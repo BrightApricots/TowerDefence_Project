@@ -2,14 +2,14 @@
 1. UI작업(타이틀, 스테이지 등등..), 포탑, 몬스터 
 2. 테트리스 작업                     
 3. 몬스터 알고리즘(A*, nav)       
-
+![TowerDefence_Project drawio](https://github.com/user-attachments/assets/92346fce-4a6d-4e0a-95f9-e17339d4e310)
 
 <테트리스 얻는 경로>=======
 시작시 테트리스 3개 줌
 웨이브 클리어시 2개 줌
 추가 테트리스 = 카드뽑기(골드로) -> 테트리스 블록 얻음
 ====================
-![TowerDefence_Project drawio](https://github.com/user-attachments/assets/92346fce-4a6d-4e0a-95f9-e17339d4e310)
+
 
 테트리스 종류
 
