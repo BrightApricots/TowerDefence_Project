@@ -2,7 +2,20 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance; // 싱글톤 인스턴스
     public Grid grid; // Unity Grid 컴포넌트 참조
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // 월드 좌표 -> 그리드 좌표로 변환
     public Vector3Int WorldToGrid(Vector3 worldPosition)
