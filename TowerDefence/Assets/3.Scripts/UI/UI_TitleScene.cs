@@ -9,8 +9,9 @@ public class UI_TitleScene : MonoBehaviour
     public Button NewGame;
     public Button Continue;
     public Button Exit;
+    public GameObject Difficulty;
 
-    private void Awake()
+    private void OnEnable()
     {
         NewGame.onClick.AddListener(LoadNewGame);
         Continue.onClick.AddListener(LoadContinue);
@@ -19,7 +20,7 @@ public class UI_TitleScene : MonoBehaviour
 
     private void LoadNewGame()
     {
-        SceneManager.LoadScene("InGameScene");
+        Difficulty.SetActive(true);
         //TODO : 불러오기를 만들면 새 게임 시작 시 저장 데이터 삭제 경고 팝업
     }
 
