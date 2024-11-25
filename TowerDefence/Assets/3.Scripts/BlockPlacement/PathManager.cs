@@ -13,6 +13,7 @@ public class PathManager : MonoBehaviour
     
     public Vector3[] CurrentPath { get; private set; }
     public bool HasValidPath { get; private set; }
+    private bool isPathBlocked = false;
 
     void Awake()
     {
@@ -65,6 +66,7 @@ public class PathManager : MonoBehaviour
     {
         CurrentPath = path;
         HasValidPath = success;
+        isPathBlocked = !success;
     }
 
     public bool HasBothPoints()
@@ -82,5 +84,23 @@ public class PathManager : MonoBehaviour
     public Vector3 GetTargetPosition()
     {
         return targetPoint ? targetPoint.position : Vector3.zero;
+    }
+
+    public void ResetPath()
+    {
+        // 경로 상태를 완전히 리셋
+        if (pathUnit != null)
+        {
+            pathUnit.transform.position = spawnPoint.position;
+            CurrentPath = null;
+            HasValidPath = false;
+            isPathBlocked = false;
+            UpdatePath();
+        }
+    }
+
+    public bool IsPathBlocked()
+    {
+        return isPathBlocked;
     }
 } 
