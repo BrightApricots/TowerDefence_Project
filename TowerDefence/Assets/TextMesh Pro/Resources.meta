@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:TowerDefence/Assets/Materials.meta
+guid: ecb45e6169f116e42a05eef5d65c1dd1
+========
 guid: 243e06394e614e5d99fab26083b707fa
+>>>>>>>> 94414f95cfba935dfc572c118effe4e151d5548f:TowerDefence/Assets/TextMesh Pro/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
