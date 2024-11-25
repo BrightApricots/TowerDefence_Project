@@ -99,7 +99,7 @@ public class PlacementState : IBuildingState
         }
 
         // 경로 체크
-        PathManager.Instance.UpdatePath();
+        PathManager.Instance.UpdatePreviewPath();  // 프리뷰 경로 사용
         bool isValid = PathManager.Instance.HasValidPath;
 
         // 노드 상태 복원
@@ -130,7 +130,6 @@ public class PlacementState : IBuildingState
         }
         else
         {
-            // 기본 배치 가능 여부 체크
             validity = BlockData.CanPlaceObjectAt(gridPosition, 
                 database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), floor) &&
                 TowerData.CanPlaceObjectAt(gridPosition, 
@@ -160,7 +159,6 @@ public class PlacementState : IBuildingState
 
                 if (validity)
                 {
-                    // 모든 노드의 현재 상태를 저장
                     Dictionary<ANode, bool> originalStates = new Dictionary<ANode, bool>();
                     List<ANode> modifiedNodes = new List<ANode>();
 
@@ -183,9 +181,8 @@ public class PlacementState : IBuildingState
                             }
                         }
 
-                        // 경로 체크
-                        PathManager.Instance.ResetPath();  // 경로 상태 초기화
-                        PathManager.Instance.UpdatePath();
+                        // 프리뷰 경로 계산
+                        PathManager.Instance.UpdatePreviewPath();
                         validity = PathManager.Instance.HasValidPath;
                     }
                     finally
@@ -198,8 +195,6 @@ public class PlacementState : IBuildingState
                                 node.walkable = originalStates[node];
                             }
                         }
-                        PathManager.Instance.ResetPath();  // 경로 상태 다시 초기화
-                        PathManager.Instance.UpdatePath();  // 최종 경로 업데이트
                     }
                 }
             }

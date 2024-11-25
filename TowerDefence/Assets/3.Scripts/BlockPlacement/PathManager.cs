@@ -9,11 +9,15 @@ public class PathManager : MonoBehaviour
     [SerializeField]
     private Transform targetPoint; // 목표 지점 (중심부)
     [SerializeField]
-    private Unit pathUnit;        // 시작 지점에 있는 Unit 참조
+    private AUnit pathUnit;        // 시작 지점에 있는 Unit 참조
     
-    public Vector3[] CurrentPath { get; private set; }
+    private Vector3[] previewPath;  // 프리뷰용 임시 경로
+    public Vector3[] CurrentPath { get; private set; }  // 실제 경로
     public bool HasValidPath { get; private set; }
     private bool isPathBlocked = false;
+
+    public delegate void PathUpdatedHandler(Vector3[] newPath);
+    public event PathUpdatedHandler OnPathUpdated;
 
     void Awake()
     {
@@ -35,7 +39,7 @@ public class PathManager : MonoBehaviour
             if (pathUnit == null)
             {
                 // Start 오브젝트에서 Unit 컴포넌트 찾기
-                pathUnit = spawnPoint.GetComponent<Unit>();
+                pathUnit = spawnPoint.GetComponent<AUnit>();
             }
             
             if (pathUnit != null)
@@ -55,6 +59,16 @@ public class PathManager : MonoBehaviour
         }
     }
 
+    // 프리뷰 상태에서 호출될 메서드
+    public void UpdatePreviewPath()
+    {
+        if (spawnPoint != null && targetPoint != null && pathUnit != null)
+        {
+            pathUnit.transform.position = spawnPoint.position;
+            pathUnit.UpdatePreviewPath();  // 프리뷰용 경로 계산
+        }
+    }
+
     // 몬스터가 사용할 수 있는 현재 경로 가져오기
     public Vector3[] GetCurrentPath()
     {
@@ -62,11 +76,26 @@ public class PathManager : MonoBehaviour
     }
 
     // Unit 스크립트에서 호출할 콜백
-    public void OnPathCalculated(Vector3[] path, bool success)
+    public void OnPathCalculated(Vector3[] path, bool success, bool isPreview = false)
     {
-        CurrentPath = path;
-        HasValidPath = success;
-        isPathBlocked = !success;
+        if (isPreview)
+        {
+            previewPath = path;
+            HasValidPath = success;
+            isPathBlocked = !success;
+        }
+        else
+        {
+            CurrentPath = path;
+            HasValidPath = success;
+            isPathBlocked = !success;
+            
+            // 실제 경로가 갱신될 때만 이벤트 발생
+            if (success && path != null)
+            {
+                OnPathUpdated?.Invoke(path);
+            }
+        }
     }
 
     public bool HasBothPoints()
@@ -88,11 +117,11 @@ public class PathManager : MonoBehaviour
 
     public void ResetPath()
     {
-        // 경로 상태를 완전히 리셋
         if (pathUnit != null)
         {
             pathUnit.transform.position = spawnPoint.position;
             CurrentPath = null;
+            previewPath = null;
             HasValidPath = false;
             isPathBlocked = false;
             UpdatePath();
