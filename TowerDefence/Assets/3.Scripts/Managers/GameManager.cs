@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
-    public Player player;
+
+    public int EmberAmount=10;
+    public int ExpAmount=10;
+    public int HpAmount=15;
     public int Difficulty;
 
     private void Awake()
