@@ -7,13 +7,14 @@ public class Unit : MonoBehaviour
     public Transform target;
     private Vector3[] path;
     private LineRenderer lineRenderer;
+    public Material lineMaterial;
 
     void Awake()
     {
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.15f;
         lineRenderer.endWidth = 0.15f;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.material = lineMaterial;
         lineRenderer.startColor = Color.black;
         lineRenderer.endColor = Color.black;
     }
