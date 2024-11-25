@@ -605,6 +605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae27a724f26884a8c0973aefd50b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EmberAmount: 0
+  ExpAmount: 0
+  HpAmount: 0
   Difficulty: 0
 --- !u!4 &626632889
 Transform:
