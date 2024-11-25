@@ -13,6 +13,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/[Uu]serSettings/
 
 # 메모리 캡처 및 녹화 파일
 /[Mm]emoryCaptures/
