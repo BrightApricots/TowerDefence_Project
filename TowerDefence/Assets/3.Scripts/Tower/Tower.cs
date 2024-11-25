@@ -10,16 +10,18 @@ public class Tower : MonoBehaviour
     public float FireRate;
     public float Range;
     public string Info;
-    private List<Enemy> targetList;
+    public bool isTargeting;
+    public Transform TowerHeadPosition;
 
-    protected virtual void Fire()
+    protected virtual void Detect()
     {
         Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
-        for(int i = 0; i<hitColliders.Length; i++)
+        foreach (Collider target in hitColliders)
         {
-            if (hitColliders[i].CompareTag("Enemy"))
+            if(target.CompareTag("Enemy"))
             {
-                targetList[i] = hitColliders[i].gameObject.GetComponent<Enemy>();
+                Vector3 fireDir = target.transform.position-TowerHeadPosition.position;
+
             }
         }
     }
