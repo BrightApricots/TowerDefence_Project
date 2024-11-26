@@ -181,7 +181,7 @@ public class TurretAI : MonoBehaviour {
 
             Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
             GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-            Projectile projectile = missleGo.GetComponent<Projectile>();
+            SampleProjectile projectile = missleGo.GetComponent<SampleProjectile>();
             projectile.target = lockOnPos;
         }
         else if(turretType == TurretType.Dual)
@@ -190,14 +190,14 @@ public class TurretAI : MonoBehaviour {
             {
                 Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
                 GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-                Projectile projectile = missleGo.GetComponent<Projectile>();
+                SampleProjectile projectile = missleGo.GetComponent<SampleProjectile>();
                 projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
             }
             else
             {
                 Instantiate(muzzleEff, muzzleSub.transform.position, muzzleSub.rotation);
                 GameObject missleGo = Instantiate(bullet, muzzleSub.transform.position, muzzleSub.rotation);
-                Projectile projectile = missleGo.GetComponent<Projectile>();
+                SampleProjectile projectile = missleGo.GetComponent<SampleProjectile>();
                 projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
             }
 
@@ -207,7 +207,7 @@ public class TurretAI : MonoBehaviour {
         {
             Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
             GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
-            Projectile projectile = missleGo.GetComponent<Projectile>();
+            SampleProjectile projectile = missleGo.GetComponent<SampleProjectile>();
             projectile.target = currentTarget.transform;
         }
     }
