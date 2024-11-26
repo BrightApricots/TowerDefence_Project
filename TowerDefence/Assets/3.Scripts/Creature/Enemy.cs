@@ -1,114 +1,105 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Enemy : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private Transform targetBase;
-    private LineRenderer lineRenderer;
+    private List<Node> path; // A* 알고리즘으로 계산된 경로
+    private int pathIndex; // 현재 경로에서 이동 중인 노드의 인덱스
+    private Transform targetBase; // 적이 목표로 삼는 기지의 Transform
+    private Pathfinding_AstarMove pathfinding; // A* 알고리즘 경로 탐색을 담당하는 Pathfinding 스크립트 참조
+    public float moveSpeed = 3.5f; // 적의 이동 속도
 
-    [Header("Enemy Settings")]
-    public float moveSpeed = 3.5f;
+    private LineRenderer lineRenderer; // 경로를 시각화할 LineRenderer
 
-    public void Initialize(Transform baseTransform)
+    private void Awake()
     {
-        targetBase = baseTransform;
+        // LineRenderer 초기화
+        lineRenderer = GetComponent<LineRenderer>(); // 현재 GameObject에서 LineRenderer 스크립트를 가져옴
+
+        // LineRenderer의 선 두께 설정
+        lineRenderer.startWidth = 0.1f; // 선의 시작 부분 두께 설정
+        lineRenderer.endWidth = 0.1f;   // 선의 끝 부분 두께 설정
+
+        // LineRenderer의 머티리얼 설정
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // LineRenderer에 사용할 기본 머티리얼 할당
+
+        // LineRenderer의 색상 설정
+        lineRenderer.startColor = Color.green; // 선의 시작 부분 색상을 녹색으로 설정
+        lineRenderer.endColor = Color.red;     // 선의 끝 부분 색상을 빨간색으로 설정
     }
 
-    private void Start()
+    // Enemy의 초기화 메서드. 목표 기지와 Pathfinding 스크립트를 설정합니다.
+    public void Initialize(Transform baseTransform, Pathfinding_AstarMove pathfindingComponent)
     {
-        agent = GetComponent<NavMeshAgent>();
-        lineRenderer = GetComponent<LineRenderer>();
+        targetBase = baseTransform; // 목표 기지 설정
+        pathfinding = pathfindingComponent; // Pathfinding 스크립트 설정
 
-        // 이동 속도 설정
-        agent.speed = moveSpeed;
+        // Pathfinding과 TargetBase가 정상적으로 초기화되었는지 확인
+        if (pathfinding != null && targetBase != null)
+        {
+            // A* 알고리즘을 사용하여 경로를 계산
+            path = pathfinding.FindPath(transform.position, targetBase.position);
+            pathIndex = 0; // 경로의 시작 인덱스를 0으로 설정
 
-        SetupLineRenderer();
+            // 경로를 LineRenderer로 시각화
+            DrawPath();
+        }
+        else
+        {
+            // 초기화 실패 시 오류 메시지 출력
+            Debug.LogError("Pathfinding 스크립트 또는 목표 기지가 Enemy에서 초기화되지 않았습니다.");
+        }
     }
 
+    // 매 프레임마다 호출되어 적을 이동시키는 메서드
     private void Update()
     {
-        if (targetBase != null)
+        // 경로가 존재하고, 아직 경로를 따라가는 중인지 확인
+        if (path != null && pathIndex < path.Count)
         {
-            // 기지로 이동
-            agent.SetDestination(targetBase.position);
-            UpdateLineRenderer();
+            // 현재 이동해야 할 노드의 위치
+            Vector3 targetPos = path[pathIndex].worldPosition;
 
-            // 목표 지점에 도달하면 삭제
-            if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+            // MoveTowards를 사용하여 현재 위치에서 목표 위치로 이동
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            // 목표 위치에 도달하면 다음 노드로 이동
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
-                Debug.Log("Enemy 삭제");
-                Destroy(gameObject);
+                pathIndex++; // 다음 노드로 이동
+                //UpdatePathVisualization(); // 이동 경로 업데이트
+            }
+        }
+        else if (pathIndex >= path.Count) // 경로의 마지막 노드에 도달한 경우
+        {
+            // 디버그 메시지 출력
+            Debug.Log("목표 지점에 도착, Enemy 오브젝트 삭제");
+            Destroy(gameObject); // Enemy 오브젝트 삭제
+        }
+    }
+
+    // 경로를 LineRenderer로 시각화
+    private void DrawPath()
+    {
+        if (path != null && path.Count > 0)
+        {
+            lineRenderer.positionCount = path.Count;
+            for (int i = 0; i < path.Count; i++)
+            {
+                lineRenderer.SetPosition(i, path[i].worldPosition);
             }
         }
     }
 
-    private void SetupLineRenderer()
+    // 이동 중인 경로를 실시간으로 업데이트
+    private void UpdatePathVisualization()
     {
-        // LineRenderer 기본 설정
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.startColor = Color.yellow;
-        lineRenderer.endColor = Color.yellow;
-        lineRenderer.textureMode = LineTextureMode.Tile;
-
-        // 점선 효과를 위한 텍스처 설정
-        lineRenderer.material.mainTexture = GenerateDashedTexture();
-        lineRenderer.material.mainTextureScale = new Vector2(1f, 1f);
-    }
-
-    private void UpdateLineRenderer()
-    {
-        if (agent.path == null || agent.path.corners.Length == 0)
+        if (lineRenderer.positionCount > pathIndex)
         {
-            lineRenderer.positionCount = 0;
-            return;
+            // 이미 지나온 경로를 투명하게 처리
+            lineRenderer.startColor = Color.clear;
+            lineRenderer.endColor = Color.red;
         }
-
-        // 현재 위치와 다음 목표 위치만 LineRenderer에 설정
-        Vector3[] pathSegment = new Vector3[2];
-        pathSegment[0] = transform.position; // 유닛 현재 위치
-        pathSegment[1] = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; // 다음 코너
-
-        lineRenderer.positionCount = pathSegment.Length;
-        lineRenderer.SetPositions(pathSegment);
-    }
-
-    private Texture2D GenerateDashedTexture()
-    {
-        // 점선 텍스처 생성
-        int width = 8;
-        int height = 1;
-        Texture2D texture = new Texture2D(width, height);
-        texture.wrapMode = TextureWrapMode.Repeat;
-
-        for (int x = 0; x < width; x++)
-        {
-            Color color = (x % 2 == 0) ? Color.white : Color.clear; // 흰색과 투명 교차
-            for (int y = 0; y < height; y++)
-            {
-                texture.SetPixel(x, y, color);
-            }
-        }
-
-        texture.Apply();
-        return texture;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (agent == null || agent.path == null || agent.path.corners.Length == 0)
-            return;
-
-        // 현재 경로와 동일한 스타일로 Scene 뷰에 시각화
-        Gizmos.color = Color.yellow;
-
-        Vector3 currentPos = transform.position; //생성된 유닛의 현재 위치
-        Vector3 nextCorner = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; //유닛의 다음 경유지 
-
-        // 유닛 위치에서 다음 경로 코너까지 선 그리기
-        Gizmos.DrawLine(currentPos, nextCorner);
     }
 }
