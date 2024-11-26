@@ -13,8 +13,9 @@ public class RemovingState : IBuildingState
     GridData TowerData;
     ObjectPlacer objectPlacer;
     AGrid aGrid;
+    InputManager inputManager;
 
-    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData blockData, GridData towerData, ObjectPlacer objectPlacer, AGrid aGrid)
+    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData blockData, GridData towerData, ObjectPlacer objectPlacer, AGrid aGrid, InputManager inputManager)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
@@ -22,6 +23,7 @@ public class RemovingState : IBuildingState
         this.TowerData = towerData;
         this.objectPlacer = objectPlacer;
         this.aGrid = aGrid;
+        this.inputManager = inputManager;
         previewSystem.StartShowingRemovePreview();
     }
 
@@ -32,34 +34,51 @@ public class RemovingState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
+        if (inputManager.IsPointerOverUI())
+        {
+            return;
+        }
+
         GridData selectedData = null;
-        if (BlockData.GetRepresentationIndex(gridPosition) != -1)
+        int index = -1;
+        int id = -1;
+
+        // 블록 데이터 확인
+        PlacementData blockData = BlockData.GetPlacementData(gridPosition);
+        if (blockData != null)
         {
             selectedData = BlockData;
+            index = blockData.PlacedObjectIndex;
+            id = blockData.ID;
         }
-        else if (TowerData.GetRepresentationIndex(gridPosition) != -1)
+        else
         {
-            selectedData = TowerData;
+            // 타워 데이터 확인
+            PlacementData towerData = TowerData.GetPlacementData(gridPosition);
+            if (towerData != null)
+            {
+                selectedData = TowerData;
+                index = towerData.PlacedObjectIndex;
+                id = towerData.ID;
+            }
         }
 
         if (selectedData != null)
         {
-            PlacementData placementData = selectedData.GetPlacementData(gridPosition);
-            if (placementData != null)
+            // 오브젝트 제거
+            selectedData.RemoveObjectAt(gridPosition);
+            objectPlacer.RemoveObjectAt(index);
+
+            // AGrid 업데이트
+            foreach (var pos in blockData.occupiedPositions)
             {
-                objectPlacer.RemoveObjectAt(placementData.PlacedObjectIndex);
-                
-                foreach (var pos in placementData.occupiedPositions)
-                {
-                    aGrid.UpdateNode(pos, false);
-                }
-                
-                selectedData.RemoveObjectAt(gridPosition);
-                
-                if (PathManager.Instance != null)
-                {
-                    PathManager.Instance.UpdatePath();
-                }
+                aGrid.UpdateNode(pos, false);
+            }
+
+            // 경로 업데이트
+            if (PathManager.Instance != null)
+            {
+                PathManager.Instance.UpdateAllPaths();
             }
         }
     }

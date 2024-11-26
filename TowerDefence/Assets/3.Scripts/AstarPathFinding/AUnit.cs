@@ -10,7 +10,8 @@ public class AUnit : MonoBehaviour
     private Vector3[] previewPath;
     private LineRenderer actualPathRenderer;
     private LineRenderer previewPathRenderer;
-    public Material lineMaterial;
+    [SerializeField]
+    private Material lineMaterial;
     [SerializeField]
     private Color actualPathColor = Color.black;
     [SerializeField]
@@ -18,32 +19,52 @@ public class AUnit : MonoBehaviour
 
     void Awake()
     {
-        // 실제 경로용 LineRenderer는 별도의 게임오브젝트에 생성
-        GameObject actualPathObj = new GameObject("ActualPathRenderer");
-        actualPathObj.transform.SetParent(transform);
-        actualPathRenderer = actualPathObj.AddComponent<LineRenderer>();
-        SetupLineRenderer(actualPathRenderer, actualPathColor);
+        InitializeLineRenderers();
+    }
 
-        // 프리뷰 경로용 LineRenderer도 별도의 게임오브젝트에 생성
-        GameObject previewObj = new GameObject("PreviewPathRenderer");
-        previewObj.transform.SetParent(transform);
-        previewPathRenderer = previewObj.AddComponent<LineRenderer>();
-        SetupLineRenderer(previewPathRenderer, previewPathColor);
-        
-        // 초기 상태 설정
+    private void InitializeLineRenderers()
+    {
+        // 기본 Material 생성
+        if (lineMaterial == null)
+        {
+            lineMaterial = new Material(Shader.Find("Sprites/Default"));
+        }
+
+        // 실제 경로용 LineRenderer
+        if (actualPathRenderer == null)
+        {
+            GameObject actualPathObj = new GameObject("ActualPathRenderer");
+            actualPathObj.transform.SetParent(transform);
+            actualPathRenderer = actualPathObj.AddComponent<LineRenderer>();
+            SetupLineRenderer(actualPathRenderer, actualPathColor);
+        }
+
+        // 프리뷰 경로용 LineRenderer
+        if (previewPathRenderer == null)
+        {
+            GameObject previewObj = new GameObject("PreviewPathRenderer");
+            previewObj.transform.SetParent(transform);
+            previewPathRenderer = previewObj.AddComponent<LineRenderer>();
+            SetupLineRenderer(previewPathRenderer, previewPathColor);
+        }
+
         ShowPreviewPath(false);
         ShowActualPath(true);
     }
 
     private void SetupLineRenderer(LineRenderer renderer, Color color)
     {
-        renderer.startWidth = 0.15f;
-        renderer.endWidth = 0.15f;
-        renderer.material = new Material(lineMaterial);
-        renderer.startColor = color;
-        renderer.endColor = color;
-        renderer.positionCount = 0;
-        renderer.enabled = true;
+        if (renderer != null)
+        {
+            renderer.startWidth = 0.15f;
+            renderer.endWidth = 0.15f;
+            renderer.material = new Material(lineMaterial);
+            renderer.material.color = color;
+            renderer.startColor = color;
+            renderer.endColor = color;
+            renderer.positionCount = 0;
+            renderer.enabled = true;
+        }
     }
 
     public void SetTarget(Transform newTarget)
@@ -59,60 +80,72 @@ public class AUnit : MonoBehaviour
         ShowPreviewPath(false);
         ShowActualPath(true);
         PathRequestManager.RequestPath(transform.position, target.position, 
-            (path, success) => OnPathFound(path, success, false));
+            (path, success) => HandleActualPathFound(path, success));
     }
 
-    public void UpdatePreviewPath()
+    private void HandleActualPathFound(Vector3[] path, bool success)
+    {
+        if (success)
+        {
+            this.path = path;
+            DrawPath(this.path, actualPathRenderer, actualPathColor);
+            previewPathRenderer.positionCount = 0;
+            OnPathUpdated?.Invoke(this.path, true);
+
+            if (PathManager.Instance != null)
+            {
+                PathManager.Instance.OnPathCalculated(path, true, false);
+            }
+        }
+        else
+        {
+            this.path = null;
+            actualPathRenderer.positionCount = 0;
+
+            if (PathManager.Instance != null)
+            {
+                PathManager.Instance.OnPathCalculated(null, false, false);
+            }
+            OnPathUpdated?.Invoke(null, false);
+        }
+    }
+
+    public void CheckPreviewPath()
     {
         if (target == null) return;
         ShowPreviewPath(true);
         ShowActualPath(true);
         PathRequestManager.RequestPath(transform.position, target.position, 
-            (path, success) => OnPathFound(path, success, true));
+            (path, success) => HandlePreviewPathFound(path, success));
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccessful, bool isPreview = false)
+    private void HandlePreviewPathFound(Vector3[] path, bool success)
     {
-        if (pathSuccessful)
+        if (success)
         {
-            if (isPreview)
-            {
-                previewPath = newPath;
-                DrawPath(previewPath, previewPathRenderer);
-            }
-            else
-            {
-                path = newPath;
-                DrawPath(path, actualPathRenderer);
-                previewPathRenderer.positionCount = 0;
-            }
+            previewPath = path;
+            DrawPath(previewPath, previewPathRenderer, previewPathColor);
+            OnPathUpdated?.Invoke(previewPath, true);
 
             if (PathManager.Instance != null)
             {
-                PathManager.Instance.OnPathCalculated(newPath, true, isPreview);
+                PathManager.Instance.OnPathCalculated(path, true, true);
             }
         }
         else
         {
-            if (isPreview)
-            {
-                previewPath = null;
-                previewPathRenderer.positionCount = 0;
-            }
-            else
-            {
-                path = null;
-                actualPathRenderer.positionCount = 0;
-            }
+            previewPath = null;
+            previewPathRenderer.positionCount = 0;
 
             if (PathManager.Instance != null)
             {
-                PathManager.Instance.OnPathCalculated(null, false, isPreview);
+                PathManager.Instance.OnPathCalculated(null, false, true);
             }
+            OnPathUpdated?.Invoke(null, false);
         }
     }
 
-    void DrawPath(Vector3[] pathToDraw, LineRenderer renderer)
+    private void DrawPath(Vector3[] pathToDraw, LineRenderer renderer, Color color)
     {
         if (pathToDraw == null || pathToDraw.Length == 0) 
         {
@@ -134,6 +167,9 @@ public class AUnit : MonoBehaviour
             points[i].y = pathHeight;
         }
 
+        renderer.material.color = color;
+        renderer.startColor = color;
+        renderer.endColor = color;
         renderer.positionCount = points.Length;
         renderer.SetPositions(points);
     }
@@ -162,5 +198,22 @@ public class AUnit : MonoBehaviour
         previewPathRenderer.positionCount = 0;
         path = null;
         previewPath = null;
+    }
+
+    public Vector3[] GetCurrentPath()
+    {
+        return path;
+    }
+
+    public delegate void PathUpdatedHandler(Vector3[] newPath, bool success);
+    public event PathUpdatedHandler OnPathUpdated;
+
+    public void SetLineMaterial(Material material)
+    {
+        lineMaterial = material;
+        if (actualPathRenderer != null)
+            actualPathRenderer.material = new Material(material);
+        if (previewPathRenderer != null)
+            previewPathRenderer.material = new Material(material);
     }
 }

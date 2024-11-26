@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 5133042701788897420}
   m_Layer: 6
   m_Name: Block2
-  m_TagString: Untagged
+  m_TagString: TowerPlaceable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

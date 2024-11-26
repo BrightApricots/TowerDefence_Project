@@ -9,27 +9,36 @@ public class Monster : MonoBehaviour
     private bool isMoving = false;
     private Vector3 currentTargetPosition;
     private Vector3 moveDirection;
+    private Transform spawnPoint;
 
-    public void Initialize(Vector3[] pathToFollow)
+    public void Initialize(Transform spawn)
     {
-        path = pathToFollow;
-        currentWaypointIndex = 0;
-        isMoving = true;
-
-        if (PathManager.Instance != null)
+        spawnPoint = spawn;
+        transform.position = PathManager.Instance.GetSpawnPosition(spawnPoint);
+        Vector3[] newPath = PathManager.Instance.GetCurrentPath(spawnPoint);
+        
+        if (newPath != null && newPath.Length > 0)
         {
-            Vector3 startPos = PathManager.Instance.GetSpawnPosition();
-            startPos.y = transform.position.y;
-            transform.position = startPos;
-            PathManager.Instance.OnPathUpdated += OnPathUpdated;
+            path = newPath;
+            currentWaypointIndex = 0;
+            isMoving = true;
+            
+            if (PathManager.Instance != null)
+            {
+                PathManager.Instance.OnPathUpdated += OnPathUpdated;
+            }
+            
+            UpdateCurrentTarget();
         }
-
-        UpdateCurrentTarget();
+        else
+        {
+            Debug.LogWarning("No valid path found for monster initialization");
+        }
     }
 
-    private void OnPathUpdated(Vector3[] newPath)
+    private void OnPathUpdated(Transform updatedSpawnPoint, Vector3[] newPath)
     {
-        if (newPath != null && newPath.Length > 0)
+        if (spawnPoint == updatedSpawnPoint && newPath != null && newPath.Length > 0)
         {
             moveDirection = (currentTargetPosition - transform.position).normalized;
             

@@ -53,7 +53,14 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, BlockData, TowerData, objectPlacer, aGrid);
+        buildingState = new RemovingState(
+            grid, 
+            preview, 
+            BlockData, 
+            TowerData, 
+            objectPlacer, 
+            aGrid,
+            inputManager);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }

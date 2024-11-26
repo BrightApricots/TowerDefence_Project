@@ -1,135 +1,352 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PathManager : MonoBehaviour
 {
-    public static PathManager Instance { get; private set; }
-
-    [SerializeField]
-    private Transform spawnPoint;  // 몬스터 스폰 지점 d
-    [SerializeField]
-    private Transform targetPoint; // 목표 지점 (중심부)
-    [SerializeField]
-    private AUnit pathUnit;        // 시작 지점에 있는 Unit 참조
-    
-    private Vector3[] previewPath;  // 프리뷰용 임시 경로
-    public Vector3[] CurrentPath { get; private set; }  // 실제 경로
-    public bool HasValidPath { get; private set; }
-    private bool isPathBlocked = false;
-
-    public delegate void PathUpdatedHandler(Vector3[] newPath);
-    public event PathUpdatedHandler OnPathUpdated;
-
-    void Awake()
+    private static PathManager instance;
+    public static PathManager Instance
     {
-        if (Instance == null)
+        get
         {
-            Instance = this;
+            if (instance == null)
+                instance = FindObjectOfType<PathManager>();
+            return instance;
         }
-        else
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
     }
 
-    void Start()
+    [SerializeField]
+    private List<Transform> spawnPoints;  // 여러 스폰 포인트
+    [SerializeField]
+    private Transform targetPoint;
+    private Dictionary<Transform, AUnit> pathUnits = new Dictionary<Transform, AUnit>();
+    
+    private bool isUpdating = false;
+    private int pendingUpdates = 0;
+
+    // 경로 관리를 위한 추가 속성들
+    private Dictionary<Transform, PathData> pathDataMap = new Dictionary<Transform, PathData>();
+
+    private class PathData
     {
-        // 시작 시 경로 생성
-        if (spawnPoint != null && targetPoint != null)
+        public Vector3[] CurrentPath { get; set; }
+        public bool IsValid { get; set; }
+        public AUnit PathUnit { get; set; }
+    }
+
+    // 경로 업데이트 이벤트
+    public event System.Action<Transform, Vector3[]> OnPathUpdated;
+    public event System.Action<bool> OnValidityChanged;
+
+    private void NotifyPathUpdate(Transform spawnPoint, Vector3[] path)
+    {
+        OnPathUpdated?.Invoke(spawnPoint, path);
+    }
+
+    private void NotifyValidityChange(bool isValid)
+    {
+        OnValidityChanged?.Invoke(isValid);
+    }
+
+    [SerializeField]
+    private Material pathLineMaterial;  // Inspector에서 할당할 Material
+
+    private void Start()
+    {
+        if (pathLineMaterial == null)
         {
-            if (pathUnit == null)
-            {
-                // Start 오브젝트에서 Unit 컴포넌트 찾기
-                pathUnit = spawnPoint.GetComponent<AUnit>();
-            }
+            pathLineMaterial = new Material(Shader.Find("Sprites/Default"));
+            pathLineMaterial.color = Color.white;
+        }
+
+        // pathUnits와 pathDataMap 초기화
+        pathUnits = new Dictionary<Transform, AUnit>();
+        pathDataMap = new Dictionary<Transform, PathData>();
+
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint == null) continue;
+
+            GameObject unitObj = new GameObject($"PathUnit_{spawnPoint.name}");
+            AUnit unit = unitObj.AddComponent<AUnit>();
             
-            if (pathUnit != null)
+            // Material 설정
+            unit.SetLineMaterial(pathLineMaterial);
+            
+            // 위치와 타겟 설정
+            unit.transform.position = spawnPoint.position;
+            unit.SetTarget(targetPoint);
+
+            // PathData 생성 및 저장
+            PathData pathData = new PathData
             {
-                pathUnit.SetTarget(targetPoint);
+                PathUnit = unit,
+                IsValid = false,
+                CurrentPath = null
+            };
+            
+            pathUnits.Add(spawnPoint, unit);
+            pathDataMap.Add(spawnPoint, pathData);
+
+            // 경로 업데이트 이벤트 구독
+            unit.OnPathUpdated += (newPath, success) =>
+            {
+                if (success && newPath != null)
+                {
+                    pathData.CurrentPath = newPath;
+                    pathData.IsValid = true;
+                    NotifyPathUpdate(spawnPoint, newPath);
+                }
+            };
+        }
+        
+        UpdateAllPaths();
+    }
+
+    public Vector3[] GetCurrentPath(Transform spawnPoint = null)
+    {
+        if (spawnPoint == null)
+            spawnPoint = GetBestSpawnPoint();
+
+        if (pathDataMap.TryGetValue(spawnPoint, out PathData data))
+        {
+            if (data.CurrentPath == null || data.CurrentPath.Length == 0)
+            {
+                // AUnit에서 직접 경로 가져오기 시도
+                AUnit unit = pathUnits[spawnPoint];
+                if (unit != null)
+                {
+                    return unit.GetCurrentPath();
+                }
+            }
+            return data.CurrentPath;
+        }
+        
+        Debug.LogWarning($"No path data found for spawn point: {spawnPoint.name}");
+        return null;
+    }
+
+    public void UpdateAllPaths()
+    {
+        UpdatePath();
+    }
+
+    public void CheckPreviewPath()
+    {
+        // 모든 PathData의 IsValid를 초기화
+        foreach (var data in pathDataMap.Values)
+        {
+            data.IsValid = false;
+            data.CurrentPath = null;
+        }
+
+        // 모든 유닛의 프리뷰 초기화 및 활성화
+        foreach (var kvp in pathUnits)
+        {
+            if (kvp.Value != null)
+            {
+                kvp.Value.ShowPreviewPath(true);
+                kvp.Value.ShowActualPath(true);
+                kvp.Value.CheckPreviewPath();  // 각 유닛별로 프리뷰 경로 계산
+            }
+        }
+    }
+
+    private IEnumerator WaitForAllPathsCalculated()
+    {
+        yield return new WaitForEndOfFrame();
+
+        // 모든 경로의 유효성 확인
+        bool anyValidPath = false;
+        foreach (var data in pathDataMap.Values)
+        {
+            if (data.IsValid && data.CurrentPath != null)
+            {
+                anyValidPath = true;
+                // break 제거하여 모든 경로 확인
+            }
+        }
+
+        HasValidPath = anyValidPath;
+        NotifyValidityChange(anyValidPath);
+    }
+
+    public void UpdatePath()
+    {
+        if (isUpdating)
+        {
+            pendingUpdates++;
+            return;
+        }
+
+        isUpdating = true;
+
+        foreach (var kvp in pathUnits)
+        {
+            if (kvp.Value != null)
+            {
+                kvp.Value.UpdatePath();
+            }
+        }
+
+        // 타임아웃 설정
+        StartCoroutine(UpdateTimeout());
+    }
+
+    private IEnumerator UpdateTimeout()
+    {
+        yield return new WaitForSeconds(1f);
+        if (isUpdating)
+        {
+            isUpdating = false;
+            if (pendingUpdates > 0)
+            {
+                pendingUpdates--;
                 UpdatePath();
             }
         }
     }
 
-    public void UpdatePath()
+    // 가장 짧은 경로를 가진 스폰 포인트 선택
+    public Transform GetBestSpawnPoint()
     {
-        if (spawnPoint != null && targetPoint != null && pathUnit != null)
+        Transform bestSpawn = null;
+        float shortestPath = float.MaxValue;
+
+        foreach (var kvp in pathUnits)
         {
-            pathUnit.transform.position = spawnPoint.position;
-            pathUnit.UpdatePath();
+            Vector3[] path = kvp.Value.GetCurrentPath();
+            if (path != null)
+            {
+                float pathLength = CalculatePathLength(path);
+                if (pathLength < shortestPath)
+                {
+                    shortestPath = pathLength;
+                    bestSpawn = kvp.Key;
+                }
+            }
+        }
+
+        return bestSpawn;
+    }
+
+    private float CalculatePathLength(Vector3[] path)
+    {
+        float length = 0;
+        for (int i = 0; i < path.Length - 1; i++)
+        {
+            length += Vector3.Distance(path[i], path[i + 1]);
+        }
+        return length;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var unit in pathUnits.Values)
+        {
+            if (unit != null)
+            {
+                Destroy(unit.gameObject);
+            }
+        }
+        pathUnits.Clear();
+    }
+
+    public void CleanupUnusedPaths()
+    {
+        List<Transform> keysToRemove = new List<Transform>();
+        foreach (var kvp in pathUnits)
+        {
+            if (kvp.Key == null || kvp.Value == null)
+            {
+                keysToRemove.Add(kvp.Key);
+            }
+        }
+
+        foreach (var key in keysToRemove)
+        {
+            if (pathUnits[key] != null)
+            {
+                Destroy(pathUnits[key].gameObject);
+            }
+            pathUnits.Remove(key);
         }
     }
 
-    // 프리뷰 상태에서 호출될 메서드
-    public void UpdatePreviewPath()
+    public List<Transform> GetSpawnPoints() => spawnPoints;
+    public Vector3 GetTargetPosition() => targetPoint.position;
+    public Vector3 GetSpawnPosition(Transform spawnPoint = null)
     {
-        if (spawnPoint != null && targetPoint != null && pathUnit != null)
-        {
-            pathUnit.transform.position = spawnPoint.position;
-            pathUnit.UpdatePreviewPath();  // 프리뷰용 경로 계산
-        }
+        if (spawnPoint == null)
+            spawnPoint = GetBestSpawnPoint();
+            
+        return spawnPoint != null ? spawnPoint.position : spawnPoints[0].position;
     }
-
-    // 몬스터가 사용할 수 있는 현재 경로 가져오기
-    public Vector3[] GetCurrentPath()
-    {
-        return CurrentPath;
-    }
-
-    // Unit 스크립트에서 호출할 콜백
+    public bool HasBothPoints() => spawnPoints.Count > 0 && targetPoint != null;
+    public bool HasValidPath { get; private set; }
     public void OnPathCalculated(Vector3[] path, bool success, bool isPreview = false)
     {
         if (isPreview)
         {
-            previewPath = path;
-            HasValidPath = success;
-            isPathBlocked = !success;
+            if (success && path != null)
+            {
+                foreach (var kvp in pathDataMap)
+                {
+                    float distance = Vector3.Distance(kvp.Value.PathUnit.transform.position, path[0]);
+                    if (distance < 0.1f)
+                    {
+                        kvp.Value.IsValid = true;
+                        kvp.Value.CurrentPath = path;
+                        NotifyPathUpdate(kvp.Key, path);
+                    }
+                }
+            }
+            HasValidPath = pathDataMap.Values.Any(data => data.IsValid);
         }
         else
         {
-            CurrentPath = path;
+            // 실제 경로 처리는 그대로 유지
             HasValidPath = success;
-            isPathBlocked = !success;
-            
-            // 실제 경로가 갱신될 때만 이벤트 발생
             if (success && path != null)
             {
-                OnPathUpdated?.Invoke(path);
+                foreach (var kvp in pathDataMap)
+                {
+                    float distance = Vector3.Distance(kvp.Value.PathUnit.transform.position, path[0]);
+                    if (distance < 0.1f)
+                    {
+                        kvp.Value.CurrentPath = path;
+                        kvp.Value.IsValid = true;
+                        NotifyPathUpdate(kvp.Key, path);
+                    }
+                }
             }
+            NotifyValidityChange(success);
         }
     }
 
-    public bool HasBothPoints()
+    public void UpdatePreviewPathWithDelay(System.Action<bool> callback)
     {
-        return spawnPoint != null && targetPoint != null;
+        StartCoroutine(UpdatePreviewPathCoroutine(callback));
     }
 
-    // 몬스터 스폰 위치 가져오기
-    public Vector3 GetSpawnPosition()
+    private IEnumerator UpdatePreviewPathCoroutine(System.Action<bool> callback)
     {
-        return spawnPoint ? spawnPoint.position : Vector3.zero;
-    }
-
-    // 목표 위치 가져오기
-    public Vector3 GetTargetPosition()
-    {
-        return targetPoint ? targetPoint.position : Vector3.zero;
-    }
-
-    public void ResetPath()
-    {
-        if (pathUnit != null)
-        {
-            pathUnit.transform.position = spawnPoint.position;
-            CurrentPath = null;
-            previewPath = null;
-            HasValidPath = false;
-            isPathBlocked = false;
-            UpdatePath();
-        }
-    }
-
-    public bool IsPathBlocked()
-    {
-        return isPathBlocked;
+        yield return new WaitForEndOfFrame();
+        CheckPreviewPath();
+        callback?.Invoke(HasValidPath);
     }
 } 

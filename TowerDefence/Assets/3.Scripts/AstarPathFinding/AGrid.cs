@@ -23,6 +23,9 @@ public class AGrid : MonoBehaviour
 
     private GridData BlockData;
 
+    // 노드의 임시 상태를 저장할 Dictionary 추가
+    private Dictionary<Vector3Int, bool> temporaryNodeStates = new Dictionary<Vector3Int, bool>();
+
     void Awake()
     {
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x);
@@ -59,28 +62,41 @@ public class AGrid : MonoBehaviour
                 worldPoint.y = transform.position.y;
 
                 Collider[] hitColliders = Physics.OverlapSphere(worldPoint, .3f, unwalkableMask);
-                bool isBlocked = hitColliders.Length > 0;
-                bool walkable = !isBlocked;
+                bool isBlocked = false;
 
-                if (isBlocked && hitColliders[0] != null)
+                if (hitColliders.Length > 0 && hitColliders[0] != null)
                 {
                     GameObject obstacleObject = hitColliders[0].gameObject;
-                    Debug.Log($"Found obstacle: {obstacleObject.name}");
                     
-                    if (!ObjectPlacer.Instance.placedGameObjects.Contains(obstacleObject))
+                    // 블록 템플릿과 프리뷰는 무시
+                    if (!obstacleObject.name.Contains("blockTemplate") && 
+                        !obstacleObject.name.Contains("Template") &&
+                        !obstacleObject.name.Contains("Preview") &&
+                        !obstacleObject.CompareTag("Preview"))
                     {
-                        ObjectPlacer.Instance.placedGameObjects.Add(obstacleObject);
-                        Debug.Log($"Added to placedGameObjects. Count: {ObjectPlacer.Instance.placedGameObjects.Count}");
-                    }
+                        isBlocked = true;
+                        Debug.Log($"Found obstacle: {obstacleObject.name}");
+                        
+                        if (!ObjectPlacer.Instance.placedGameObjects.Contains(obstacleObject))
+                        {
+                            ObjectPlacer.Instance.placedGameObjects.Add(obstacleObject);
+                            Debug.Log($"Added to placedGameObjects. Count: {ObjectPlacer.Instance.placedGameObjects.Count}");
+                        }
 
-                    Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
-                    List<Vector2Int> occupiedCells = new List<Vector2Int> { new Vector2Int(0, 0) };
-                    
-                    int index = ObjectPlacer.Instance.placedGameObjects.IndexOf(obstacleObject);
-                    GridData.Instance.AddObjectAt(gridPosition, occupiedCells, 0, index);
-                    BlockData.AddObjectAt(gridPosition, occupiedCells, 0, index);
+                        Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
+                        List<Vector2Int> occupiedCells = new List<Vector2Int> { new Vector2Int(0, 0) };
+                        
+                        int index = ObjectPlacer.Instance.placedGameObjects.IndexOf(obstacleObject);
+                        GridData.Instance.AddObjectAt(gridPosition, occupiedCells, 0, index);
+                        BlockData.AddObjectAt(gridPosition, occupiedCells, 0, index);
+                    }
+                    else
+                    {
+                        Debug.Log($"Ignoring template/preview object: {obstacleObject.name}");
+                    }
                 }
 
+                bool walkable = !isBlocked;
                 nodeArray[x, y] = new ANode(walkable, worldPoint, x, y);
             }
         }
@@ -156,5 +172,74 @@ public class AGrid : MonoBehaviour
         {
             Debug.LogWarning($"Attempted to update node outside grid bounds at ({gridX}, {gridY})");
         }
+    }
+
+    // 노드의 임시 상태 설정
+    public void SetTemporaryNodeState(Vector3Int position, bool walkable)
+    {
+        int gridX = position.x + gridSizeX / 2;
+        int gridY = position.z + gridSizeY / 2;
+
+        if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY)
+        {
+            temporaryNodeStates[position] = nodeArray[gridX, gridY].walkable;
+            nodeArray[gridX, gridY].walkable = walkable;
+        }
+    }
+
+    // 임시 상태 복원
+    public void RestoreTemporaryNodes()
+    {
+        foreach (var kvp in temporaryNodeStates)
+        {
+            int gridX = kvp.Key.x + gridSizeX / 2;
+            int gridY = kvp.Key.z + gridSizeY / 2;
+
+            if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY)
+            {
+                nodeArray[gridX, gridY].walkable = kvp.Value;
+            }
+        }
+        temporaryNodeStates.Clear();
+    }
+
+    private bool CheckPathValidity(Vector3Int gridPosition, List<Vector2Int> cells)
+    {
+        // 임시로 노드들을 막음
+        Dictionary<ANode, bool> originalStates = new Dictionary<ANode, bool>();
+        foreach (var cell in cells)
+        {
+            Vector3Int blockPos = new Vector3Int(
+                gridPosition.x + cell.x,
+                gridPosition.y,
+                gridPosition.z + cell.y
+            );
+            ANode node = ANodeFromWorldPoint(new Vector3(blockPos.x, 0, blockPos.z));
+            if (node != null && !originalStates.ContainsKey(node))
+            {
+                originalStates[node] = node.walkable;
+                node.walkable = false;
+            }
+        }
+
+        // 프리뷰 경로 업데이트 전에 모든 스폰 포인트에서 경로 체크
+        bool anyValidPath = false;
+        foreach (var spawnPoint in PathManager.Instance.GetSpawnPoints())
+        {
+            PathManager.Instance.CheckPreviewPath();
+            if (PathManager.Instance.HasValidPath)
+            {
+                anyValidPath = true;
+                break;
+            }
+        }
+
+        // 노드 상태 복원
+        foreach (var pair in originalStates)
+        {
+            pair.Key.walkable = pair.Value;
+        }
+
+        return anyValidPath;
     }
 }
