@@ -4,82 +4,88 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Enemy : MonoBehaviour
 {
-    private List<Node> path; // A* ¾Ë°í¸®ÁòÀ¸·Î °è»êµÈ °æ·Î
-    private int pathIndex; // ÇöÀç °æ·Î¿¡¼­ ÀÌµ¿ ÁßÀÎ ³ëµåÀÇ ÀÎµ¦½º
-    private Transform targetBase; // ÀûÀÌ ¸ñÇ¥·Î »ï´Â ±âÁöÀÇ Transform
-    private Pathfinding_AstarMove pathfinding; // A* ¾Ë°í¸®Áò °æ·Î Å½»öÀ» ´ã´çÇÏ´Â Pathfinding ½ºÅ©¸³Æ® ÂüÁ¶
-    public float moveSpeed = 3.5f; // ÀûÀÇ ÀÌµ¿ ¼Óµµ
+    private List<Node> path; // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    private int pathIndex; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+    private Transform targetBase; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Transform
+    private Pathfinding_AstarMove pathfinding; // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+    public float moveSpeed = 3.5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
+    public int Hp;
+    public int Speed;
+    public int Damage;
+    private NavMeshAgent agent;
+    private Transform targetBase;
+    private LineRenderer lineRenderer;
 
-    private LineRenderer lineRenderer; // °æ·Î¸¦ ½Ã°¢È­ÇÒ LineRenderer
+    private LineRenderer lineRenderer; // ï¿½ï¿½Î¸ï¿½ ï¿½Ã°ï¿½È­ï¿½ï¿½ LineRenderer
 
     private void Awake()
     {
-        // LineRenderer ÃÊ±âÈ­
-        lineRenderer = GetComponent<LineRenderer>(); // ÇöÀç GameObject¿¡¼­ LineRenderer ½ºÅ©¸³Æ®¸¦ °¡Á®¿È
+        // LineRenderer ï¿½Ê±ï¿½È­
+        lineRenderer = GetComponent<LineRenderer>(); // ï¿½ï¿½ï¿½ï¿½ GameObjectï¿½ï¿½ï¿½ï¿½ LineRenderer ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        // LineRendererÀÇ ¼± µÎ²² ¼³Á¤
-        lineRenderer.startWidth = 0.1f; // ¼±ÀÇ ½ÃÀÛ ºÎºÐ µÎ²² ¼³Á¤
-        lineRenderer.endWidth = 0.1f;   // ¼±ÀÇ ³¡ ºÎºÐ µÎ²² ¼³Á¤
+        // LineRendererï¿½ï¿½ ï¿½ï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.startWidth = 0.1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.endWidth = 0.1f;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // LineRendererÀÇ ¸ÓÆ¼¸®¾ó ¼³Á¤
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // LineRenderer¿¡ »ç¿ëÇÒ ±âº» ¸ÓÆ¼¸®¾ó ÇÒ´ç
+        // LineRendererï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // LineRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
 
-        // LineRendererÀÇ »ö»ó ¼³Á¤
-        lineRenderer.startColor = Color.green; // ¼±ÀÇ ½ÃÀÛ ºÎºÐ »ö»óÀ» ³ì»öÀ¸·Î ¼³Á¤
-        lineRenderer.endColor = Color.red;     // ¼±ÀÇ ³¡ ºÎºÐ »ö»óÀ» »¡°£»öÀ¸·Î ¼³Á¤
+        // LineRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.startColor = Color.green; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.endColor = Color.red;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    // EnemyÀÇ ÃÊ±âÈ­ ¸Þ¼­µå. ¸ñÇ¥ ±âÁö¿Í Pathfinding ½ºÅ©¸³Æ®¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+    // Enemyï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Þ¼ï¿½ï¿½ï¿½. ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
     public void Initialize(Transform baseTransform, Pathfinding_AstarMove pathfindingComponent)
     {
-        targetBase = baseTransform; // ¸ñÇ¥ ±âÁö ¼³Á¤
-        pathfinding = pathfindingComponent; // Pathfinding ½ºÅ©¸³Æ® ¼³Á¤
+        targetBase = baseTransform; // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        pathfinding = pathfindingComponent; // Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-        // Pathfinding°ú TargetBase°¡ Á¤»óÀûÀ¸·Î ÃÊ±âÈ­µÇ¾ú´ÂÁö È®ÀÎ
+        // Pathfindingï¿½ï¿½ TargetBaseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         if (pathfinding != null && targetBase != null)
         {
-            // A* ¾Ë°í¸®ÁòÀ» »ç¿ëÇÏ¿© °æ·Î¸¦ °è»ê
+            // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½
             path = pathfinding.FindPath(transform.position, targetBase.position);
-            pathIndex = 0; // °æ·ÎÀÇ ½ÃÀÛ ÀÎµ¦½º¸¦ 0À¸·Î ¼³Á¤
+            pathIndex = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            // °æ·Î¸¦ LineRenderer·Î ½Ã°¢È­
+            // ï¿½ï¿½Î¸ï¿½ LineRendererï¿½ï¿½ ï¿½Ã°ï¿½È­
             DrawPath();
         }
         else
         {
-            // ÃÊ±âÈ­ ½ÇÆÐ ½Ã ¿À·ù ¸Þ½ÃÁö Ãâ·Â
-            Debug.LogError("Pathfinding ½ºÅ©¸³Æ® ¶Ç´Â ¸ñÇ¥ ±âÁö°¡ Enemy¿¡¼­ ÃÊ±âÈ­µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            // ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            Debug.LogError("Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½Ç´ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Enemyï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
-    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù È£ÃâµÇ¾î ÀûÀ» ÀÌµ¿½ÃÅ°´Â ¸Þ¼­µå
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     private void Update()
     {
-        // °æ·Î°¡ Á¸ÀçÇÏ°í, ¾ÆÁ÷ °æ·Î¸¦ µû¶ó°¡´Â ÁßÀÎÁö È®ÀÎ
+        // ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         if (path != null && pathIndex < path.Count)
         {
-            // ÇöÀç ÀÌµ¿ÇØ¾ß ÇÒ ³ëµåÀÇ À§Ä¡
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
             Vector3 targetPos = path[pathIndex].worldPosition;
 
-            // MoveTowards¸¦ »ç¿ëÇÏ¿© ÇöÀç À§Ä¡¿¡¼­ ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+            // MoveTowardsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 
-            // ¸ñÇ¥ À§Ä¡¿¡ µµ´ÞÇÏ¸é ´ÙÀ½ ³ëµå·Î ÀÌµ¿
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
             if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
-                pathIndex++; // ´ÙÀ½ ³ëµå·Î ÀÌµ¿
-                //UpdatePathVisualization(); // ÀÌµ¿ °æ·Î ¾÷µ¥ÀÌÆ®
+                pathIndex++; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+                //UpdatePathVisualization(); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
             }
         }
-        else if (pathIndex >= path.Count) // °æ·ÎÀÇ ¸¶Áö¸· ³ëµå¿¡ µµ´ÞÇÑ °æ¿ì
+        else if (pathIndex >= path.Count) // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         {
-            // µð¹ö±× ¸Þ½ÃÁö Ãâ·Â
-            Debug.Log("¸ñÇ¥ ÁöÁ¡¿¡ µµÂø, Enemy ¿ÀºêÁ§Æ® »èÁ¦");
-            Destroy(gameObject); // Enemy ¿ÀºêÁ§Æ® »èÁ¦
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            Debug.Log("ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, Enemy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
+            Destroy(gameObject); // Enemy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-    // °æ·Î¸¦ LineRenderer·Î ½Ã°¢È­
+    // ï¿½ï¿½Î¸ï¿½ LineRendererï¿½ï¿½ ï¿½Ã°ï¿½È­
     private void DrawPath()
     {
         if (path != null && path.Count > 0)
@@ -92,12 +98,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // ÀÌµ¿ ÁßÀÎ °æ·Î¸¦ ½Ç½Ã°£À¸·Î ¾÷µ¥ÀÌÆ®
+    // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     private void UpdatePathVisualization()
     {
         if (lineRenderer.positionCount > pathIndex)
         {
-            // ÀÌ¹Ì Áö³ª¿Â °æ·Î¸¦ Åõ¸íÇÏ°Ô Ã³¸®
+            // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Ã³ï¿½ï¿½
             lineRenderer.startColor = Color.clear;
             lineRenderer.endColor = Color.red;
         }
