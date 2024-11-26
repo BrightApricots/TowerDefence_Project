@@ -1,9 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Enemy : MonoBehaviour
 {
+    private List<Node> path; // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    private int pathIndex; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+    private Transform targetBase; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Transform
+    private Pathfinding_AstarMove pathfinding; // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+    public float moveSpeed = 3.5f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
     public int Hp;
     public int Speed;
     public int Damage;
@@ -11,107 +16,96 @@ public class Enemy : MonoBehaviour
     private Transform targetBase;
     private LineRenderer lineRenderer;
 
-    [Header("Enemy Settings")]
-    public float moveSpeed = 3.5f;
+    private LineRenderer lineRenderer; // ï¿½ï¿½Î¸ï¿½ ï¿½Ã°ï¿½È­ï¿½ï¿½ LineRenderer
 
-    public void Initialize(Transform baseTransform)
+    private void Awake()
     {
-        targetBase = baseTransform;
+        // LineRenderer ï¿½Ê±ï¿½È­
+        lineRenderer = GetComponent<LineRenderer>(); // ï¿½ï¿½ï¿½ï¿½ GameObjectï¿½ï¿½ï¿½ï¿½ LineRenderer ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+
+        // LineRendererï¿½ï¿½ ï¿½ï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.startWidth = 0.1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.endWidth = 0.1f;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Î²ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+        // LineRendererï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // LineRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
+
+        // LineRendererï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.startColor = Color.green; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        lineRenderer.endColor = Color.red;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    private void Start()
+    // Enemyï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Þ¼ï¿½ï¿½ï¿½. ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+    public void Initialize(Transform baseTransform, Pathfinding_AstarMove pathfindingComponent)
     {
-        agent = GetComponent<NavMeshAgent>();
-        lineRenderer = GetComponent<LineRenderer>();
+        targetBase = baseTransform; // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        pathfinding = pathfindingComponent; // Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-        // ÀÌµ¿ ¼Óµµ ¼³Á¤
-        agent.speed = moveSpeed;
+        // Pathfindingï¿½ï¿½ TargetBaseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+        if (pathfinding != null && targetBase != null)
+        {
+            // A* ï¿½Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½
+            path = pathfinding.FindPath(transform.position, targetBase.position);
+            pathIndex = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        SetupLineRenderer();
+            // ï¿½ï¿½Î¸ï¿½ LineRendererï¿½ï¿½ ï¿½Ã°ï¿½È­
+            DrawPath();
+        }
+        else
+        {
+            // ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            Debug.LogError("Pathfinding ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½Ç´ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Enemyï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½.");
+        }
     }
 
+    // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     private void Update()
     {
-        if (targetBase != null)
+        // ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ó°¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+        if (path != null && pathIndex < path.Count)
         {
-            // ±âÁö·Î ÀÌµ¿
-            agent.SetDestination(targetBase.position);
-            UpdateLineRenderer();
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+            Vector3 targetPos = path[pathIndex].worldPosition;
 
-            // ¸ñÇ¥ ÁöÁ¡¿¡ µµ´ÞÇÏ¸é »èÁ¦
-            if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+            // MoveTowardsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
-                Debug.Log("Enemy »èÁ¦");
-                Destroy(gameObject);
+                pathIndex++; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+                //UpdatePathVisualization(); // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+            }
+        }
+        else if (pathIndex >= path.Count) // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        {
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            Debug.Log("ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, Enemy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
+            Destroy(gameObject); // Enemy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+        }
+    }
+
+    // ï¿½ï¿½Î¸ï¿½ LineRendererï¿½ï¿½ ï¿½Ã°ï¿½È­
+    private void DrawPath()
+    {
+        if (path != null && path.Count > 0)
+        {
+            lineRenderer.positionCount = path.Count;
+            for (int i = 0; i < path.Count; i++)
+            {
+                lineRenderer.SetPosition(i, path[i].worldPosition);
             }
         }
     }
 
-    private void SetupLineRenderer()
+    // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    private void UpdatePathVisualization()
     {
-        // LineRenderer ±âº» ¼³Á¤
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.startColor = Color.yellow;
-        lineRenderer.endColor = Color.yellow;
-        lineRenderer.textureMode = LineTextureMode.Tile;
-
-        // Á¡¼± È¿°ú¸¦ À§ÇÑ ÅØ½ºÃ³ ¼³Á¤
-        lineRenderer.material.mainTexture = GenerateDashedTexture();
-        lineRenderer.material.mainTextureScale = new Vector2(1f, 1f);
-    }
-
-    private void UpdateLineRenderer()
-    {
-        if (agent.path == null || agent.path.corners.Length == 0)
+        if (lineRenderer.positionCount > pathIndex)
         {
-            lineRenderer.positionCount = 0;
-            return;
+            // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Ã³ï¿½ï¿½
+            lineRenderer.startColor = Color.clear;
+            lineRenderer.endColor = Color.red;
         }
-
-        // ÇöÀç À§Ä¡¿Í ´ÙÀ½ ¸ñÇ¥ À§Ä¡¸¸ LineRenderer¿¡ ¼³Á¤
-        Vector3[] pathSegment = new Vector3[2];
-        pathSegment[0] = transform.position; // À¯´Ö ÇöÀç À§Ä¡
-        pathSegment[1] = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; // ´ÙÀ½ ÄÚ³Ê
-
-        lineRenderer.positionCount = pathSegment.Length;
-        lineRenderer.SetPositions(pathSegment);
-    }
-
-    private Texture2D GenerateDashedTexture()
-    {
-        // Á¡¼± ÅØ½ºÃ³ »ý¼º
-        int width = 8;
-        int height = 1;
-        Texture2D texture = new Texture2D(width, height);
-        texture.wrapMode = TextureWrapMode.Repeat;
-
-        for (int x = 0; x < width; x++)
-        {
-            Color color = (x % 2 == 0) ? Color.white : Color.clear; // Èò»ö°ú Åõ¸í ±³Â÷
-            for (int y = 0; y < height; y++)
-            {
-                texture.SetPixel(x, y, color);
-            }
-        }
-
-        texture.Apply();
-        return texture;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (agent == null || agent.path == null || agent.path.corners.Length == 0)
-            return;
-
-        // ÇöÀç °æ·Î¿Í µ¿ÀÏÇÑ ½ºÅ¸ÀÏ·Î Scene ºä¿¡ ½Ã°¢È­
-        Gizmos.color = Color.yellow;
-
-        Vector3 currentPos = transform.position; //»ý¼ºµÈ À¯´ÖÀÇ ÇöÀç À§Ä¡
-        Vector3 nextCorner = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; //À¯´ÖÀÇ ´ÙÀ½ °æÀ¯Áö 
-
-        // À¯´Ö À§Ä¡¿¡¼­ ´ÙÀ½ °æ·Î ÄÚ³Ê±îÁö ¼± ±×¸®±â
-        Gizmos.DrawLine(currentPos, nextCorner);
     }
 }
