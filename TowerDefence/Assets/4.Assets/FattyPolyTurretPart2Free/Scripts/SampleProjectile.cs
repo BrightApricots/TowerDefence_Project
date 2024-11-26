@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
+public class SampleProjectile : MonoBehaviour {
 
     public TurretAI.TurretType type = TurretAI.TurretType.Single;
     public Transform target;
@@ -61,7 +61,8 @@ public class Projectile : MonoBehaviour {
                 transform.GetComponent<Rigidbody>().velocity = Vo;
                 lockOn = false;
             }
-        }else if(type == TurretAI.TurretType.Dual)
+        }
+        else if(type == TurretAI.TurretType.Dual)
         {
             Vector3 dir = target.position - transform.position;
             //float distThisFrame = speed * Time.deltaTime;

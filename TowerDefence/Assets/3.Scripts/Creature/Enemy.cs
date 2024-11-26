@@ -4,6 +4,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(LineRenderer))]
 public class Enemy : MonoBehaviour
 {
+    public int Hp;
+    public int Speed;
+    public int Damage;
     private NavMeshAgent agent;
     private Transform targetBase;
     private LineRenderer lineRenderer;
