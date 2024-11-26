@@ -1,3 +1,5 @@
+// 요약 : 노드 클래스 
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,6 +81,18 @@ public class CustomGrid : MonoBehaviour
         }
 
         return neighbors; // 이웃 노드 리스트 반환
+    }
+
+    // *런타임 중 새로운 오브젝트로 인해 이동 불가능한 영역을 업데이트
+    public void UpdateGrid(Vector3 objectPosition)
+    {
+        Node node = NodeFromWorldPoint(objectPosition); // 1. 전달 받은 새로 생성된 오브젝트의 위치를 기반으로 노드 탐색
+        if (node != null)
+        {
+            // 해당 노드를 이동 불가능한 상태로 변경
+            bool walkable = !Physics.CheckSphere(node.worldPosition, nodeRadius, unwalkableMask); // 2. 노드의 이동 가능 여부 판단
+            node.walkable = walkable; //3. 노드를 이동 불가능 영역으로 확정
+        }
     }
 
     // 그리드를 시각적으로 표시

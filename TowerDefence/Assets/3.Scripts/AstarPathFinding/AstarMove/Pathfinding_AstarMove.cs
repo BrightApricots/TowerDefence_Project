@@ -1,3 +1,4 @@
+// 요약 : 경로 탐색 클래스
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +8,16 @@ public class Pathfinding_AstarMove : MonoBehaviour
 
     void Awake()
     {
-        // Grid 스크립트를 동적으로 찾기
+        // CustomGrid 스크립트를 동적으로 찾기
         grid = FindObjectOfType<CustomGrid>();
         if (grid == null)
         {
+            // CustomGrid가 없으면 오류 출력
             Debug.LogError("씬에 CustomGrid 스크립트가 없습니다. 적절한 GameObject에 CustomGrid 스크립트를 추가하세요.");
         }
     }
 
+    // A* 알고리즘을 사용하여 경로 탐색
     public List<Node> FindPath(Vector3 startPos, Vector3 targetPos)
     {
         // grid가 null이면 경로 탐색 중단
@@ -39,7 +42,8 @@ public class Pathfinding_AstarMove : MonoBehaviour
             for (int i = 1; i < openSet.Count; i++)
             {
                 // 현재 노드와 비교하여 비용(fCost)이 더 낮은 노드를 선택
-                if (openSet[i].fCost < currentNode.fCost || (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
+                if (openSet[i].fCost < currentNode.fCost ||
+                   (openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost))
                 {
                     currentNode = openSet[i];
                 }
@@ -81,9 +85,9 @@ public class Pathfinding_AstarMove : MonoBehaviour
         return null; // 경로를 찾지 못한 경우 null 반환
     }
 
+    // 경로를 역으로 추적하여 반환
     private List<Node> RetracePath(Node startNode, Node endNode)
     {
-        // 시작 노드부터 목표 노드까지의 경로를 추적
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
 
@@ -94,13 +98,13 @@ public class Pathfinding_AstarMove : MonoBehaviour
         }
         path.Reverse(); // 경로를 역순으로 정렬 (시작 노드부터 목표 노드까지)
 
-        grid.path = path; // Grid에 경로 저장 (디버깅용)
+        grid.path = path; // CustomGrid의 디버깅용 경로 업데이트
         return path;
     }
 
+    // 두 노드 간의 거리 계산
     private int GetDistance(Node nodeA, Node nodeB)
     {
-        // 두 노드 간의 거리 계산
         int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
         int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
@@ -108,5 +112,20 @@ public class Pathfinding_AstarMove : MonoBehaviour
         if (dstX > dstY)
             return 14 * dstY + 10 * (dstX - dstY);
         return 14 * dstX + 10 * (dstY - dstX);
+    }
+
+    // 실시간으로 새로운 이동 불가 영역 추가에 반응
+    public void UpdatePath(Vector3 startPos, Vector3 targetPos)
+    {
+        Debug.Log("새로운 경로를 탐색합니다.");
+        List<Node> newPath = FindPath(startPos, targetPos); // 1. FindPath 메서드에 시작 위치와 목표 위치를 전달하여 A* 알고리즘 실행
+        if (newPath != null) // 2. 새로게 탐색된 경로의 유효성 따지고 결과 반환
+        {
+            Debug.Log("경로 갱신 완료.");
+        }
+        else
+        {
+            Debug.LogWarning("경로를 찾을 수 없습니다.");
+        }
     }
 }
