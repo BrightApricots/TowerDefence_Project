@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public static GridManager Instance; // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
-    public Grid grid; // Unity Grid ÄÄÆ÷³ÍÆ® ÂüÁ¶
+    public static GridManager Instance; // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
+    public Grid grid; // Unity Grid ì»´í¬ë„ŒíŠ¸ ì°¸ì¡°
 
     private void Awake()
     {
@@ -17,13 +17,13 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // ¿ùµå ÁÂÇ¥ -> ±×¸®µå ÁÂÇ¥·Î º¯È¯
+    // ì›”ë“œ ì¢Œí‘œ -> ê·¸ë¦¬ë“œ ì¢Œí‘œë¡œ ë³€í™˜
     public Vector3Int WorldToGrid(Vector3 worldPosition)
     {
         return grid.WorldToCell(worldPosition);
     }
 
-    // ±×¸®µå ÁÂÇ¥ -> ¿ùµå ÁÂÇ¥·Î º¯È¯
+    // ê·¸ë¦¬ë“œ ì¢Œí‘œ -> ì›”ë“œ ì¢Œí‘œë¡œ ë³€í™˜
     public Vector3 GridToWorld(Vector3Int gridPosition)
     {
         return grid.CellToWorld(gridPosition) + new Vector3(grid.cellSize.x / 2f, 0, grid.cellSize.z / 2f);

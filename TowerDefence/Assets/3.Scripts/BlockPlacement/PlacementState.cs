@@ -241,17 +241,10 @@ public class PlacementState : IBuildingState
             Vector3 position = grid.CellToWorld(gridPosition);
             position += new Vector3(0.5f, floor, 0.5f);
 
-            int index = objectPlacer.PlaceObject(
-                database.objectsData[selectedObjectIndex].Prefab,
-                position,
-                Quaternion.Euler(0, 90 * currentRotation, 0));
+            int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,position,Quaternion.Euler(0, 90 * currentRotation, 0));
 
-            selectedData.AddObjectAt(
-                gridPosition,
-                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation),
-                database.objectsData[selectedObjectIndex].ID,
-                index,
-                floor);
+            selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation),
+                database.objectsData[selectedObjectIndex].ID,index,floor);
 
             if (database.IsBlock(database.objectsData[selectedObjectIndex].ID))
             {

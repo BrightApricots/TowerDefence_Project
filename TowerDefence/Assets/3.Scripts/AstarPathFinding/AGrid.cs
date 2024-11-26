@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class AGrid : MonoBehaviour
 {
-
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
@@ -42,7 +41,13 @@ public class AGrid : MonoBehaviour
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x + 0.5f) + Vector3.forward * (y + 0.5f);
                 worldPoint.y = transform.position.y;
 
-                bool walkable = !(Physics.CheckSphere(worldPoint, 0.1f, unwalkableMask));
+                bool walkable = !(Physics.CheckSphere(worldPoint, .3f, unwalkableMask));
+                if(!walkable)
+                {
+                    Debug.Log($"x : {x}, y : {y}");
+                    GridData.Instance.UpdateMapObject(new Vector2(x, y));
+                }
+
                 grid[x, y] = new ANode(walkable, worldPoint, x, y);
             }
         }

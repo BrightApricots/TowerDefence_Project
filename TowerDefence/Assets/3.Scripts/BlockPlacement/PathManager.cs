@@ -5,7 +5,7 @@ public class PathManager : MonoBehaviour
     public static PathManager Instance { get; private set; }
 
     [SerializeField]
-    private Transform spawnPoint;  // 몬스터 스폰 지점
+    private Transform spawnPoint;  // 몬스터 스폰 지점 d
     [SerializeField]
     private Transform targetPoint; // 목표 지점 (중심부)
     [SerializeField]
