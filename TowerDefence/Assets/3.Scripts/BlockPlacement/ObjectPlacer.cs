@@ -12,13 +12,35 @@ public class ObjectPlacer : MonoBehaviour
         get
         {
             if (instance == null)
-                instance = new ObjectPlacer();
+            {
+                GameObject go = new GameObject("ObjectPlacer");
+                instance = go.AddComponent<ObjectPlacer>();
+                instance.placedGameObjects = new List<GameObject>();
+            }
             return instance;
         }
     }
 
     [SerializeField]
-    public List<GameObject> placedGameObjects = new();
+    public List<GameObject> placedGameObjects = new List<GameObject>();
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        if (placedGameObjects == null)
+        {
+            placedGameObjects = new List<GameObject>();
+        }
+    }
 
     public int PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
