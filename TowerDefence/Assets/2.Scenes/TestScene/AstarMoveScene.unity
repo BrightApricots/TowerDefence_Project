@@ -376,7 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad2a8bab43d5c5458b79a1037ce5913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefab: {fileID: 6323410511895906477, guid: 710e468cf4f08b4478d41af5cd2aa430, type: 3}
+  cubePrefabs:
+  - {fileID: 4428052050468720457, guid: 16b56e76439d5e54f9fdd2bb30085c61, type: 3}
+  - {fileID: 3487007735555770654, guid: 6a6c89eea12009545bcf94b114bd83e2, type: 3}
+  - {fileID: 4168513232984766456, guid: 8648c27a70a9a9d4e8c7a9e1c5ae10a7, type: 3}
+  - {fileID: 4168513232984766456, guid: 54e156cded1f45f4aa90744b9d278e5d, type: 3}
+  - {fileID: 4168513232984766456, guid: 79baae0fc2e5fd34dae80b846ffc4ba7, type: 3}
+  - {fileID: 4168513232984766456, guid: b30c0dd5fe9f8ca4cab2d18cc76500b0, type: 3}
   mainCamera: {fileID: 963194227}
   fixedY: 0.6
 --- !u!1 &188573859
