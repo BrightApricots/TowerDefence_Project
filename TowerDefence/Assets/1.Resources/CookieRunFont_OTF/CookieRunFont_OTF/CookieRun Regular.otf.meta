@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45b7901ead6956a4e9cf131041ac076d
+guid: 5a858a74f530a844c9b81f426199d5ff
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - ONE Mobile POP
+  - CookieRunOTF
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
