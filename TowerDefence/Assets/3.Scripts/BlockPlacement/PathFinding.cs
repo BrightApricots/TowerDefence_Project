@@ -117,10 +117,10 @@ public class PathFinding : MonoBehaviour
         return waypoints;
     }
 
-    int GetDistance(ANode ANodeA, ANode ANodeB)
+    int GetDistance(ANode nodeA, ANode nodeB)
     {
-        int dstX = Mathf.Abs(ANodeA.gridX - ANodeB.gridX);
-        int dstY = Mathf.Abs(ANodeA.gridY - ANodeB.gridY);
+        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
+        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
         if (dstX > dstY)
             return 14 * dstY + 10 * (dstX - dstY);

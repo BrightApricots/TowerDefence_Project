@@ -15,7 +15,7 @@ public class Monster : MonoBehaviour
     {
         spawnPoint = spawn;
         transform.position = PathManager.Instance.GetSpawnPosition(spawnPoint);
-        Vector3[] newPath = PathManager.Instance.GetCurrentPath(spawnPoint);
+        Vector3[] newPath = PathManager.Instance.GetActualPath(spawnPoint);
         
         if (newPath != null && newPath.Length > 0)
         {
@@ -25,7 +25,7 @@ public class Monster : MonoBehaviour
             
             if (PathManager.Instance != null)
             {
-                PathManager.Instance.OnPathUpdated += OnPathUpdated;
+                PathManager.Instance.OnActualPathUpdated += OnPathUpdated;
             }
             
             UpdateCurrentTarget();
@@ -110,7 +110,7 @@ public class Monster : MonoBehaviour
                 {
                     if (PathManager.Instance != null)
                     {
-                        PathManager.Instance.OnPathUpdated -= OnPathUpdated;
+                        PathManager.Instance.OnActualPathUpdated -= OnPathUpdated;
                     }
                     Destroy(gameObject);
                 }
@@ -122,7 +122,7 @@ public class Monster : MonoBehaviour
     {
         if (PathManager.Instance != null)
         {
-            PathManager.Instance.OnPathUpdated -= OnPathUpdated;
+            PathManager.Instance.OnActualPathUpdated -= OnPathUpdated;
         }
     }
 } 

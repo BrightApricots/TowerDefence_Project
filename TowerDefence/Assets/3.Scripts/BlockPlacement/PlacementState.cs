@@ -58,6 +58,48 @@ public class PlacementState : IBuildingState
         inputManager.OnRotate -= RotateStructure;
     }
 
+    private IEnumerator CheckPlacementValidityCoroutine(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview, System.Action<bool> callback)
+    {
+        // 임시로 노드들을 막음
+        foreach (var cell in cells)
+        {
+            Vector3Int blockPos = new Vector3Int(
+                gridPosition.x + cell.x,
+                gridPosition.y,
+                gridPosition.z + cell.y
+            );
+            aGrid.SetTemporaryNodeState(blockPos, false);
+        }
+
+        // 모든 스폰 포인트에서 동시에 경로 체크
+        PathManager.Instance.CheckPreviewPath();
+
+        bool anyValidPath = false;
+        bool checkComplete = false;
+
+        PathManager.Instance.UpdatePreviewPathWithDelay((isValid) => {
+            anyValidPath = isValid;
+            checkComplete = true;
+        });
+
+        // 코루틴으로 대기
+        float timeout = Time.time + 0.5f;
+        while (!checkComplete && Time.time < timeout)
+        {
+            yield return null;
+        }
+
+        // 노드 상태 복원
+        aGrid.RestoreTemporaryNodes();
+
+        if (!anyValidPath && isPreview)
+        {
+            Debug.Log("Block placement would block all possible paths");
+        }
+
+        callback(anyValidPath);
+    }
+
     private bool CheckPlacementValidity(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview = false)
     {
         // 시작 위치와 종료 위치 체크
@@ -74,7 +116,6 @@ public class PlacementState : IBuildingState
                     gridPosition.z + cell.y
                 );
                 
-                // 시작 위치나 종료 위치에 블록을 설치하려고 하는 경우
                 if ((blockPos.x == spawnGridPos.x && blockPos.z == spawnGridPos.z) ||
                     (blockPos.x == targetGridPos.x && blockPos.z == targetGridPos.z))
                 {
@@ -91,28 +132,7 @@ public class PlacementState : IBuildingState
             return false;
         }
 
-        // 장애물 체크 (프리뷰와 템플릿 제외)
-        Vector3 worldPosition = grid.CellToWorld(gridPosition);
-        foreach (var cell in cells)
-        {
-            Vector3 checkPosition = worldPosition + new Vector3(cell.x + 0.5f, 0, cell.y + 0.5f);
-            Collider[] hitColliders = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
-            
-            foreach (var hitCollider in hitColliders)
-            {
-                if (hitCollider != null)
-                {
-                    GameObject obj = hitCollider.gameObject;
-                    if (!obj.name.Contains("Preview") && 
-                        !obj.name.Contains("Template"))
-                    {
-                        return false;
-                    }
-                }
-            }
-        }
-
-        // 임로 노드들을 막고 프리뷰 경로로 유효성 확인
+        // 임시로 노드들을 막음
         foreach (var cell in cells)
         {
             Vector3Int blockPos = new Vector3Int(
@@ -123,7 +143,7 @@ public class PlacementState : IBuildingState
             aGrid.SetTemporaryNodeState(blockPos, false);
         }
 
-        // 프리뷰 경로 업데이트하여 경로 차단 여부 확인
+        // 즉시 경로 체크
         PathManager.Instance.CheckPreviewPath();
         bool isValid = PathManager.Instance.HasValidPath;
 
@@ -232,7 +252,27 @@ public class PlacementState : IBuildingState
             position += new Vector3(0.5f, floor, 0.5f);
 
             int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, position, Quaternion.Euler(0, 90 * currentRotation, 0));
-            selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation),currentID, index, floor);
+            
+            // 블록인 경우 Collider 추가
+            if (database.IsBlock(currentID))
+            {
+                GameObject placedObject = ObjectPlacer.Instance.placedGameObjects[index];
+                if (placedObject != null)
+                {
+                    // BoxCollider가 없으면 추가
+                    if (placedObject.GetComponent<BoxCollider>() == null)
+                    {
+                        BoxCollider collider = placedObject.AddComponent<BoxCollider>();
+                        collider.size = Vector3.one;  // 크기는 블록 크기에 맞게 조정
+                        collider.center = Vector3.zero;  // 중심점 설정
+                        
+                        // unwalkableMask 레이어로 설정
+                        placedObject.layer = LayerMask.NameToLayer("Unwalkable");
+                    }
+                }
+            }
+
+            selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), currentID, index, floor);
 
             if (!database.IsTower(currentID))
             {

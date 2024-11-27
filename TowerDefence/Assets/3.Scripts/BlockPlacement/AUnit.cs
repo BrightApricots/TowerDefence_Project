@@ -119,7 +119,7 @@ public class AUnit : MonoBehaviour
             (path, success) => HandlePreviewPathFound(path, success));
     }
 
-    private void HandlePreviewPathFound(Vector3[] path, bool success)
+    public void HandlePreviewPathFound(Vector3[] path, bool success)
     {
         if (success)
         {
