@@ -35,7 +35,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void Start()
     {
-        gridVisualization.SetActive(false);
+        gridVisualization.SetActive(true);
         BlockData = new();
         TowerData = new();
     }
