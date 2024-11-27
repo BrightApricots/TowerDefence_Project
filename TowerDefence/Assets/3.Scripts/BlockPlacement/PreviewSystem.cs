@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PreviewSystem : MonoBehaviour
 {
@@ -78,12 +79,21 @@ public class PreviewSystem : MonoBehaviour
                 materialsCopy[i].SetFloat("_Blend", 0);
                 materialsCopy[i].SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
                 materialsCopy[i].SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                materialsCopy[i].SetInt("_ZWrite", 0);
+                materialsCopy[i].SetInt("_ZWrite", 1);
                 materialsCopy[i].renderQueue = 3000;
 
-                Color color = materialsCopy[i].color;
-                color.a = previewAlpha;
-                materialsCopy[i].color = color;
+                if (materialsCopy[i].color != null)
+                {
+                    Color color = materialsCopy[i].color;
+                    color.a = previewAlpha;
+                    materialsCopy[i].color = color;
+                }
+                else
+                {
+                    Color color = Color.white;
+                    color.a = previewAlpha;
+                    materialsCopy[i].color = color;
+                }
 
                 previewMaterialsCopy.Add(materialsCopy[i]);
             }
