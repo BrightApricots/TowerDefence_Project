@@ -1,44 +1,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CubeSettings
+{
+    public GameObject cubePrefab; // íë¸Œ í”„ë¦¬íŒ¹
+    public float positionY;  // Position Y ê°’
+    public float scaleY;     // Scale Y ê°’
+}
+
 public class CubeSpawner : MonoBehaviour
 {
-    public List<GameObject> cubePrefabs; // »ı¼ºÇÒ Å¥ºê ÇÁ¸®ÆÕ ¸®½ºÆ®
-    public Camera mainCamera;           // Å¬¸¯ °¨Áö¸¦ À§ÇÑ Ä«¸Ş¶ó
-    public float fixedY = 0.6f;         // »ı¼ºµÈ Å¥ºêÀÇ y°ª (Inspector¿¡¼­ ¼³Á¤ °¡´É)
+    public List<CubeSettings> cubeSettingsList; // íë¸Œ ì„¤ì • ë¦¬ìŠ¤íŠ¸
+    public Camera mainCamera;                   // í´ë¦­ ê°ì§€ë¥¼ ìœ„í•œ ì¹´ë©”ë¼
 
-    private GameObject previewCube;     // ÇÁ¸®ºä Å¥ºê ¿ÀºêÁ§Æ®
-    private CustomGrid customGrid;      // CustomGrid ½ºÅ©¸³Æ® ÂüÁ¶
-    private Pathfinding_AstarMove pathfinding; // Pathfinding ½ºÅ©¸³Æ® ÂüÁ¶
-    private Quaternion currentRotation = Quaternion.identity; // ÇöÀç È¸Àü »óÅÂ
-    private Node currentPreviewNode;    // ÇöÀç ÇÁ¸®ºä°¡ °íÁ¤µÈ ³ëµå
-    private int selectedCubeIndex = 0;  // ¼±ÅÃµÈ Å¥ºê ÇÁ¸®ÆÕ ÀÎµ¦½º
+    private GameObject previewCube;             // í”„ë¦¬ë·° íë¸Œ ì˜¤ë¸Œì íŠ¸
+    private CustomGrid customGrid;              // CustomGrid ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°
+    private Pathfinding_AstarMove pathfinding;  // Pathfinding ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°
+    private Quaternion currentRotation = Quaternion.identity; // í˜„ì¬ íšŒì „ ìƒíƒœ
+    private Node currentPreviewNode;            // í˜„ì¬ í”„ë¦¬ë·°ê°€ ê³ ì •ëœ ë…¸ë“œ
+    private int selectedCubeIndex = 0;          // ì„ íƒëœ íë¸Œ ì¸ë±ìŠ¤
 
     void Start()
     {
-        // CustomGrid¿Í Pathfinding ½ºÅ©¸³Æ® Ã£±â
+        // CustomGridì™€ Pathfinding ìŠ¤í¬ë¦½íŠ¸ ì°¾ê¸°
         customGrid = FindObjectOfType<CustomGrid>();
         pathfinding = FindObjectOfType<Pathfinding_AstarMove>();
 
         if (customGrid == null)
         {
-            Debug.LogError("¾À¿¡ CustomGrid ½ºÅ©¸³Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("ì”¬ì— CustomGrid ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
 
         if (pathfinding == null)
         {
-            Debug.LogError("¾À¿¡ Pathfinding_AstarMove ½ºÅ©¸³Æ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("ì”¬ì— Pathfinding_AstarMove ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
 
-        // ÇÁ¸®ºä Å¥ºê »ı¼º
-        if (cubePrefabs != null && cubePrefabs.Count > 0)
+        // íë¸Œ ì„¤ì • ë¦¬ìŠ¤íŠ¸ í™•ì¸
+        if (cubeSettingsList != null && cubeSettingsList.Count > 0)
         {
-            previewCube = Instantiate(cubePrefabs[selectedCubeIndex]); // Ã¹ ¹øÂ° Å¥ºê¸¦ ÇÁ¸®ºä·Î ¼³Á¤
-            previewCube.SetActive(false); // ÃÊ±â ºñÈ°¼ºÈ­
+            previewCube = Instantiate(cubeSettingsList[selectedCubeIndex].cubePrefab); // ì²« ë²ˆì§¸ íë¸Œë¥¼ í”„ë¦¬ë·°ë¡œ ì„¤ì •
+            previewCube.SetActive(false); // ì´ˆê¸° ë¹„í™œì„±í™”
         }
         else
         {
-            Debug.LogError("Å¥ºê ÇÁ¸®ÆÕ ¸®½ºÆ®°¡ ºñ¾î ÀÖ½À´Ï´Ù. ÇÁ¸®ÆÕÀ» Ãß°¡ÇÏ¼¼¿ä.");
+            Debug.LogError("íë¸Œ ì„¤ì • ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤. í”„ë¦¬íŒ¹ì„ ì¶”ê°€í•˜ì„¸ìš”.");
         }
     }
 
@@ -46,28 +53,28 @@ public class CubeSpawner : MonoBehaviour
     {
         UpdatePreviewCube();
 
-        if (Input.GetMouseButtonDown(0)) // ¿ŞÂÊ ¸¶¿ì½º Å¬¸¯ °¨Áö
+        if (Input.GetMouseButtonDown(0)) // ì™¼ìª½ ë§ˆìš°ìŠ¤ í´ë¦­ ê°ì§€
         {
             TryPlaceCube();
         }
 
-        if (Input.GetMouseButtonDown(1)) // ¿ìÅ¬¸¯À¸·Î ÁÂ¿ì È¸Àü
+        if (Input.GetMouseButtonDown(1)) // ìš°í´ë¦­ìœ¼ë¡œ ì¢Œìš° íšŒì „
         {
             RotatePreviewCube();
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // ¸¶¿ì½º ÈÙ À§·Î ½ºÅ©·Ñ
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // ë§ˆìš°ìŠ¤ íœ  ìœ„ë¡œ ìŠ¤í¬ë¡¤
         {
             CycleCubePrefabs(1);
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f) // ¸¶¿ì½º ÈÙ ¾Æ·¡·Î ½ºÅ©·Ñ
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f) // ë§ˆìš°ìŠ¤ íœ  ì•„ë˜ë¡œ ìŠ¤í¬ë¡¤
         {
             CycleCubePrefabs(-1);
         }
     }
 
-    // ÇÁ¸®ºä Å¥ºê ¾÷µ¥ÀÌÆ®
+    // í”„ë¦¬ë·° íë¸Œ ì—…ë°ì´íŠ¸
     void UpdatePreviewCube()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -79,76 +86,138 @@ public class CubeSpawner : MonoBehaviour
             {
                 Node node = customGrid.NodeFromWorldPoint(hit.point);
 
-                // ÇöÀç ³ëµå¿Í ÀÌÀü ³ëµå°¡ °°´Ù¸é ¾÷µ¥ÀÌÆ®ÇÏÁö ¾ÊÀ½
+                // í˜„ì¬ ë…¸ë“œì™€ ì´ì „ ë…¸ë“œê°€ ê°™ë‹¤ë©´ ì—…ë°ì´íŠ¸í•˜ì§€ ì•ŠìŒ
                 if (node != null && node != currentPreviewNode)
                 {
-                    currentPreviewNode = node; // ÇöÀç ³ëµå ÀúÀå
-                    previewCube.SetActive(true); // ÇÁ¸®ºä Å¥ºê È°¼ºÈ­
-                    Vector3 previewPosition = node.worldPosition;
-                    previewPosition.y = fixedY; // y°ª ¼³Á¤
-                    previewCube.transform.position = previewPosition;
-                    previewCube.transform.rotation = currentRotation;
+                    currentPreviewNode = node; // í˜„ì¬ ë…¸ë“œ ì €ì¥
+                    previewCube.SetActive(true); // í”„ë¦¬ë·° íë¸Œ í™œì„±í™”
+                    SetCubeProperties(previewCube, node.worldPosition, currentRotation, selectedCubeIndex); // ìœ„ì¹˜ì™€ íšŒì „ ì„¤ì •
 
-                    // ¼³Ä¡ °¡´É ¿©ºÎ¿¡ µû¶ó »ö»ó º¯°æ
-                    Renderer renderer = previewCube.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        renderer.material.color = node.walkable ? Color.blue : Color.red;
-                    }
+                    // ì„¤ì¹˜ ê°€ëŠ¥ ì—¬ë¶€ì— ë”°ë¼ ìƒ‰ìƒ ë³€ê²½
+                    UpdatePreviewColors(previewCube.transform);
                 }
             }
         }
         else
         {
-            previewCube.SetActive(false); // ·¹ÀÌ°¡ ¸Â´Â °÷ÀÌ ¾øÀ¸¸é ºñÈ°¼ºÈ­
+            previewCube.SetActive(false); // ë ˆì´ê°€ ë§ëŠ” ê³³ì´ ì—†ìœ¼ë©´ ë¹„í™œì„±í™”
         }
     }
 
-    // Å¥ºê ¼³Ä¡ ½Ãµµ
+    // íë¸Œ ì„¤ì¹˜ ì‹œë„
     void TryPlaceCube()
     {
-        if (currentPreviewNode != null && currentPreviewNode.walkable) // ÇöÀç ³ëµåÀÇ ¼³Ä¡ °¡´É ¿©ºÎ È®ÀÎ
+        if (currentPreviewNode != null && IsPlacementValid(previewCube.transform)) // í˜„ì¬ ë…¸ë“œì™€ ì „ì²´ ê³„ì¸µ êµ¬ì¡° ê²€ì‚¬
         {
-            Vector3 spawnPosition = currentPreviewNode.worldPosition;
-            spawnPosition.y = fixedY; // y°ª ¼³Á¤
+            GameObject newCube = Instantiate(cubeSettingsList[selectedCubeIndex].cubePrefab);
+            SetCubeProperties(newCube, currentPreviewNode.worldPosition, currentRotation, selectedCubeIndex); // ìœ„ì¹˜ì™€ íšŒì „ ì„¤ì •
 
-            GameObject newCube = Instantiate(cubePrefabs[selectedCubeIndex], spawnPosition, currentRotation);
+            // CustomGrid ì—…ë°ì´íŠ¸: ê³„ì¸µ êµ¬ì¡° ì „ì²´ë¥¼ ì²˜ë¦¬
+            UpdateGridForHierarchy(newCube.transform);
 
-            // CustomGrid ¾÷µ¥ÀÌÆ®: »õ·Î¿î Àå¾Ö¹° À§Ä¡ ¹İ¿µ
-            customGrid.UpdateGrid(newCube.transform.position);
-
-            // Pathfinding °æ·Î ÀçÅ½»ö
-            if (pathfinding != null)
-            {
-                pathfinding.UpdatePath(Vector3.zero, new Vector3(10, 0, 10)); // ¿¹½Ã °æ·Î
-                Debug.Log("°æ·Î ÀçÅ½»ö ¿Ï·á");
-            }
+            // ëª¨ë“  Enemyì˜ ê²½ë¡œë¥¼ ì¬íƒìƒ‰í•˜ë„ë¡ ìš”ì²­
+            Enemy.RequestPathUpdate();
+            Debug.Log("ëª¨ë“  Enemyì˜ ê²½ë¡œë¥¼ ê°±ì‹ í–ˆìŠµë‹ˆë‹¤.");
         }
         else
         {
-            Debug.LogWarning("ÇöÀç ³ëµå´Â ¼³Ä¡°¡ ºÒ°¡´ÉÇÑ ¿µ¿ªÀÔ´Ï´Ù.");
+            Debug.LogWarning("í˜„ì¬ ë…¸ë“œëŠ” ì„¤ì¹˜ê°€ ë¶ˆê°€ëŠ¥í•œ ì˜ì—­ì…ë‹ˆë‹¤.");
         }
     }
 
-    // ÇÁ¸®ºä Å¥ºê ÁÂ¿ì È¸Àü
+    // í”„ë¦¬ë·° íë¸Œ ì¢Œìš° íšŒì „
     void RotatePreviewCube()
     {
-        currentRotation *= Quaternion.Euler(0, 90, 0); // 90µµ È¸Àü
+        currentRotation *= Quaternion.Euler(0, 90, 0); // 90ë„ íšŒì „
     }
 
-    // Å¥ºê ÇÁ¸®ÆÕ ¼øÈ¯ º¯°æ
+    // íë¸Œ í”„ë¦¬íŒ¹ ìˆœí™˜ ë³€ê²½
     void CycleCubePrefabs(int direction)
     {
-        if (cubePrefabs == null || cubePrefabs.Count == 0)
+        if (cubeSettingsList == null || cubeSettingsList.Count == 0)
         {
-            Debug.LogWarning("Å¥ºê ÇÁ¸®ÆÕ ¸®½ºÆ®°¡ ºñ¾î ÀÖ½À´Ï´Ù.");
+            Debug.LogWarning("íë¸Œ ì„¤ì • ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ ìˆìŠµë‹ˆë‹¤.");
             return;
         }
 
-        selectedCubeIndex = (selectedCubeIndex + direction + cubePrefabs.Count) % cubePrefabs.Count; // ¼øÈ¯ º¯°æ
-        Destroy(previewCube); // ±âÁ¸ ÇÁ¸®ºä »èÁ¦
-        previewCube = Instantiate(cubePrefabs[selectedCubeIndex]); // »õ ÇÁ¸®ºä »ı¼º
-        previewCube.SetActive(false); // ÃÊ±â ºñÈ°¼ºÈ­
-        Debug.Log($"ÇöÀç ¼±ÅÃµÈ Å¥ºê ÇÁ¸®ÆÕ: {selectedCubeIndex + 1}/{cubePrefabs.Count}");
+        selectedCubeIndex = (selectedCubeIndex + direction + cubeSettingsList.Count) % cubeSettingsList.Count; // ìˆœí™˜ ë³€ê²½
+        Destroy(previewCube); // ê¸°ì¡´ í”„ë¦¬ë·° ì‚­ì œ
+        previewCube = Instantiate(cubeSettingsList[selectedCubeIndex].cubePrefab); // ìƒˆ í”„ë¦¬ë·° ìƒì„±
+        previewCube.SetActive(false); // ì´ˆê¸° ë¹„í™œì„±í™”
+        Debug.Log($"í˜„ì¬ ì„ íƒëœ íë¸Œ í”„ë¦¬íŒ¹: {selectedCubeIndex + 1}/{cubeSettingsList.Count}");
+    }
+
+    // ìœ„ì¹˜ì™€ í¬ê¸°, íšŒì „ì„ ì„¤ì •
+    private void SetCubeProperties(GameObject cube, Vector3 position, Quaternion rotation, int index)
+    {
+        if (cube != null && index >= 0 && index < cubeSettingsList.Count)
+        {
+            CubeSettings settings = cubeSettingsList[index];
+
+            position.y = settings.positionY; // Position Y ì„¤ì •
+            cube.transform.position = position;
+
+            Vector3 scale = cube.transform.localScale;
+            scale.y = settings.scaleY; // Scale Y ì„¤ì •
+            cube.transform.localScale = scale;
+
+            cube.transform.rotation = rotation; // íšŒì „ ì„¤ì •
+        }
+    }
+
+    // ê³„ì¸µ êµ¬ì¡°ì˜ ëª¨ë“  ìì‹ ì˜¤ë¸Œì íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì—¬ CustomGrid ì—…ë°ì´íŠ¸ ë° ì„¤ì¹˜ ê°€ëŠ¥ ì—¬ë¶€ í™•ì¸
+    private bool IsPlacementValid(Transform parent)
+    {
+        // ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ í™•ì¸
+        if (!IsNodeWalkable(parent.position))
+        {
+            return false;
+        }
+
+        // ìì‹ ì˜¤ë¸Œì íŠ¸ ìˆœíšŒ
+        foreach (Transform child in parent)
+        {
+            if (!IsPlacementValid(child))
+            {
+                return false;
+            }
+        }
+
+        return true; // ëª¨ë“  ë…¸ë“œê°€ ì„¤ì¹˜ ê°€ëŠ¥í•˜ë©´ true ë°˜í™˜
+    }
+
+    // íŠ¹ì • ìœ„ì¹˜ì˜ ë…¸ë“œê°€ walkableì¸ì§€ í™•ì¸
+    private bool IsNodeWalkable(Vector3 position)
+    {
+        Node node = customGrid.NodeFromWorldPoint(position);
+        return node != null && node.walkable;
+    }
+
+    // ë¦¬ìŠ¤íŠ¸ì— í¬í•¨ëœ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ì˜ ì„¤ì¹˜ ê°€ëŠ¥ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ì—¬ ìƒ‰ìƒ ë³€ê²½
+    private void UpdatePreviewColors(Transform parent)
+    {
+        Color color = IsPlacementValid(parent) ? Color.blue : Color.red;
+        SetPreviewColor(color);
+    }
+
+    // í”„ë¦¬ë·° íë¸Œì˜ ìƒ‰ìƒì„ ì„¤ì •
+    private void SetPreviewColor(Color color)
+    {
+        Renderer renderer = previewCube.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material.color = color;
+        }
+    }
+
+    // ê³„ì¸µ êµ¬ì¡°ì˜ ëª¨ë“  ìì‹ ì˜¤ë¸Œì íŠ¸ë¥¼ ì²˜ë¦¬í•˜ì—¬ CustomGrid ì—…ë°ì´íŠ¸
+    private void UpdateGridForHierarchy(Transform parent)
+    {
+        customGrid.UpdateGrid(parent.position);
+
+        foreach (Transform child in parent)
+        {
+            UpdateGridForHierarchy(child);
+        }
     }
 }
