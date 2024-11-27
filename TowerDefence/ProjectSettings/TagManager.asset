@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Camp
   - Enemy
+  - TowerPlaceable
   layers:
   - Default
   - TransparentFX

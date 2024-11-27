@@ -20,11 +20,6 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
-    [SerializeField]
-    private AudioClip correctPlacementClip, wrongPlacementClip;
-    [SerializeField]
-    private AudioSource source;
-
     private GridData BlockData, TowerData;
 
     [SerializeField]
@@ -40,7 +35,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void Start()
     {
-        gridVisualization.SetActive(false);
+        gridVisualization.SetActive(true);
         BlockData = new();
         TowerData = new();
     }
@@ -58,7 +53,14 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, BlockData, TowerData, objectPlacer, aGrid);
+        buildingState = new RemovingState(
+            grid, 
+            preview, 
+            BlockData, 
+            TowerData, 
+            objectPlacer, 
+            aGrid,
+            inputManager);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
