@@ -1,114 +1,109 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Enemy : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private Transform targetBase;
-    private LineRenderer lineRenderer;
+    private List<Node> path; // A* ê²½ë¡œ íƒìƒ‰ì„ ìœ„í•œ ë¦¬ìŠ¤íŠ¸
+    private int pathIndex; // í˜„ì¬ ê²½ë¡œì—ì„œ ì´ë™í•  ì¸ë±ìŠ¤
+    private Transform targetBase; // ëª©í‘œ ì§€ì ì˜ Transform
+    private Pathfinding_AstarMove pathfinding; // A* ê²½ë¡œ íƒìƒ‰ì„ ìœ„í•œ Pathfinding ì»´í¬ë„ŒíŠ¸
+    public float moveSpeed = 3.5f; // ì´ë™ ì†ë„
+    public int Hp; // ì²´ë ¥
+    public int Speed; // ì†ë„
+    public int Damage; // í”¼í•´ëŸ‰
+    private UnityEngine.AI.NavMeshAgent agent; // NavMeshAgent
 
-    [Header("Enemy Settings")]
-    public float moveSpeed = 3.5f;
+    private LineRenderer lineRenderer; // ê²½ë¡œ ì‹œê°í™”ë¥¼ ìœ„í•œ LineRenderer
 
-    public void Initialize(Transform baseTransform)
+    private void Awake()
     {
-        targetBase = baseTransform;
+        // LineRenderer ì´ˆê¸°í™”
+        lineRenderer = GetComponent<LineRenderer>(); // í˜„ì¬ GameObjectì—ì„œ LineRenderer ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜´
+
+        // LineRendererì˜ ì‹œì‘ê³¼ ë ë‘ê»˜ ì„¤ì •
+        lineRenderer.startWidth = 0.1f; // ì‹œì‘ ë‘ê»˜
+        lineRenderer.endWidth = 0.1f;   // ë ë‘ê»˜
+
+        // LineRendererì˜ ì¬ì§ˆ ì„¤ì •
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // LineRendererì˜ ê¸°ë³¸ ì¬ì§ˆ ì„¤ì •
+
+        // LineRendererì˜ ìƒ‰ìƒ ì„¤ì •
+        lineRenderer.startColor = Color.green; // ì‹œì‘ ìƒ‰ìƒ
+        lineRenderer.endColor = Color.red;     // ë ìƒ‰ìƒ
     }
 
-    private void Start()
+    // Enemy ì´ˆê¸°í™” ë©”ì„œë“œ. ëª©í‘œ ì§€ì ê³¼ Pathfinding ì»´í¬ë„ŒíŠ¸ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+    public void Initialize(Transform baseTransform, Pathfinding_AstarMove pathfindingComponent)
     {
-        agent = GetComponent<NavMeshAgent>();
-        lineRenderer = GetComponent<LineRenderer>();
+        targetBase = baseTransform; // ëª©í‘œ ì§€ì  ì„¤ì •
+        pathfinding = pathfindingComponent; // Pathfinding ì»´í¬ë„ŒíŠ¸ ì„¤ì •
 
-        // ÀÌµ¿ ¼Óµµ ¼³Á¤
-        agent.speed = moveSpeed;
+        // Pathfindingì´ TargetBaseë¥¼ ì˜¬ë°”ë¥´ê²Œ ì´ˆê¸°í™”í–ˆëŠ”ì§€ í™•ì¸
+        if (pathfinding != null && targetBase != null)
+        {
+            // A* ê²½ë¡œ íƒìƒ‰ì„ í†µí•´ ê²½ë¡œ ì°¾ê¸°
+            path = pathfinding.FindPath(transform.position, targetBase.position);
+            pathIndex = 0; // í˜„ì¬ ì¸ë±ìŠ¤ ì´ˆê¸°í™”
 
-        SetupLineRenderer();
+            // LineRendererë¡œ ê²½ë¡œ ê·¸ë¦¬ê¸°
+            DrawPath();
+        }
+        else
+        {
+            // ì´ˆê¸°í™” ì¤‘ ì˜¤ë¥˜ ë°œìƒ
+            Debug.LogError("Pathfinding ì»´í¬ë„ŒíŠ¸ê°€ ì—†ê±°ë‚˜ ëª©í‘œ ì§€ì ì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+        }
     }
 
+    // ë§¤ í”„ë ˆì„ ì—…ë°ì´íŠ¸
     private void Update()
     {
-        if (targetBase != null)
+        // ê²½ë¡œê°€ ì¡´ì¬í•˜ê³  ì¸ë±ìŠ¤ê°€ ìœ íš¨í•œ ê²½ìš°
+        if (path != null && pathIndex < path.Count)
         {
-            // ±âÁö·Î ÀÌµ¿
-            agent.SetDestination(targetBase.position);
-            UpdateLineRenderer();
+            // í˜„ì¬ ëª©í‘œ ìœ„ì¹˜
+            Vector3 targetPos = path[pathIndex].worldPosition;
 
-            // ¸ñÇ¥ ÁöÁ¡¿¡ µµ´ŞÇÏ¸é »èÁ¦
-            if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+            // MoveTowardsë¥¼ ì‚¬ìš©í•˜ì—¬ ëª©í‘œ ìœ„ì¹˜ë¡œ ì´ë™
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            // ëª©í‘œ ìœ„ì¹˜ì— ë„ë‹¬í–ˆëŠ”ì§€ í™•ì¸
+            if (Vector3.Distance(transform.position, targetPos) < 0.1f)
             {
-                Debug.Log("Enemy »èÁ¦");
-                Destroy(gameObject);
+                pathIndex++; // ë‹¤ìŒ ì¸ë±ìŠ¤ë¡œ ì´ë™
+                //UpdatePathVisualization(); // ê²½ë¡œ ì‹œê°í™” ì—…ë°ì´íŠ¸
+            }
+        }
+        else if (pathIndex >= path.Count) // ëª¨ë“  ê²½ë¡œë¥¼ ë‹¤ ì´ë™í•œ ê²½ìš°
+        {
+            // ì  ì œê±°
+            Debug.Log("ëª©í‘œì— ë„ë‹¬í–ˆìŠµë‹ˆë‹¤, Enemy ì˜¤ë¸Œì íŠ¸ ì œê±°");
+            Destroy(gameObject); // Enemy ì˜¤ë¸Œì íŠ¸ ì œê±°
+        }
+    }
+
+    // LineRendererë¡œ ê²½ë¡œ ê·¸ë¦¬ê¸°
+    private void DrawPath()
+    {
+        if (path != null && path.Count > 0)
+        {
+            lineRenderer.positionCount = path.Count;
+            for (int i = 0; i < path.Count; i++)
+            {
+                lineRenderer.SetPosition(i, path[i].worldPosition);
             }
         }
     }
 
-    private void SetupLineRenderer()
+    // ì´ë™ ê²½ë¡œ ì‹œê°í™” ì—…ë°ì´íŠ¸
+    private void UpdatePathVisualization()
     {
-        // LineRenderer ±âº» ¼³Á¤
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.startColor = Color.yellow;
-        lineRenderer.endColor = Color.yellow;
-        lineRenderer.textureMode = LineTextureMode.Tile;
-
-        // Á¡¼± È¿°ú¸¦ À§ÇÑ ÅØ½ºÃ³ ¼³Á¤
-        lineRenderer.material.mainTexture = GenerateDashedTexture();
-        lineRenderer.material.mainTextureScale = new Vector2(1f, 1f);
-    }
-
-    private void UpdateLineRenderer()
-    {
-        if (agent.path == null || agent.path.corners.Length == 0)
+        if (lineRenderer.positionCount > pathIndex)
         {
-            lineRenderer.positionCount = 0;
-            return;
+            // ê²½ë¡œ ì‹œê°í™” ìƒ‰ìƒ ë³€ê²½
+            lineRenderer.startColor = Color.clear;
+            lineRenderer.endColor = Color.red;
         }
-
-        // ÇöÀç À§Ä¡¿Í ´ÙÀ½ ¸ñÇ¥ À§Ä¡¸¸ LineRenderer¿¡ ¼³Á¤
-        Vector3[] pathSegment = new Vector3[2];
-        pathSegment[0] = transform.position; // À¯´Ö ÇöÀç À§Ä¡
-        pathSegment[1] = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; // ´ÙÀ½ ÄÚ³Ê
-
-        lineRenderer.positionCount = pathSegment.Length;
-        lineRenderer.SetPositions(pathSegment);
-    }
-
-    private Texture2D GenerateDashedTexture()
-    {
-        // Á¡¼± ÅØ½ºÃ³ »ı¼º
-        int width = 8;
-        int height = 1;
-        Texture2D texture = new Texture2D(width, height);
-        texture.wrapMode = TextureWrapMode.Repeat;
-
-        for (int x = 0; x < width; x++)
-        {
-            Color color = (x % 2 == 0) ? Color.white : Color.clear; // Èò»ö°ú Åõ¸í ±³Â÷
-            for (int y = 0; y < height; y++)
-            {
-                texture.SetPixel(x, y, color);
-            }
-        }
-
-        texture.Apply();
-        return texture;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (agent == null || agent.path == null || agent.path.corners.Length == 0)
-            return;
-
-        // ÇöÀç °æ·Î¿Í µ¿ÀÏÇÑ ½ºÅ¸ÀÏ·Î Scene ºä¿¡ ½Ã°¢È­
-        Gizmos.color = Color.yellow;
-
-        Vector3 currentPos = transform.position; //»ı¼ºµÈ À¯´ÖÀÇ ÇöÀç À§Ä¡
-        Vector3 nextCorner = agent.path.corners.Length > 1 ? agent.path.corners[1] : agent.path.corners[0]; //À¯´ÖÀÇ ´ÙÀ½ °æÀ¯Áö 
-
-        // À¯´Ö À§Ä¡¿¡¼­ ´ÙÀ½ °æ·Î ÄÚ³Ê±îÁö ¼± ±×¸®±â
-        Gizmos.DrawLine(currentPos, nextCorner);
     }
 }
