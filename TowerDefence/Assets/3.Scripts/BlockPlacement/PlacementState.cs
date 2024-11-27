@@ -15,6 +15,7 @@ public class PlacementState : IBuildingState
     ObjectPlacer objectPlacer;
     InputManager inputManager;
     AGrid aGrid;
+    private LayerMask towerPlaceableLayer;
 
     public PlacementState(int ID, Grid grid, PreviewSystem preview, ObjectsDatabaseSO database, GridData blockData,
             GridData towerData, ObjectPlacer objectPlacer, InputManager inputManager, AGrid aGrid)
@@ -38,6 +39,8 @@ public class PlacementState : IBuildingState
         }
 
         inputManager.OnRotate += RotateStructure;
+
+        towerPlaceableLayer = LayerMask.GetMask("TowerPlaceable");
     }
 
     private void RotateStructure()
@@ -109,7 +112,7 @@ public class PlacementState : IBuildingState
             }
         }
 
-        // 임시로 노드들을 막고 프리뷰 경로로 유효성 확인
+        // 임로 노드들을 막고 프리뷰 경로로 유효성 확인
         foreach (var cell in cells)
         {
             Vector3Int blockPos = new Vector3Int(
@@ -188,33 +191,31 @@ public class PlacementState : IBuildingState
         if (database.IsTower(currentID))
         {
             Vector3Int positionBelow = new Vector3Int(gridPosition.x, 0, gridPosition.z);
-
-            // 일반 블록과 장애물 모두 체크
             bool hasBlockBelow = BlockData.GetRepresentationIndex(positionBelow) != -1;
             bool hasObstacleBelow = false;
 
             // 장애물 체크
             Vector3 checkPosition = grid.CellToWorld(positionBelow) + new Vector3(0.5f, 0, 0.5f);
-
-            Collider[] colls = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
-            foreach (var coll in colls)
+            
+            // 장애물이 있는지 체크하고, 있다면 그 장애물이 타워 설치 가능한지 확인
+            Collider[] obstacles = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
+            foreach (var obstacle in obstacles)
             {
-                if (coll.CompareTag("TowerPlaceable"))
+                hasObstacleBelow = true;
+                if (obstacle.CompareTag("TowerPlaceable"))
                 {
                     canPlaceTower = true;
+                    break;  // 타워 설치 가능한 장애물을 찾았으면 더 이상 검사할 필요 없음
                 }
             }
 
-            if (Physics.CheckSphere(checkPosition, 0.3f, aGrid.unwalkableMask))
-            {
-                hasObstacleBelow = true;
-            }
-
-            if (hasBlockBelow || hasObstacleBelow || canPlaceTower)
+            if ((hasBlockBelow || (hasObstacleBelow && canPlaceTower)))
             {
                 floor = 1;
-                canPlace = TowerData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), floor);
-                Debug.Log($"Tower placement - Block below: {hasBlockBelow}, Obstacle below: {hasObstacleBelow}, Can place: {canPlace}");
+                canPlace = TowerData.CanPlaceObjectAt(gridPosition, 
+                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
+                    floor);
+                Debug.Log($"Tower placement - Block below: {hasBlockBelow}, Obstacle below: {hasObstacleBelow}, Can place tower: {canPlaceTower}");
             }
         }
         else
