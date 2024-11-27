@@ -1,7 +1,12 @@
 fileFormatVersion: 2
-guid: 729a3af474adafb4b80d1dcccec0e9fb
+<<<<<<<< HEAD:TowerDefence/Assets/polyperfect/Common/Polyperfect.Common.asmdef.meta
+guid: 531a9515a3189bd4e93f11a1b812ea2e
+AssemblyDefinitionImporter:
+========
+guid: b942e7d2682c7374bb8cf2b67685da71
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> 0b8f09eebce6449078c017243ad5b0c1f8b89a1a:TowerDefence/Assets/polyperfect.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
