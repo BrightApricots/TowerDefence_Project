@@ -14,7 +14,7 @@ public class UI_LobbyScene : MonoBehaviour
     public Button Talents;
     //public GameObject SettingPopup;
     public GameObject TowerLoadoutPopup;
-    //public GameObject BackpackPopup;
+    public GameObject BackpackPopup;
     //public GameObject TalentsPopup;
     public TextMeshProUGUI EmberAmountText;
     public TextMeshProUGUI ExpAmountText;
@@ -25,7 +25,7 @@ public class UI_LobbyScene : MonoBehaviour
         //Setting.onClick.AddListener(PopupSetting);
         Title.onClick.AddListener(BackToTitle);
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
-        //Backpack.onClick.AddListener(PopupBackpack);
+        Backpack.onClick.AddListener(PopupBackpack);
         //Talents.onClick.AddListener(PopupTalents);
     }
 
@@ -48,12 +48,12 @@ public class UI_LobbyScene : MonoBehaviour
     {
         TowerLoadoutPopup.SetActive(true);
     }
-    //private void PopupBackpack()
-    //{
-    //    BackpackPopup.SetActive(true);
-    //}
+    private void PopupBackpack()
+    {
+        BackpackPopup.SetActive(true);
+    }
     //private void PopupTalents()
     //{
     //    TalentsPopup.SetActive(true);
     //}
-}
+} 
