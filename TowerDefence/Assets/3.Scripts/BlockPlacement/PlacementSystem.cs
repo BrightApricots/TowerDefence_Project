@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
+    private static PlacementSystem instance;
+    public static PlacementSystem Instance {  get { return instance; } }
+
     [SerializeField]
     private InputManager inputManager;
     [SerializeField]
@@ -32,6 +35,18 @@ public class PlacementSystem : MonoBehaviour
 
     IBuildingState buildingState;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -42,10 +57,11 @@ public class PlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
-        StopPlacement();
+        //StopPlacement();
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
         inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += StopPlacement;
         inputManager.OnExit += StopPlacement;
     }
 
@@ -94,6 +110,7 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(false);
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;
+        inputManager.OnClicked -= StopPlacement;
         inputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
@@ -110,6 +127,5 @@ public class PlacementSystem : MonoBehaviour
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
         }
-
     }
 }

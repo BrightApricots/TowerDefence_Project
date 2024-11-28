@@ -20,6 +20,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.TowerList.Add(this);
         StartCoroutine(Attack());
     }
 

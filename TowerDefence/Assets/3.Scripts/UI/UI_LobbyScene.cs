@@ -31,9 +31,9 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void Update()
     {
-        EmberAmountText.text = $"{GameManager.Instance.EmberAmount}";
-        ExpAmountText.text = $"{GameManager.Instance.ExpAmount}";
-        HpAmountText.text = $"{GameManager.Instance.HpAmount}/15";
+        EmberAmountText.text = $"{GameManager.Instance.CurrentEmber}";
+        ExpAmountText.text = $"{GameManager.Instance.CurrentExp}";
+        HpAmountText.text = $"{GameManager.Instance.CurrentHp}/15";
     }
 
     //private void PopupSetting()
