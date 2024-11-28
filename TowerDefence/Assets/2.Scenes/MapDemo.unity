@@ -10171,17 +10171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7201800650143437200, guid: 5469a7e840fe2a14f9c14d03cd2a34e6, type: 3}
   spawnInterval: 1
---- !u!114 &34449048622257817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3113044511250512828, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
-  m_PrefabInstance: {fileID: 3855099707947716770}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &825098665387115648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10274,14 +10263,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.62
       objectReference: {fileID: 0}
-    - target: {fileID: 2837059761170832216, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 2148545608219480695}
-    - target: {fileID: 2837059761170832216, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10410,14 +10391,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.62
       objectReference: {fileID: 0}
-    - target: {fileID: 2764881336665796453, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 2664167888134458226}
-    - target: {fileID: 2764881336665796453, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     - target: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
       propertyPath: m_Name
       value: TetrisCard5
@@ -10532,17 +10505,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ae9baddc6418894891224a2814ddf1e, type: 3}
---- !u!114 &2148545608219480695 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2687683676658221952, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
-  m_PrefabInstance: {fileID: 825098665387115648}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2258710364241884087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10635,14 +10597,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TetrisCard2
       objectReference: {fileID: 0}
-    - target: {fileID: 7314935580755180521, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 8523142756863364461}
-    - target: {fileID: 7314935580755180521, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10667,17 +10621,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 144.4, y: 173.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2664167888134458226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5576429737844624960, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
-  m_PrefabInstance: {fileID: 1610984501395961716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3040369925659012013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10827,14 +10770,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.62
       objectReference: {fileID: 0}
-    - target: {fileID: 3596128748089624724, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 7962727203221656867}
-    - target: {fileID: 3596128748089624724, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     - target: {fileID: 8205607950013524934, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
       propertyPath: m_Name
       value: TetrisCard0
@@ -10852,14 +10787,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1041677713}
     m_Modifications:
-    - target: {fileID: 2937285051878212561, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 7998996339366483539}
-    - target: {fileID: 2937285051878212561, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     - target: {fileID: 2988321865891437268, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11037,14 +10964,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -8.62
       objectReference: {fileID: 0}
-    - target: {fileID: 962785454367206576, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
-      propertyPath: m_TargetGraphic
-      value: 
-      objectReference: {fileID: 34449048622257817}
-    - target: {fileID: 962785454367206576, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 698258339}
     - target: {fileID: 5417237943439139473, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
       propertyPath: m_Name
       value: TetrisCard4
@@ -11179,28 +11098,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2988321865891437268, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
   m_PrefabInstance: {fileID: 3430498473616549667}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7962727203221656867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8747938968672886436, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
-  m_PrefabInstance: {fileID: 3392935593308510697}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7998996339366483539 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2655124643335614718, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
-  m_PrefabInstance: {fileID: 3430498473616549667}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8315622125310906944
 GameObject:
   m_ObjectHideFlags: 0
@@ -11220,17 +11117,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8523142756863364461 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 589804075978435740, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
-  m_PrefabInstance: {fileID: 2258710364241884087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
