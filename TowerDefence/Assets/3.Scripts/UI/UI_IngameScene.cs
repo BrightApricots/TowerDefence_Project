@@ -9,7 +9,6 @@ public class UI_IngameScene : MonoBehaviour
     public TextMeshProUGUI CurrentHp;
     public TextMeshProUGUI MaxHp;
     public TextMeshProUGUI CurrentMoney;
-    public Button Draw;
 
     private void Update()
     {

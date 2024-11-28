@@ -13,9 +13,10 @@ public class GameManager : MonoBehaviour
     public int CurrentMoney = 50;
     public int MaxHp = 15;
     public int Difficulty;
-    public List<int> TetrisCardList;//0~5
-    public List<int> TowerCardList;//6~10
-    public List<Tower> TowerList;
+    public List<int> TetrisCardList = new List<int> { 0,1,2,3,4,5 };
+    public List<GameObject> TetrisHandCardList;
+    public List<int> TowerCardList = new List<int> { 6 };
+    public List<Tower> PlacedTowerList;
 
     private void Awake()
     {
