@@ -166,31 +166,42 @@ public class PlacementState : IBuildingState
         if (database.IsTower(database.objectsData[selectedObjectIndex].ID))
         {
             Vector3Int positionBelow = new Vector3Int(gridPosition.x, 0, gridPosition.z);
-            
-            // 일반 블록과 장애물 모두 체크
             bool hasBlockBelow = BlockData.GetRepresentationIndex(positionBelow) != -1;
             bool hasObstacleBelow = false;
+            bool canPlaceTower = false;
 
             // 장애물 체크
             Vector3 checkPosition = grid.CellToWorld(positionBelow) + new Vector3(0.5f, 0, 0.5f);
-            if (Physics.CheckSphere(checkPosition, 0.3f, aGrid.unwalkableMask))
+            Collider[] obstacles = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
+            foreach (var obstacle in obstacles)
             {
                 hasObstacleBelow = true;
+                if (obstacle.CompareTag("TowerPlaceable"))
+                {
+                    canPlaceTower = true;
+                    break;
+                }
             }
 
-            if (hasBlockBelow || hasObstacleBelow)
+            if (hasBlockBelow || (hasObstacleBelow && canPlaceTower))
             {
                 floor = 1;
                 validity = TowerData.CanPlaceObjectAt(gridPosition, 
-                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), floor);
-                Debug.Log($"Tower preview - Block below: {hasBlockBelow}, Obstacle below: {hasObstacleBelow}, Can place: {validity}");
+                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
+                    floor);
+            }
+            else
+            {
+                validity = false; // 타워를 설치할 수 없는 위치
             }
         }
         else
         {
-            validity = CheckPlacementValidity(gridPosition, 
-                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
-                true);  // isPreview = true
+            validity = GridData.Instance.CanPlaceObjectAt(gridPosition, 
+                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation)) &&
+                CheckPlacementValidity(gridPosition, 
+                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
+                    true);
         }
 
         preview.UpdatePosition(grid.CellToWorld(gridPosition), validity, floor);
@@ -240,7 +251,10 @@ public class PlacementState : IBuildingState
         }
         else
         {
-            canPlace = CheckPlacementValidity(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), false);  
+            canPlace = GridData.Instance.CanPlaceObjectAt(gridPosition, 
+                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation)) &&
+                CheckPlacementValidity(gridPosition, 
+                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), false);
         }
 
         if (canPlace)

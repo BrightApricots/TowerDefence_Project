@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using System.Linq;
 
 public class AGrid : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class AGrid : MonoBehaviour
     {
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y);
-        BlockData = new GridData();
+        BlockData = GridData.Instance;
         
         // Grid 컴포넌트가 없으면 가져오기
         if (grid == null)
@@ -65,58 +66,77 @@ public class AGrid : MonoBehaviour
             placerObj.AddComponent<ObjectPlacer>();
         }
 
-        // 기존에 설치된 모든 오브젝트 찾기
-        Collider[] existingObjects = Physics.OverlapBox(
-            transform.position,
-            new Vector3(gridWorldSize.x / 2, 0.5f, gridWorldSize.y / 2),
-            Quaternion.identity,
-            unwalkableMask
-        );
-
-        // 감지된 오브젝트들의 그리드 위치 저장
-        Dictionary<Vector3Int, GameObject> detectedObjects = new Dictionary<Vector3Int, GameObject>();
-        foreach (var collider in existingObjects)
-        {
-            if (collider != null && !collider.name.Contains("Preview") && !collider.CompareTag("Preview"))
-            {
-                Vector3 objectPosition = collider.transform.position;
-                Vector3Int gridPosition = grid.WorldToCell(objectPosition);
-                detectedObjects[gridPosition] = collider.gameObject;
-            }
-        }
-
+        // 먼저 모든 장애물을 찾고 각각의 크기를 체크
+        Dictionary<GameObject, HashSet<Vector3Int>> obstacleOccupiedPositions = new Dictionary<GameObject, HashSet<Vector3Int>>();
+        
         for (int x = 0; x < gridSizeX; x++)
         {
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x + 0.5f) + Vector3.forward * (y + 0.5f);
                 worldPoint.y = transform.position.y;
-
                 Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
-                bool isBlocked = false;
 
-                // 현재 그리드 위치에 오브젝트가 있는지 확인
-                if (detectedObjects.ContainsKey(gridPosition))
+                // 각 노드에서 장애물 체크
+                Vector3 checkPoint = worldPoint + Vector3.up * 0.1f;
+                Collider[] obstacles = Physics.OverlapBox(
+                    checkPoint,
+                    new Vector3(0.4f, 0.1f, 0.4f),
+                    Quaternion.identity,
+                    unwalkableMask
+                );
+
+                foreach (var obstacle in obstacles)
                 {
-                    GameObject obstacleObject = detectedObjects[gridPosition];
-                    
-                    if (!ObjectPlacer.Instance.placedGameObjects.Contains(obstacleObject))
+                    if (!obstacleOccupiedPositions.ContainsKey(obstacle.gameObject))
                     {
-                        ObjectPlacer.Instance.placedGameObjects.Add(obstacleObject);
-                        Debug.Log($"Added existing object to placedGameObjects: {obstacleObject.name}");
+                        obstacleOccupiedPositions[obstacle.gameObject] = new HashSet<Vector3Int>();
                     }
+                    obstacleOccupiedPositions[obstacle.gameObject].Add(gridPosition);
+                }
+            }
+        }
 
-                    // GridData에 오브젝트 추가
-                    List<Vector2Int> occupiedCells = new List<Vector2Int> { new Vector2Int(0, 0) };
-                    int index = ObjectPlacer.Instance.placedGameObjects.IndexOf(obstacleObject);
-                    
-                    // BlockData와 GridData.Instance 모두에 추가
-                    GridData.Instance.AddObjectAt(gridPosition, occupiedCells, 0, index);
-                    BlockData.AddObjectAt(gridPosition, occupiedCells, 0, index);
-                    
-                    isBlocked = true;
+        // 각 장애물별로 차지하는 모든 노드를 GridData에 등록
+        foreach (var obstacleData in obstacleOccupiedPositions)
+        {
+            GameObject obstacle = obstacleData.Key;
+            HashSet<Vector3Int> positions = obstacleData.Value;
+
+            if (!ObjectPlacer.Instance.placedGameObjects.Contains(obstacle))
+            {
+                ObjectPlacer.Instance.placedGameObjects.Add(obstacle);
+                int index = ObjectPlacer.Instance.placedGameObjects.Count - 1;
+
+                // 장애물이 차지하는 모든 셀을 Vector2Int로 변환
+                Vector3Int basePosition = positions.First(); // 기준점
+                List<Vector2Int> occupiedCells = new List<Vector2Int>();
+                
+                foreach (var pos in positions)
+                {
+                    Vector2Int relativePos = new Vector2Int(
+                        pos.x - basePosition.x,
+                        pos.z - basePosition.z
+                    );
+                    occupiedCells.Add(relativePos);
                 }
 
+                // GridData에 추가
+                GridData.Instance.AddObjectAt(basePosition, occupiedCells, 0, index);
+                Debug.Log($"Added large obstacle at base position ({basePosition.x}, {basePosition.z}) occupying {positions.Count} cells");
+            }
+        }
+
+        // 노드 배열 생성
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x + 0.5f) + Vector3.forward * (y + 0.5f);
+                worldPoint.y = transform.position.y;
+                Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
+                
+                bool isBlocked = GridData.Instance.IsPositionOccupied(gridPosition);
                 bool walkable = !isBlocked;
                 nodeArray[x, y] = new ANode(walkable, worldPoint, x, y);
             }
