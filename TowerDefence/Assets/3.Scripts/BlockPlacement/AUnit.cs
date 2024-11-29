@@ -64,6 +64,9 @@ public class AUnit : MonoBehaviour
             renderer.endColor = color;
             renderer.positionCount = 0;
             renderer.enabled = true;
+            renderer.textureMode = LineTextureMode.Tile;
+
+            //renderer.textureMode = LineRenderer.textureMode;
         }
     }
 
