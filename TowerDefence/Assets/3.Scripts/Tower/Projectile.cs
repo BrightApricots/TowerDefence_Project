@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Vector3 dir = Target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(dir);
         transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
@@ -44,7 +47,6 @@ public class Projectile : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        print("trigger");
         if (IsBomb)
         {
             Bomb(other);
