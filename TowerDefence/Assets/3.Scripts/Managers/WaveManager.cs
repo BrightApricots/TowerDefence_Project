@@ -14,28 +14,48 @@ public class WaveManager : MonoBehaviour
     private List<Wave> waves = new List<Wave>(); // 웨이브 리스트
     [SerializeField]
     private MonsterSpawner monsterSpawner; // MonsterSpawner 참조
-    [SerializeField]
-    private float waveInterval = 5f; // 웨이브 간 대기 시간
 
     private int currentWaveIndex = 0; // 현재 진행 중인 웨이브 인덱스
     private bool isWaveActive = false; // 웨이브 진행 여부
     private int remainingMonsters = 0; // 남은 몬스터 수
+    private bool isReadyForNextWave = false; // 버튼으로 웨이브 시작 여부
 
     private void Start()
     {
-        StartNextWave();
+        Debug.Log("웨이브를 시작하려면 버튼을 눌러주세요!");
+    }
+
+    // 버튼에서 호출할 함수
+    public void PrepareNextWave()
+    {
+        if (isWaveActive)
+        {
+            Debug.Log("현재 웨이브가 진행 중입니다. 웨이브가 종료된 후 시작할 수 있습니다.");
+            return;
+        }
+
+        Debug.Log("다음 웨이브 준비 완료!");
+        isReadyForNextWave = true;
+        StartNextWave(); // 웨이브 시작
     }
 
     private void StartNextWave()
     {
+        if (!isReadyForNextWave)
+        {
+            Debug.Log("다음 웨이브 준비 상태가 아닙니다. 버튼을 눌러 웨이브를 시작하세요.");
+            return;
+        }
+
         if (currentWaveIndex >= waves.Count)
         {
             Debug.Log("모든 웨이브가 완료되었습니다!");
             return;
         }
 
-        Debug.Log($"웨이브 {currentWaveIndex + 1} 시작!");
+        Debug.Log($"{currentWaveIndex + 1} / 웨이브 시작!");
         isWaveActive = true;
+        isReadyForNextWave = false;
 
         // 현재 웨이브의 몬스터 데이터 설정
         var currentWave = waves[currentWaveIndex];
@@ -66,27 +86,20 @@ public class WaveManager : MonoBehaviour
 
     private void EndCurrentWave()
     {
-        Debug.Log($"웨이브 {currentWaveIndex + 1} 완료!");
+        Debug.Log($"{currentWaveIndex + 1} / 웨이브 완료!");
 
         isWaveActive = false;
         currentWaveIndex++;
 
-        // 다음 웨이브 시작
+        // 다음 웨이브 준비 가능 상태로 전환
         if (currentWaveIndex < waves.Count)
         {
-            StartCoroutine(StartNextWaveWithDelay());
+            Debug.Log("다음 웨이브를 시작하려면 버튼을 눌러주세요!");
+            isReadyForNextWave = true;
         }
         else
         {
             Debug.Log("모든 웨이브를 완료했습니다!");
         }
     }
-
-    private IEnumerator StartNextWaveWithDelay()
-    {
-        yield return new WaitForSeconds(waveInterval);
-        StartNextWave();
-    }
 }
-
-// 중간 완료
