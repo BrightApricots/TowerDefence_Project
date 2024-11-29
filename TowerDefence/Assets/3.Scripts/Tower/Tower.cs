@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
     public Transform TowerHead;
     public Transform TowerMuzzle;
     public Transform Bullet;
-    private Enemy currentTarget=null;
+    private Monster currentTarget =null;
 
     private void Start()
     {
@@ -37,9 +37,9 @@ public class Tower : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, ShootRange);
             foreach (Collider target in hitColliders)
             {
-                if (target.CompareTag("Enemy"))
+                if (target.CompareTag("Monster"))
                 {
-                    currentTarget =target.GetComponent<Enemy>();
+                    currentTarget =target.GetComponent<Monster>();
                     break;
                 }
             }
@@ -81,3 +81,5 @@ public class Tower : MonoBehaviour
     }
 
 }
+
+//

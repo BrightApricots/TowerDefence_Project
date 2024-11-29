@@ -137,7 +137,7 @@ public class Monster : MonoBehaviour
     private void OnReachedTarget()
     {
         // GameManager의 체력 감소 및 골드 추가 처리
-        GameManager.Instance.MaxHp -= damage; // 체력 감소
+        GameManager.Instance.CurrentHp -= damage; // 체력 감소
         GameManager.Instance.CurrentMoney += gold; // 골드 추가
 
         // 디버깅 메시지 출력
