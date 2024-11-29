@@ -5138,6 +5138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4595654756050798}
+  - component: {fileID: -3630481060988295828}
   m_Layer: 0
   m_Name: FattyCannonG02
   m_TagString: Untagged
@@ -5162,6 +5163,28 @@ Transform:
   - {fileID: 4779222424309044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3630481060988295828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875090778556656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cost: 10
+  Name: BasicTower
+  Damage: 2
+  ShootCooltime: 1
+  ShootRange: 10
+  Info: 
+  TowerHead: {fileID: 4722236510932744}
+  Barrel: {fileID: 4597034265451690}
+  TowerMuzzle: {fileID: 4703932692914808}
+  Projectile: {fileID: 4655418500077788, guid: 04488629b32874a4bb0f234c6cac7eaf, type: 3}
 --- !u!1 &1931211189434318
 GameObject:
   m_ObjectHideFlags: 0
