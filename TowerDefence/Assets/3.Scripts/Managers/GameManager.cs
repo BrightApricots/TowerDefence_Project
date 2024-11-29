@@ -7,10 +7,16 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
-    public int EmberAmount=10;
-    public int ExpAmount=10;
-    public int HpAmount=15;
+    public int CurrentEmber=10;
+    public int CurrentExp=10;
+    public int CurrentHp=15;
+    public int CurrentMoney = 50;
+    public int MaxHp = 15;
     public int Difficulty;
+    public List<int> TetrisCardList = new List<int> { 0,1,2,3,4,5 };
+    public List<GameObject> TetrisHandCardList;
+    public List<int> TowerCardList = new List<int> { 6 };
+    public List<Tower> PlacedTowerList;
 
     private void Awake()
     {
@@ -25,3 +31,5 @@ public class GameManager : MonoBehaviour
         }
     }
 }
+
+//

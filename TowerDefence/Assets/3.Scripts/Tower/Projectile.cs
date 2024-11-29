@@ -2,24 +2,77 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float moveSpeed=4f;
-    public float damage;
-    public float duration=3f;
+    public float MoveSpeed = 50f;
+    public int Damage = 5;
+    public float Duration = 3f;
+    public bool IsTargeting = false;
+    public bool IsBomb = false;
+    public float BombRange = 0f;
+    public Monster Target;
 
-    private void Update()
+    protected virtual void Update()
     {
-        Move(Vector3.forward);
+        Move();
     }
 
-    private void Move(Vector3 dir)
+    protected void Move()
     {
-        transform.Translate(dir*moveSpeed*Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Enemy"))
+        if(IsTargeting)
         {
+            TagettingMove();
+        }
+
+        else
+        {
+            NonTagettingMove(); 
+        }
+    }
+
+    protected virtual void TagettingMove()
+    {
+        transform.Translate(Target.transform.position*MoveSpeed*Time.deltaTime);
+    }
+
+    protected virtual void NonTagettingMove()
+    {
+        transform.Translate(Vector3.forward * MoveSpeed*Time.deltaTime);
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        print("trigger");
+        if (IsBomb)
+        {
+            Bomb(other);
+        }
+
+        else
+        {
+            NonBomb(other);
+        }
+    }
+
+    private void Bomb(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Collider[] hit = Physics.OverlapSphere(transform.position, BombRange);
+            foreach (Collider h in hit)
+            {
+                if (h.CompareTag("Enemy"))
+                {
+                    other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
+                }
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private void NonBomb(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
             Destroy(gameObject);
         }
     }
