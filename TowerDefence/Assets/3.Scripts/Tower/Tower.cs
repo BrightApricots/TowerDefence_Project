@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, ShootRange);
             foreach (Collider target in hitColliders)
             {
-                if (target.CompareTag("Enemy"))
+                if (target.CompareTag("Monster"))
                 {
                     CurrentTarget =target.GetComponent<Monster>();
                     break;
@@ -86,3 +86,5 @@ public class Tower : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, ShootRange);
     }
 }
+
+//
