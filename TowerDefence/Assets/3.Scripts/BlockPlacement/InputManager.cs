@@ -26,8 +26,7 @@ public class InputManager : MonoBehaviour
             OnRotate?.Invoke();
     }
 
-    public bool IsPointerOverUI()
-        => EventSystem.current.IsPointerOverGameObject();
+    public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
 
     public Vector3 GetSelectedMapPosition()
     {
