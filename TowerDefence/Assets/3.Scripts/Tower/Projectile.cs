@@ -1,5 +1,6 @@
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 
 public class Projectile : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Projectile : MonoBehaviour
     public bool IsBomb = false;
     public float BombRange = 3f;
     public Transform Target;
+    public GameObject ExplosionParticle;
 
     protected virtual void Update()
     {
@@ -22,7 +24,6 @@ public class Projectile : MonoBehaviour
         {
             TargettingMove();
         }
-
         else
         {
             NonTagettingMove(); 
@@ -51,7 +52,6 @@ public class Projectile : MonoBehaviour
         {
             Bomb(other);
         }
-
         else
         {
             NonBomb(other);
@@ -63,6 +63,8 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             Collider[] hit = Physics.OverlapSphere(transform.position, BombRange);
+            
+            Instantiate(ExplosionParticle,transform.position, Quaternion.identity);
             foreach (Collider h in hit)
             {
                 if (h.CompareTag("Monster"))
@@ -83,4 +85,8 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, BombRange);
+    }
 }
