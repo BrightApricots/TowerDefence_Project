@@ -7,7 +7,7 @@ TagManager:
   - Camp
   - Enemy
   - TowerPlaceable
-  - Monster
+  - Preview
   layers:
   - Default
   - TransparentFX
