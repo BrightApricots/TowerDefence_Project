@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Draw : MonoBehaviour
 {
+    public int DrawPrice = 5;
     public GameObject OneSquarePrefab;
     public GameObject FourSquarePrefab;
     public GameObject FuckYouPrefab;
@@ -13,6 +15,7 @@ public class UI_Draw : MonoBehaviour
     public GameObject StraightPrefab;
     public GameObject LPrefab;
     public Button DrawButton;
+    public TextMeshProUGUI DrawPriceText;
     public RectTransform HorizontalLayout;
 
     private void Awake()
@@ -20,14 +23,19 @@ public class UI_Draw : MonoBehaviour
         DrawButton.onClick.AddListener(DrawCard);
     }
 
+    private void Update()
+    {
+        DrawPriceText.text = $"{DrawPrice}";
+    }
+
     public void DrawCard()
     {
-        if(GameManager.Instance.TetrisHandCardList.Count < 7)
+        if(GameManager.Instance.TetrisHandCardList.Count < 7 && GameManager.Instance.CurrentMoney >= DrawPrice)
         { 
-        int drawCard = Random.Range(0, GameManager.Instance.TetrisCardList.Count);
-        
-        for (int i = 0; i < GameManager.Instance.TetrisCardList.Count; i++)
-        {
+            GameManager.Instance.CurrentMoney -= DrawPrice;
+            int drawCard = Random.Range(0, GameManager.Instance.TetrisCardList.Count);
+            for (int i = 0; i < GameManager.Instance.TetrisCardList.Count; i++)
+            {
                 if (i == drawCard)
                 {
                     GameObject type;
@@ -58,6 +66,7 @@ public class UI_Draw : MonoBehaviour
                             GameManager.Instance.TetrisHandCardList.Add(type);
                             break;
                     }
+                    DrawPrice += 5;
                     break;
                 }
             }

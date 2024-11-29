@@ -14,9 +14,10 @@ public class Tower : MonoBehaviour
     public bool IsTargeting;
     public bool IsBomb;
     public Transform TowerHead;
+    public Transform Barrel;
     public Transform TowerMuzzle;
-    public Transform Bullet;
-    private Monster currentTarget =null;
+    public Transform Projectile;
+    private Monster CurrentTarget=null;
 
     private void Start()
     {
@@ -32,32 +33,33 @@ public class Tower : MonoBehaviour
 
     protected void Detect()
     {
-        if (currentTarget == null)
+        if (CurrentTarget == null)
         {
             Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, ShootRange);
             foreach (Collider target in hitColliders)
             {
                 if (target.CompareTag("Monster"))
                 {
-                    currentTarget =target.GetComponent<Monster>();
+                    CurrentTarget =target.GetComponent<Monster>();
                     break;
                 }
             }
         }
         else
         {
-            if (Vector3.Distance(currentTarget.transform.position, transform.position)>ShootRange)
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position)>ShootRange)
             {
-                currentTarget=null;
+                CurrentTarget=null;
             }
         }
     }
 
     protected void FollowTarget()
     {
-        if(currentTarget !=null)
+        if(CurrentTarget !=null)
         {
-            Vector3 towerDir = currentTarget.transform.position - TowerHead.transform.position;
+            Vector3 towerDir = CurrentTarget.transform.position - TowerHead.transform.position;
+            Barrel.forward = towerDir;
             towerDir.y = 0;
             TowerHead.forward = towerDir;
         }
@@ -68,9 +70,13 @@ public class Tower : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(ShootCooltime);
-            if (currentTarget !=null)
+            if (CurrentTarget !=null)
             {
-                Instantiate(Bullet, TowerMuzzle.transform.position,TowerHead.transform.rotation);
+                Transform projectile = Instantiate(Projectile, TowerMuzzle.transform.position,Barrel.transform.rotation);
+                projectile.gameObject.GetComponent<Projectile>().Damage = this.Damage;
+                projectile.gameObject.GetComponent<Projectile>().IsTargeting = this.IsTargeting;
+                projectile.gameObject.GetComponent<Projectile>().IsBomb = this.IsBomb;
+                projectile.gameObject.GetComponent<Projectile>().Target = this.CurrentTarget;
             }
         }
     }
@@ -79,7 +85,6 @@ public class Tower : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, ShootRange);
     }
-
 }
 
 //
