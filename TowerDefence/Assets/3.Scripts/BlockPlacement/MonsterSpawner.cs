@@ -57,7 +57,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         if (activeSpawnPoints == null || activeSpawnPoints.Count == 0)
         {
-            Debug.LogWarning("활성화된 스폰 지점이 없습니다.");
+            Debug.LogWarning("활성화된 스폰 지점이 없음");
             return;
         }
 
@@ -68,7 +68,7 @@ public class MonsterSpawner : MonoBehaviour
         // 등장 확률 기반으로 몬스터 종류 선택
         if (weightedMonsterPool.Count == 0)
         {
-            Debug.Log("모든 몬스터 등장 완료.");
+            Debug.Log("모든 몬스터 등장 완료");
             StopSpawning();
             return;
         }

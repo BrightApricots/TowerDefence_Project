@@ -140,7 +140,7 @@ public class Monster : MonoBehaviour
         GameManager.Instance.CurrentHp -= damage; // 체력 감소
 
         // 디버깅 메시지 출력
-        Debug.Log($"{gameObject.name} / 목표 지점에 도달 / {damage}만큼 체력을 감소 / {gold} 골드 획득");
+        Debug.Log($"{gameObject.name} / 목표 지점에 도달 / {damage}만큼 체력을 감소");
 
         // 이벤트 구독 해제 및 몬스터 삭제
         if (PathManager.Instance != null)
@@ -153,7 +153,9 @@ public class Monster : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        if(hp <= 0)
+        Debug.Log($"{gameObject.name} 남은 HP : {hp}");
+
+        if (hp <= 0)
         {
             Die();
         }
@@ -161,6 +163,7 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
+        Debug.Log($"획득 골드 : {gold}");
         GameManager.Instance.CurrentMoney += gold;
         Destroy(gameObject);
     }
@@ -178,5 +181,3 @@ public class Monster : MonoBehaviour
         OnDestroyed?.Invoke();
     }
 }
-
-//

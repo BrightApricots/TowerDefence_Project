@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2560402464368550381}
   m_Layer: 0
   m_Name: Monster (2)
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76367be63875e454cb64c082729c3574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 40
+  hp: 20
   speed: 2
   damage: 3
   gold: 3

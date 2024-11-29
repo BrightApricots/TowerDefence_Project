@@ -17,35 +17,32 @@ public class Projectile : MonoBehaviour
 
     protected void Move()
     {
-        if(IsTargeting)
+        if (IsTargeting)
         {
             TagettingMove();
         }
-
         else
         {
-            NonTagettingMove(); 
+            NonTagettingMove();
         }
     }
 
     protected virtual void TagettingMove()
     {
-        transform.Translate(Target.transform.position*MoveSpeed*Time.deltaTime);
+        transform.Translate(Target.transform.position * MoveSpeed * Time.deltaTime);
     }
 
     protected virtual void NonTagettingMove()
     {
-        transform.Translate(Vector3.forward * MoveSpeed*Time.deltaTime);
+        transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
     protected void OnTriggerEnter(Collider other)
     {
-        print("trigger");
         if (IsBomb)
         {
             Bomb(other);
         }
-
         else
         {
             NonBomb(other);
@@ -54,12 +51,12 @@ public class Projectile : MonoBehaviour
 
     private void Bomb(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Monster"))
         {
             Collider[] hit = Physics.OverlapSphere(transform.position, BombRange);
             foreach (Collider h in hit)
             {
-                if (h.CompareTag("Enemy"))
+                if (h.CompareTag("Monster"))
                 {
                     other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
                 }
@@ -70,10 +67,12 @@ public class Projectile : MonoBehaviour
 
     private void NonBomb(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Monster"))
         {
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
             Destroy(gameObject);
         }
     }
 }
+
+//

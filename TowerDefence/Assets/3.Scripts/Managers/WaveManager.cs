@@ -27,15 +27,14 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        // 이름이 "Battle"인 버튼 찾기
+        // Battle 버튼 설정
         GameObject buttonObject = GameObject.Find("Battle");
         if (buttonObject != null)
         {
             battleButton = buttonObject.GetComponent<Button>();
-
             if (battleButton != null)
             {
-                battleButton.onClick.AddListener(PrepareNextWave); // 버튼 클릭 이벤트에 PrepareNextWave 연결
+                battleButton.onClick.AddListener(PrepareNextWave); // 버튼 클릭 이벤트 연결
                 battleButton.gameObject.SetActive(true); // 버튼 활성화
             }
             else
@@ -45,46 +44,45 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Battle 버튼을 찾을 수 없습니다. 이름을 확인하세요.");
+            Debug.LogError("Battle 버튼을 찾을 수 없습니다.");
         }
-
-        Debug.Log("웨이브를 시작하려면 Battle 버튼을 눌러주세요!");
     }
 
     private void Update()
     {
-        // 클리어 실패 조건 확인
+        // 게임 오버 상태 확인
         if (GameManager.Instance.CurrentHp <= 0 && !isGameOver)
         {
             HandleGameOver();
         }
     }
 
-    // 버튼에서 호출할 함수
+    // 웨이브 준비
     public void PrepareNextWave()
     {
         if (isWaveActive)
         {
-            Debug.Log("현재 웨이브가 진행 중입니다. 웨이브가 종료된 후 시작할 수 있습니다.");
+            Debug.Log("현재 웨이브가 진행 중입니다.");
             return;
         }
 
-        Debug.Log("다음 웨이브 준비 완료!");
+        Debug.Log($"{currentWaveIndex + 1} 웨이브 ");
         isReadyForNextWave = true;
 
         if (battleButton != null)
         {
-            battleButton.gameObject.SetActive(false); // 웨이브 시작 후 버튼 비활성화
+            battleButton.gameObject.SetActive(false); // 버튼 비활성화
         }
 
         StartNextWave(); // 웨이브 시작
     }
 
+    // 웨이브 시작
     private void StartNextWave()
     {
         if (!isReadyForNextWave)
         {
-            Debug.Log("다음 웨이브 준비 상태가 아닙니다. Battle 버튼을 눌러 웨이브를 시작하세요.");
+            Debug.Log("Battle 버튼을 눌러 웨이브를 시작하세요.");
             return;
         }
 
@@ -94,11 +92,9 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{currentWaveIndex + 1} / 웨이브 시작!");
         isWaveActive = true;
         isReadyForNextWave = false;
 
-        // 현재 웨이브의 데이터를 MonsterSpawner에 전달
         var currentWave = waves[currentWaveIndex];
         var activeSpawnPoints = GetActiveSpawnPoints(currentWave);
 
@@ -108,16 +104,14 @@ public class WaveManager : MonoBehaviour
             activeSpawnPoints
         );
 
-        // 몬스터 스포너에서 몬스터 생성 시작
-        monsterSpawner.OnMonsterSpawned += OnMonsterSpawned; // 몬스터 생성 시 이벤트
-        monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed; // 몬스터 파괴 시 이벤트
-
+        monsterSpawner.OnMonsterSpawned += OnMonsterSpawned;
+        monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed;
         monsterSpawner.StartSpawning();
     }
 
+    // 활성화된 스폰 지점 필터링
     private List<Transform> GetActiveSpawnPoints(Wave currentWave)
     {
-        // 활성화된 스폰 지점을 필터링
         List<Transform> activePoints = new List<Transform>();
         foreach (var point in currentWave.spawnPoints)
         {
@@ -126,60 +120,58 @@ public class WaveManager : MonoBehaviour
         return activePoints;
     }
 
+    // 몬스터 생성 시 호출
     private void OnMonsterSpawned(GameObject monster)
     {
-        remainingMonsters++; // 생성된 몬스터 수 증가
+        remainingMonsters++;
     }
 
+    // 몬스터 파괴 시 호출
     private void OnMonsterDestroyed(GameObject monster)
     {
-        remainingMonsters--; // 파괴된 몬스터 수 감소
+        remainingMonsters--;
 
-        // 남은 몬스터가 없으면 웨이브 종료
         if (remainingMonsters <= 0 && isWaveActive)
         {
-            EndCurrentWave();
+            EndCurrentWave(); // 웨이브 종료
         }
     }
 
+    // 웨이브 종료
     private void EndCurrentWave()
     {
-        Debug.Log($"{currentWaveIndex + 1} / 웨이브 완료!");
-
         isWaveActive = false;
         currentWaveIndex++;
 
-        // 다음 웨이브 준비 가능 상태로 전환
         if (currentWaveIndex < waves.Count)
         {
-            Debug.Log("다음 웨이브를 시작하려면 Battle 버튼을 눌러주세요!");
+            Debug.Log($"{currentWaveIndex} 웨이브 완료. 다음 웨이브 준비 중...");
             isReadyForNextWave = true;
 
             if (battleButton != null)
             {
-                battleButton.gameObject.SetActive(true); // 다음 웨이브 준비 상태에서 버튼 활성화
+                battleButton.gameObject.SetActive(true); // 버튼 활성화
             }
         }
         else
         {
-            Debug.Log("모든 웨이브를 완료했습니다!");
+            Debug.Log("모든 웨이브를 클리어했습니다. 축하합니다!");
         }
     }
 
+    // 게임 오버 처리
     private void HandleGameOver()
     {
-        Debug.Log("클리어 실패: HP가 0입니다!");
-        isGameOver = true; // 게임 오버 상태로 전환
+        Debug.Log("게임 오버.");
+        isGameOver = true;
         isWaveActive = false;
         isReadyForNextWave = false;
 
         if (battleButton != null)
         {
-            battleButton.gameObject.SetActive(false);
+            battleButton.gameObject.SetActive(false); // 버튼 비활성화
         }
 
         Time.timeScale = 0; // 게임 중단
     }
 }
-
-//
