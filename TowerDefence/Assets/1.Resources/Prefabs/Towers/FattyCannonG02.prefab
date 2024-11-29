@@ -5156,8 +5156,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4722236510932744}
   - {fileID: 4779222424309044}
@@ -5177,10 +5177,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cost: 10
   Name: BasicTower
-  Damage: 2
+  Damage: 5
   ShootCooltime: 1
   ShootRange: 10
   Info: 
+  IsTargeting: 0
+  IsBomb: 0
   TowerHead: {fileID: 4722236510932744}
   Barrel: {fileID: 4597034265451690}
   TowerMuzzle: {fileID: 4703932692914808}

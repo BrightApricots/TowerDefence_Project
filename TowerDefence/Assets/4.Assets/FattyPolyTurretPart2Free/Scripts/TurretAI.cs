@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +92,7 @@ public class TurretAI : MonoBehaviour {
 
         for (int i = 0; i < colls.Length; i++)
         {
-            if (colls[i].tag == "Player")
+            if (colls[i].tag == "Monster")
             {
                 float dist = Vector3.Distance(transform.position, colls[i].transform.position);
                 if (dist < distAway)
