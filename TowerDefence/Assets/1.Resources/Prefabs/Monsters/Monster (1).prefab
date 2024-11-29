@@ -120,5 +120,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 20
   speed: 2
-  damage: 2
+  damage: 16
   gold: 2

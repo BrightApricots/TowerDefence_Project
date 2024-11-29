@@ -5661,19 +5661,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1096463294}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1227888311}
-        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: PrepareNextWave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!224 &1103578760 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8387228153551679927, guid: 4ae9baddc6418894891224a2814ddf1e, type: 3}
@@ -6215,8 +6203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 7714184698131708119, guid: 596c9466bf54a764f879c66a8d64ab88, type: 3}
-      spawnCount: 2
+    - monsterPrefab: {fileID: 2452309151166013254, guid: 5469a7e840fe2a14f9c14d03cd2a34e6, type: 3}
+      spawnCount: 1
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
@@ -10356,7 +10344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fcf98704d3d45f42bdba51a5985a171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
 --- !u!1001 &825098665387115648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10926,10 +10913,10 @@ SceneRoots:
   - {fileID: 1541005857}
   - {fileID: 943508852}
   - {fileID: 1146140177}
+  - {fileID: 1574182473}
   - {fileID: 1551325540}
   - {fileID: 554544601}
   - {fileID: 1862580659}
   - {fileID: 1498700928}
   - {fileID: 2142065681}
   - {fileID: 1227888312}
-  - {fileID: 1574182473}

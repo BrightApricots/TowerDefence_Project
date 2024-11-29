@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 [System.Serializable]
 public class MonsterSpawnData
@@ -12,8 +11,6 @@ public class MonsterSpawnData
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private List<Transform> spawnPoints = new List<Transform>(); // 모든 스폰 지점
     private List<MonsterSpawnData> monsterList = new List<MonsterSpawnData>(); // 현재 웨이브의 몬스터 리스트
     private List<Transform> activeSpawnPoints = new List<Transform>(); // 현재 활성화된 스폰 지점
     private float spawnInterval = 0.5f; // 몬스터 생성 주기 (동적으로 설정)
@@ -31,7 +28,6 @@ public class MonsterSpawner : MonoBehaviour
     {
         remainingSpawnCount.Clear();
 
-        // 몬스터별 등장 수량 초기화
         foreach (var spawnData in monsterList)
         {
             if (spawnData.monsterPrefab != null)
@@ -45,7 +41,6 @@ public class MonsterSpawner : MonoBehaviour
     {
         weightedMonsterPool.Clear();
 
-        // 몬스터별 등장 확률에 따라 가중치 기반 풀 생성
         foreach (var spawnData in monsterList)
         {
             if (spawnData.monsterPrefab != null && spawnData.spawnCount > 0)
@@ -140,3 +135,5 @@ public class MonsterSpawner : MonoBehaviour
         CreateWeightedMonsterPool();
     }
 }
+
+//

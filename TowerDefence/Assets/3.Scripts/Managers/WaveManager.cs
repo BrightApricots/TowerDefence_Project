@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
     private bool isWaveActive = false; // 웨이브 진행 여부
     private int remainingMonsters = 0; // 남은 몬스터 수
     private bool isReadyForNextWave = false; // 다음 웨이브 시작 여부
+    private bool isGameOver = false; // 게임 오버 상태 확인용 변수
 
     private void Start()
     {
@@ -48,6 +49,15 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("웨이브를 시작하려면 Battle 버튼을 눌러주세요!");
+    }
+
+    private void Update()
+    {
+        // 클리어 실패 조건 확인
+        if (GameManager.Instance.CurrentHp <= 0 && !isGameOver)
+        {
+            HandleGameOver();
+        }
     }
 
     // 버튼에서 호출할 함수
@@ -154,5 +164,20 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log("모든 웨이브를 완료했습니다!");
         }
+    }
+
+    private void HandleGameOver()
+    {
+        Debug.Log("클리어 실패: HP가 0입니다!");
+        isGameOver = true; // 게임 오버 상태로 전환
+        isWaveActive = false;
+        isReadyForNextWave = false;
+
+        if (battleButton != null)
+        {
+            battleButton.gameObject.SetActive(false);
+        }
+
+        Time.timeScale = 0; // 게임 중단
     }
 }
