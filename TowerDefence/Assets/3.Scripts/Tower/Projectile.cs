@@ -20,13 +20,13 @@ public class Projectile : MonoBehaviour
 
     protected void Move()
     {
-        if(IsTargeting)
+        if (IsTargeting)
         {
             TargettingMove();
         }
         else
         {
-            NonTagettingMove(); 
+            NonTagettingMove();
         }
     }
 
@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void NonTagettingMove()
     {
-        transform.Translate(Vector3.forward * MoveSpeed*Time.deltaTime);
+        transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
     protected void OnTriggerEnter(Collider other)
