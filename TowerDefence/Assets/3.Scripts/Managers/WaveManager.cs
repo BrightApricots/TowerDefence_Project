@@ -181,3 +181,5 @@ public class WaveManager : MonoBehaviour
         Time.timeScale = 0; // 게임 중단
     }
 }
+
+//

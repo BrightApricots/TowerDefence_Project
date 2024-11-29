@@ -2785,7 +2785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &554544598
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8853,7 +8853,7 @@ MonoBehaviour:
   gridWorldSize: {x: 50, y: 50}
   obstaclePositions: []
   database: {fileID: 11400000, guid: 04938bc5fa434594b80d1a7b3b492fea, type: 2}
-  gridComponent: {fileID: 1199009664}
+  grid: {fileID: 0}
 --- !u!1 &1874897110
 GameObject:
   m_ObjectHideFlags: 0
@@ -10487,6 +10487,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 698258339}
+    - target: {fileID: 3139195777279295551, guid: 4ae9baddc6418894891224a2814ddf1e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 7097985763082699476, guid: 4ae9baddc6418894891224a2814ddf1e, type: 3}
       propertyPath: m_Name
       value: MissileTowerCard
