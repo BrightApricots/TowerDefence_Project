@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - TowerPlaceable
   - Preview
+  - Occluder
+  - Monster
   layers:
   - Default
   - TransparentFX
