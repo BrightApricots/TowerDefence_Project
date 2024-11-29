@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Projectile : MonoBehaviour
 {
@@ -7,8 +9,9 @@ public class Projectile : MonoBehaviour
     public float Duration = 3f;
     public bool IsTargeting = false;
     public bool IsBomb = false;
-    public float BombRange = 0f;
-    public Monster Target;
+    public float BombRange = 3f;
+    public Transform Target;
+    public GameObject ExplosionParticle;
 
     protected virtual void Update()
     {
@@ -19,7 +22,7 @@ public class Projectile : MonoBehaviour
     {
         if (IsTargeting)
         {
-            TagettingMove();
+            TargettingMove();
         }
         else
         {
@@ -27,9 +30,15 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    protected virtual void TagettingMove()
+    protected virtual void TargettingMove()
     {
-        transform.Translate(Target.transform.position * MoveSpeed * Time.deltaTime);
+        if(Target==null)
+        {
+            Destroy(gameObject);
+        }
+        Vector3 dir = Target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(dir);
+        transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
     protected virtual void NonTagettingMove()
@@ -54,6 +63,8 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             Collider[] hit = Physics.OverlapSphere(transform.position, BombRange);
+            
+            Instantiate(ExplosionParticle,transform.position, Quaternion.identity);
             foreach (Collider h in hit)
             {
                 if (h.CompareTag("Monster"))
@@ -73,6 +84,9 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-}
 
-//
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, BombRange);
+    }
+}

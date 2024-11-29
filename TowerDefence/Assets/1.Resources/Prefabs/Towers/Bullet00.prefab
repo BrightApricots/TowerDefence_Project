@@ -47,12 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca787d71ed08ba44680cc2ccbbd9b7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveSpeed: 20
+  Damage: 5
+  Duration: 3
   IsTargeting: 0
   IsBomb: 0
   BombRange: 0
-  moveSpeed: 50
-  damage: 2
-  duration: 3
+  Target: {fileID: 0}
 --- !u!136 &5544276257652062456
 CapsuleCollider:
   m_ObjectHideFlags: 0

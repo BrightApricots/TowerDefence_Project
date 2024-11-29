@@ -6311,6 +6311,67 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1001 &1220149894
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1498501323785604, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_Name
+      value: FattyMissileG02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0002414
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081698564255386, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7203481859707684851, guid: c098e192d5e58684aa33453685b97863, type: 3}
+      propertyPath: Name
+      value: MissileTower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c098e192d5e58684aa33453685b97863, type: 3}
 --- !u!1 &1227888310
 GameObject:
   m_ObjectHideFlags: 0
@@ -11066,5 +11127,5 @@ SceneRoots:
   - {fileID: 1498700928}
   - {fileID: 2142065681}
   - {fileID: 1227888312}
-  - {fileID: 799786284}
-  - {fileID: 328844900}
+  - {fileID: 1574182473}
+  - {fileID: 1220149894}

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Tower : MonoBehaviour
 {
@@ -17,7 +15,7 @@ public class Tower : MonoBehaviour
     public Transform Barrel;
     public Transform TowerMuzzle;
     public Transform Projectile;
-    private Monster CurrentTarget=null;
+    private Transform CurrentTarget=null;
 
     private void Start()
     {
@@ -40,7 +38,7 @@ public class Tower : MonoBehaviour
             {
                 if (target.CompareTag("Monster"))
                 {
-                    CurrentTarget =target.GetComponent<Monster>();
+                    CurrentTarget =target.GetComponent<Transform>();
                     break;
                 }
             }
@@ -59,7 +57,7 @@ public class Tower : MonoBehaviour
         if(CurrentTarget !=null)
         {
             Vector3 towerDir = CurrentTarget.transform.position - TowerHead.transform.position;
-            Barrel.forward = towerDir;
+            if(!IsTargeting)Barrel.forward = towerDir;
             towerDir.y = 0;
             TowerHead.forward = towerDir;
         }
@@ -87,4 +85,3 @@ public class Tower : MonoBehaviour
     }
 }
 
-//
