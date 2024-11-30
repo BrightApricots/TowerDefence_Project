@@ -9,6 +9,9 @@ TagManager:
   - TowerPlaceable
   - Preview
   - Monster
+  - Tetris
+  - Tower
+  - TowerTooltip
   layers:
   - Default
   - TransparentFX
