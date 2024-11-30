@@ -20,6 +20,32 @@ public class GridData
     private Dictionary<Vector3Int, PlacementData> placedObjects = new();
     private ObjectPlacer placer;
 
+    public bool HasObjectAt(Vector3Int position)
+    {
+        return placedObjects.ContainsKey(position);
+    }
+
+    public PlacementData GetObjectAt(Vector3Int position)
+    {
+        if (placedObjects.ContainsKey(position))
+            return placedObjects[position];
+        return null;
+    }
+
+    public void AddObjectAt(Vector3Int gridPosition, List<Vector2Int> occupiedCells, int ID, int placedObjectIndex, int floor = 0)
+    {
+        gridPosition.y = floor;
+        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, occupiedCells);
+        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex);
+
+        foreach (var pos in positionToOccupy)
+        {
+            if (placedObjects.ContainsKey(pos))
+                throw new Exception($"Dictionary already contains this cell position {pos}");
+            placedObjects[pos] = data;
+        }
+    }
+
     public void UpdateMapObject(Vector2 placedPosition)
     {
         Vector3Int newPos = new Vector3Int((int)placedPosition.x, 0, (int)placedPosition.y);
@@ -56,24 +82,6 @@ public class GridData
         //}
     }
 
-
-   
-   
-     
-    public void AddObjectAt(Vector3Int gridPosition, List<Vector2Int> occupiedCells, int ID, int placedObjectIndex, int floor = 0)
-    {
-        gridPosition.y = floor;
-        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, occupiedCells);
-        PlacementData data = new PlacementData(positionToOccupy, ID, placedObjectIndex);
-
-        foreach (var pos in positionToOccupy)
-        {
-            if (placedObjects.ContainsKey(pos)) 
-                throw new Exception($"Dictionary already contains this cell position {pos}");
-            placedObjects[pos] = data;
-        }
-    }
-
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, List<Vector2Int> occupiedCells)
     {
         List<Vector3Int> returnVal = new();
@@ -89,22 +97,9 @@ public class GridData
         gridPosition.y = floor;
         List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, occupiedCells);
         
-        // 2층인 경우, 아래 층에 블럭이 있는지 확인
-        if (floor > 0)
-        {
-            foreach (var pos in positionToOccupy)
-            {
-                // 현재 위치에 이미 오브젝트가 있는지 확인
-                if (placedObjects.ContainsKey(pos))
-                    return false;
-            }
-            return true;  // 2층이고 현재 위치가 비어있으면 true 반환
-        }
-
-        // 1층인 경우 현재 위치가 비어있는지만 확인
         foreach (var pos in positionToOccupy)
         {
-            if (placedObjects.ContainsKey(pos))
+            if (IsPositionOccupied(pos))
                 return false;
         }
         return true;
@@ -130,6 +125,11 @@ public class GridData
         if (placedObjects.ContainsKey(gridPosition))
             return placedObjects[gridPosition];
         return null;
+    }
+
+    public bool IsPositionOccupied(Vector3Int position)
+    {
+        return placedObjects.ContainsKey(position);
     }
 }
 

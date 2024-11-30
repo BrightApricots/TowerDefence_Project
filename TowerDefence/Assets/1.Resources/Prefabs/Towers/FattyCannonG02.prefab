@@ -5138,9 +5138,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4595654756050798}
+  - component: {fileID: -3630481060988295828}
+  - component: {fileID: 3964733747201478978}
   m_Layer: 0
   m_Name: FattyCannonG02
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5155,13 +5157,61 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4722236510932744}
   - {fileID: 4779222424309044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3630481060988295828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875090778556656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cost: 10
+  Name: BasicTower
+  Damage: 5
+  ShootCooltime: 1
+  ShootRange: 10
+  Info: 
+  IsTargeting: 0
+  IsBomb: 0
+  TowerHead: {fileID: 4722236510932744}
+  Barrel: {fileID: 4597034265451690}
+  TowerMuzzle: {fileID: 4703932692914808}
+  Projectile: {fileID: 4655418500077788, guid: 04488629b32874a4bb0f234c6cac7eaf, type: 3}
+  TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
+  Quad: {fileID: 0}
+  mainCanvas: {fileID: 0}
+--- !u!65 &3964733747201478978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875090778556656}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1931211189434318
 GameObject:
   m_ObjectHideFlags: 0

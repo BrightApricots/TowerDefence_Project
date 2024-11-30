@@ -1,15 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UI_IngameScene : MonoBehaviour
 {
+    private static UI_IngameScene instance;
+    public static UI_IngameScene Instance { get { return instance; } }
+
     public TextMeshProUGUI CurrentHp;
     public TextMeshProUGUI MaxHp;
     public TextMeshProUGUI CurrentMoney;
-    public Button Draw;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            DestroyImmediate(this);
+        }
+    }
 
     private void Update()
     {

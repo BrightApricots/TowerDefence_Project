@@ -1,8 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
+using UnityEngine;
 
 [System.Serializable]
 public class MonsterSpawnData
@@ -13,10 +11,9 @@ public class MonsterSpawnData
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private List<MonsterSpawnData> monsterList = new List<MonsterSpawnData>(); // 몬스터 리스트
-    [SerializeField]
-    private float spawnInterval = 0.5f; // 몬스터 생성 주기
+    private List<MonsterSpawnData> monsterList = new List<MonsterSpawnData>(); // 현재 웨이브의 몬스터 리스트
+    private List<Transform> activeSpawnPoints = new List<Transform>(); // 현재 활성화된 스폰 지점
+    private float spawnInterval = 0.5f; // 몬스터 생성 주기 (동적으로 설정)
 
     private bool isSpawning = false; // 몬스터 생성 활성화 여부
     private int currentSpawnIndex = 0; // 현재 스폰 지점 인덱스
@@ -27,17 +24,10 @@ public class MonsterSpawner : MonoBehaviour
     public event System.Action<GameObject> OnMonsterSpawned; // 몬스터 생성 이벤트
     public event System.Action<GameObject> OnMonsterDestroyed; // 몬스터 파괴 이벤트
 
-    void Start()
-    {
-        InitializeSpawnCounts(); // 몬스터 수량 초기화
-        CreateWeightedMonsterPool(); // 확률 기반 가중치 풀 생성
-    }
-
     private void InitializeSpawnCounts()
     {
         remainingSpawnCount.Clear();
 
-        // 몬스터별 등장 수량 초기화
         foreach (var spawnData in monsterList)
         {
             if (spawnData.monsterPrefab != null)
@@ -51,7 +41,6 @@ public class MonsterSpawner : MonoBehaviour
     {
         weightedMonsterPool.Clear();
 
-        // 몬스터별 등장 확률에 따라 가중치 기반 풀 생성
         foreach (var spawnData in monsterList)
         {
             if (spawnData.monsterPrefab != null && spawnData.spawnCount > 0)
@@ -66,35 +55,20 @@ public class MonsterSpawner : MonoBehaviour
 
     private void SpawnMonster()
     {
-        var spawnPoints = PathManager.Instance.GetSpawnPoints();
-        if (spawnPoints == null || spawnPoints.Count == 0)
+        if (activeSpawnPoints == null || activeSpawnPoints.Count == 0)
         {
-            Debug.Log("스폰 지점이 없습니다.");
-            return;
-        }
-
-        // 유효한 스폰 지점 필터링
-        var validSpawnPoints = spawnPoints.Where(sp =>
-        {
-            if (sp == null) return false;
-            var path = PathManager.Instance.GetCurrentPath(sp);
-            return path != null && path.Length > 0;
-        }).ToList();
-
-        if (validSpawnPoints.Count == 0)
-        {
-            Debug.Log("유효한 스폰 지점이 없습니다.");
+            Debug.LogWarning("활성화된 스폰 지점이 없음");
             return;
         }
 
         // 순환 방식으로 스폰 지점 선택
-        currentSpawnIndex = (currentSpawnIndex + 1) % validSpawnPoints.Count;
-        Transform selectedSpawnPoint = validSpawnPoints[currentSpawnIndex];
+        currentSpawnIndex = (currentSpawnIndex + 1) % activeSpawnPoints.Count;
+        Transform selectedSpawnPoint = activeSpawnPoints[currentSpawnIndex];
 
         // 등장 확률 기반으로 몬스터 종류 선택
         if (weightedMonsterPool.Count == 0)
         {
-            Debug.Log("모든 몬스터 등장 완료.");
+            Debug.Log("모든 몬스터 등장 완료");
             StopSpawning();
             return;
         }
@@ -110,7 +84,7 @@ public class MonsterSpawner : MonoBehaviour
             }
         }
 
-        Vector3 spawnPosition = PathManager.Instance.GetSpawnPosition(selectedSpawnPoint);
+        Vector3 spawnPosition = selectedSpawnPoint.position;
         GameObject monsterObj = Instantiate(selectedMonster, spawnPosition, Quaternion.identity);
         Monster monster = monsterObj.GetComponent<Monster>();
 
@@ -127,10 +101,7 @@ public class MonsterSpawner : MonoBehaviour
     {
         while (isSpawning)
         {
-            if (PathManager.Instance != null && PathManager.Instance.HasValidPath)
-            {
-                SpawnMonster();
-            }
+            SpawnMonster();
             yield return new WaitForSeconds(spawnInterval);
         }
 
@@ -152,13 +123,17 @@ public class MonsterSpawner : MonoBehaviour
         isSpawning = false;
     }
 
-    // 새로운 웨이브 데이터를 설정하기 위한 메서드 추가
-    public void SetMonsterData(List<MonsterSpawnData> newMonsterList)
+    public void SetMonsterData(
+     List<MonsterSpawnData> newMonsterList,
+     float newSpawnInterval,
+     List<Transform> activeSpawnPoints)
     {
         monsterList = newMonsterList;
+        spawnInterval = newSpawnInterval; // 외부에서 전달받은 생성 간격 설정
+        this.activeSpawnPoints = activeSpawnPoints; // 활성화된 스폰 지점 설정
         InitializeSpawnCounts();
         CreateWeightedMonsterPool();
     }
 }
 
-// 중간 완료
+//

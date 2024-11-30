@@ -8,11 +8,11 @@ public class ObjectsDatabaseSO : ScriptableObject
 {
     public List<ObjectData> objectsData;
 
-    // ID 범위 상수 정의
     public const int BLOCK_ID_START = 0;
-    public const int BLOCK_ID_END = 5;    // 블럭 ID: 0~5
-    public const int TOWER_ID_START = 6;
-    public const int TOWER_ID_END = 10;    // 포탑 ID: 6~10
+    public const int BLOCK_ID_END = 100;    // 블럭 ID: 0~100
+
+    public const int TOWER_ID_START = 101;
+    public const int TOWER_ID_END = 200;    // 포탑 ID: 101 ~ 200
 
     public bool IsBlock(int ID)
     {
