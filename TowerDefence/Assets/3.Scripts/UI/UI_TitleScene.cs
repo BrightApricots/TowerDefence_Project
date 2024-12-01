@@ -16,17 +16,19 @@ public class UI_TitleScene : MonoBehaviour
         NewGame.onClick.AddListener(LoadNewGame);
         Continue.onClick.AddListener(LoadContinue);
         Exit.onClick.AddListener(LoadExit);
+        SoundManager.Instance.Play("Bonfire", SoundManager.Sound.Bgm);
     }
 
     private void LoadNewGame()
     {
+        SoundManager.Instance.Play("Click03", SoundManager.Sound.Effect);
         Difficulty.SetActive(true);
-        //TODO : ºÒ·¯¿À±â¸¦ ¸¸µé¸é »õ °ÔÀÓ ½ÃÀÛ ½Ã ÀúÀå µ¥ÀÌÅÍ »èÁ¦ °æ°í ÆË¾÷
+        //TODO : ë¶ˆëŸ¬ì˜¤ê¸°ë¥¼ ë§Œë“¤ë©´ ìƒˆ ê²Œì„ ì‹œì‘ ì‹œ ì €ì¥ ë°ì´í„° ì‚­ì œ ê²½ê³  íŒì—…
     }
 
     private void LoadContinue()
     {
-        //TODO : ºÒ·¯¿À±â
+        //TODO : ë¶ˆëŸ¬ì˜¤ê¸°
     }
 
     private void LoadExit()

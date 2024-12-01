@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: 2100000, guid: 2ab2d7afffb4f0249b9f41bea945f009, type: 2}
+  lineMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!1 &373992381
@@ -7122,7 +7122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: 2100000, guid: 2ab2d7afffb4f0249b9f41bea945f009, type: 2}
+  lineMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!135 &1541005854
@@ -7964,7 +7964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: 2100000, guid: 2ab2d7afffb4f0249b9f41bea945f009, type: 2}
+  lineMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!135 &1660414540
@@ -8821,7 +8821,7 @@ MonoBehaviour:
   - {fileID: 1660414543}
   - {fileID: 1541005857}
   targetPoint: {fileID: 943508852}
-  pathLineMaterial: {fileID: 2100000, guid: 2ab2d7afffb4f0249b9f41bea945f009, type: 2}
+  pathLineMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
 --- !u!114 &1862580661
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -228,7 +228,7 @@ public class PlacementState : IBuildingState
             // 장애물 체크
             Vector3 checkPosition = grid.CellToWorld(positionBelow) + new Vector3(0.5f, 0, 0.5f);
             
-            // 장애물이 있는지 체크하고, 있다면 그 장애물이 타워 설치 가능한지 확인
+            // 장애물 있는지 체크하고, 있다면 그 장애물이 타워 설치 가능한지 확인
             Collider[] obstacles = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
             foreach (var obstacle in obstacles)
             {
@@ -265,24 +265,46 @@ public class PlacementState : IBuildingState
             Vector3 position = grid.CellToWorld(gridPosition);
             position += new Vector3(0.5f, floor, 0.5f);
 
+            // 블록 설치 전에 해당 위치의 나무 체크
+            if (database.IsBlock(currentID))
+            {
+                // 블록이 차지할 모든 셀에 대해 나무 체크
+                foreach (var cell in database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation))
+                {
+                    Vector3 checkPosition = position + new Vector3(cell.x, 0, cell.y);
+                    Collider[] colliders = Physics.OverlapSphere(checkPosition, 0.5f);
+                    foreach (var collider in colliders)
+                    {
+                        TreeDisapearEffect treeEffect = collider.GetComponent<TreeDisapearEffect>();
+                        if (treeEffect != null)
+                        {
+                            // 나무 이펙트 직접 실행
+                            ParticleSystem particle = Object.Instantiate(treeEffect.effect, treeEffect.transform.position, Quaternion.identity);
+                            Object.Destroy(particle.gameObject, particle.main.duration);
+                            Object.Destroy(treeEffect.gameObject);
+                        }
+                    }
+                }
+            }
+
             int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, position, Quaternion.Euler(0, 90 * currentRotation, 0));
             
-            // 블록인 경우 Collider 추가
             if (database.IsBlock(currentID))
             {
                 GameObject placedObject = ObjectPlacer.Instance.placedGameObjects[index];
                 if (placedObject != null)
                 {
-                    // BoxCollider가 없으면 추가
-                    if (placedObject.GetComponent<BoxCollider>() == null)
-                    {
-                        BoxCollider collider = placedObject.AddComponent<BoxCollider>();
-                        collider.size = Vector3.one;  // 크기는 블록 크기에 맞게 조정
-                        collider.center = Vector3.zero;  // 중심점 설정
+                    //// BoxCollider가 없으면 추가
+                    //if (placedObject.GetComponent<BoxCollider>() == null)
+                    //{
+                    //    BoxCollider collider = placedObject.AddComponent<BoxCollider>();
+                    //    collider.size = Vector3.one;  // 크기는 블록 크기에 맞게 조정
+                    //    collider.center = Vector3.zero;  // 중심점 설정
                         
-                        // unwalkableMask 레이어로 설정
-                        placedObject.layer = LayerMask.NameToLayer("Unwalkable");
-                    }
+                    //    // unwalkableMask 레이어로 설정
+                    //    placedObject.layer = LayerMask.NameToLayer("Unwalkable");
+                    //}
+                    placedObject.layer = LayerMask.NameToLayer("Unwalkable");
                 }
             }
 
