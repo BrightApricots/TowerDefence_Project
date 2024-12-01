@@ -21,9 +21,7 @@ public class Tower : MonoBehaviour
     public Canvas mainCanvas;
     private Transform CurrentTarget=null;
     private GameObject currentTooltip;
-
     private Vector3 clickmousePointer;
-
 
     private void Start()
     {
@@ -121,9 +119,8 @@ public class Tower : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 화면에 Ray 쏘기
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit) )
+        if(Physics.Raycast(ray, out hit))
         {
-
             //월드 좌표를 스크린 좌표로 변환
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
 
@@ -134,7 +131,8 @@ public class Tower : MonoBehaviour
             //스크린 좌표를 캔버스 좌표로 변환
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                mainCanvas.transform.GetComponent<RectTransform>(), screenPoint, mainCanvas.worldCamera, out localPoint);
+                mainCanvas.transform.GetComponent<RectTransform>(),
+                screenPoint, mainCanvas.worldCamera, out localPoint);
 
             rect.anchoredPosition = localPoint;
         }
