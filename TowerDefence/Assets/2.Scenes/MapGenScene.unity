@@ -46068,13 +46068,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041882070}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.55921876, y: 0.30461678, z: -0.23163597, w: 0.73541003}
+  m_LocalRotation: {x: 0.5299155, y: 0.31347594, z: -0.21949817, w: 0.7567979}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 508775801}
-  m_LocalEulerAnglesHint: {x: 74.5, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 45, z: 0}
 --- !u!81 &2041882072
 AudioListener:
   m_ObjectHideFlags: 0
@@ -46117,8 +46117,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7.44
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -48734,10 +48734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fcf98704d3d45f42bdba51a5985a171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 362881107}
-  - {fileID: 1660414543}
-  - {fileID: 1541005857}
 --- !u!1001 &91434653022343551
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -152,6 +153,10 @@ public class Monster : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        GameObject damageText = Instantiate(Resources.Load<GameObject>("DamageFont"), GameObject.Find("DamageCanvas").transform);
+        damageText.GetComponent<TextMeshProUGUI>().text = $"{damage}";
+        damageText.transform.position = transform.position;
+
         hp -= damage;
         Debug.Log($"{gameObject.name} 남은 HP : {hp}");
 

@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (IsBomb)
         {
