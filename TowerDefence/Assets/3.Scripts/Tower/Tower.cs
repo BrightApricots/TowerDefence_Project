@@ -19,27 +19,25 @@ public class Tower : MonoBehaviour
     public GameObject TowerTooltip;
     public GameObject Quad;
     public Canvas mainCanvas;
-    private Transform CurrentTarget=null;
+    protected Transform CurrentTarget=null;
     private GameObject currentTooltip;
-
     private Vector3 clickmousePointer;
 
-
-    private void Start()
+    protected virtual void Start()
     {
         GameManager.Instance.PlacedTowerList.Add(this);
         mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
         StartCoroutine(Attack());
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Detect();
         FollowTarget();
         TooltipPopupCheck();
     }
 
-    protected void Detect()
+    protected virtual void Detect()
     {
         if (CurrentTarget == null)
         {
@@ -48,7 +46,7 @@ public class Tower : MonoBehaviour
             {
                 if (target.CompareTag("Monster"))
                 {
-                    CurrentTarget =target.GetComponent<Transform>();
+                    CurrentTarget = target.GetComponent<Transform>();
                     break;
                 }
             }
@@ -62,7 +60,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    protected void FollowTarget()
+    protected virtual void FollowTarget()
     {
         if(CurrentTarget !=null)
         {
@@ -73,7 +71,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void TooltipPopupCheck()
+    protected void TooltipPopupCheck()
     {
         if (currentTooltip != null && Input.GetMouseButtonDown(0)) //툴팁이 있고, 마우스를 눌렀을 때
         {
@@ -89,7 +87,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    IEnumerator Attack()
+    protected virtual IEnumerator Attack()
     {
         while (true)
         {
@@ -121,9 +119,8 @@ public class Tower : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 화면에 Ray 쏘기
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit) )
+        if(Physics.Raycast(ray, out hit))
         {
-
             //월드 좌표를 스크린 좌표로 변환
             Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
 
@@ -134,7 +131,8 @@ public class Tower : MonoBehaviour
             //스크린 좌표를 캔버스 좌표로 변환
             Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                mainCanvas.transform.GetComponent<RectTransform>(), screenPoint, mainCanvas.worldCamera, out localPoint);
+                mainCanvas.transform.GetComponent<RectTransform>(),
+                screenPoint, mainCanvas.worldCamera, out localPoint);
 
             rect.anchoredPosition = localPoint;
         }

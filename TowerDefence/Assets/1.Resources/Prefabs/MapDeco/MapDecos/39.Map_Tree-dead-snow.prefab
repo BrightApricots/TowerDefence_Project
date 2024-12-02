@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 896339156809236890}
   - component: {fileID: 7414724713431791667}
   - component: {fileID: 354582844096497057}
+  - component: {fileID: 5094503344916999291}
   m_Layer: 0
   m_Name: 39.Map_Tree-dead-snow
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 6e3ac6e47b4d7a44685dfef9bf209413, type: 2}
   - {fileID: 2100000, guid: 5f35ae9530edec84085e28d4c3302e29, type: 2}
+  - {fileID: 2100000, guid: d00721cc561a6a740b5ec74b7f581c5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,3 +108,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 7.881236, z: 0.6}
   m_Center: {x: 0.19, y: 3.9598756, z: 0.2}
+--- !u!114 &5094503344916999291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8494545716493850589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84db65e39c3a2449a12d91b871fcf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 0}
+  checkRadius: 1

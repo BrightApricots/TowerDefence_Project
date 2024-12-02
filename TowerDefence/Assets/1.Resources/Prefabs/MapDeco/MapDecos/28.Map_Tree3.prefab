@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8731648312730810706}
   - component: {fileID: 2289999759163126269}
   - component: {fileID: 8486633836335946881}
+  - component: {fileID: 228925597463576392}
   m_Layer: 6
   m_Name: Map_Tree3
   m_TagString: Untagged
@@ -67,6 +68,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 2768469f7f5282a4282f61dbf62e68e2, type: 2}
   - {fileID: 2100000, guid: 48b31daa83ddb854fadd9402702394e4, type: 2}
   - {fileID: 2100000, guid: 5f35ae9530edec84085e28d4c3302e29, type: 2}
+  - {fileID: 2100000, guid: d00721cc561a6a740b5ec74b7f581c5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,6 +111,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 5.545726, z: 0.7}
   m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
+--- !u!114 &228925597463576392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168392216508773252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84db65e39c3a2449a12d91b871fcf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 0}
+  checkRadius: 1
 --- !u!1 &7597224455167945969
 GameObject:
   m_ObjectHideFlags: 0

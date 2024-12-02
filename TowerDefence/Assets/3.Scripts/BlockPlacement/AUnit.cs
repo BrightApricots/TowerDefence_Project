@@ -65,6 +65,8 @@ public class AUnit : MonoBehaviour
             renderer.positionCount = 0;
             renderer.enabled = true;
             renderer.textureMode = LineTextureMode.Tile;
+            renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+            renderer.allowOcclusionWhenDynamic = false;
 
             //renderer.textureMode = LineRenderer.textureMode;
         }
