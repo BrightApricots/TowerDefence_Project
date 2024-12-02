@@ -27,40 +27,40 @@ public class UI_Draw : MonoBehaviour
 
     public void DrawCard()
     {
-        if(GameManager.Instance.TetrisHandCardList.Count < 7 && GameManager.Instance.CurrentMoney >= DrawPrice)
+        if(GameManager.Instance.HandTetrisList.Count < 7 && GameManager.Instance.CurrentMoney >= DrawPrice)
         { 
             GameManager.Instance.CurrentMoney -= DrawPrice;
-            int drawCard = Random.Range(0, GameManager.Instance.TetrisCardList.Count);
-            for (int i = 0; i < GameManager.Instance.TetrisCardList.Count; i++)
+            int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
+            for (int i = 0; i < GameManager.Instance.TotalTetrisList.Count; i++)
             {
                 if (i == drawCard)
                 {
                     GameObject type;
-                    switch (GameManager.Instance.TetrisCardList[i])
+                    switch (GameManager.Instance.TotalTetrisList[i])
                     {
                         case 0:
                             type = Instantiate(OneSquarePrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                         case 1:
                             type = Instantiate(FourSquarePrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                         case 2:
                             type = Instantiate(FuckYouPrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                         case 3:
                             type = Instantiate(ZigzagPrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                         case 4:
                             type = Instantiate(StraightPrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                         case 5:
                             type = Instantiate(LPrefab, HorizontalLayout);
-                            GameManager.Instance.TetrisHandCardList.Add(type);
+                            GameManager.Instance.HandTetrisList.Add(type);
                             break;
                     }
                     DrawPrice += 5;
