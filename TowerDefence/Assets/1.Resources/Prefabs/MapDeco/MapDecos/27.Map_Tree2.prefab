@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2218987910550583856}
   - component: {fileID: 634372057611354454}
   - component: {fileID: 4087295762878632330}
+  - component: {fileID: 3065878186656570938}
   m_Layer: 6
   m_Name: Map_Tree2
   m_TagString: Untagged
@@ -96,6 +97,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 6e3ac6e47b4d7a44685dfef9bf209413, type: 2}
   - {fileID: 2100000, guid: 87ff71ffc286b91449d2296928632aed, type: 2}
+  - {fileID: 2100000, guid: d00721cc561a6a740b5ec74b7f581c5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,3 +140,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 5.7361794, z: 0.7}
   m_Center: {x: -0.060791492, y: 2.8545494, z: -0.010021746}
+--- !u!114 &3065878186656570938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8736841977232689198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a84db65e39c3a2449a12d91b871fcf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 0}
+  checkRadius: 1
