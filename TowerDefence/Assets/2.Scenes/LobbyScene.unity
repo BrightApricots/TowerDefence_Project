@@ -3263,6 +3263,7 @@ MonoBehaviour:
   TowerLoadout: {fileID: 43167269}
   Backpack: {fileID: 1985215727}
   Talents: {fileID: 1145525043}
+  Academy: {fileID: 62038251}
   TowerLoadoutPopup: {fileID: 347878197}
   BackpackPopup: {fileID: 1111876945}
   EmberAmountText: {fileID: 640770067}

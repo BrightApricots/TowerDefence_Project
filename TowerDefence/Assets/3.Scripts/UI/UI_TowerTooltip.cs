@@ -43,6 +43,4 @@ public class UI_TowerTooltip : MonoBehaviour
             
         }
     }
-
-    
 }
