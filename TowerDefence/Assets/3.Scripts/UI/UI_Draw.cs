@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UI_Draw : MonoBehaviour
 {
@@ -14,10 +16,12 @@ public class UI_Draw : MonoBehaviour
     public Button DrawButton;
     public TextMeshProUGUI DrawPriceText;
     public RectTransform HorizontalLayout;
+    public static Action draw;
 
     private void Awake()
     {
-        DrawButton.onClick.AddListener(DrawCard);
+        DrawButton.onClick.AddListener(PayDrawCard);
+        draw = () => { DrawCard(); };
     }
 
     private void Update()
@@ -27,46 +31,52 @@ public class UI_Draw : MonoBehaviour
 
     public void DrawCard()
     {
+        int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
+        for (int i = 0; i<GameManager.Instance.TotalTetrisList.Count; i++)
+        {
+            if (i == drawCard)
+            {
+                GameObject type;
+                switch (GameManager.Instance.TotalTetrisList[i])
+                {
+                    case 0:
+                        type = Instantiate(OneSquarePrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                    case 1:
+                        type = Instantiate(FourSquarePrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                    case 2:
+                        type = Instantiate(FuckYouPrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                    case 3:
+                        type = Instantiate(ZigzagPrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                    case 4:
+                        type = Instantiate(StraightPrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                    case 5:
+                        type = Instantiate(LPrefab, HorizontalLayout);
+                        GameManager.Instance.HandTetrisList.Add(type);
+                        break;
+                }
+                break;
+            }
+        }
+    }
+
+    public void PayDrawCard()
+    {
         if(GameManager.Instance.HandTetrisList.Count < 7 && GameManager.Instance.CurrentMoney >= DrawPrice)
         { 
             GameManager.Instance.CurrentMoney -= DrawPrice;
             int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
-            for (int i = 0; i < GameManager.Instance.TotalTetrisList.Count; i++)
-            {
-                if (i == drawCard)
-                {
-                    GameObject type;
-                    switch (GameManager.Instance.TotalTetrisList[i])
-                    {
-                        case 0:
-                            type = Instantiate(OneSquarePrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                        case 1:
-                            type = Instantiate(FourSquarePrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                        case 2:
-                            type = Instantiate(FuckYouPrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                        case 3:
-                            type = Instantiate(ZigzagPrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                        case 4:
-                            type = Instantiate(StraightPrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                        case 5:
-                            type = Instantiate(LPrefab, HorizontalLayout);
-                            GameManager.Instance.HandTetrisList.Add(type);
-                            break;
-                    }
-                    DrawPrice += 5;
-                    break;
-                }
-            }
+            DrawCard();
+            DrawPrice += 5;
         }
     }
 }

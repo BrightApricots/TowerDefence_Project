@@ -15,6 +15,11 @@ public class Block : MonoBehaviour
 
     protected virtual void Start()
     {
-        button.onClick.AddListener(() => PlacementSystem.Instance.StartPlacement(blockType));
+        button.onClick.AddListener(Placement);
+    }
+
+    protected virtual void Placement()
+    {
+        PlacementSystem.Instance.StartPlacement(blockType);
     }
 }

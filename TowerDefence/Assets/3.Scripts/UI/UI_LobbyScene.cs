@@ -12,7 +12,6 @@ public class UI_LobbyScene : MonoBehaviour
     public Button TowerLoadout;
     public Button Backpack;
     public Button Talents;
-    public Button Academy;
     //public GameObject SettingPopup;
     public GameObject TowerLoadoutPopup;
     public GameObject BackpackPopup;
@@ -25,7 +24,6 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void Awake()
     {
-        Academy.onClick.AddListener(EnterAcademy);
         //Setting.onClick.AddListener(PopupSetting);
         Title.onClick.AddListener(BackToTitle);
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
@@ -52,10 +50,6 @@ public class UI_LobbyScene : MonoBehaviour
     private void BackToTitle()
     {
         SceneManager.LoadScene("TitleScene");
-    }
-    private void EnterAcademy()
-    {
-        SceneManager.LoadScene("AcademyScene");
     }
     private void PopupTowerLoadout()
     {

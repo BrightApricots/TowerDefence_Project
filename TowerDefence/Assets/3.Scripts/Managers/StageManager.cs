@@ -44,6 +44,11 @@ public class StageManager : MonoBehaviour
                 element.SetActive(true);
             }
         }
+
+        for (int i = 0; i<3; i++)
+        {
+            UI_Draw.draw();
+        }
     }
 
     private void OnDestroy()
@@ -61,6 +66,7 @@ public class StageManager : MonoBehaviour
         Debug.Log("모든 웨이브가 클리어되었습니다. 준비 패널을 표시합니다.");
         allWavesCleared = true;
         ShowPreparationPanel();
+        UI_Map.clearStage+=1;
     }
 
     // 준비 패널 표시
