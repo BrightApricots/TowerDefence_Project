@@ -32,16 +32,22 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
     enum TowerEnum
     {
         Tower_Basic,
-        Tower_Fire,
         Tower_Missile,
+        Tower_Lightning,
+        Tower_Poison,
+        Tower_Flame,
+        Tower_Drone,
         Count
     };
 
     enum ImageTowerEnum
     {
         Image_Basic,
-        Image_Fire,
         Image_Missile,
+        Image_Lightning,
+        Image_Poison,
+        Image_Flame,
+        Image_Drone,
         Count
     };
 
