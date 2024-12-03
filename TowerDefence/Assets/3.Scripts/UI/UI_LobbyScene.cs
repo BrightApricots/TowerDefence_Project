@@ -20,6 +20,8 @@ public class UI_LobbyScene : MonoBehaviour
     public TextMeshProUGUI EmberAmountText;
     public TextMeshProUGUI ExpAmountText;
     public TextMeshProUGUI HpAmountText;
+    public GameObject EmptyCard;
+    public Transform TowerCardLocation;
 
     private void Awake()
     {
@@ -29,6 +31,11 @@ public class UI_LobbyScene : MonoBehaviour
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
         Backpack.onClick.AddListener(PopupBackpack);
         //Talents.onClick.AddListener(PopupTalents);
+    }
+
+    private void Start()
+    {
+        TowerCard();
     }
 
     private void Update()
@@ -62,4 +69,16 @@ public class UI_LobbyScene : MonoBehaviour
     //{
     //    TalentsPopup.SetActive(true);
     //}
+
+    private void TowerCard()
+    {
+        for (int i = 0; i < GameManager.Instance.EquipTowerList.Count; i++)
+        {
+            Instantiate(GameManager.Instance.EquipTowerList[i], TowerCardLocation);
+        }
+        for(int i = GameManager.Instance.EquipTowerList.Count; i<8; i++)
+        { 
+            Instantiate(EmptyCard, TowerCardLocation);
+        }
+    }
 } 
