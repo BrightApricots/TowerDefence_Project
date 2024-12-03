@@ -12797,7 +12797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1290159579780068142, guid: 821fba9d9aaaea846a7445648be2f90d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1290159579780068147, guid: 821fba9d9aaaea846a7445648be2f90d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22064,7 +22064,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 554102890}
   MainCam: {fileID: 2006641987}
+  virtualCamera: {fileID: 0}
   moveSpeed: 20
+  zoomSpeed: 10
 --- !u!1 &2068516430
 GameObject:
   m_ObjectHideFlags: 0

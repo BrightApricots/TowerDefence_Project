@@ -43,41 +43,4 @@ public class FireProjectile : Projectile
             yield return new WaitForSeconds(DamageInterval);
         }
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Monster")
-    //    {
-    //        if (_coStartDamage != null)
-    //            StopCoroutine(_coStartDamage);
-
-    //        _coStartDamage = StartCoroutine(CoStartDamage(Target.gameObject));
-    //    }
-    //}
-
-    //public virtual void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    Monster target = collision.gameObject.GetComponent<Monster>(); // 충돌한 오브젝트(플레이어)를 타켓으로 설정한다
-
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        if (_coStartDamage != null)
-    //        {
-    //            StopCoroutine(_coStartDamage);
-    //        }
-    //        _coStartDamage = null;
-    //    }
-    //}
-
-
-    //public IEnumerator CoStartDamage(Monster target)
-    //{
-    //    while (true)
-    //    {
-    //        target.OnDamaged(this, 2);
-    //        yield return new WaitForSeconds(0.1f);
-    //    }
-    //}
-
-
 }

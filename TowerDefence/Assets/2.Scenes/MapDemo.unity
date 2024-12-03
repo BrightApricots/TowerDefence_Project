@@ -5675,6 +5675,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757583079}
   m_CullTransparentMesh: 1
+--- !u!1 &762461244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 762461245}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &762461245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762461244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &764054866
 GameObject:
   m_ObjectHideFlags: 0
@@ -8776,8 +8807,8 @@ MonoBehaviour:
   battleButton: {fileID: 1096463296}
   waveStatusText: {fileID: 259808161}
   wavePrepareText: {fileID: 655782871}
-  additionalText1: {fileID: 320410092}
-  additionalText2: {fileID: 575949529}
+  wavePrepareTimeText: {fileID: 0}
+  wavePrepareTimeText_1: {fileID: 0}
   timeBarBackground: {fileID: 1908198555}
   timeBarFill: {fileID: 1374514164}
   speedButtonGroup: {fileID: 2140313253}
@@ -9035,7 +9066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1328590139
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9754,6 +9785,9 @@ MonoBehaviour:
   CurrentHp: {fileID: 1376865588}
   MaxHp: {fileID: 305604109}
   CurrentMoney: {fileID: 1571822027}
+  TowerCardLocation1: {fileID: 0}
+  TowerCardLocation2: {fileID: 0}
+  EmptyCard: {fileID: 0}
 --- !u!1 &1413232853
 GameObject:
   m_ObjectHideFlags: 0
@@ -10404,7 +10438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.03, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1519030491
@@ -12288,7 +12322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1712405626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14293,6 +14327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
+  Panel: {fileID: 0}
+  uiElementsToDisable: []
 --- !u!4 &2033305624
 Transform:
   m_ObjectHideFlags: 0
@@ -15591,7 +15627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3040369925659012013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16054,3 +16090,4 @@ SceneRoots:
   - {fileID: 1712405627}
   - {fileID: 7164693054216430785}
   - {fileID: 1328590140}
+  - {fileID: 762461245}
