@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2.Scenes/AcademyScene.unity
     guid: a61fcab1f78533743b9a1be28fd07c3b
+  - enabled: 1
+    path: Assets/2.Scenes/Stages/InGameScene1.unity
+    guid: fb98509431ba5fa4295f0d05edc3e3b5
   m_configObjects: {}

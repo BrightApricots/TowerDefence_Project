@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 65
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3160aa16744f49a4ba2aa1cbf5b1959c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bf3e7b64cc778a4a84c0101a7677738, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -295,9 +295,9 @@ GameObject:
   - component: {fileID: 8387228153551679927}
   - component: {fileID: 2022830373428428149}
   - component: {fileID: 465203529226023573}
-  - component: {fileID: 7906036579871879371}
+  - component: {fileID: 3232549031435933174}
   m_Layer: 5
-  m_Name: Image_Missile
+  m_Name: Image_Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7906036579871879371
+--- !u!114 &3232549031435933174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,6 +372,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7097985763082699476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b4826c7c12b074abdcc1a5223c97f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d1bfdbc2859f984c8c634352fae22ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

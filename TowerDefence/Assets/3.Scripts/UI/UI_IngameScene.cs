@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ public class UI_IngameScene : MonoBehaviour
     public TextMeshProUGUI CurrentHp;
     public TextMeshProUGUI MaxHp;
     public TextMeshProUGUI CurrentMoney;
+    public Transform TowerCardLocation1;
+    public Transform TowerCardLocation2;
+    public GameObject EmptyCard;
 
     private void Awake()
     {
@@ -22,10 +26,41 @@ public class UI_IngameScene : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        TowerCardSet();
+    }
+
     private void Update()
     {
         CurrentHp.text = $"{GameManager.Instance.CurrentHp}";
         MaxHp.text = $"/{GameManager.Instance.MaxHp}";
         CurrentMoney.text = $"{GameManager.Instance.CurrentMoney}";
+    }
+
+    private void TowerCardSet()
+    {
+        for(int i= 0; i<GameManager.Instance.EquipTowerList.Count;i++)
+        {
+            if (i < 4)
+            {
+                Instantiate(GameManager.Instance.EquipTowerList[i], TowerCardLocation1);
+            }
+            else
+            {
+                Instantiate(GameManager.Instance.EquipTowerList[i],TowerCardLocation2 ); 
+            }
+        }
+        for(int i = GameManager.Instance.EquipTowerList.Count; i < 8; i++)
+        {
+            if(i< 4)
+            {
+                Instantiate(EmptyCard, TowerCardLocation1);
+            }
+            else
+            {
+                Instantiate(EmptyCard, TowerCardLocation2 );
+            }
+        }
     }
 }
