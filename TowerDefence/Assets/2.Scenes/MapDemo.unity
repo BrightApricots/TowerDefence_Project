@@ -1415,9 +1415,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 355401980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166816707
@@ -1751,9 +1751,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1962727981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &252003324
@@ -2671,9 +2671,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 355401980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &352830182
@@ -8781,6 +8781,24 @@ MonoBehaviour:
   timeBarBackground: {fileID: 1908198555}
   timeBarFill: {fileID: 1374514164}
   speedButtonGroup: {fileID: 2140313253}
+  speedSettings:
+  - speedMultiplier: 0.5
+    speedImages:
+    - {fileID: 1609755437}
+  - speedMultiplier: 1
+    speedImages:
+    - {fileID: 2045300983}
+  - speedMultiplier: 2
+    speedImages:
+    - {fileID: 166816707}
+    - {fileID: 352830182}
+  - speedMultiplier: 3
+    speedImages:
+    - {fileID: 252003324}
+    - {fileID: 1935265910}
+    - {fileID: 1546054183}
+  activeColor: {r: 1, g: 1, b: 1, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
 --- !u!4 &1227888312
 Transform:
@@ -10363,9 +10381,12 @@ MonoBehaviour:
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
-  TetrisCardList: 000000000100000002000000030000000400000005000000
-  TetrisHandCardList: []
-  TowerCardList: 06000000
+  TotalTetrisList: 000000000100000002000000030000000400000005000000
+  TotalTowerList: 
+  PlayerTetrisList: []
+  HandTetrisList: []
+  EquipTowerList: []
+  UnEquipTowerList: []
   PlacedTowerList: []
 --- !u!224 &1498700928
 RectTransform:
@@ -10768,9 +10789,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1962727981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1546054183
@@ -11397,9 +11418,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 576537930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609755437
@@ -13507,9 +13528,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1962727981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 14.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1935265910
@@ -14319,9 +14340,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 346894316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2045300983
@@ -14414,7 +14435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2065107487
 Transform:
   m_ObjectHideFlags: 0
@@ -14444,7 +14465,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 554102890}
   MainCam: {fileID: 2006641987}
+  virtualCamera: {fileID: 0}
   moveSpeed: 20
+  zoomSpeed: 10
 --- !u!1 &2066037064
 GameObject:
   m_ObjectHideFlags: 0
