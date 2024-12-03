@@ -90,3 +90,5 @@ public class Projectile : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, BombRange);
     }
 }
+
+//

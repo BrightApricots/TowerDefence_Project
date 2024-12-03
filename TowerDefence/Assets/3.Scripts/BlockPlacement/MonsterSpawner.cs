@@ -24,6 +24,7 @@ public class MonsterSpawner : MonoBehaviour
     public event System.Action<GameObject> OnMonsterSpawned; // 몬스터 생성 이벤트
     public event System.Action<GameObject> OnMonsterDestroyed; // 몬스터 파괴 이벤트
 
+    // 몬스터 수량 초기화
     private void InitializeSpawnCounts()
     {
         remainingSpawnCount.Clear();
@@ -37,6 +38,7 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
+    // 가중치 기반 몬스터 풀 생성
     private void CreateWeightedMonsterPool()
     {
         weightedMonsterPool.Clear();
@@ -53,6 +55,7 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
+    // 몬스터 생성
     private void SpawnMonster()
     {
         if (activeSpawnPoints == null || activeSpawnPoints.Count == 0)
@@ -91,12 +94,13 @@ public class MonsterSpawner : MonoBehaviour
         if (monster != null)
         {
             monster.Initialize(selectedSpawnPoint);
-            monster.OnDestroyed += () => OnMonsterDestroyed?.Invoke(monsterObj);
+            monster.OnDestroyed += () => OnMonsterDestroyed?.Invoke(monsterObj); // 파괴 시 이벤트 호출
         }
 
-        OnMonsterSpawned?.Invoke(monsterObj);
+        OnMonsterSpawned?.Invoke(monsterObj); // 생성 시 이벤트 호출
     }
 
+    // 몬스터 생성 루틴
     private IEnumerator SpawnRoutine()
     {
         while (isSpawning)
@@ -105,9 +109,10 @@ public class MonsterSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
 
-        OnSpawnComplete?.Invoke();
+        OnSpawnComplete?.Invoke(); // 모든 몬스터 스폰 완료 이벤트 호출
     }
 
+    // 몬스터 생성 시작
     public void StartSpawning()
     {
         if (!isSpawning)
@@ -118,22 +123,22 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
+    // 몬스터 생성 중지
     public void StopSpawning()
     {
         isSpawning = false;
     }
 
+    // 몬스터 데이터 설정
     public void SetMonsterData(
-     List<MonsterSpawnData> newMonsterList,
-     float newSpawnInterval,
-     List<Transform> activeSpawnPoints)
+        List<MonsterSpawnData> newMonsterList,
+        float newSpawnInterval,
+        List<Transform> activeSpawnPoints)
     {
         monsterList = newMonsterList;
         spawnInterval = newSpawnInterval; // 외부에서 전달받은 생성 간격 설정
         this.activeSpawnPoints = activeSpawnPoints; // 활성화된 스폰 지점 설정
-        InitializeSpawnCounts();
-        CreateWeightedMonsterPool();
+        InitializeSpawnCounts(); // 몬스터 수량 초기화
+        CreateWeightedMonsterPool(); // 가중치 풀 생성
     }
 }
-
-//

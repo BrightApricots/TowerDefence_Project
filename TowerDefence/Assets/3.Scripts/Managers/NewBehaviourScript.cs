@@ -1,38 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-
-public class GameManager : MonoBehaviour
-{
-    private static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
-
-    public int CurrentEmber=10;
-    public int CurrentExp=10;
-    public int CurrentHp=15;
-    public int CurrentMoney = 50;
-    public int MaxHp = 15;
-    public int Difficulty;
-    public List<int> TetrisCardList = new List<int> { 0,1,2,3,4,5 };
-    public List<GameObject> TetrisHandCardList;
-    public List<int> TowerCardList = new List<int> { 6 };
-    public List<Tower> PlacedTowerList;
-
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            DestroyImmediate(gameObject);
-        }
-    }
-}
-
 //using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
@@ -45,6 +10,13 @@ public class GameManager : MonoBehaviour
 //    public List<MonsterSpawnData> monsterSpawnData;
 //    public float spawnInterval = 1f;
 //    public List<Transform> spawnPoints = new List<Transform>();
+//}
+
+//[System.Serializable]
+//public class SpeedSetting
+//{
+//    public float speedMultiplier; // 배속 값
+//    public Image speedImage;      // 배속과 관련된 이미지
 //}
 
 //public class WaveManager : MonoBehaviour
@@ -70,6 +42,12 @@ public class GameManager : MonoBehaviour
 //    [SerializeField]
 //    private GameObject speedButtonGroup; // 배속 버튼 그룹을 담을 GameObject
 //    [SerializeField]
+//    private List<SpeedSetting> speedSettings = new List<SpeedSetting>(); // 배속 설정 리스트
+//    [SerializeField]
+//    private Color activeColor = Color.green; // 활성 상태 색상
+//    [SerializeField]
+//    private Color inactiveColor = Color.gray; // 비활성 상태 색상
+//    [SerializeField]
 //    private float prepareCooldown = 10f;
 
 //    private int currentWaveIndex = 0;
@@ -92,21 +70,58 @@ public class GameManager : MonoBehaviour
 
 //        if (speedButtonGroup != null)
 //        {
-//            speedButtonGroup.SetActive(false); // 배속 버튼 그룹 초기 비활성화
 //            foreach (var button in speedButtonGroup.GetComponentsInChildren<Button>())
 //            {
 //                button.onClick.AddListener(() => ChangeGameSpeed(float.Parse(button.name))); // 버튼 이름을 배속 값으로 사용
 //            }
 //        }
 
+
+
+
+
+
+
+
+
+
+
+
 //        UpdateWaveText();
 //        UpdateWavePrepareText();
+
+
+
+
+
+
+
+
+
+
+
+
 
 //        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
 //        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
 //        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
 //        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
+
+
+
+
+
+
+
+
+
+
+
+//        UpdateSpeedImageColors(1f); // 기본 배속 1배속으로 초기화
 //    }
+
+
+
 
 //    private void Update()
 //    {
@@ -118,27 +133,62 @@ public class GameManager : MonoBehaviour
 //        HandleSpeedInput(); // 키보드 입력에 따른 배속 처리
 //    }
 
-//    // 키보드 입력에 따른 배속 처리
+
+
+
+
+
 //    private void HandleSpeedInput()
 //    {
-//        if (Input.GetKeyDown(KeyCode.Z)) // 1번 키로 배속 0.5x
+//        if (Input.GetKeyDown(KeyCode.Z)) // 배속 0.5x
 //        {
 //            ChangeGameSpeed(0.5f);
 //        }
-//        else if (Input.GetKeyDown(KeyCode.X)) // 2번 키로 배속 2x
+//        else if (Input.GetKeyDown(KeyCode.X)) // 배속 1x
 //        {
 //            ChangeGameSpeed(1f);
 //        }
-//        else if (Input.GetKeyDown(KeyCode.C)) // 3번 키로 배속 3x
+//        else if (Input.GetKeyDown(KeyCode.C)) // 배속 2x
 //        {
 //            ChangeGameSpeed(2f);
 //        }
-//        else if (Input.GetKeyDown(KeyCode.V)) // 4번 키로 배속 3x로 초기화
+//        else if (Input.GetKeyDown(KeyCode.V)) // 배속 3x
 //        {
 //            ChangeGameSpeed(3f);
 //        }
 //    }
 
+
+
+
+
+
+//    private void ChangeGameSpeed(float speed)
+//    {
+//        Time.timeScale = speed;
+//        UpdateSpeedImageColors(speed); // 배속 변경 시 버튼 아이콘 색상 업데이트
+//    }
+
+
+
+
+
+
+
+
+
+//    private void UpdateSpeedImageColors(float activeSpeed)
+//    {
+//        foreach (var setting in speedSettings)
+//        {
+//            if (setting.speedImage != null)
+//            {
+//                setting.speedImage.color = Mathf.Approximately(setting.speedMultiplier, activeSpeed)
+//                    ? activeColor
+//                    : inactiveColor;
+//            }
+//        }
+//    }
 
 //    private IEnumerator PrepareCooldownRoutine()
 //    {
@@ -196,102 +246,10 @@ public class GameManager : MonoBehaviour
 //        StartNextWave();
 //    }
 
-//    public void StartNextWaveManually()
-//    {
-//        if (isWaveActive || currentWaveIndex >= waves.Count) return;
-
-//        if (!isFirstBattleClicked)
-//        {
-//            isFirstBattleClicked = true;
-//            if (wavePrepareText != null) wavePrepareText.gameObject.SetActive(false);
-//        }
-
-//        if (prepareCooldownCoroutine != null)
-//        {
-//            StopCoroutine(prepareCooldownCoroutine);
-//            HideTimeBar();
-//            prepareCooldownCoroutine = null;
-//        }
-
-//        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
-//        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
-
-//        StartNextWave();
-//    }
-
-//    private void StartNextWave()
-//    {
-//        if (isWaveActive || currentWaveIndex >= waves.Count) return;
-
-//        isWaveActive = true;
-//        isReadyForNextWave = false;
-//        SetBattleButtonState(false);
-
-//        if (speedButtonGroup != null) speedButtonGroup.SetActive(true);
-
-//        var currentWave = waves[currentWaveIndex];
-//        monsterSpawner.SetMonsterData(currentWave.monsterSpawnData, currentWave.spawnInterval, currentWave.spawnPoints);
-
-//        monsterSpawner.OnMonsterSpawned += OnMonsterSpawned;
-//        monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed;
-
-//        monsterSpawner.StartSpawning();
-//        UpdateWaveText();
-//    }
-
-//    private void OnMonsterSpawned(GameObject monster)
-//    {
-//        remainingMonsters++;
-//    }
-
-//    private void OnMonsterDestroyed(GameObject monster)
-//    {
-//        remainingMonsters--;
-
-//        if (remainingMonsters <= 0 && isWaveActive)
-//        {
-//            EndCurrentWave();
-//        }
-//    }
-
-//    private void EndCurrentWave()
-//    {
-//        isWaveActive = false;
-//        currentWaveIndex++;
-
-//        if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
-
-//        if (currentWaveIndex < waves.Count)
-//        {
-//            isReadyForNextWave = true;
-//            UpdateWaveText();
-//            UpdateWavePrepareText();
-
-//            if (currentWaveIndex != 0)
-//            {
-//                prepareCooldownCoroutine = StartCoroutine(PrepareCooldownRoutine());
-//            }
-//        }
-//        else
-//        {
-//            OnAllWavesCleared?.Invoke();
-//        }
-//    }
-
-//    private void ChangeGameSpeed(float speed)
-//    {
-//        Time.timeScale = speed;
-//    }
-
 //    private void HideTimeBar()
 //    {
 //        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
 //        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
-//    }
-
-//    private void SetBattleButtonState(bool isActive)
-//    {
-//        if (battleButton != null) battleButton.gameObject.SetActive(isActive);
 //    }
 
 //    private void UpdateWaveText()
@@ -320,5 +278,3 @@ public class GameManager : MonoBehaviour
 //        Time.timeScale = 0;
 //    }
 //}
-
-//중간완성

@@ -1,177 +1,324 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // UI 관련 네임스페이스
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class Wave
 {
-    public List<MonsterSpawnData> monsterSpawnData; // 웨이브의 몬스터 데이터
-    public float spawnInterval = 1f; // 웨이브별 몬스터 생성 간격
-    public List<Transform> spawnPoints = new List<Transform>(); // 웨이브별 활성화할 스폰 지점
+    public List<MonsterSpawnData> monsterSpawnData;
+    public float spawnInterval = 1f;
+    public List<Transform> spawnPoints = new List<Transform>();
+}
+
+[System.Serializable]
+public class SpeedSetting
+{
+    public float speedMultiplier; // 배속 값
+    public List<Image> speedImages; // 배속과 관련된 여러 이미지들
 }
 
 public class WaveManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Wave> waves = new List<Wave>(); // 웨이브 리스트
+    private List<Wave> waves = new List<Wave>();
     [SerializeField]
-    private MonsterSpawner monsterSpawner; // MonsterSpawner 참조
+    private MonsterSpawner monsterSpawner;
+    [SerializeField]
+    private Button battleButton;
+    [SerializeField]
+    private TextMeshProUGUI waveStatusText;
+    [SerializeField]
+    private TextMeshProUGUI wavePrepareText;
+    [SerializeField]
+    private TextMeshProUGUI additionalText1;
+    [SerializeField]
+    private TextMeshProUGUI additionalText2;
+    [SerializeField]
+    private Image timeBarBackground;
+    [SerializeField]
+    private Image timeBarFill;
+    [SerializeField]
+    private GameObject speedButtonGroup; // 배속 버튼 그룹을 담을 GameObject
 
-    private Button battleButton; // Battle 버튼
-    private int currentWaveIndex = 0; // 현재 진행 중인 웨이브 인덱스
-    private bool isWaveActive = false; // 웨이브 진행 여부
-    private int remainingMonsters = 0; // 남은 몬스터 수
-    private bool isReadyForNextWave = false; // 다음 웨이브 시작 여부
-    private bool isGameOver = false; // 게임 오버 상태 확인용 변수
+    [SerializeField]
+    private List<SpeedSetting> speedSettings = new List<SpeedSetting>(); // 배속 설정 리스트
+    [SerializeField]
+    private Color activeColor = Color.green; // 활성 상태 색상
+    [SerializeField]
+    private Color inactiveColor = Color.gray; // 비활성 상태 색상
+
+    [SerializeField]
+    private float prepareCooldown = 10f;
+
+    private int currentWaveIndex = 0;
+    private bool isWaveActive = false;
+    private int remainingMonsters = 0;
+    private bool isReadyForNextWave = false;
+    private bool isGameOver = false;
+    private bool isFirstBattleClicked = false;
+    private Coroutine prepareCooldownCoroutine;
+
+    public event System.Action OnAllWavesCleared;
 
     private void Start()
     {
-        // Battle 버튼 설정
-        GameObject buttonObject = GameObject.Find("Battle");
-        if (buttonObject != null)
+        if (battleButton != null)
         {
-            battleButton = buttonObject.GetComponent<Button>();
-            if (battleButton != null)
+            battleButton.onClick.AddListener(StartNextWaveManually);
+            SetBattleButtonState(true);
+        }
+
+        if (speedButtonGroup != null)
+        {
+            speedButtonGroup.SetActive(false); // 배속 버튼 그룹 초기 비활성화
+            foreach (var button in speedButtonGroup.GetComponentsInChildren<Button>())
             {
-                battleButton.onClick.AddListener(PrepareNextWave); // 버튼 클릭 이벤트 연결
-                battleButton.gameObject.SetActive(true); // 버튼 활성화
-            }
-            else
-            {
-                Debug.LogError("Battle 버튼에서 Button 컴포넌트를 찾을 수 없습니다.");
+                button.onClick.AddListener(() => ChangeGameSpeed(float.Parse(button.name))); // 버튼 이름을 배속 값으로 사용
             }
         }
-        else
-        {
-            Debug.LogError("Battle 버튼을 찾을 수 없습니다.");
-        }
+
+        UpdateWaveText();
+        UpdateWavePrepareText();
+
+        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
+        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
+        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
+        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
+
+        UpdateSpeedImageColors(1f); // 기본 배속 1배속으로 초기화
     }
 
     private void Update()
     {
-        // 게임 오버 상태 확인
         if (GameManager.Instance.CurrentHp <= 0 && !isGameOver)
         {
             HandleGameOver();
         }
+
+        HandleSpeedInput(); // 키보드 입력에 따른 배속 처리
     }
 
-    // 웨이브 준비
-    public void PrepareNextWave()
+    //키보드 입력에 따른 배속 처리
+    private void HandleSpeedInput()
     {
-        if (isWaveActive)
+        if (Input.GetKeyDown(KeyCode.Z)) // 1번 키로 배속 0.5x
         {
-            Debug.Log("현재 웨이브가 진행 중입니다.");
-            return;
+            ChangeGameSpeed(0.5f);
         }
-
-        Debug.Log($"{currentWaveIndex + 1} 웨이브 ");
-        isReadyForNextWave = true;
-
-        if (battleButton != null)
+        else if (Input.GetKeyDown(KeyCode.X)) // 2번 키로 배속 2x
         {
-            battleButton.gameObject.SetActive(false); // 버튼 비활성화
+            ChangeGameSpeed(1f);
         }
-
-        StartNextWave(); // 웨이브 시작
+        else if (Input.GetKeyDown(KeyCode.C)) // 3번 키로 배속 3x
+        {
+            ChangeGameSpeed(2f);
+        }
+        else if (Input.GetKeyDown(KeyCode.V)) // 4번 키로 배속 3x로 초기화
+        {
+            ChangeGameSpeed(3f);
+        }
     }
 
-    // 웨이브 시작
+
+    private IEnumerator PrepareCooldownRoutine()
+    {
+        float elapsed = 0f;
+
+        SetBattleButtonState(true);
+
+        if (!isFirstBattleClicked && wavePrepareText != null)
+        {
+            wavePrepareText.gameObject.SetActive(true);
+        }
+
+        if (additionalText1 != null)
+        {
+            additionalText1.gameObject.SetActive(true);
+            additionalText1.text = "NEXT WAVE IN";
+        }
+
+        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(true);
+        if (timeBarFill != null)
+        {
+            timeBarFill.gameObject.SetActive(true);
+            timeBarFill.fillAmount = 0f;
+        }
+
+        while (elapsed < prepareCooldown)
+        {
+            if (isWaveActive)
+            {
+                HideTimeBar();
+                yield break;
+            }
+
+            if (additionalText2 != null)
+            {
+                additionalText2.text = $"{Mathf.CeilToInt(prepareCooldown - elapsed)}";
+                additionalText2.gameObject.SetActive(true);
+            }
+
+            if (timeBarFill != null)
+            {
+                timeBarFill.fillAmount = elapsed / prepareCooldown;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+            elapsed += 0.1f;
+        }
+
+        HideTimeBar();
+
+        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
+        if (wavePrepareText != null) wavePrepareText.gameObject.SetActive(false);
+        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
+
+        StartNextWave();
+    }
+
+    public void StartNextWaveManually()
+    {
+        if (isWaveActive || currentWaveIndex >= waves.Count) return;
+
+        if (!isFirstBattleClicked)
+        {
+            isFirstBattleClicked = true;
+            if (wavePrepareText != null) wavePrepareText.gameObject.SetActive(false);
+        }
+
+        if (prepareCooldownCoroutine != null)
+        {
+            StopCoroutine(prepareCooldownCoroutine);
+            HideTimeBar();
+            prepareCooldownCoroutine = null;
+        }
+
+        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
+        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
+
+        StartNextWave();
+    }
+
     private void StartNextWave()
     {
-        if (!isReadyForNextWave)
-        {
-            Debug.Log("Battle 버튼을 눌러 웨이브를 시작하세요.");
-            return;
-        }
-
-        if (currentWaveIndex >= waves.Count)
-        {
-            Debug.Log("모든 웨이브가 완료되었습니다!");
-            return;
-        }
+        if (isWaveActive || currentWaveIndex >= waves.Count) return;
 
         isWaveActive = true;
         isReadyForNextWave = false;
+        SetBattleButtonState(false);
+
+        if (speedButtonGroup != null) speedButtonGroup.SetActive(true);
 
         var currentWave = waves[currentWaveIndex];
-        var activeSpawnPoints = GetActiveSpawnPoints(currentWave);
-
-        monsterSpawner.SetMonsterData(
-            currentWave.monsterSpawnData,
-            currentWave.spawnInterval,
-            activeSpawnPoints
-        );
+        monsterSpawner.SetMonsterData(currentWave.monsterSpawnData, currentWave.spawnInterval, currentWave.spawnPoints);
 
         monsterSpawner.OnMonsterSpawned += OnMonsterSpawned;
         monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed;
+
         monsterSpawner.StartSpawning();
+        UpdateWaveText();
     }
 
-    // 활성화된 스폰 지점 필터링
-    private List<Transform> GetActiveSpawnPoints(Wave currentWave)
-    {
-        List<Transform> activePoints = new List<Transform>();
-        foreach (var point in currentWave.spawnPoints)
-        {
-            if (point != null) activePoints.Add(point);
-        }
-        return activePoints;
-    }
-
-    // 몬스터 생성 시 호출
     private void OnMonsterSpawned(GameObject monster)
     {
         remainingMonsters++;
     }
 
-    // 몬스터 파괴 시 호출
     private void OnMonsterDestroyed(GameObject monster)
     {
         remainingMonsters--;
 
         if (remainingMonsters <= 0 && isWaveActive)
         {
-            EndCurrentWave(); // 웨이브 종료
+            EndCurrentWave();
         }
     }
 
-    // 웨이브 종료
     private void EndCurrentWave()
     {
         isWaveActive = false;
         currentWaveIndex++;
 
+        if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
+
         if (currentWaveIndex < waves.Count)
         {
-            Debug.Log($"{currentWaveIndex} 웨이브 완료. 다음 웨이브 준비 중...");
             isReadyForNextWave = true;
+            UpdateWaveText();
+            UpdateWavePrepareText();
 
-            if (battleButton != null)
+            if (currentWaveIndex != 0)
             {
-                battleButton.gameObject.SetActive(true); // 버튼 활성화
+                prepareCooldownCoroutine = StartCoroutine(PrepareCooldownRoutine());
             }
         }
         else
         {
-            Debug.Log("모든 웨이브를 클리어했습니다. 축하합니다!");
+            OnAllWavesCleared?.Invoke();
         }
     }
 
-    // 게임 오버 처리
+    private void ChangeGameSpeed(float speed)
+    {
+        Time.timeScale = speed;
+        UpdateSpeedImageColors(speed); // 배속 변경 시 버튼 아이콘 색상 업데이트
+    }
+
+    private void UpdateSpeedImageColors(float activeSpeed)
+    {
+        foreach (var setting in speedSettings)
+        {
+            if (setting.speedImages != null)
+            {
+                foreach (var speedImage in setting.speedImages) // 리스트의 각 Image에 대해 반복문을 실행
+                {
+                    // 배속 값에 따라 색상을 변경
+                    speedImage.color = Mathf.Approximately(setting.speedMultiplier, activeSpeed)
+                        ? activeColor  // 배속 값이 활성 배속 값과 일치하면 활성 색상
+                        : inactiveColor; // 그렇지 않으면 비활성 색상
+                }
+            }
+        }
+    }
+
+    private void HideTimeBar()
+    {
+        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
+        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
+    }
+
+    private void SetBattleButtonState(bool isActive)
+    {
+        if (battleButton != null) battleButton.gameObject.SetActive(isActive);
+    }
+
+    private void UpdateWaveText()
+    {
+        if (waveStatusText != null)
+        {
+            waveStatusText.text = $"Wave {currentWaveIndex + 1}/{waves.Count}";
+        }
+    }
+
+    private void UpdateWavePrepareText()
+    {
+        if (wavePrepareText != null)
+        {
+            wavePrepareText.text = $"Prepare for {currentWaveIndex + 1}st wave!";
+        }
+    }
+
     private void HandleGameOver()
     {
-        Debug.Log("게임 오버.");
         isGameOver = true;
         isWaveActive = false;
         isReadyForNextWave = false;
-
-        if (battleButton != null)
-        {
-            battleButton.gameObject.SetActive(false); // 버튼 비활성화
-        }
-
-        Time.timeScale = 0; // 게임 중단
+        SetBattleButtonState(false);
+        if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
+        Time.timeScale = 0;
     }
 }
+
+//중간완료
