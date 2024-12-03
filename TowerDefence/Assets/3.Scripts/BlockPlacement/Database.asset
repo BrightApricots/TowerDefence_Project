@@ -58,8 +58,23 @@ MonoBehaviour:
     - {x: 1, y: 0}
     - {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 4168513232984766456, guid: b30c0dd5fe9f8ca4cab2d18cc76500b0, type: 3}
-  - <Name>k__BackingField: Tower1
+  - <Name>k__BackingField: NormalTower
     <ID>k__BackingField: 101
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 4428052050468720457, guid: 65494e6216d228643bfa6bc442884214, type: 3}
+    <Prefab>k__BackingField: {fileID: 1875090778556656, guid: 734674663cb4bed46ad7e5173e4b986c, type: 3}
+  - <Name>k__BackingField: MissileTower
+    <ID>k__BackingField: 102
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 1498501323785604, guid: c098e192d5e58684aa33453685b97863, type: 3}
+  - <Name>k__BackingField: FireTower
+    <ID>k__BackingField: 103
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 3163827338122199704, guid: 78b990effdac6ba42a937a44f627bb37, type: 3}
+  - <Name>k__BackingField: LightningTower
+    <ID>k__BackingField: 104
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 1929637352258750305, guid: 437f2d9ddca973f49b1770e67d0c196f, type: 3}

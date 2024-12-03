@@ -316,6 +316,11 @@ MonoBehaviour:
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
     <Prefab>k__BackingField: {fileID: 5621244821914641567, guid: 5ddcbce997202f647b29d05f8de69e16, type: 3}
+  - <Name>k__BackingField: 56.pillar_1
+    <ID>k__BackingField: 56
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 874428636862435787, guid: e79b861b440aba0448402498289d7b29, type: 3}
   - <Name>k__BackingField: 55.sphinx
     <ID>k__BackingField: 55
     <OccupiedCells>k__BackingField:

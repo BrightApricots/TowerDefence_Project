@@ -12,6 +12,7 @@ public class UI_LobbyScene : MonoBehaviour
     public Button TowerLoadout;
     public Button Backpack;
     public Button Talents;
+    public Button Academy;
     //public GameObject SettingPopup;
     public GameObject TowerLoadoutPopup;
     public GameObject BackpackPopup;
@@ -19,14 +20,22 @@ public class UI_LobbyScene : MonoBehaviour
     public TextMeshProUGUI EmberAmountText;
     public TextMeshProUGUI ExpAmountText;
     public TextMeshProUGUI HpAmountText;
+    public GameObject EmptyCard;
+    public Transform TowerCardLocation;
 
     private void Awake()
     {
+        Academy.onClick.AddListener(EnterAcademy);
         //Setting.onClick.AddListener(PopupSetting);
         Title.onClick.AddListener(BackToTitle);
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
         Backpack.onClick.AddListener(PopupBackpack);
         //Talents.onClick.AddListener(PopupTalents);
+    }
+
+    private void Start()
+    {
+        TowerCard();
     }
 
     private void Update()
@@ -44,6 +53,10 @@ public class UI_LobbyScene : MonoBehaviour
     {
         SceneManager.LoadScene("TitleScene");
     }
+    private void EnterAcademy()
+    {
+        SceneManager.LoadScene("AcademyScene");
+    }
     private void PopupTowerLoadout()
     {
         TowerLoadoutPopup.SetActive(true);
@@ -56,4 +69,16 @@ public class UI_LobbyScene : MonoBehaviour
     //{
     //    TalentsPopup.SetActive(true);
     //}
+
+    private void TowerCard()
+    {
+        for (int i = 0; i < GameManager.Instance.EquipTowerList.Count; i++)
+        {
+            Instantiate(GameManager.Instance.EquipTowerList[i], TowerCardLocation);
+        }
+        for(int i = GameManager.Instance.EquipTowerList.Count; i<8; i++)
+        { 
+            Instantiate(EmptyCard, TowerCardLocation);
+        }
+    }
 } 

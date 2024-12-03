@@ -36,13 +36,4 @@ public class UI_TowerTooltip : MonoBehaviour
         TargetPriorityText.text = $"Target: {TargetPriority}";
     }
 
-    private void Update()
-    {
-        if(Input.GetMouseButton(0))
-        {
-            
-        }
-    }
-
-    
 }
