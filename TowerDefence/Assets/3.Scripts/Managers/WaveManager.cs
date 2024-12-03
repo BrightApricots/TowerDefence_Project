@@ -32,9 +32,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI wavePrepareText;
     [SerializeField]
-    private TextMeshProUGUI additionalText1;
+    private TextMeshProUGUI wavePrepareTimeText;
     [SerializeField]
-    private TextMeshProUGUI additionalText2;
+    private TextMeshProUGUI wavePrepareTimeText_1;
     [SerializeField]
     private Image timeBarBackground;
     [SerializeField]
@@ -82,8 +82,8 @@ public class WaveManager : MonoBehaviour
         UpdateWaveText();
         UpdateWavePrepareText();
 
-        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
-        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
+        if (wavePrepareTimeText != null) wavePrepareTimeText.gameObject.SetActive(false);
+        if (wavePrepareTimeText_1 != null) wavePrepareTimeText_1.gameObject.SetActive(false);
         if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
         if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
 
@@ -133,10 +133,10 @@ public class WaveManager : MonoBehaviour
             wavePrepareText.gameObject.SetActive(true);
         }
 
-        if (additionalText1 != null)
+        if (wavePrepareTimeText != null)
         {
-            additionalText1.gameObject.SetActive(true);
-            additionalText1.text = "NEXT WAVE IN";
+            wavePrepareTimeText.gameObject.SetActive(true);
+            wavePrepareTimeText.text = "NEXT WAVE IN";
         }
 
         if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(true);
@@ -154,10 +154,10 @@ public class WaveManager : MonoBehaviour
                 yield break;
             }
 
-            if (additionalText2 != null)
+            if (wavePrepareTimeText_1 != null)
             {
-                additionalText2.text = $"{Mathf.CeilToInt(prepareCooldown - elapsed)}";
-                additionalText2.gameObject.SetActive(true);
+                wavePrepareTimeText_1.text = $"{Mathf.CeilToInt(prepareCooldown - elapsed)}";
+                wavePrepareTimeText_1.gameObject.SetActive(true);
             }
 
             if (timeBarFill != null)
@@ -171,9 +171,9 @@ public class WaveManager : MonoBehaviour
 
         HideTimeBar();
 
-        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
+        if (wavePrepareTimeText_1 != null) wavePrepareTimeText_1.gameObject.SetActive(false);
         if (wavePrepareText != null) wavePrepareText.gameObject.SetActive(false);
-        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
+        if (wavePrepareTimeText != null) wavePrepareTimeText.gameObject.SetActive(false);
 
         StartNextWave();
     }
@@ -195,8 +195,8 @@ public class WaveManager : MonoBehaviour
             prepareCooldownCoroutine = null;
         }
 
-        if (additionalText2 != null) additionalText2.gameObject.SetActive(false);
-        if (additionalText1 != null) additionalText1.gameObject.SetActive(false);
+        if (wavePrepareTimeText_1 != null) wavePrepareTimeText_1.gameObject.SetActive(false);
+        if (wavePrepareTimeText != null) wavePrepareTimeText.gameObject.SetActive(false);
 
         StartNextWave();
     }
@@ -298,9 +298,18 @@ public class WaveManager : MonoBehaviour
     {
         if (waveStatusText != null)
         {
-            waveStatusText.text = $"Wave {currentWaveIndex + 1}/{waves.Count}";
+            if (currentWaveIndex == waves.Count - 1)  // 마지막 웨이브
+            {
+                waveStatusText.text = "Final Wave";  // "Final Wave"를 한 줄로 출력
+            }
+            else
+            {
+                waveStatusText.text = $"Wave {currentWaveIndex + 1}/{waves.Count}";
+            }
         }
     }
+
+
 
     private void UpdateWavePrepareText()
     {
