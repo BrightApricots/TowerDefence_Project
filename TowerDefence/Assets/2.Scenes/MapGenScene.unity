@@ -655,9 +655,12 @@ MonoBehaviour:
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
-  TetrisCardList: 000000000100000002000000030000000400000005000000
-  TetrisHandCardList: []
-  TowerCardList: 06000000
+  TotalTetrisList: 
+  TotalTowerList: 
+  PlayerTetrisList: []
+  PlayerTowerList: []
+  HandTetrisList: []
+  EquipTowerList: []
   PlacedTowerList: []
 --- !u!4 &15495277
 Transform:

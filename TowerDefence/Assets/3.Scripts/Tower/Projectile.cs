@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour
 {
@@ -13,6 +15,12 @@ public class Projectile : MonoBehaviour
     public Transform Target;
     public GameObject ExplosionParticle;
 
+    private void Start()
+    {
+        StartCoroutine(SelfDestroy(Duration));
+    }
+
+    
     protected virtual void Update()
     {
         Move();
@@ -84,6 +92,13 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    protected IEnumerator SelfDestroy(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
+    }
+
 
     private void OnDrawGizmos()
     {

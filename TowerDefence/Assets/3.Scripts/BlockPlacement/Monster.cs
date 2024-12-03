@@ -153,7 +153,7 @@ public class Monster : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        GameObject damageText = Instantiate(Resources.Load<GameObject>("DamageFont"), GameObject.Find("DamageCanvas").transform);
+        GameObject damageText = Instantiate(Resources.Load<GameObject>("Effects/DamageFont"), GameObject.Find("DamageCanvas").transform);
         damageText.GetComponent<TextMeshProUGUI>().text = $"{damage}";
         damageText.transform.position = transform.position;
 
