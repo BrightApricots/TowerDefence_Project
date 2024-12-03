@@ -3085,7 +3085,6 @@ MonoBehaviour:
   TowerLoadout: {fileID: 43167269}
   Backpack: {fileID: 1985215727}
   Talents: {fileID: 1145525043}
-  Academy: {fileID: 62038251}
   TowerLoadoutPopup: {fileID: 347878197}
   BackpackPopup: {fileID: 1111876945}
   EmberAmountText: {fileID: 640770067}
@@ -5574,6 +5573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020895a61da814b45b555961359a79fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Academy: {fileID: 62038251}
   Stage1: {fileID: 723250223}
   Stage2: {fileID: 250736024}
   Stage3: {fileID: 1061028266}

@@ -35,5 +35,4 @@ public class UI_TowerTooltip : MonoBehaviour
         SellPriceText.text = $"SELL {SellPrice}";
         TargetPriorityText.text = $"Target: {TargetPriority}";
     }
-
 }

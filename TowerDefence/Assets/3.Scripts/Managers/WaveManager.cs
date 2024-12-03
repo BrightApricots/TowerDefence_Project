@@ -58,6 +58,7 @@ public class WaveManager : MonoBehaviour
     private bool isReadyForNextWave = false;
     private bool isGameOver = false;
     private bool isFirstBattleClicked = false;
+    private int waveClearMoney = 50;
     private Coroutine prepareCooldownCoroutine;
 
     public event System.Action OnAllWavesCleared;
@@ -238,6 +239,12 @@ public class WaveManager : MonoBehaviour
 
     private void EndCurrentWave()
     {
+        for (int i = 0; i<3; i++)
+        {
+            UI_Draw.draw();
+        }
+        GameManager.Instance.CurrentMoney+=waveClearMoney;
+        waveClearMoney += 10;
         isWaveActive = false;
         currentWaveIndex++;
 

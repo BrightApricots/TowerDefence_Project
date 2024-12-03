@@ -109,6 +109,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
     {
         GameManager.Instance.EquipTowerList=TowerList;
         GameManager.Instance.PlayerTetrisList=TetrisList;
+        UI_Map.clearStage++;
         SceneManager.LoadScene("LobbyScene");
     }
 }
