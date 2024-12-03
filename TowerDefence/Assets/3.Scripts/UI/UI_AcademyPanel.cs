@@ -101,7 +101,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.Instance.PlayerTowerList=TowerList;
+        GameManager.Instance.EquipTowerList=TowerList;
         GameManager.Instance.PlayerTetrisList=TetrisList;
         SceneManager.LoadScene("LobbyScene");
     }
