@@ -9,13 +9,13 @@ public class UI_PausePanel : MonoBehaviour
     public Button Options;
     public Button Title;
     public GameObject OptionsPanel;
-    //public GameObject BackTitlePopup;
+    public GameObject BackTitlePopup;
 
     private void Awake()
     {
         Continue.onClick.AddListener(EnterContinue);
         Options.onClick.AddListener(EnterOptions);
-        //Title.onClick.AddListener(BackToTitle);
+        Title.onClick.AddListener(BackToTitle);
     }
 
     private void Update()
@@ -38,8 +38,8 @@ public class UI_PausePanel : MonoBehaviour
         OptionsPanel.SetActive(true);
     }
 
-    /*private void BackToTitle()
+    private void BackToTitle()
     {
         BackTitlePopup.SetActive(true);
-    }*/
+    }
 }

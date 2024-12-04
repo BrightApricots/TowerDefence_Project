@@ -19,7 +19,7 @@ public class UI_TowerTooltip : MonoBehaviour
     public string SellPrice = "";
     public string TargetPriority = "";
 
-    public Image TowerImage;  
+    public Image TowerImage;
 
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI UpgradeText;
@@ -42,6 +42,5 @@ public class UI_TowerTooltip : MonoBehaviour
         TargetPriorityText.text = $"Target: {TargetPriority}";
         SellPriceText.text = $"Sell       ${SellPrice}";
         UpgradeText.text = $"Upgrade   ${UpgradePrice}";
-
     }
 }

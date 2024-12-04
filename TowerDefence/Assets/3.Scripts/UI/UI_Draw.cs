@@ -7,12 +7,12 @@ using Random = UnityEngine.Random;
 public class UI_Draw : MonoBehaviour
 {
     public int DrawPrice = 5;
-    public GameObject OneSquarePrefab;
-    public GameObject FourSquarePrefab;
-    public GameObject FuckYouPrefab;
-    public GameObject ZigzagPrefab;
-    public GameObject StraightPrefab;
-    public GameObject LPrefab;
+    public GameObject Dot;
+    public GameObject O;
+    public GameObject T;
+    public GameObject Z;
+    public GameObject I;
+    public GameObject L;
     public Button DrawButton;
     public TextMeshProUGUI DrawPriceText;
     public RectTransform HorizontalLayout;
@@ -40,27 +40,27 @@ public class UI_Draw : MonoBehaviour
                 switch (GameManager.Instance.TotalTetrisList[i])
                 {
                     case 0:
-                        type = Instantiate(OneSquarePrefab, HorizontalLayout);
+                        type = Instantiate(Dot, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                     case 1:
-                        type = Instantiate(FourSquarePrefab, HorizontalLayout);
+                        type = Instantiate(O, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                     case 2:
-                        type = Instantiate(FuckYouPrefab, HorizontalLayout);
+                        type = Instantiate(T, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                     case 3:
-                        type = Instantiate(ZigzagPrefab, HorizontalLayout);
+                        type = Instantiate(Z, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                     case 4:
-                        type = Instantiate(StraightPrefab, HorizontalLayout);
+                        type = Instantiate(I, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                     case 5:
-                        type = Instantiate(LPrefab, HorizontalLayout);
+                        type = Instantiate(L, HorizontalLayout);
                         GameManager.Instance.HandTetrisList.Add(type);
                         break;
                 }
