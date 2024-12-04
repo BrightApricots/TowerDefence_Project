@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115467002315093561}
   - component: {fileID: 2719450867046897598}
+  - component: {fileID: -2960963291154403064}
   m_Layer: 0
   m_Name: Tower_PoisonBidge
   m_TagString: Untagged
@@ -52,20 +53,39 @@ MonoBehaviour:
   FireRate: 1
   DamageDealt: 0
   TotalKilled: 0
-  UpgradePrice: 
-  SellPrice: 
+  UpgradePrice: 0
+  SellPrice: 0
   TargetPriority: Most Progress
   Info: 
-  IsTargeting: 0
+  MaxLevel: 3
   IsBomb: 0
   TowerHead: {fileID: 0}
-  Barrel: {fileID: 0}
   TowerMuzzle: {fileID: 0}
-  Projectile: {fileID: 0}
   TowerTooltip: {fileID: 0}
-  Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
   isPreview: 0
+  isFollow: 0
+--- !u!65 &-2960963291154403064
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318948246927493250}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6586130573540019690
 GameObject:
   m_ObjectHideFlags: 0

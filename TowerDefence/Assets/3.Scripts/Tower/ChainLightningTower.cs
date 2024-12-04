@@ -73,4 +73,21 @@ public class ChainLightningTower : Tower
         LightningEffect lightning = effect.GetComponent<LightningEffect>();
         lightning.CreateLightning(start, end);
     }
+
+    protected override void OnLevelUp()
+    {
+        base.OnLevelUp();
+        
+        // 레벨에 따른 체인 효과 강화
+        switch (Level)
+        {
+            case 2:
+                ChainCount++;  // 체인 횟수 증가
+                break;
+            case 3:
+                ChainRange *= 1.3f;  // 체인 범위 30% 증가
+                lightningEffectPrefab = Resources.Load<GameObject>("Prefabs/AdvancedLightningEffect");  // 강화된 이펙트로 변경
+                break;
+        }
+    }
 } 

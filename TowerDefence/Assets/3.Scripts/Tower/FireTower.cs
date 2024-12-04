@@ -6,7 +6,7 @@ public class FireTower : Tower
 {
     [SerializeField] private GameObject fireProjectileObject;
     private FireProjectile fireProjectile;
-
+    public bool IsTargeting;
     private void Awake()
     {
         base.Start();
