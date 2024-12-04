@@ -8,7 +8,8 @@ public class UI_Backpack : MonoBehaviour
 {
     public Button Exit;
     public GameObject NoCard;
-    public Transform Cards;
+    public Transform Cards1;
+    public Transform Cards2;
 
     private void Awake()
     {
@@ -23,6 +24,17 @@ public class UI_Backpack : MonoBehaviour
         else
         {
             NoCard.SetActive(false);
+            for (int i = 0; i < GameManager.Instance.PlayerTetrisList.Count; i++)
+            {
+                if (i<8)
+                {
+                    Instantiate(GameManager.Instance.PlayerTetrisList[i], Cards1);
+                }
+                else if(i<16)
+                {
+                    Instantiate(GameManager.Instance.PlayerTetrisList[i] , Cards2);
+                }
+            }
         }
     }
 

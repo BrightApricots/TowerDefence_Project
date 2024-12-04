@@ -35041,12 +35041,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawPrice: 5
-  OneSquarePrefab: {fileID: 8205607950013524934, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
-  FourSquarePrefab: {fileID: 110272216088920707, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
-  FuckYouPrefab: {fileID: 6162816463178265187, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
-  ZigzagPrefab: {fileID: 4520414062922787682, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
-  StraightPrefab: {fileID: 5417237943439139473, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
-  LPrefab: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
+  Dot: {fileID: 8205607950013524934, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
+  O: {fileID: 110272216088920707, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
+  T: {fileID: 6162816463178265187, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
+  Z: {fileID: 4520414062922787682, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
+  I: {fileID: 5417237943439139473, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
+  L: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
   DrawButton: {fileID: 1108174728}
   DrawPriceText: {fileID: 1285029814}
   HorizontalLayout: {fileID: 519268450}
