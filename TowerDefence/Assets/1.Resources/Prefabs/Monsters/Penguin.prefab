@@ -790,3 +790,4 @@ MonoBehaviour:
   speed: 2
   damage: 1
   gold: 1
+  rotationSpeed: 100

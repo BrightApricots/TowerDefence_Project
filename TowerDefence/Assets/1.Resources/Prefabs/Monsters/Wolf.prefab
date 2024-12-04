@@ -672,6 +672,7 @@ MonoBehaviour:
   speed: 2
   damage: 1
   gold: 1
+  rotationSpeed: 100
 --- !u!1 &2377433268864834307
 GameObject:
   m_ObjectHideFlags: 0
