@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae27a724f26884a8c0973aefd50b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentEmber: 10
   CurrentExp: 10
+  CurrentEmber: 10
   CurrentHp: 15
   CurrentMoney: 50
   MaxHp: 15
@@ -2266,7 +2266,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2041882073}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -15934,6 +15934,10 @@ PrefabInstance:
       propertyPath: Projectile
       value: 
       objectReference: {fileID: 4655418500077788, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
+    - target: {fileID: 5146096117131174251, guid: 29f2bf8123ebbc5448978befe775c5ec, type: 3}
+      propertyPath: MuzzleEffect
+      value: 
+      objectReference: {fileID: 1751010978416606, guid: dd86b44dc327d2e45a0fbe3cdf9e1cd9, type: 3}
     - target: {fileID: 6232635189348713071, guid: 29f2bf8123ebbc5448978befe775c5ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.453
@@ -15973,6 +15977,10 @@ PrefabInstance:
     - target: {fileID: 6232635189348713071, guid: 29f2bf8123ebbc5448978befe775c5ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7767493726691107023, guid: 29f2bf8123ebbc5448978befe775c5ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51693,8 +51701,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 508775801}
   - {fileID: 595642548}
-  - {fileID: 89318722}
   - {fileID: 203856084}
+  - {fileID: 89318722}
   - {fileID: 1402549180}
   - {fileID: 2112419793}
   - {fileID: 1172296994}

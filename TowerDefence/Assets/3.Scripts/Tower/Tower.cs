@@ -36,6 +36,8 @@ public class Tower : MonoBehaviour
     private Vector3 clickmousePointer;
 
     public bool isPreview = false;
+    public GameObject MuzzleEffect;
+
 
     protected virtual void Start()
     {
@@ -120,6 +122,11 @@ public class Tower : MonoBehaviour
                 projectile.gameObject.GetComponent<Projectile>().IsTargeting = this.IsTargeting;
                 projectile.gameObject.GetComponent<Projectile>().IsBomb = this.IsBomb;
                 projectile.gameObject.GetComponent<Projectile>().Target = this.CurrentTarget;
+                if(MuzzleEffect != null)
+                {
+                    GameObject _MuzzlEffect = Instantiate(MuzzleEffect, TowerMuzzle.position, Barrel.transform.rotation);
+                    Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
+                }
             }
         }
     }

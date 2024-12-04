@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -66,7 +67,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void Bomb(Collider other)
+    protected virtual void Bomb(Collider other)
     {
         if (other.CompareTag("Monster"))
         {
@@ -84,13 +85,16 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void NonBomb(Collider other)
+    protected virtual void NonBomb(Collider other)
     {
         if (other.CompareTag("Monster"))
         {
+            GameObject go = Instantiate(ExplosionParticle, transform.position, Quaternion.identity);
+            Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
             Destroy(gameObject);
         }
+
     }
 
     protected IEnumerator SelfDestroy(float time)
