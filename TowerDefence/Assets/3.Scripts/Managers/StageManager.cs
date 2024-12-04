@@ -44,7 +44,8 @@ public class StageManager : MonoBehaviour
                 element.SetActive(true);
             }
         }
-
+        // 텍스트 초기화
+       
         for (int i = 0; i<3; i++)
         {
             UI_Draw.draw();

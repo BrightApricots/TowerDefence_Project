@@ -16260,8 +16260,6 @@ MonoBehaviour:
   - {fileID: 1124488417}
   - {fileID: 2115218082}
   - {fileID: 2033399253}
-  expText: {fileID: 1291900408}
-  emberText: {fileID: 1176954587}
 --- !u!4 &1170214131
 Transform:
   m_ObjectHideFlags: 0
