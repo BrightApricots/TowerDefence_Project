@@ -13,6 +13,8 @@ public class UI_IngameScene : MonoBehaviour
     public Transform TowerCardLocation1;
     public Transform TowerCardLocation2;
     public GameObject EmptyCard;
+    public GameObject PausePanel;
+    public static int PopupCount;
 
     private void Awake()
     {
@@ -36,6 +38,11 @@ public class UI_IngameScene : MonoBehaviour
         CurrentHp.text = $"{GameManager.Instance.CurrentHp}";
         MaxHp.text = $"/{GameManager.Instance.MaxHp}";
         CurrentMoney.text = $"{GameManager.Instance.CurrentMoney}";
+        if(Input.GetButtonDown("Cancel"))
+        {
+            Time.timeScale = 0f;
+            PausePanel.SetActive(true);
+        }
     }
 
     private void TowerCardSet()
