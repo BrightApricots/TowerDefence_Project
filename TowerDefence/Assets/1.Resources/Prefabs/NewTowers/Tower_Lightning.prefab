@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5518478428060728232}
   - component: {fileID: 4955794807359036584}
+  - component: {fileID: 8826128345493874805}
   m_Layer: 0
-  m_Name: LightningTower
+  m_Name: Tower_Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a651be158b169469f9cc4644cb7e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 15
-  Name: ChainLightningTower
-  Damage: 3
-  ShootCooltime: 1
-  ShootRange: 5
+  Name: Lightning Tower
+  Element: Electric
+  Damage: 4
+  Range: 4
+  FireRate: 0.75
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 25
+  SellPrice: 2
+  TargetPriority: Most Progress
   Info: 
   IsTargeting: 0
   IsBomb: 0
@@ -57,12 +63,34 @@ MonoBehaviour:
   Barrel: {fileID: 5518478428060728232}
   TowerMuzzle: {fileID: 7735920187469573463}
   Projectile: {fileID: 0}
-  TowerTooltip: {fileID: 0}
+  TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
-  ChainCount: 3
-  ChainRange: 5
+  isPreview: 0
+  ChainCount: 4
+  ChainRange: 4
   lightningEffectPrefab: {fileID: 3017776589207227471, guid: 838c2b16f50797f4fa59867d334d9975, type: 3}
+--- !u!65 &8826128345493874805
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929637352258750305}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 2.01, z: 0.8}
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!1 &3512516295491346737
 GameObject:
   m_ObjectHideFlags: 0

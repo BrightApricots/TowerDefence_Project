@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 758678627868450243}
   m_Layer: 0
-  m_Name: IceTower
+  m_Name: Tower_Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

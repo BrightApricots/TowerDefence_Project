@@ -18,6 +18,7 @@ MonoBehaviour:
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
     <Prefab>k__BackingField: {fileID: 4428052050468720457, guid: 16b56e76439d5e54f9fdd2bb30085c61, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Blcok2
     <ID>k__BackingField: 1
     <OccupiedCells>k__BackingField:
@@ -26,6 +27,7 @@ MonoBehaviour:
     - {x: 0, y: 1}
     - {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 3487007735555770654, guid: 6a6c89eea12009545bcf94b114bd83e2, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Blcok3
     <ID>k__BackingField: 2
     <OccupiedCells>k__BackingField:
@@ -34,6 +36,7 @@ MonoBehaviour:
     - {x: 1, y: 0}
     - {x: 0, y: 1}
     <Prefab>k__BackingField: {fileID: 4168513232984766456, guid: 8648c27a70a9a9d4e8c7a9e1c5ae10a7, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Blcok4
     <ID>k__BackingField: 3
     <OccupiedCells>k__BackingField:
@@ -42,6 +45,7 @@ MonoBehaviour:
     - {x: 1, y: 0}
     - {x: 1, y: -1}
     <Prefab>k__BackingField: {fileID: 4168513232984766456, guid: 54e156cded1f45f4aa90744b9d278e5d, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Blcok5
     <ID>k__BackingField: 4
     <OccupiedCells>k__BackingField:
@@ -50,6 +54,7 @@ MonoBehaviour:
     - {x: 1, y: 0}
     - {x: 2, y: 0}
     <Prefab>k__BackingField: {fileID: 4168513232984766456, guid: 79baae0fc2e5fd34dae80b846ffc4ba7, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Blcok6
     <ID>k__BackingField: 5
     <OccupiedCells>k__BackingField:
@@ -58,23 +63,34 @@ MonoBehaviour:
     - {x: 1, y: 0}
     - {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 4168513232984766456, guid: b30c0dd5fe9f8ca4cab2d18cc76500b0, type: 3}
+    <Price>k__BackingField: 0
   - <Name>k__BackingField: Tower_Basic
     <ID>k__BackingField: 101
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 1875090778556656, guid: 734674663cb4bed46ad7e5173e4b986c, type: 3}
+    <Prefab>k__BackingField: {fileID: 1143255420651060252, guid: 29f2bf8123ebbc5448978befe775c5ec, type: 3}
+    <Price>k__BackingField: 10
   - <Name>k__BackingField: Tower_Missile
     <ID>k__BackingField: 102
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 1498501323785604, guid: c098e192d5e58684aa33453685b97863, type: 3}
+    <Prefab>k__BackingField: {fileID: 8665792060414798625, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
+    <Price>k__BackingField: 65
   - <Name>k__BackingField: Tower_Flame
     <ID>k__BackingField: 103
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 3163827338122199704, guid: 78b990effdac6ba42a937a44f627bb37, type: 3}
+    <Prefab>k__BackingField: {fileID: 8694802009060840424, guid: 6c277706d6a99df46b553d21555f3be8, type: 3}
+    <Price>k__BackingField: 30
   - <Name>k__BackingField: Tower_Lightning
     <ID>k__BackingField: 104
     <OccupiedCells>k__BackingField:
     - {x: 0, y: 0}
-    <Prefab>k__BackingField: {fileID: 1929637352258750305, guid: 437f2d9ddca973f49b1770e67d0c196f, type: 3}
+    <Prefab>k__BackingField: {fileID: 1929637352258750305, guid: 687955fe012eaf148a2bc64bfcc00ab4, type: 3}
+    <Price>k__BackingField: 25
+  - <Name>k__BackingField: Tower_Drone
+    <ID>k__BackingField: 105
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 5910751741922407090, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
+    <Price>k__BackingField: 15

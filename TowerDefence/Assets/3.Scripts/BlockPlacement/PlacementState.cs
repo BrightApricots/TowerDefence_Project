@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class PlacementState : IBuildingState
 {
@@ -286,7 +287,7 @@ public class PlacementState : IBuildingState
                     }
                 }
             }
-
+            //database.objectsData[selectedObjectIndex].price
             int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, position, Quaternion.Euler(0, 90 * currentRotation, 0));
             
             if (database.IsBlock(currentID))
@@ -326,10 +327,26 @@ public class PlacementState : IBuildingState
                     Debug.Log($"Path validity after placing block {currentID}: {PathManager.Instance.HasValidPath}");
                 }
             }
+
+            if (database.IsTower(currentID))
+            {
+                for (int i = 0; i < database.objectsData.Count; i++)
+                {
+                    if (database.objectsData[i].ID == currentID)
+                    {
+                        Debug.Log($"타워설치 {database.objectsData[i].Price} 만큼 빠져나감...");
+                        GameManager.Instance.CurrentMoney -= database.objectsData[i].Price;
+                        break;
+                    }
+                }
+            }
         }
         else
         {
             Debug.Log($"Cannot place {(database.IsTower(currentID) ? "tower" : "block")} ID {currentID} - placement conditions not met");
         }
+
+        
+
     }
 }

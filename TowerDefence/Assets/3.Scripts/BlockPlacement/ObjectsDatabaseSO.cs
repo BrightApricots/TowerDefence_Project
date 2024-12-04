@@ -37,6 +37,9 @@ public class ObjectData
     [field: SerializeField]
     public GameObject Prefab { get; private set; }
 
+    [field: SerializeField]
+    public int Price { get; private set; }
+
     public List<Vector2Int> GetRotatedCells(int rotationIndex)
     {
         List<Vector2Int> rotatedCells = new List<Vector2Int>();

@@ -11,7 +11,7 @@ public class Block : MonoBehaviour
     protected virtual void Awake()
     {
         button = GetComponent<Button>();
-    }
+    }   
 
     protected virtual void Start()
     {

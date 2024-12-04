@@ -12,7 +12,7 @@ public class ChainLightningTower : Tower
     {
         while (true)
         {
-            yield return new WaitForSeconds(ShootCooltime);
+            yield return new WaitForSeconds(FireRate);
             if (CurrentTarget != null)
             {
                 StartCoroutine(ChainLightning(CurrentTarget, Damage, ChainCount));

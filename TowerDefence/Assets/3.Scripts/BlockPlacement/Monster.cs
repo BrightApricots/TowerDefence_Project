@@ -112,6 +112,7 @@ public class Monster : MonoBehaviour
 
         transform.position += moveDirection * speed * Time.deltaTime; // 이동
 
+
         // 현재 목표에 도달했는지 확인
         if (Vector3.Distance(transform.position, currentTargetPosition) < 0.1f)
         {

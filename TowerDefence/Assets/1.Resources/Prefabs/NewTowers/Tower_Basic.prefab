@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6232635189348713071}
   - component: {fileID: 5146096117131174251}
+  - component: {fileID: 7963059800701513188}
   m_Layer: 0
-  m_Name: BasicTower
+  m_Name: Tower_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 10
-  Name: BasicTower
-  Damage: 5
-  ShootCooltime: 1
-  ShootRange: 10
+  Name: Basic Tower
+  Element: Normnal
+  Damage: 2
+  Range: 4
+  FireRate: 1.5
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 10
+  SellPrice: 2
+  TargetPriority: Most Progress
   Info: 
   IsTargeting: 0
   IsBomb: 0
@@ -60,6 +66,28 @@ MonoBehaviour:
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
+  isPreview: 0
+--- !u!65 &7963059800701513188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143255420651060252}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.5, z: 0.9}
+  m_Center: {x: 0, y: 0.2, z: 0.1}
 --- !u!1 &1274272218233673461
 GameObject:
   m_ObjectHideFlags: 0
