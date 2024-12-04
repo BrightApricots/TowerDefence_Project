@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower_Drone : MonoBehaviour
+public class Tower_Drone : Tower_Placement
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int _TowerPrice = 15;
 
-    // Update is called once per frame
-    void Update()
+    protected override void Awake()
     {
-        
+        blockType = 105;
+        TowerPrice = _TowerPrice;
+        base.Awake();
     }
 }

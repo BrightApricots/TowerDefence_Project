@@ -14,7 +14,7 @@ public class DroneTower : Tower
 
         if (drone != null && droneHomePosition != null)
         {
-            drone.Initialize(droneHomePosition, transform, ShootRange);
+            drone.Initialize(droneHomePosition, transform, Range);
         }
         else
         {
@@ -26,7 +26,7 @@ public class DroneTower : Tower
     {
         if (!drone.HasTarget())
         {
-            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, ShootRange);
+            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
             Transform nearestTarget = null;
             float minDistance = float.MaxValue;
 

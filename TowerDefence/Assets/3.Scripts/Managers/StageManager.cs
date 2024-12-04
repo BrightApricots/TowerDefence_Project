@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스
+using UnityEngine.SceneManagement; 
 
 public class StageManager : MonoBehaviour
 {
     [SerializeField]
-    private Object nextStageScene; // Inspector에서 할당할 씬 (UnityEngine.Object 사용)
+    private Object nextStageScene; // 할당할 씬
 
     [SerializeField]
-    private GameObject Panel; // 준비 패널 UI
+    private GameObject EndPanel; // 종료 패널 UI
 
     [SerializeField]
     private List<GameObject> uiElementsToDisable; // 비활성화할 UI 요소들
@@ -31,9 +31,9 @@ public class StageManager : MonoBehaviour
         }
 
         // 준비 패널 초기 비활성화
-        if (Panel != null)
+        if (EndPanel != null)
         {
-            Panel.SetActive(false);
+            EndPanel.SetActive(false);
         }
 
         // UI 요소 초기 활성화
@@ -44,7 +44,8 @@ public class StageManager : MonoBehaviour
                 element.SetActive(true);
             }
         }
-
+        // 텍스트 초기화
+       
         for (int i = 0; i<3; i++)
         {
             UI_Draw.draw();
@@ -72,9 +73,10 @@ public class StageManager : MonoBehaviour
     // 준비 패널 표시
     private void ShowPreparationPanel()
     {
-        if (Panel != null)
+        if (EndPanel != null)
         {
-            Panel.SetActive(true);
+            EndPanel.SetActive(true);
+            Time.timeScale = 1f; // 게임 속도를 1배속으로 설정
         }
         else
         {
@@ -94,13 +96,13 @@ public class StageManager : MonoBehaviour
     // 매 프레임마다 호출되어 마우스 클릭을 체크
     private void Update()
     {
-        if (allWavesCleared && Panel.activeSelf && Input.GetMouseButtonDown(0)) // 마우스 왼쪽 클릭
+        if (allWavesCleared && EndPanel.activeSelf && Input.GetMouseButtonDown(0)) // 마우스 왼쪽 클릭
         {
             LoadNextStage();
         }
     }
 
-    // 버튼 클릭 시 호출되어 다음 스테이지로 이동
+    // 마우스 클릭 시 호출되어 다음 스테이지로 이동
     public void LoadNextStage()
     {
         if (allWavesCleared)
@@ -121,3 +123,5 @@ public class StageManager : MonoBehaviour
         }
     }
 }
+
+//

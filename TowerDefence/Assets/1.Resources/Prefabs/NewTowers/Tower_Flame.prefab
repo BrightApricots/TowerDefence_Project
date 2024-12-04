@@ -179,8 +179,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1883150158327404688}
   - component: {fileID: 500084212188572961}
+  - component: {fileID: 9057469534193236476}
   m_Layer: 0
-  m_Name: FrameThrowerTower
+  m_Name: Tower_Flame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,11 +215,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26a2231c1d9ea44ead62723516e491a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 15
-  Name: FlamethrowerTower
-  Damage: 1
-  ShootCooltime: 2
-  ShootRange: 5
+  Name: Flame Tower
+  Element: Fire
+  Damage: 2
+  Range: 3.5
+  FireRate: 2.5
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 30
+  SellPrice: 6
+  TargetPriority: Most Progress
   Info: 
   IsTargeting: 0
   IsBomb: 0
@@ -226,10 +232,32 @@ MonoBehaviour:
   Barrel: {fileID: 1883150158327404688}
   TowerMuzzle: {fileID: 2457213457941702661}
   Projectile: {fileID: 0}
-  TowerTooltip: {fileID: 0}
+  TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
+  isPreview: 0
   fireProjectileObject: {fileID: 6789872993577127074}
+--- !u!65 &9057469534193236476
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8694802009060840424}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0.3, z: 0.03}
 --- !u!1001 &6790940294924633658
 PrefabInstance:
   m_ObjectHideFlags: 0

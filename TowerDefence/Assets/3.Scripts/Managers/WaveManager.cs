@@ -108,11 +108,11 @@ public class WaveManager : MonoBehaviour
         {
             ChangeGameSpeed(0.5f);
         }
-        else if (Input.GetKeyDown(KeyCode.X)) // 2번 키로 배속 2x
+        else if (Input.GetKeyDown(KeyCode.X)) // 2번 키로 배속 1x
         {
             ChangeGameSpeed(1f);
         }
-        else if (Input.GetKeyDown(KeyCode.C)) // 3번 키로 배속 3x
+        else if (Input.GetKeyDown(KeyCode.C)) // 3번 키로 배속 2x
         {
             ChangeGameSpeed(2f);
         }
@@ -337,4 +337,4 @@ public class WaveManager : MonoBehaviour
     }
 }
 
-//중간완료
+//

@@ -9,7 +9,8 @@ public class FireTower : Tower
 
     private void Awake()
     {
-        fireProjectile = fireProjectileObject.GetComponent<FireProjectile>();
+        base.Start();
+        //fireProjectile = fireProjectileObject.GetComponent<FireProjectile>();
     }
 
     protected override void Start()

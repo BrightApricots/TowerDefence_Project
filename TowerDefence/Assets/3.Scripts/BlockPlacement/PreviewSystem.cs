@@ -32,6 +32,14 @@ public class PreviewSystem : MonoBehaviour
         currentOccupiedCells = new List<Vector2Int>(occupiedCells);
         currentRotation = rotationIndex;
         previewObject = Instantiate(prefab);
+        previewObject.name = prefab.name;
+
+        Tower[] towers = previewObject.GetComponentsInChildren<Tower>();
+        foreach (Tower tower in towers)
+        {
+            tower.isPreview = true;
+        }
+
         PreparePreview(previewObject);
         PrepareCursor(currentOccupiedCells);
         cellIndicator.SetActive(true);

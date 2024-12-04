@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tower_Basic : Tower_Placement
 {
-    public int _TowerPrice=10;
+    public int _TowerPrice = 10;
     protected override void Awake()
     {
         blockType = 101;

@@ -1,17 +1,29 @@
 using System.Collections;
+using UnityEditor.iOS;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
-    public int Cost;
-    public string Name;
+    public string Name = "";
+    public string Element = "";
     public int Damage;
-    public float ShootCooltime=1f;
-    public float ShootRange;
-    public string Info;
+    public float Range;
+    public float FireRate = 1f;
+
+    public int DamageDealt = 0;
+    public int TotalKilled = 0;
+
+    public string UpgradePrice = "";
+    public string SellPrice = "";
+    public string TargetPriority = "Most Progress";
+
+    public string Info = "";
+
     public bool IsTargeting;
     public bool IsBomb;
+
     public Transform TowerHead;
     public Transform Barrel;
     public Transform TowerMuzzle;
@@ -23,16 +35,25 @@ public class Tower : MonoBehaviour
     private GameObject currentTooltip;
     private Vector3 clickmousePointer;
 
+    public bool isPreview = false;
+
     protected virtual void Start()
     {
-        GameManager.Instance.PlacedTowerList.Add(this);
-        mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
-        StartCoroutine(Attack());
+        if(!isPreview)
+        {
+            GameManager.Instance.PlacedTowerList.Add(this);
+            mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
+            StartCoroutine(Attack());
+        }
     }
 
     protected virtual void Update()
     {
-        Detect();
+        if (!isPreview)
+        {
+            Detect();
+        }
+
         FollowTarget();
         TooltipPopupCheck();
     }
@@ -41,7 +62,7 @@ public class Tower : MonoBehaviour
     {
         if (CurrentTarget == null)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, ShootRange);
+            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
             foreach (Collider target in hitColliders)
             {
                 if (target.CompareTag("Monster"))
@@ -53,7 +74,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position)>ShootRange)
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position)> Range)
             {
                 CurrentTarget=null;
             }
@@ -91,7 +112,7 @@ public class Tower : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(ShootCooltime);
+            yield return new WaitForSeconds(FireRate);
             if (CurrentTarget !=null)
             {
                 Transform projectile = Instantiate(Projectile, TowerMuzzle.transform.position,Barrel.transform.rotation);
@@ -105,36 +126,53 @@ public class Tower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, ShootRange);
+        Gizmos.DrawWireSphere(transform.position, Range);
     }
 
     private void OnMouseDown() //gameObject 클릭 시 발생 이벤트 MonoBehavior 내장
     {
-        clickmousePointer = Input.mousePosition;
-        if (currentTooltip != null) //현재 툴팁이 있다면
+        if (!isPreview)
         {
-            Destroy(currentTooltip); //툴팁 제거
-        }
+            clickmousePointer = Input.mousePosition;
+            if (currentTooltip != null) //현재 툴팁이 있다면
+            {
+                Destroy(currentTooltip); //툴팁 제거
+            }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 화면에 Ray 쏘기
-        RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 화면에 Ray 쏘기
+            RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit))
-        {
-            //월드 좌표를 스크린 좌표로 변환
-            Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
+            if (Physics.Raycast(ray, out hit))
+            {
+                //월드 좌표를 스크린 좌표로 변환
+                Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
 
-            //UI 생성 및 위치 설정
-            currentTooltip = Instantiate(TowerTooltip, mainCanvas.transform);
-            RectTransform rect = currentTooltip.GetComponent<RectTransform>();
+                //UI 생성 및 위치 설정
+                currentTooltip = Instantiate(TowerTooltip, mainCanvas.transform);
+                UI_TowerTooltip toolTip = currentTooltip.GetComponent<UI_TowerTooltip>();
+                toolTip.Name = $"{this.Name}";
+                toolTip.Element = $"{this.Element}";
+                toolTip.Damage = $"{this.Damage}";
+                toolTip.Range = $"{this.Range}";
+                toolTip.FireRate = $"{this.FireRate}";
 
-            //스크린 좌표를 캔버스 좌표로 변환
-            Vector2 localPoint;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                mainCanvas.transform.GetComponent<RectTransform>(),
-                screenPoint, mainCanvas.worldCamera, out localPoint);
+                toolTip.DamageDealt = $"{this.DamageDealt}";
+                toolTip.UpgradePrice = $"{this.UpgradePrice}";
+                toolTip.SellPrice = $"{this.SellPrice}";
+                toolTip.TargetPriority = $"{this.TargetPriority}";
+                toolTip.TotalKilled = $"{this.TotalKilled}";
+                toolTip.TowerImage.sprite = Resources.Load<Sprite>($"Sprites/{this.Name}");
+                     
+                RectTransform rect = currentTooltip.GetComponent<RectTransform>();
 
-            rect.anchoredPosition = localPoint;
+                //스크린 좌표를 캔버스 좌표로 변환
+                Vector2 localPoint;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    mainCanvas.transform.GetComponent<RectTransform>(),
+                    screenPoint, mainCanvas.worldCamera, out localPoint);
+
+                rect.anchoredPosition = localPoint;
+            }
         }
     }
 }

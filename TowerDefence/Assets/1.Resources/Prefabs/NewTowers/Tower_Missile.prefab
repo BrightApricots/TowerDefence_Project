@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2562844392355504021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.45, z: 0.079}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0.079}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 7038726429414835138}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -262,8 +262,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1363359531549946460}
   - component: {fileID: 7698180299492827416}
+  - component: {fileID: 6562114099687935198}
   m_Layer: 0
-  m_Name: MissileTower
+  m_Name: Tower_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,11 +299,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 15
-  Name: MissileTower
+  Name: Missile Tower
+  Element: Electric
   Damage: 10
-  ShootCooltime: 1
-  ShootRange: 10
+  Range: 15
+  FireRate: 0.33
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 65
+  SellPrice: 13
+  TargetPriority: Most Progress
   Info: 
   IsTargeting: 1
   IsBomb: 1
@@ -313,3 +319,25 @@ MonoBehaviour:
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
+  isPreview: 0
+--- !u!65 &6562114099687935198
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665792060414798625}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 1, z: 0.7}
+  m_Center: {x: 0, y: 0.5, z: 0}
