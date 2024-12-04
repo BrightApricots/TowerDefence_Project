@@ -22188,8 +22188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae27a724f26884a8c0973aefd50b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentExp: 30
-  CurrentEmber: 50
+  CurrentExp: 10
+  CurrentEmber: 10
   CurrentHp: 15
   CurrentMoney: 50
   MaxHp: 15
@@ -27645,7 +27645,7 @@ MonoBehaviour:
     m_Bits: 64
   gridWorldSize: {x: 50, y: 50}
   obstaclePositions: []
-  database: {fileID: 11400000, guid: 04938bc5fa434594b80d1a7b3b492fea, type: 2}
+  database: {fileID: 11400000, guid: 9cb9899a278eb634699b46feeb33d428, type: 2}
   grid: {fileID: 0}
 --- !u!1 &1862625223
 GameObject:
