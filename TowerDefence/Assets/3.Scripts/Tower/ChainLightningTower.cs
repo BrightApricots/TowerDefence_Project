@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public class ChainLightningTower : Tower
@@ -7,7 +8,24 @@ public class ChainLightningTower : Tower
     public float ChainRange = 5f; //다음 타겟 탐지거리
 
     public GameObject lightningEffectPrefab;
-    
+
+    public ChainLightningTower()
+    {
+        Name = "Lightning Tower";
+        Element = "Electric";
+        Damage = 4;
+        Range = 4f;
+        FireRate = 0.75f;
+        DamageDealt = 0;
+        TotalKilled = 0;
+        UpgradePrice = 25;
+        SellPrice = 13;
+        TargetPriority = "Most Progress";
+        Info = "Fires chain lightning that bounces between multiple targets.";
+    }
+
+
+
     protected override IEnumerator Attack()
     {
         while (true)
@@ -76,17 +94,23 @@ public class ChainLightningTower : Tower
 
     protected override void OnLevelUp()
     {
-        base.OnLevelUp();
+        LightningEffect effect = lightningEffectPrefab.GetComponent<LightningEffect>();
         
-        // 레벨에 따른 체인 효과 강화
         switch (Level)
         {
+            case 1:
+                UnityEngine.Color color = new Color32(221, 255, 0, 255);
+                break;
             case 2:
-                ChainCount++;  // 체인 횟수 증가
+                color = new Color32(0, 122, 255, 255);
+                effect.lightningColor = color;
+                ChainCount += 4;
                 break;
             case 3:
-                ChainRange *= 1.3f;  // 체인 범위 30% 증가
-                lightningEffectPrefab = Resources.Load<GameObject>("Prefabs/AdvancedLightningEffect");  // 강화된 이펙트로 변경
+                Damage += 2;
+                FireRate *= 0.5f;
+                color = new Color32(146, 0, 255, 255);
+                effect.lightningColor = color;
                 break;
         }
     }

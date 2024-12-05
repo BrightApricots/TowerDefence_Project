@@ -189,6 +189,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileEffect: {fileID: 0}
   projectileHitEffect: {fileID: 0}
+  IsBomb: 0
   muzzlePosition: {fileID: 858689846512024143}
   shootCooldown: 2
   damage: 1

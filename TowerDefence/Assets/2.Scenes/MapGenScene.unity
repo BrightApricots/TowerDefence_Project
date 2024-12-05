@@ -19568,18 +19568,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower_Drone
       objectReference: {fileID: 0}
-    - target: {fileID: 9043174540697479632, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
-      propertyPath: projectiles.Array.data[0]
-      value: 
-      objectReference: {fileID: 3031729019245985137, guid: f238f9586ff1a7b469b952f8bd5b8502, type: 3}
-    - target: {fileID: 9043174540697479632, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
-      propertyPath: projectiles.Array.data[1]
-      value: 
-      objectReference: {fileID: 7728831310326839812, guid: 278bcb55e9f9379468d830d20b463139, type: 3}
-    - target: {fileID: 9043174540697479632, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
-      propertyPath: projectiles.Array.data[2]
-      value: 
-      objectReference: {fileID: 7144311290435400609, guid: e86bdde02e68f994b9792c01543fcabe, type: 3}
+    - target: {fileID: 5910751741922407090, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48933,10 +48925,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightningTower
       objectReference: {fileID: 0}
-    - target: {fileID: 1929637352258750305, guid: 687955fe012eaf148a2bc64bfcc00ab4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5518478428060728232, guid: 687955fe012eaf148a2bc64bfcc00ab4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.898
@@ -48947,7 +48935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5518478428060728232, guid: 687955fe012eaf148a2bc64bfcc00ab4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.79
+      value: -7.09
       objectReference: {fileID: 0}
     - target: {fileID: 5518478428060728232, guid: 687955fe012eaf148a2bc64bfcc00ab4, type: 3}
       propertyPath: m_LocalRotation.w
