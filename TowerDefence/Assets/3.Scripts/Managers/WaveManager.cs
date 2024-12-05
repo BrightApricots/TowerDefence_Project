@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using MyGame; 
 
 [System.Serializable]
 public class Wave
@@ -17,6 +18,17 @@ public class SpeedSetting
 {
     public float speedMultiplier; // 배속 값
     public List<Image> speedImages; // 배속과 관련된 여러 이미지들
+}
+
+namespace MyGame
+{
+    [System.Serializable]
+    public class MonsterSpawnData
+    {
+        public GameObject monsterPrefab; // 몬스터 프리팹
+        public string monsterName;       // 몬스터 이름
+        public int spawnCount;           // 몬스터 등장 수량
+    }
 }
 
 public class WaveManager : MonoBehaviour
@@ -52,6 +64,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private float prepareCooldown = 10f;
 
+    [SerializeField]
+    private WaveTextManager waveTextManager; // 텍스트 매니저 스크립트 참조
+
     private int currentWaveIndex = 0;
     private bool isWaveActive = false;
     private int remainingMonsters = 0;
@@ -80,6 +95,12 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        if (waveTextManager != null)
+        {
+            waveTextManager.Initialize(waves); // 웨이브 데이터 전달
+            waveTextManager.ShowWaveInfo();   // 초기 상태로 텍스트 표시
+        }
+
         UpdateWaveText();
         UpdateWavePrepareText();
 
@@ -89,10 +110,21 @@ public class WaveManager : MonoBehaviour
         if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
 
         UpdateSpeedImageColors(1f); // 기본 배속 1배속으로 초기화
+
     }
 
     private void Update()
     {
+        // 스페이스바 입력 감지
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // 배틀 버튼 클릭 동작 실행
+            if (battleButton != null && battleButton.interactable)
+            {
+                battleButton.onClick.Invoke();
+            }
+        }
+
         if (GameManager.Instance.CurrentHp <= 0 && !isGameOver)
         {
             HandleGameOver();
@@ -121,7 +153,6 @@ public class WaveManager : MonoBehaviour
             ChangeGameSpeed(3f);
         }
     }
-
 
     private IEnumerator PrepareCooldownRoutine()
     {
@@ -212,6 +243,12 @@ public class WaveManager : MonoBehaviour
 
         if (speedButtonGroup != null) speedButtonGroup.SetActive(true);
 
+        if (waveTextManager != null)
+        {
+            waveTextManager.HideWaveInfo(); // 웨이브 시작 시 텍스트 숨김
+        }
+
+
         var currentWave = waves[currentWaveIndex];
         monsterSpawner.SetMonsterData(currentWave.monsterSpawnData, currentWave.spawnInterval, currentWave.spawnPoints);
 
@@ -259,6 +296,21 @@ public class WaveManager : MonoBehaviour
             if (currentWaveIndex != 0)
             {
                 prepareCooldownCoroutine = StartCoroutine(PrepareCooldownRoutine());
+            }
+        }
+        else
+        {
+            OnAllWavesCleared?.Invoke();
+        }
+
+        if (currentWaveIndex < waves.Count)
+        {
+            isReadyForNextWave = true;
+
+            if (waveTextManager != null)
+            {
+                waveTextManager.SetCurrentWaveIndex(currentWaveIndex); // 다음 웨이브 데이터 전달
+                waveTextManager.ShowWaveInfo(); // 웨이브 완료 후 텍스트 표시
             }
         }
         else
@@ -315,8 +367,6 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-
-
 
     private void UpdateWavePrepareText()
     {

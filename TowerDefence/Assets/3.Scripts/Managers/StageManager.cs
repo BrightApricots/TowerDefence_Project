@@ -1,195 +1,199 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; // UI 요소를 사용하기 위한 네임스페이스
 
 public class StageManager : MonoBehaviour
 {
     [SerializeField]
-    private Object nextStageScene; // 할당할 씬
+    private Object nextStageScene; // 다음 스테이지로 이동할 씬
 
     [SerializeField]
-    private Object gameOverScene; // 게임 오버 씬
+    private Object gameOverScene; // 게임 오버 시 로드할 씬
 
     [SerializeField]
-    private GameObject EndPanel; // 종료 패널 UI
+    private GameObject EndPanel; // 스테이지 종료 후 표시할 패널
 
     [SerializeField]
-    private GameObject GameOverPanel; // 게임 오버 패널
+    private GameObject GameOverPanel; // 게임 오버 시 표시할 패널
 
     [SerializeField]
-    private List<GameObject> uiElementsToDisable; // 비활성화할 UI 요소들
+    private Button gameOverButton; // 게임 오버 패널 내의 버튼
 
-    private WaveManager waveManager;
-    private bool allWavesCleared = false; // 웨이브가 모두 종료되었는지 여부
+    [SerializeField]
+    private List<GameObject> uiElementsToDisable; // 특정 상황에서 비활성화할 UI 요소 목록
+
+    private WaveManager waveManager; // 웨이브 매니저 스크립트 참조
+    private bool allWavesCleared = false; // 모든 웨이브가 종료되었는지 여부를 나타내는 플래그
 
     private void Start()
     {
-        // WaveManager 찾기
-        waveManager = FindObjectOfType<WaveManager>();
-        if (waveManager != null)
-        {
-            waveManager.OnAllWavesCleared += HandleAllWavesCleared;
-        }
-        else
-        {
-            Debug.LogError("WaveManager를 찾을 수 없습니다.");
-        }
-
-        // 패널 초기 비활성화
-        if (EndPanel != null) EndPanel.SetActive(false);
-        if (GameOverPanel != null) GameOverPanel.SetActive(false);
-
-        // UI 요소 초기 활성화
-        foreach (var element in uiElementsToDisable)
-        {
-            if (element != null)
-            {
-                element.SetActive(true);
-            }
-        }
-
-        // 텍스트 초기화
-        for (int i = 0; i < 3; i++)
-        {
-            UI_Draw.draw();
-        }
+        // 각종 초기화 메서드 호출
+        InitializeWaveManager(); // 웨이브 매니저 초기화 및 이벤트 등록
+        InitializePanels(); // 패널들을 초기 상태로 설정 (비활성화)
+        InitializeUIElements(); // UI 요소들을 초기 상태로 설정 (활성화)
+        InitializeGameOverButton(); // 게임 오버 버튼에 이벤트 리스너 등록
     }
 
     private void Update()
     {
         // 게임 오버 조건 확인
-        if (GameManager.Instance.CurrentHp <= 0)
-        {
-            ShowGameOverPanel();
-        }
-
-        // 웨이브 종료 후 클릭으로 다음 스테이지 이동
-        if (allWavesCleared && EndPanel.activeSelf && Input.GetMouseButtonDown(0))
-        {
-            LoadNextStage();
-        }
+        CheckGameOverCondition();
+        // 다음 스테이지로 이동할지 여부 확인
+        CheckNextStageTransition();
     }
 
     private void OnDestroy()
     {
-        // 이벤트 해제
+        // 이벤트 등록 해제
+        UnregisterEvents();
+    }
+
+    // 웨이브 매니저를 초기화하고 이벤트를 등록하는 메서드
+    private void InitializeWaveManager()
+    {
+        waveManager = FindObjectOfType<WaveManager>(); // 씬에서 WaveManager 스크립트 찾기
         if (waveManager != null)
         {
+            // 모든 웨이브가 종료되었을 때 호출될 이벤트 등록
+            waveManager.OnAllWavesCleared += HandleAllWavesCleared;
+        }
+    }
+
+    // 모든 패널을 비활성화 상태로 초기화하는 메서드
+    private void InitializePanels()
+    {
+        SetPanelActive(EndPanel, false); // 종료 패널 비활성화
+        SetPanelActive(GameOverPanel, false); // 게임 오버 패널 비활성화
+    }
+
+    // 지정된 UI 요소들을 활성화하는 메서드
+    private void InitializeUIElements()
+    {
+        SetUIElementsActive(uiElementsToDisable, true); // UI 요소들을 활성화
+    }
+
+    // 게임 오버 버튼에 클릭 이벤트를 등록하는 메서드
+    private void InitializeGameOverButton()
+    {
+        if (gameOverButton != null)
+        {
+            // 게임 오버 버튼 클릭 시 호출될 메서드 등록
+            gameOverButton.onClick.AddListener(OnGameOverButtonClicked);
+        }
+    }
+
+    // 이벤트 등록을 해제하는 메서드
+    private void UnregisterEvents()
+    {
+        if (waveManager != null)
+        {
+            // 웨이브 종료 이벤트 해제
             waveManager.OnAllWavesCleared -= HandleAllWavesCleared;
         }
+
+        if (gameOverButton != null)
+        {
+            // 게임 오버 버튼 클릭 이벤트 해제
+            gameOverButton.onClick.RemoveListener(OnGameOverButtonClicked);
+        }
     }
 
-    // 모든 웨이브 클리어 시 호출
+    // 플레이어의 현재 HP를 확인하여 게임 오버 상태를 처리하는 메서드
+    private void CheckGameOverCondition()
+    {
+        if (GameManager.Instance.CurrentHp <= 0) // 플레이어의 HP가 0 이하인지 확인
+        {
+            ShowGameOverPanel(); // 게임 오버 패널 표시
+        }
+    }
+
+    // 모든 웨이브가 종료되었을 때 다음 스테이지로 이동할지 확인하는 메서드
+    private void CheckNextStageTransition()
+    {
+        // 모든 웨이브가 종료되었고, EndPanel이 활성화되어 있으며, 마우스 왼쪽 버튼이 클릭되었을 때
+        if (allWavesCleared && IsPanelActive(EndPanel) && Input.GetMouseButtonDown(0))
+        {
+            LoadNextStage(); // 다음 스테이지 로드
+        }
+    }
+
+    // 모든 웨이브가 종료되었을 때 호출되는 이벤트 핸들러
     private void HandleAllWavesCleared()
     {
-        Debug.Log("모든 웨이브가 클리어되었습니다. 준비 패널을 표시합니다.");
-        allWavesCleared = true;
-        ShowPreparationPanel();
-        UI_Map.clearStage += 1;
+        allWavesCleared = true; // 모든 웨이브 종료 플래그 설정
+        ShowPreparationPanel(); // 준비 패널 표시
+        UI_Map.clearStage += 1; // 클리어한 스테이지 수 증가
     }
 
-    // 준비 패널 표시
+    // 준비 패널을 표시하고 UI 요소를 비활성화하는 메서드
     private void ShowPreparationPanel()
     {
-        if (EndPanel != null)
-        {
-            EndPanel.SetActive(true);
-            Time.timeScale = 1f; // 게임 속도를 1배속으로 설정
-        }
-        else
-        {
-            Debug.LogError("준비 패널이 설정되지 않았습니다.");
-        }
-
-        // 나머지 UI 요소 비활성화
-        foreach (var element in uiElementsToDisable)
-        {
-            if (element != null)
-            {
-                element.SetActive(false);
-            }
-        }
+        SetPanelActive(EndPanel, true); // 준비 패널 활성화
+        PrefabManager.Instance.ReplaceChildWithPrefab(); // PrefabManager를 통해 자식 오브젝트 교체
+        SetUIElementsActive(uiElementsToDisable, false); // 지정된 UI 요소들 비활성화
+        Time.timeScale = 1f; // 게임 시간 속도를 정상화
     }
 
-    // 게임 오버 패널 표시
+    // 게임 오버 패널을 표시하고 UI 요소를 비활성화하는 메서드
     private void ShowGameOverPanel()
     {
-        if (GameOverPanel != null)
-        {
-            GameOverPanel.SetActive(true);
-            Time.timeScale = 0f; // 게임 일시정지
-        }
-        else
-        {
-            Debug.LogError("게임 오버 패널이 설정되지 않았습니다.");
-        }
+        SetPanelActive(GameOverPanel, true); // 게임 오버 패널 활성화
+        SetUIElementsActive(uiElementsToDisable, false, gameOverButton?.gameObject); // 게임 오버 버튼을 제외한 UI 요소 비활성화
+        Time.timeScale = 0f; // 게임 정지
+    }
 
-        // 나머지 UI 요소 비활성화
-        foreach (var element in uiElementsToDisable)
+    // 지정된 패널의 활성 상태를 설정하는 메서드
+    private void SetPanelActive(GameObject panel, bool isActive)
+    {
+        if (panel != null)
         {
-            if (element != null)
+            panel.SetActive(isActive); // 패널의 활성 상태 설정
+        }
+    }
+
+    // 지정된 패널이 활성화되어 있는지 확인하는 메서드
+    private bool IsPanelActive(GameObject panel)
+    {
+        return panel != null && panel.activeSelf; // 패널이 null이 아니고 활성화되어 있는지 반환
+    }
+
+    // 지정된 UI 요소들의 활성 상태를 설정하는 메서드
+    private void SetUIElementsActive(List<GameObject> elements, bool isActive, GameObject excludeElement = null)
+    {
+        foreach (var element in elements)
+        {
+            // 제외할 요소가 아니면 활성 상태 설정
+            if (element != null && element != excludeElement)
             {
-                element.SetActive(false);
+                element.SetActive(isActive);
             }
         }
     }
 
-    // 게임 오버 버튼 클릭 시 호출
+    // 게임 오버 버튼이 클릭되었을 때 호출되는 메서드
     public void OnGameOverButtonClicked()
     {
-        LoadGameOverScene();
+        LoadScene(gameOverScene); // 게임 오버 씬 로드
     }
 
-    // 게임 오버 씬으로 전환
-    private void LoadGameOverScene()
-    {
-        if (gameOverScene != null)
-        {
-            string sceneName = gameOverScene.name; // Inspector에서 설정된 씬 이름 가져오기
-            Time.timeScale = 1f; // 씬 전환 전 게임 속도 정상화
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            Debug.LogError("게임 오버 씬이 설정되지 않았습니다.");
-        }
-    }
-
-    // 마우스 클릭 시 호출되어 다음 스테이지로 이동
-    public void LoadNextStage()
+    // 다음 스테이지를 로드하는 메서드
+    private void LoadNextStage()
     {
         if (allWavesCleared)
         {
-            if (nextStageScene != null)
-            {
-                string sceneName = nextStageScene.name; // Inspector에서 설정된 씬 이름 가져오기
-                Time.timeScale = 1f; // 씬 전환 전 게임 속도 정상화
-                SceneManager.LoadScene(sceneName);
-            }
-            else
-            {
-                Debug.LogError("다음 스테이지 씬이 설정되지 않았습니다.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("모든 웨이브가 종료되지 않았습니다.");
+            LoadScene(nextStageScene); // 다음 스테이지 씬 로드
         }
     }
 
-    // 게임 오버 버튼에 할당할 메서드 추가
-    public void OpenGameOverScene()
+    // 지정된 씬을 로드하는 메서드
+    private void LoadScene(Object scene)
     {
-        if (gameOverScene != null)
+        if (scene != null)
         {
-            string sceneName = gameOverScene.name; // Inspector에서 설정된 씬 이름 가져오기
-            Time.timeScale = 1f; // 씬 전환 전 게임 속도 정상화
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            Debug.LogError("게임 오버 씬이 설정되지 않았습니다.");
+            string sceneName = scene.name; // 씬의 이름을 가져옴
+            Time.timeScale = 1f; // 게임 시간 속도를 정상화
+            SceneManager.LoadScene(sceneName); // 씬 로드
         }
     }
 }
