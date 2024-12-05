@@ -11,15 +11,21 @@ public class Projectile : MonoBehaviour
     public float MoveSpeed = 50f;
     public int Damage = 5;
     public float Duration = 3f;
-    public bool IsTargeting = false;
-    public bool IsBomb = false;
-    public bool isSelfDestroy = false;
 
+    [Header("공통기능")]
+    [Tooltip("투사체가 타겟을 따라감")]
+    public bool IsTargeting = false;
+    [Tooltip("투사체가 타겟 명중시 주변에 광역 데미지 발생")]
+    public bool IsBomb = false;
+    [Tooltip("광역 데미지 범위")]
     public float BombRange = 3f;
+    [Tooltip("투사체 충돌이 없을시 스스로 파괴됨")]
+    public bool isSelfDestroy = false;
+    
     public Transform Target;
     public GameObject ExplosionParticle;
 
-    protected virtual void Start()
+    public virtual void Initialize()
     {
         if(isSelfDestroy)
         {
@@ -27,7 +33,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    
+    protected virtual void OnDisable()
+    {
+        StopAllCoroutines();
+        Target = null;
+    }
+
     protected virtual void Update()
     {
         Move();
@@ -98,7 +109,7 @@ public class Projectile : MonoBehaviour
                     other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
                 }
             }
-            Destroy(gameObject);
+            ObjectManager.Instance.Despawn(this);
         }
     }
 
@@ -113,17 +124,15 @@ public class Projectile : MonoBehaviour
             }
             
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
-            Destroy(gameObject);
+            ObjectManager.Instance.Despawn(this);
         }
-
     }
 
     protected IEnumerator SelfDestroy(float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(this.gameObject);
+        ObjectManager.Instance.Despawn(this);
     }
-
 
     private void OnDrawGizmos()
     {

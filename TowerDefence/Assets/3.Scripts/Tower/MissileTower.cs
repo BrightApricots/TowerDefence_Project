@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MissileTower : Tower
 {
+    [Header("타워 레벨효과")]
     [SerializeField] private List<GameObject> projectiles;
     [SerializeField] private List<GameObject> muzzleEffects;
     [SerializeField] private List<GameObject> HitEffects;
@@ -12,9 +13,12 @@ public class MissileTower : Tower
     private GameObject currentMuzzleEffect;
     private GameObject currentHitEffect;
 
-    public List<Monster> targetMonsters;
+    private List<Monster> targetMonsters;
     public bool IsTargeting;
-    public int RimitTarget = 10;
+
+    [Header("최대 타겟수")]
+        public int RimitTarget = 10;
+
     public MissileTower()
     {
         Name = "Missile Tower";
@@ -77,13 +81,16 @@ public class MissileTower : Tower
                 foreach (var monster in targetMonsters)
                 {
                     yield return new WaitForSeconds(0.05f);
-                    GameObject projectile = Instantiate(currentProjectile, TowerMuzzle.transform.position, TowerHead.transform.rotation);
-                    Projectile proj = projectile.GetComponent<Projectile>();
-                    proj.Damage = this.Damage;
-                    proj.IsTargeting = this.IsTargeting;
-                    proj.IsBomb = this.IsBomb;
-                    proj.Target = monster.transform; // 각 몬스터를 타겟으로 설정
-
+                    Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(
+                        currentProjectile, 
+                        TowerMuzzle.transform.position
+                    );
+                    
+                    projectile.transform.rotation = TowerHead.transform.rotation;
+                    projectile.Damage = this.Damage;
+                    projectile.IsTargeting = this.IsTargeting;
+                    //projectile.IsBomb = this.IsBomb;
+                    projectile.Target = monster.transform;
                     
                     GameObject _MuzzleEffect = Instantiate(currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation);
                     Destroy(_MuzzleEffect, _MuzzleEffect.GetComponent<ParticleSystem>().main.duration);

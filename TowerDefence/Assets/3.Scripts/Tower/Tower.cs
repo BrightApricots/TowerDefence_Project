@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Tower : MonoBehaviour
 {
     #region ToolTip
+    [Header("타워 정보")]
     public string Name;
     public string Element;
     public int Damage;
@@ -22,24 +23,23 @@ public class Tower : MonoBehaviour
     public int Level { get; protected set; } = 1;
     public int MaxLevel = 3;
 
-    
-    public bool IsBomb;
-
+    [Header("타워 파츠")]
     public Transform TowerHead;
     public Transform TowerMuzzle;
-    
-    //public GameObject MuzzleEffect;
-
     public GameObject TowerTooltip;
+
+    [Header("공통 기능")]
+    [Tooltip("타워가 프리뷰 상태에서 발사하지 않게함")]
+    public bool isPreview = false;
+    [Tooltip("타워가 타겟을 바라봄")]
+    public bool isFollow = false;
+
+    [Header("툴팁 캔버스")]
     public Canvas mainCanvas;
 
     protected Transform CurrentTarget = null;
     private GameObject currentTooltip;
     private Vector3 clickmousePointer;
-
-    public bool isPreview = false;
-    public bool isFollow = false;
-
 
     protected virtual void Start()
     {
@@ -62,18 +62,6 @@ public class Tower : MonoBehaviour
             FollowTarget();
         }
         TooltipPopupCheck();
-    }
-
-    public virtual void Upgrade()
-    {
-        if (Level >= MaxLevel)
-        {
-            Debug.Log("타워 최대레벨 초과");
-            return;
-        }
-
-        Level++;
-        OnLevelUp();
     }
 
     protected virtual void OnLevelUp()
@@ -142,11 +130,23 @@ public class Tower : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 
+    public virtual void Upgrade()
+    {
+        if (Level >= MaxLevel)
+        {
+            Debug.Log("타워 최대레벨 초과");
+            return;
+        }
+
+        Level++;
+        OnLevelUp();
+    }
+
     private void OnMouseDown()
     {
         if (!isPreview)
         {
-            clickmousePointer = Input.mousePosition;
+                clickmousePointer = Input.mousePosition;
             if (currentTooltip != null)
             {
                 Destroy(currentTooltip);

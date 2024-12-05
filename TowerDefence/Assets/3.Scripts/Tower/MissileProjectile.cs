@@ -24,7 +24,7 @@ public class MissileProjectile : Projectile
                         other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
                     }
                 }
-                Destroy(gameObject);
+                ObjectManager.Instance.Despawn(this);
             }
         }
     }

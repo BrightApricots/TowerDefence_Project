@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8506020052864630864}
   - component: {fileID: 8915277836086164226}
   m_Layer: 0
-  m_Name: ShootPos
+  m_Name: ShootPos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4089755200585435170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4098158683273016635}
   - component: {fileID: 5364272216278680139}
   m_Layer: 0
-  m_Name: ShootPos (1)
+  m_Name: ShootPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6636623227558821586}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -345,8 +345,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363359531549946460}
-  - component: {fileID: 6562114099687935198}
   - component: {fileID: 3145255694369611420}
+  - component: {fileID: 6562114099687935198}
   m_Layer: 0
   m_Name: Tower_Missile
   m_TagString: Untagged
@@ -371,6 +371,51 @@ Transform:
   - {fileID: 5588223922261882595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3145255694369611420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665792060414798625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8490c78d44c0743b3051de8dc1e3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Missile Tower
+  Element: Electric
+  Damage: 3
+  Range: 15
+  FireRate: 1
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 65
+  SellPrice: 33
+  TargetPriority: Most Progress
+  Info: Each attack fires 10 missiles, targeting random enemies within the attack
+    range.
+  MaxLevel: 3
+  TowerHead: {fileID: 1363359531549946460}
+  TowerMuzzle: {fileID: 8996524052376631843}
+  TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
+  isPreview: 0
+  isFollow: 1
+  mainCanvas: {fileID: 0}
+  projectiles:
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  muzzleEffects:
+  - {fileID: 147450, guid: d786954ea58ae6f45b3de29c31ec67f9, type: 3}
+  - {fileID: 169982, guid: 83cbfdcec541739499bcee069cf124ad, type: 3}
+  - {fileID: 151374, guid: 0d79fbba411af7541b91f5ae2aa2e31a, type: 3}
+  HitEffects:
+  - {fileID: 1324124168371050, guid: 9eb3b1a11c610cd418079f132e291197, type: 3}
+  - {fileID: 1939352568327336, guid: ad82adc91f9827d48890e80c546cdce0, type: 3}
+  - {fileID: 1503314963399906, guid: b179a4b6ccaf1ad459bbd10cfc2e1ca4, type: 3}
+  IsTargeting: 1
+  RimitTarget: 10
 --- !u!65 &6562114099687935198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -392,48 +437,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 1, z: 0.7}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &3145255694369611420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665792060414798625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb8490c78d44c0743b3051de8dc1e3a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Missile Tower
-  Element: Electric
-  Damage: 3
-  Range: 15
-  FireRate: 0.33
-  DamageDealt: 0
-  TotalKilled: 0
-  UpgradePrice: 65
-  SellPrice: 33
-  TargetPriority: Most Progress
-  Info: Each attack fires 10 missiles, targeting random enemies within the attack
-    range.
-  MaxLevel: 3
-  IsBomb: 0
-  TowerHead: {fileID: 0}
-  TowerMuzzle: {fileID: 0}
-  TowerTooltip: {fileID: 0}
-  mainCanvas: {fileID: 0}
-  isPreview: 0
-  isFollow: 0
-  projectiles:
-  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
-  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
-  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
-  muzzleEffects:
-  - {fileID: 147450, guid: d786954ea58ae6f45b3de29c31ec67f9, type: 3}
-  - {fileID: 169982, guid: 83cbfdcec541739499bcee069cf124ad, type: 3}
-  - {fileID: 151374, guid: 0d79fbba411af7541b91f5ae2aa2e31a, type: 3}
-  HitEffects:
-  - {fileID: 130346, guid: 07bf9ced87963e24299c2c2a22bfeeb6, type: 3}
-  - {fileID: 122924, guid: 02602c03e3a632f44a268976f34add18, type: 3}
-  - {fileID: 160086, guid: c217f262fea9e90468154f70d667707c, type: 3}
-  IsTargeting: 0

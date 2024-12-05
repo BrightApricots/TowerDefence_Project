@@ -1743,49 +1743,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: IsBomb
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: FireRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: isFollow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: TowerHead
-      value: 
-      objectReference: {fileID: 1560074674}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: isPreview
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
       propertyPath: IsTargeting
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: TowerMuzzle
-      value: 
-      objectReference: {fileID: 440595493}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: TowerTooltip
-      value: 
-      objectReference: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: HitEffects.Array.data[0]
-      value: 
-      objectReference: {fileID: 1324124168371050, guid: 9eb3b1a11c610cd418079f132e291197, type: 3}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: HitEffects.Array.data[1]
-      value: 
-      objectReference: {fileID: 1939352568327336, guid: ad82adc91f9827d48890e80c546cdce0, type: 3}
-    - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: HitEffects.Array.data[2]
-      value: 
-      objectReference: {fileID: 1503314963399906, guid: b179a4b6ccaf1ad459bbd10cfc2e1ca4, type: 3}
     - target: {fileID: 8665792060414798625, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
       propertyPath: m_Name
       value: MissileTower
@@ -14554,11 +14514,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437167778}
   m_Mesh: {fileID: -3114268974010914483, guid: fdd5639a76137d34084da45affc8534e, type: 3}
---- !u!4 &440595493 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8996524052376631843, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-  m_PrefabInstance: {fileID: 49859202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &440706192
 GameObject:
   m_ObjectHideFlags: 0
@@ -38017,11 +37972,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558770190}
   m_Mesh: {fileID: -3114268974010914483, guid: fdd5639a76137d34084da45affc8534e, type: 3}
---- !u!4 &1560074674 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1363359531549946460, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-  m_PrefabInstance: {fileID: 49859202}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1561032059
 GameObject:
   m_ObjectHideFlags: 0

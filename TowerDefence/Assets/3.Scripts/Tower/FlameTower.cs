@@ -49,7 +49,7 @@ public class FlameTower: Tower
                 proj.Damage = this.Damage;
                 proj.IsTargeting = this.IsTargeting;
                 proj.Target = this.CurrentTarget;
-                proj.IsBomb = this.IsBomb;
+                //proj.IsBomb = this.IsBomb;
             }
             else
             {

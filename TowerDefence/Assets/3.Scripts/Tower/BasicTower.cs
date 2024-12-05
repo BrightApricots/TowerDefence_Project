@@ -50,7 +50,7 @@ public class BasicTower : Tower
                 Projectile proj = projectile.gameObject.GetComponent<Projectile>();
                 proj.Damage = this.Damage;
                 proj.IsTargeting = this.IsTargeting;
-                proj.IsBomb = this.IsBomb;
+                //proj.IsBomb = this.IsBomb;
                 proj.Target = this.CurrentTarget;
 
                 GameObject _MuzzlEffect = Instantiate(currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation);
