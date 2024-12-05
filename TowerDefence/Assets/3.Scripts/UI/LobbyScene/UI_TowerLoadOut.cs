@@ -18,11 +18,11 @@ public class UI_TowerLoadOut : MonoBehaviour
     {
         for (int i = 0; i<GameManager.Instance.EquipTowerList.Count; i++)
         {
-            Instantiate(GameManager.Instance.EquipTowerList[i], EquipTower);
+            Instantiate(Resources.Load<GameObject>($"TowerLoadoutCard/{GameManager.Instance.EquipTowerList[i].name}"), EquipTower);
         }
         for(int i= 0; i<GameManager.Instance.UnEquipTowerList.Count; i++)
         {
-            Instantiate(GameManager.Instance.UnEquipTowerList[i], UnEquipTower);
+            Instantiate(Resources.Load<GameObject>($"TowerLoadoutCard/{GameManager.Instance.UnEquipTowerList[i].name}"), UnEquipTower);
         }
     }
 
