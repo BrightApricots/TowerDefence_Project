@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Projectile : MonoBehaviour
     public Transform Target;
     public GameObject ExplosionParticle;
 
-    private void Start()
+    protected virtual void Start()
     {
         if(isSelfDestroy)
         {
@@ -50,6 +51,17 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        float time = Time.time + 1f;
+
+        // if 문으로 변경하여 조건을 확인합니다.
+        if (time > Time.time)
+        {
+            Debug.Log("들어옴");
+            Vector3 randVec = new Vector3(Random.Range(0, 90), Random.Range(0, 30), Random.Range(0, 60)).normalized;
+            
+            transform.Translate(randVec * 30f * Time.deltaTime);
+        }
+
         Vector3 dir = Target.position - transform.position;
         transform.rotation = Quaternion.LookRotation(dir);
         transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);

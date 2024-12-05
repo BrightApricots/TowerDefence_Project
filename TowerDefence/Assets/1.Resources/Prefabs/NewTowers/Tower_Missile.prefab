@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8996524052376631843}
+  - {fileID: 583464363086899684}
   m_Father: {fileID: 1363359531549946460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4076610172178671850
@@ -102,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8996524052376631843
 Transform:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ Transform:
   m_GameObject: {fileID: 4089755200585435170}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.399, y: 0.228, z: 0.334}
+  m_LocalPosition: {x: 0.493, y: 0.228, z: 0.334}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -133,6 +134,89 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4089755200585435170}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6636623227558821586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 583464363086899684}
+  - component: {fileID: 4098158683273016635}
+  - component: {fileID: 5364272216278680139}
+  m_Layer: 0
+  m_Name: ShootPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &583464363086899684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636623227558821586}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.521, y: 0.228, z: 0.334}
+  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 4275588154783881826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4098158683273016635
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636623227558821586}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5364272216278680139
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636623227558821586}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -261,8 +345,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363359531549946460}
-  - component: {fileID: 7698180299492827416}
   - component: {fileID: 6562114099687935198}
+  - component: {fileID: 3145255694369611420}
   m_Layer: 0
   m_Name: Tower_Missile
   m_TagString: Untagged
@@ -287,39 +371,6 @@ Transform:
   - {fileID: 5588223922261882595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7698180299492827416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665792060414798625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Missile Tower
-  Element: Electric
-  Damage: 10
-  Range: 15
-  FireRate: 0.33
-  DamageDealt: 0
-  TotalKilled: 0
-  UpgradePrice: 65
-  SellPrice: 13
-  TargetPriority: Most Progress
-  Info: 
-  IsTargeting: 1
-  IsBomb: 1
-  TowerHead: {fileID: 4275588154783881826}
-  Barrel: {fileID: 4275588154783881826}
-  TowerMuzzle: {fileID: 8996524052376631843}
-  Projectile: {fileID: 4389153839620792, guid: 3720370842d0a124baa530637202c7ab, type: 3}
-  TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  Quad: {fileID: 0}
-  mainCanvas: {fileID: 0}
-  isPreview: 0
 --- !u!65 &6562114099687935198
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -341,3 +392,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7, y: 1, z: 0.7}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3145255694369611420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665792060414798625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8490c78d44c0743b3051de8dc1e3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Missile Tower
+  Element: Electric
+  Damage: 3
+  Range: 15
+  FireRate: 0.33
+  DamageDealt: 0
+  TotalKilled: 0
+  UpgradePrice: 65
+  SellPrice: 33
+  TargetPriority: Most Progress
+  Info: Each attack fires 10 missiles, targeting random enemies within the attack
+    range.
+  MaxLevel: 3
+  IsBomb: 0
+  TowerHead: {fileID: 0}
+  TowerMuzzle: {fileID: 0}
+  TowerTooltip: {fileID: 0}
+  mainCanvas: {fileID: 0}
+  isPreview: 0
+  isFollow: 0
+  projectiles:
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+  muzzleEffects:
+  - {fileID: 147450, guid: d786954ea58ae6f45b3de29c31ec67f9, type: 3}
+  - {fileID: 169982, guid: 83cbfdcec541739499bcee069cf124ad, type: 3}
+  - {fileID: 151374, guid: 0d79fbba411af7541b91f5ae2aa2e31a, type: 3}
+  HitEffects:
+  - {fileID: 130346, guid: 07bf9ced87963e24299c2c2a22bfeeb6, type: 3}
+  - {fileID: 122924, guid: 02602c03e3a632f44a268976f34add18, type: 3}
+  - {fileID: 160086, guid: c217f262fea9e90468154f70d667707c, type: 3}
+  IsTargeting: 0
