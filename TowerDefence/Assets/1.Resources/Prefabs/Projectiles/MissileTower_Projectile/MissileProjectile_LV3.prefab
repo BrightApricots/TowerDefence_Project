@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 1295335802975358573, guid: 3720370842d0a124baa530637202c7ab, type: 3}
       propertyPath: ExplosionParticle
       value: 
-      objectReference: {fileID: 160086, guid: c217f262fea9e90468154f70d667707c, type: 3}
+      objectReference: {fileID: 7564372826126219967, guid: 873470cf1704c5e45bd860bbf5728091, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

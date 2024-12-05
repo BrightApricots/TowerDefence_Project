@@ -55,6 +55,7 @@ public class Pool<T> where T : Component
 
     void OnRelease(T item)
     {
+        Debug.Log($"Pool OnRelease: {item.name}");
         item.gameObject.SetActive(false);
     }
 

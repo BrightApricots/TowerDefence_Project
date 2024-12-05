@@ -76,6 +76,14 @@ public class ObjectManager
             Projectiles.Add(projectile);
             return projectile as T;
         }
+        else if (type == typeof(PooledParticle))
+        {
+            PooledParticle particle = PoolManager.Instance.Pop(prefab.GetComponent<PooledParticle>());
+            particle.transform.position = position;
+            if (rotation.HasValue)
+                particle.transform.rotation = rotation.Value;
+            return particle as T;
+        }
         
         return null;
     }
@@ -83,19 +91,28 @@ public class ObjectManager
     public void Despawn<T>(T obj) where T : UnityEngine.Object
     {
         if (obj == null)
+        {
+            Debug.Log("Trying to despawn null object");
             return;
+        }
 
         System.Type type = typeof(T);
+        Debug.Log($"Despawning object of type: {type.Name}");
 
-        if (type == typeof(Monster))
+        if (type == typeof(Projectile))
+        {
+            Debug.Log($"Despawning Projectile: {obj.name}");
+            Projectiles.Remove(obj as Projectile);
+            PoolManager.Instance.Push(obj as Projectile);
+        }
+        else if (type == typeof(Monster))
         {
             Monsters.Remove(obj as Monster);
-            Destroy((obj as Monster).gameObject);
+            PoolManager.Instance.Push(obj as Monster);
         }
-        else if (type == typeof(Projectile))
+        else if (type == typeof(PooledParticle))
         {
-            Projectiles.Remove(obj as Projectile);
-            Destroy((obj as Projectile).gameObject);
+            PoolManager.Instance.Push(obj as PooledParticle);
         }
     }
     public void Destroy(GameObject go)
@@ -107,8 +124,8 @@ public class ObjectManager
             PoolManager.Instance.Push(go.GetComponent<Monster>());
         else if (go.GetComponent<Projectile>() != null)
             PoolManager.Instance.Push(go.GetComponent<Projectile>());
-        else if (go.GetComponent<MonoBehaviour>() != null)
-            PoolManager.Instance.Push(go.GetComponent<MonoBehaviour>());
+        else if (go.GetComponent<PooledParticle>() != null)
+            PoolManager.Instance.Push(go.GetComponent<PooledParticle>());
         else
             UnityEngine.Object.Destroy(go);
     }

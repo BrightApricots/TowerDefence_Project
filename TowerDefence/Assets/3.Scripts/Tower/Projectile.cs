@@ -58,9 +58,10 @@ public class Projectile : MonoBehaviour
 
     protected virtual void TargettingMove()
     {
-        if(Target==null)
+        if(Target == null)
         {
-            Destroy(gameObject);
+            ObjectManager.Instance.Despawn(this);
+            return;
         }
         float time = Time.time + 1f;
 
@@ -85,6 +86,8 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Base OnTriggerEnter - IsBomb: {IsBomb}");  // 디버그 로그 추가
+        
         if (IsBomb)
         {
             Bomb(other);
@@ -101,7 +104,16 @@ public class Projectile : MonoBehaviour
         {
             Collider[] hit = Physics.OverlapSphere(transform.position, BombRange);
             
-            Instantiate(ExplosionParticle,transform.position, Quaternion.identity);
+            if(ExplosionParticle != null)
+            {
+                PooledParticle explosion = ObjectManager.Instance.Spawn<PooledParticle>(
+                    ExplosionParticle, 
+                    transform.position, 
+                    Quaternion.identity
+                );
+                explosion.Initialize();
+            }
+
             foreach (Collider h in hit)
             {
                 if (h.CompareTag("Monster"))
@@ -115,15 +127,22 @@ public class Projectile : MonoBehaviour
 
     protected virtual void NonBomb(Collider other)
     {
+        Debug.Log($"Base NonBomb - Target: {Target?.name}, Other: {other?.name}");  // 디버그 로그 추가
+        
         if (other.CompareTag("Monster"))
         {
             if(ExplosionParticle != null)
             {
-                GameObject go = Instantiate(ExplosionParticle, transform.position, Quaternion.identity);
-                Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+                PooledParticle hitEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                    ExplosionParticle, 
+                    transform.position, 
+                    Quaternion.identity
+                );
+                hitEffect.Initialize();
             }
             
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
+            Debug.Log("Base NonBomb - Despawning");  // 디버그 로그 추가
             ObjectManager.Instance.Despawn(this);
         }
     }

@@ -1743,8 +1743,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3145255694369611420, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
-      propertyPath: IsTargeting
-      value: 1
+      propertyPath: IsBomb
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8665792060414798625, guid: 18ef3d15f10e20c49aacb2ab5cfea6e5, type: 3}
       propertyPath: m_Name

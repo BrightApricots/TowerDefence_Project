@@ -15,11 +15,10 @@ public class MissileTower : Tower
 
     private List<Monster> targetMonsters;
     public bool IsTargeting;
+    public bool IsBomb;
+    public int RimitTarget = 10;
 
-    [Header("최대 타겟수")]
-        public int RimitTarget = 10;
-
-    public MissileTower()
+    public MissileTower() 
     {
         Name = "Missile Tower";
         Element = "Electric";
@@ -81,19 +80,19 @@ public class MissileTower : Tower
                 foreach (var monster in targetMonsters)
                 {
                     yield return new WaitForSeconds(0.05f);
-                    Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(
-                        currentProjectile, 
-                        TowerMuzzle.transform.position
-                    );
+                    Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(currentProjectile, TowerMuzzle.transform.position);
                     
                     projectile.transform.rotation = TowerHead.transform.rotation;
                     projectile.Damage = this.Damage;
                     projectile.IsTargeting = this.IsTargeting;
-                    //projectile.IsBomb = this.IsBomb;
+                    projectile.IsBomb = this.IsBomb;
                     projectile.Target = monster.transform;
-                    
-                    GameObject _MuzzleEffect = Instantiate(currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation);
-                    Destroy(_MuzzleEffect, _MuzzleEffect.GetComponent<ParticleSystem>().main.duration);
+                    projectile.Initialize();
+
+                    PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                        currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation
+                    );
+                    muzzleEffect?.Initialize();
                 }
             }
             targetMonsters.Clear();

@@ -157,11 +157,11 @@ MonoBehaviour:
   Damage: 5
   Duration: 3
   IsTargeting: 1
-  IsBomb: 1
-  isSelfDestroy: 0
+  IsBomb: 0
   BombRange: 3
+  isSelfDestroy: 0
   Target: {fileID: 0}
-  ExplosionParticle: {fileID: 130346, guid: 07bf9ced87963e24299c2c2a22bfeeb6, type: 3}
+  ExplosionParticle: {fileID: 4962512088551435691, guid: e7c38fe5db846b947a4fa3af67858609, type: 3}
 --- !u!1 &479583010379946935
 GameObject:
   m_ObjectHideFlags: 0
