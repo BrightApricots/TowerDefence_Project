@@ -12,13 +12,18 @@ public class Projectile : MonoBehaviour
     public float Duration = 3f;
     public bool IsTargeting = false;
     public bool IsBomb = false;
+    public bool isSelfDestroy = false;
+
     public float BombRange = 3f;
     public Transform Target;
     public GameObject ExplosionParticle;
 
     private void Start()
     {
-        StartCoroutine(SelfDestroy(Duration));
+        if(isSelfDestroy)
+        {
+            StartCoroutine(SelfDestroy(Duration));
+        }
     }
 
     
@@ -27,7 +32,7 @@ public class Projectile : MonoBehaviour
         Move();
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         if (IsTargeting)
         {
@@ -89,8 +94,12 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Monster"))
         {
-            GameObject go = Instantiate(ExplosionParticle, transform.position, Quaternion.identity);
-            Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+            if(ExplosionParticle != null)
+            {
+                GameObject go = Instantiate(ExplosionParticle, transform.position, Quaternion.identity);
+                Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+            }
+            
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
             Destroy(gameObject);
         }
@@ -109,5 +118,3 @@ public class Projectile : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, BombRange);
     }
 }
-
-//

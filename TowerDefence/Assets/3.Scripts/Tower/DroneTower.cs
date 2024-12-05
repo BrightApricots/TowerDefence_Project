@@ -5,11 +5,31 @@ using UnityEngine;
 public class DroneTower : Tower
 {
     public DroneController drone;
-
     public Transform droneHomePosition;
-    
+
+    [SerializeField] private List<GameObject> projectiles;
+    [SerializeField] private List<GameObject> muzzleEffects;
+    [SerializeField] private List<GameObject> HitEffects;
+
+    public DroneTower()
+    {
+        Name = "Drone Tower";
+        Element = "Electric";
+        Damage = 2;
+        Range = 5f;
+        FireRate = 2f;
+        DamageDealt = 0;
+        TotalKilled = 0;
+        UpgradePrice = 15;
+        SellPrice = 8;
+        TargetPriority = "Most Progress";
+        Info = "Automatically tracks and continuously attacks enemies within its range until they leave.";
+    }
+
     protected override void Start()
     {
+        
+
         base.Start();
 
         if (drone != null && droneHomePosition != null)
@@ -20,6 +40,9 @@ public class DroneTower : Tower
         {
             Debug.LogError("드론 또는 홈 포지션을 찾을 수 없습니다!");
         }
+        drone.projectilePrefab = projectiles[Level - 1];
+        drone.projectileEffect = muzzleEffects[Level - 1];
+        drone.projectileHitEffect = HitEffects[Level - 1];
     }
 
     protected override void Detect()
@@ -58,25 +81,25 @@ public class DroneTower : Tower
 
     protected override void OnLevelUp()
     {
-        base.OnLevelUp();
-        
-        // 드론 성능 향상
-        if (drone != null)
+        if (Level == 2)
         {
-            drone.damage = this.Damage;
-            drone.attackRange = this.Range * 0.7f;  // 드론의 공격범위는 타워 범위의 70%
-            drone.shootCooldown = this.FireRate;
-            
-            // 레벨에 따른 추가 효과
-            switch (Level)
-            {
-                case 2:
-                    drone.moveSpeed *= 1.2f;  // 이동속도 20% 증가
-                    break;
-                case 3:
-                    drone.projectilePrefab = Resources.Load<Transform>("Prefabs/AdvancedDroneProjectile");  // 강화된 투사체로 변경
-                    break;
-            }
+            drone.moveSpeed *= 1.3f;
+            drone.attackRange += 1.5f;
+            drone.shootCooldown *= 0.5f;
+            SetByLevel();
         }
+        else if (Level == 3)
+        {
+            drone.damage += 1;
+            drone.shootCooldown *= 0.2f;
+            SetByLevel();
+        }
+    }
+
+    private void SetByLevel()
+    {
+        drone.projectilePrefab = projectiles[Level - 1];
+        drone.projectileEffect = muzzleEffects[Level - 1];
+        drone.projectileHitEffect = HitEffects[Level - 1];
     }
 } 

@@ -36,6 +36,7 @@ public class UI_TowerTooltip : MonoBehaviour
     {
         UpdateUI();
     }
+
     public void SetTower(Tower tower)
     {
         selectedTower = tower;
@@ -61,6 +62,7 @@ public class UI_TowerTooltip : MonoBehaviour
             $"Damage: {Damage}" + System.Environment.NewLine +
             $"Range: {Range}" + System.Environment.NewLine +
             $"Fire Rate: {FireRate}" + System.Environment.NewLine +
+            System.Environment.NewLine + System.Environment.NewLine +
             $"Damage Dealt: {DamageDealt}" + System.Environment.NewLine +
             $"Total Killed: {TotalKilled}";
 

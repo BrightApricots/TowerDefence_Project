@@ -53,6 +53,7 @@ MonoBehaviour:
   Duration: 2
   IsTargeting: 0
   IsBomb: 0
+  isSelfDestroy: 0
   BombRange: 0
   Target: {fileID: 0}
   ExplosionParticle: {fileID: 0}

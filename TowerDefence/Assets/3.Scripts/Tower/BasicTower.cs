@@ -26,11 +26,9 @@ public class BasicTower : Tower
         DamageDealt = 0;
         TotalKilled = 0;
         UpgradePrice = 10;
-        SellPrice = 2;
+        SellPrice = 5;
         TargetPriority = "Most Progress";
         Info = "The basic defense tower.";
-
-        
     }
 
     protected override void Start()
@@ -40,7 +38,6 @@ public class BasicTower : Tower
         currentHitEffect = HitEffects[Level-1];
         base.Start();
     }
-
 
     protected override IEnumerator Attack()
     {
@@ -61,7 +58,6 @@ public class BasicTower : Tower
             }
         }
     }
-
 
     protected override void OnLevelUp()
     {

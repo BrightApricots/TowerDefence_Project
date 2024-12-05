@@ -184,12 +184,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 5
-  heightOffset: 0.1
-  attackRange: 8
-  projectilePrefab: {fileID: 4655418500077788, guid: 04488629b32874a4bb0f234c6cac7eaf, type: 3}
+  heightOffset: 0.5
+  attackRange: 2
+  projectilePrefab: {fileID: 0}
+  projectileEffect: {fileID: 0}
+  projectileHitEffect: {fileID: 0}
   muzzlePosition: {fileID: 858689846512024143}
-  shootCooldown: 1
+  shootCooldown: 2
   damage: 1
+  HomeTransform: {fileID: 8036534781049969696}
 --- !u!1 &1153013036359518022
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,21 +331,32 @@ MonoBehaviour:
   DamageDealt: 0
   TotalKilled: 0
   UpgradePrice: 15
-  SellPrice: 3
+  SellPrice: 8
   TargetPriority: Most Progress
-  Info: 
-  IsTargeting: 0
+  Info: Automatically tracks and continuously attacks enemies within its range until
+    they leave.
+  MaxLevel: 3
   IsBomb: 0
   TowerHead: {fileID: 0}
-  Barrel: {fileID: 0}
   TowerMuzzle: {fileID: 0}
-  Projectile: {fileID: 0}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
   isPreview: 0
+  isFollow: 0
   drone: {fileID: 4565023363747429236}
   droneHomePosition: {fileID: 8036534781049969696}
+  projectiles:
+  - {fileID: 3031729019245985137, guid: f238f9586ff1a7b469b952f8bd5b8502, type: 3}
+  - {fileID: 7728831310326839812, guid: 278bcb55e9f9379468d830d20b463139, type: 3}
+  - {fileID: 7144311290435400609, guid: e86bdde02e68f994b9792c01543fcabe, type: 3}
+  muzzleEffects:
+  - {fileID: 1751010978416606, guid: 70266080245b7944692a8b50ddf9a513, type: 3}
+  - {fileID: 1751010978416606, guid: 71052c1e9d47774439ae2a30c4489596, type: 3}
+  - {fileID: 1751010978416606, guid: 68f97a00b683f7e43aefe2e7c515bd89, type: 3}
+  HitEffects:
+  - {fileID: 7564637514454852452, guid: 8a8c74c1866a1d34692ba599bc39e1e4, type: 3}
+  - {fileID: 1873985756121678, guid: 5f6d6d77f4d0d074a8033eac55e37e4b, type: 3}
+  - {fileID: 1303102526221522, guid: 6c7761bc9a843da409235177477c7db3, type: 3}
 --- !u!65 &6957242958140905745
 BoxCollider:
   m_ObjectHideFlags: 0

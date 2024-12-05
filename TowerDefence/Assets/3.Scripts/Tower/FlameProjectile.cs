@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
-public class FireProjectile : Projectile
+public class FlameProjectile : Projectile
 {
     public float DamageInterval = 0.5f;
-    protected override void Update()
-    {
-
-    }
-
     private Dictionary<Collider, Coroutine> _damageCoroutines = new Dictionary<Collider, Coroutine>();
 
-    //private Coroutine _coStartDamage;
+
+    protected override void Move()
+    {
+    }
+
+
     protected override void OnTriggerEnter(Collider other)
     {
         if (_damageCoroutines.ContainsKey(other))
