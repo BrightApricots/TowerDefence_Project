@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6232521300777528742}
   - component: {fileID: 2688195078350882834}
   - component: {fileID: 8664037298076062200}
+  - component: {fileID: -6466680362888376489}
   m_Layer: 0
   m_Name: Monster (1)
   m_TagString: Monster
@@ -122,3 +123,21 @@ MonoBehaviour:
   speed: 2
   damage: 2
   gold: 2
+  rotationSpeed: 5
+--- !u!114 &-6466680362888376489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5080724872136012700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76367be63875e454cb64c082729c3574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 2
+  damage: 1
+  gold: 1
+  rotationSpeed: 5

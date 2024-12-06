@@ -11,6 +11,8 @@ public class Monster : MonoBehaviour
     private int damage = 1;
     [SerializeField]
     private int gold = 1;
+    [SerializeField]
+    private float rotationSpeed = 5f; // 회전 속도
 
     private Vector3[] path;
     private int currentWaypointIndex;
@@ -100,7 +102,7 @@ public class Monster : MonoBehaviour
         if (!isMoving) return;
 
         Vector3 targetDirection = (currentTargetPosition - transform.position).normalized; // 현재 목표 위치 - 몬스터의 현재 위치
-        moveDirection = Vector3.Lerp(moveDirection, targetDirection, Time.deltaTime * 10f);
+        moveDirection = Vector3.Lerp(moveDirection, targetDirection, Time.deltaTime * 10);
 
         // 이동
         transform.position += moveDirection * speed * Time.deltaTime;
@@ -109,7 +111,7 @@ public class Monster : MonoBehaviour
         if (moveDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
 
         if (Vector3.Distance(transform.position, currentTargetPosition) < 0.1f)
@@ -176,3 +178,5 @@ public class Monster : MonoBehaviour
         OnDestroyed?.Invoke();
     }
 }
+
+//
