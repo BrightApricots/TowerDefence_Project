@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,9 @@ public class UI_TowerLoadOut : MonoBehaviour
     public Transform EquipTower;
     public Transform UnEquipTower;
 
+    public List<Transform> EquipSlotList;
+    public List<Transform> UnEquipSlotList;
+
     private void Awake()
     {
         Exit.onClick.AddListener(ExitTowerLoadOut);
@@ -18,11 +20,11 @@ public class UI_TowerLoadOut : MonoBehaviour
     {
         for (int i = 0; i<GameManager.Instance.EquipTowerList.Count; i++)
         {
-            Instantiate(Resources.Load<GameObject>($"TowerLoadoutCard/{GameManager.Instance.EquipTowerList[i].name}"), EquipTower);
+            Instantiate(GameManager.Instance.EquipTowerList[i], EquipSlotList[i]);
         }
         for(int i= 0; i<GameManager.Instance.UnEquipTowerList.Count; i++)
         {
-            Instantiate(Resources.Load<GameObject>($"TowerLoadoutCard/{GameManager.Instance.UnEquipTowerList[i].name}"), UnEquipTower);
+            Instantiate(GameManager.Instance.UnEquipTowerList[i], UnEquipSlotList[i]);
         }
     }
 

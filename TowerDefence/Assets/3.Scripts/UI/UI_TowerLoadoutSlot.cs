@@ -1,70 +1,36 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using Unity.VisualScripting;
-//using UnityEngine;
-//using UnityEngine.EventSystems;
-
-//public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
-//{
-//    public SlotType slotType;
-//    private UI_Draggable currentTower;
-
-//    public enum SlotType
-//    {
-//        Inventory,
-//        Equipment
-//    }
-
-//    public void OnDrop(PointerEventData eventData)
-//    {
-//        print("OnDrop");
-//        GameObject droppedObject = eventData.pointerDrag;
-//        UI_Draggable draggableItem = droppedObject.GetComponent<UI_Draggable>();
-//        if (currentTower != null)
-//        {
-//            //if (transform.childCount > 0)
-//            //{
-//            //    Transform existingItem = transform.GetChild(0);
-//            //    existingItem.SetParent(draggableItem.OriginalParent);
-//            //    existingItem.position = draggableItem.OriginalPosition;
-//            //}
-
-//            eventData.pointerDrag.transform.SetParent(transform);
-//            eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
-//        }
-//    }
-
-//}
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
+public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
 {
-    public SlotType slotType;
-    private UI_Draggable currentTower;
-    private RectTransform rectTransform;
-
+    // 슬롯의 타입을 정의하는 열거형
     public enum SlotType
     {
         Inventory,
         Equipment
     }
 
+    public SlotType slotType;  // 현재 슬롯의 타입
+    private UI_Draggable currentTower;  // 현재 슬롯에 있는 타워
+    private RectTransform rectTransform;  // 슬롯의 RectTransform
+    public int SlotNum;  // 슬롯 번호
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        // Image 컴포넌트가 없다면 추가
+        // 레이캐스트를 위한 Image 컴포넌트 추가
         if (!GetComponent<UnityEngine.UI.Image>())
         {
             gameObject.AddComponent<UnityEngine.UI.Image>().raycastTarget = true;
         }
     }
 
+    // 드래그된 아이템이 드롭될 때 호출되는 메서드
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log($"OnDrop called on slot: {gameObject.name}");
 
+        // 드래그된 오브젝트 검증
         if (eventData.pointerDrag == null)
         {
             Debug.LogWarning("No dragged object found");
@@ -78,48 +44,102 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler, IPointerEnterHan
             return;
         }
 
-        // 현재 슬롯의 타워와 위치 교환
+        // 타워 교환 실행
         SwapTowers(draggedTower);
     }
 
+    // 타워 교환을 처리하는 메서드
     private void SwapTowers(UI_Draggable draggedTower)
     {
-        Transform draggedOriginalParent = draggedTower.OriginalParent;
-        Vector3 draggedOriginalPosition = draggedTower.OriginalPosition;
-
-        // 현재 슬롯에 타워가 있는 경우
         if (transform.childCount > 0)
         {
+            // 현재 슬롯에 타워가 있는 경우
             Transform existingTower = transform.GetChild(0);
             UI_Draggable existingDraggable = existingTower.GetComponent<UI_Draggable>();
 
             if (existingDraggable != null)
             {
+                // 현재 슬롯의 위치 정보 저장
+                Vector3 targetPosition = existingTower.position;
+                Transform targetParent = transform;
+
                 // 기존 타워를 드래그된 타워의 원래 위치로 이동
-                existingTower.SetParent(draggedOriginalParent);
-                existingDraggable.SetPosition(draggedOriginalPosition);
+                existingTower.SetParent(draggedTower.OriginalParent);
+                existingDraggable.SetPosition(draggedTower.OriginalPosition);
+
+                // 드래그된 타워를 현재 슬롯으로 이동
+                draggedTower.transform.SetParent(targetParent);
+                draggedTower.SetPosition(targetPosition);
+
+                // 스왑 완료 플래그 설정
+                draggedTower.SetSwapped(true);
+                existingDraggable.SetSwapped(true);
+
+                // GameManager의 타워 리스트 업데이트
+                UpdateGameManagerLists(draggedTower, existingDraggable);
             }
         }
-
-        // 드래그된 타워를 현재 슬롯으로 이동
-        draggedTower.transform.SetParent(transform);
-        draggedTower.SetPosition(rectTransform.position);
-
-        Debug.Log($"Successfully swapped towers in slot {gameObject.name}");
-    }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (GetComponent<UnityEngine.UI.Image>() == null)
+        else
         {
-            Debug.LogWarning($"UI_TowerLoadoutSlot on {gameObject.name} requires an Image component!");
+            // 빈 슬롯인 경우
+            draggedTower.transform.SetParent(transform);
+            draggedTower.SetPosition(rectTransform.position);
+            draggedTower.SetSwapped(true);
+
+            // 원래 위치의 슬롯 정보 가져오기
+            UI_TowerLoadoutSlot originalSlot = draggedTower.OriginalParent.GetComponent<UI_TowerLoadoutSlot>();
+
+            // 원래 위치의 리스트에서 타워 제거
+            if (originalSlot.slotType == SlotType.Inventory)
+            {
+                GameManager.Instance.UnEquipTowerList[originalSlot.SlotNum] = null;
+            }
+            else if (originalSlot.slotType == SlotType.Equipment)
+            {
+                GameManager.Instance.EquipTowerList[originalSlot.SlotNum] = null;
+            }
+
+            // 새로운 위치의 리스트에 타워 추가
+            if (slotType == SlotType.Inventory)
+            {
+                GameManager.Instance.UnEquipTowerList[SlotNum] = draggedTower.gameObject;
+            }
+            else
+            {
+                GameManager.Instance.EquipTowerList[SlotNum] = draggedTower.gameObject;
+            }
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    // GameManager의 타워 리스트를 업데이트하는 메서드
+    private void UpdateGameManagerLists(UI_Draggable draggedTower, UI_Draggable existingTower)
     {
-        throw new System.NotImplementedException();
+        UI_TowerLoadoutSlot originalSlot = draggedTower.OriginalParent.GetComponent<UI_TowerLoadoutSlot>();
+
+        // 현재 슬롯 타입에 따라 적절한 리스트 업데이트
+        if (slotType == SlotType.Inventory)
+        {
+            GameManager.Instance.UnEquipTowerList[SlotNum] = draggedTower.gameObject;
+            if (originalSlot.slotType == SlotType.Inventory)
+            {
+                GameManager.Instance.UnEquipTowerList[originalSlot.SlotNum] = existingTower.gameObject;
+            }
+            else
+            {
+                GameManager.Instance.EquipTowerList[originalSlot.SlotNum] = existingTower.gameObject;
+            }
+        }
+        else if (slotType == SlotType.Equipment)
+        {
+            GameManager.Instance.EquipTowerList[SlotNum] = draggedTower.gameObject;
+            if (originalSlot.slotType == SlotType.Inventory)
+            {
+                GameManager.Instance.UnEquipTowerList[originalSlot.SlotNum] = existingTower.gameObject;
+            }
+            else
+            {
+                GameManager.Instance.EquipTowerList[originalSlot.SlotNum] = existingTower.gameObject;
+            }
+        }
     }
-#endif
 }

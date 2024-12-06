@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public List<int> TotalTowerList;  //101~200
     public List<GameObject> PlayerTetrisList;
     public List<GameObject> HandTetrisList;
-    public List<GameObject> EquipTowerList = new List<GameObject>();
+    public List<GameObject> EquipTowerList;
     public List<GameObject> UnEquipTowerList;
     public List<Tower> PlacedTowerList;
 

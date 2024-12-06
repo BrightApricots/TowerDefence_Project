@@ -40,17 +40,6 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         Count
     };
 
-    enum ImageTowerEnum
-    {
-        Image_Basic,
-        Image_Missile,
-        Image_Lightning,
-        Image_Poison,
-        Image_Flame,
-        Image_Drone,
-        Count
-    };
-
     public GameObject TetrisListLocation;
     public GameObject TowerListLocation;
     public List<GameObject> ImageTetrisList;
@@ -98,16 +87,19 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         GameObject go;
         for (int i = 0; i < 3; i++)
         {
-            go = Instantiate(Resources.Load<GameObject>($"TowerCardPrefab/{Enum.GetName(typeof(ImageTowerEnum), tower[i])}"),
+            go = Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
                 TowerListLocation.transform);
             ImageTowerList.Add(go);
-            TowerList.Add(Resources.Load<GameObject>($"TowerCardPrefab/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
+            TowerList.Add(Resources.Load<GameObject>($"TowerLoadoutCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.Instance.EquipTowerList=TowerList;
+        for (int i = 0; i < TowerList.Count; i++)
+        {
+            GameManager.Instance.EquipTowerList[i]=TowerList[i];
+        }
         GameManager.Instance.PlayerTetrisList=TetrisList;
         UI_Map.clearStage++;
         SceneManager.LoadScene("LobbyScene");

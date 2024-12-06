@@ -66,13 +66,16 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void TowerCard()
     {
-        for (int i = 0; i < GameManager.Instance.EquipTowerList.Count; i++)
+        for(int i = 0; i<8; i++)
         {
-            Instantiate(GameManager.Instance.EquipTowerList[i], TowerCardLocation);
-        }
-        for(int i = GameManager.Instance.EquipTowerList.Count; i<8; i++)
-        { 
-            Instantiate(EmptyCard, TowerCardLocation);
+            if (GameManager.Instance.EquipTowerList[i] == null)
+            {
+                Instantiate(EmptyCard, TowerCardLocation);
+            }
+            else
+            {
+                Instantiate(Resources.Load($"AcademyTowerCard/{GameManager.Instance.EquipTowerList[i].name}"), TowerCardLocation);
+            }
         }
     }
 } 
