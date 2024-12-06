@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -64,17 +65,25 @@ public class UI_LobbyScene : MonoBehaviour
     //    TalentsPopup.SetActive(true);
     //}
 
-    private void TowerCard()
+    public List<GameObject> towerCards = new List<GameObject>();
+    public void TowerCard()
     {
-        for(int i = 0; i<8; i++)
+        foreach (var item in towerCards)
+        {
+            Destroy(item.gameObject); 
+        }
+        towerCards = new List<GameObject>();
+        for (int i = 0; i<8; i++)
         {
             if (GameManager.Instance.EquipTowerList[i] == null)
             {
-                Instantiate(EmptyCard, TowerCardLocation);
+                towerCards.Add(Instantiate(EmptyCard, TowerCardLocation));
             }
             else
             {
-                Instantiate(Resources.Load($"AcademyTowerCard/{GameManager.Instance.EquipTowerList[i].name}"), TowerCardLocation);
+                print(i);
+                var go = Instantiate(Resources.Load($"AcademyTowerCard/{GameManager.Instance.EquipTowerList[i].name}"), TowerCardLocation);
+                towerCards.Add((GameObject)go);
             }
         }
     }

@@ -90,7 +90,8 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
             go = Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
                 TowerListLocation.transform);
             ImageTowerList.Add(go);
-            TowerList.Add(Resources.Load<GameObject>($"TowerLoadoutCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
+            //TowerList.Add(Resources.Load<GameObject>($"TowerLoadoutCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
+            TowerList.Add(go);
         }
     }
 

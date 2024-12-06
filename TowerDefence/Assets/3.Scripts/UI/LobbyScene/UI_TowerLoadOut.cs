@@ -14,6 +14,7 @@ public class UI_TowerLoadOut : MonoBehaviour
     private void Awake()
     {
         Exit.onClick.AddListener(ExitTowerLoadOut);
+        Exit.onClick.AddListener(FindObjectOfType<UI_LobbyScene>().TowerCard);
     }
 
     private void Start()
