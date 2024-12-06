@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_ButtonAnimation : MonoBehaviour
+public class UI_ButtonTest : MonoBehaviour
 {
     private UI_EventHandler eventHandler;
 
