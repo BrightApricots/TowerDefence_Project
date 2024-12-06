@@ -20,7 +20,7 @@ public class DroneController : MonoBehaviour
     public Transform HomeTransform;
     
     private Transform homePosition;
-    private Transform currentTarget;
+    [SerializeField]private Transform currentTarget;
     private bool isReturning;
     private float defaultHeight;
     private Transform towerPosition;

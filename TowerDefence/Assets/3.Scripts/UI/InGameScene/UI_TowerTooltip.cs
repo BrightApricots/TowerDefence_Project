@@ -116,7 +116,8 @@ public class UI_TowerTooltip : MonoBehaviour
             // 타워 제거
             GameManager.Instance.PlacedTowerList.Remove(selectedTower);
             Destroy(selectedTower.gameObject);
-            
+
+            GameManager.Instance.tooltipCount = false;
             // 툴팁 제거
             Destroy(gameObject);
         }

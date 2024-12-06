@@ -72,21 +72,35 @@ public class Tower : MonoBehaviour
 
     protected virtual void Detect()
     {
-        if (CurrentTarget == null)
+        if (CurrentTarget == null || !CurrentTarget.gameObject.activeSelf)  // 타겟이 비활성화된 경우도 체크
         {
+            float closestDistance = float.MaxValue;
+            Transform closestTarget = null;
+            
             Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
             foreach (Collider target in hitColliders)
             {
-                if (target.CompareTag("Monster"))
+                if (target != null && target.CompareTag("Monster"))
                 {
-                    CurrentTarget = target.GetComponent<Transform>();
-                    break;
+                    Monster monster = target.GetComponent<Monster>();
+                    if (monster != null && monster.gameObject.activeSelf)  // 몬스터가 유효하고 활성화 상태인지 확인
+                    {
+                        float distance = Vector3.Distance(target.transform.position, transform.position);
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestTarget = target.transform;
+                        }
+                    }
                 }
             }
+            CurrentTarget = closestTarget;
         }
         else
         {
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position)> Range)
+            // 현재 타겟이 범위를 벗어났거나 죽었는지 확인
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range || 
+                !CurrentTarget.gameObject.activeSelf)
             {
                 CurrentTarget = null;
             }
@@ -111,6 +125,7 @@ public class Tower : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject() && clickmousePointer != Input.mousePosition)
             { 
                 Destroy(currentTooltip);
+                GameManager.Instance.tooltipCount = false;
                 currentTooltip = null;
             }
             //EventSystem.current.IsPointerOverGameObject()
@@ -146,44 +161,50 @@ public class Tower : MonoBehaviour
     {
         if (!isPreview)
         {
-                clickmousePointer = Input.mousePosition;
+            clickmousePointer = Input.mousePosition;
             if (currentTooltip != null)
             {
+                GameManager.Instance.tooltipCount = false;
                 Destroy(currentTooltip);
             }
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if(GameManager.Instance.tooltipCount != true)
             {
-                Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
 
-                currentTooltip = Instantiate(TowerTooltip, mainCanvas.transform);
-                UI_TowerTooltip toolTip = currentTooltip.GetComponent<UI_TowerTooltip>();
-                toolTip.Name = $"{this.Name}";
-                toolTip.Element = $"{this.Element}";
-                toolTip.Damage = $"{this.Damage}";
-                toolTip.Range = $"{this.Range}";
-                toolTip.FireRate = $"{this.FireRate}";
-                toolTip.DamageDealt = $"{this.DamageDealt}";
-                toolTip.UpgradePrice = $"{this.UpgradePrice}";
-                toolTip.SellPrice = $"{this.SellPrice}";
-                toolTip.TargetPriority = $"{this.TargetPriority}";
-                toolTip.TotalKilled = $"{this.TotalKilled}";
-                toolTip.TowerImage.sprite = Resources.Load<Sprite>($"Sprites/{this.Name}");
+                    currentTooltip = Instantiate(TowerTooltip, mainCanvas.transform);
+                    UI_TowerTooltip toolTip = currentTooltip.GetComponent<UI_TowerTooltip>();
+                    toolTip.Name = $"{this.Name}";
+                    toolTip.Element = $"{this.Element}";
+                    toolTip.Damage = $"{this.Damage}";
+                    toolTip.Range = $"{this.Range}";
+                    toolTip.FireRate = $"{this.FireRate}";
+                    toolTip.DamageDealt = $"{this.DamageDealt}";
+                    toolTip.UpgradePrice = $"{this.UpgradePrice}";
+                    toolTip.SellPrice = $"{this.SellPrice}";
+                    toolTip.TargetPriority = $"{this.TargetPriority}";
+                    toolTip.TotalKilled = $"{this.TotalKilled}";
+                    toolTip.TowerImage.sprite = Resources.Load<Sprite>($"Sprites/{this.Name}");
 
-                toolTip.SetTower(this);
+                    toolTip.SetTower(this);
 
-                RectTransform rect = currentTooltip.GetComponent<RectTransform>();
+                    RectTransform rect = currentTooltip.GetComponent<RectTransform>();
 
-                Vector2 localPoint;
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    mainCanvas.transform.GetComponent<RectTransform>(),
-                    screenPoint, mainCanvas.worldCamera, out localPoint);
+                    Vector2 localPoint;
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                        mainCanvas.transform.GetComponent<RectTransform>(),
+                        screenPoint, mainCanvas.worldCamera, out localPoint);
 
-                rect.anchoredPosition = localPoint;
+                    rect.anchoredPosition = localPoint;
+                    GameManager.Instance.tooltipCount = true;
+                }
             }
+            
         }
     }
 }

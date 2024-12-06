@@ -13,7 +13,7 @@ public class MissileTower : Tower
     private GameObject currentMuzzleEffect;
     private GameObject currentHitEffect;
 
-    private List<Monster> targetMonsters;
+    public List<Monster> targetMonsters;
     public bool IsTargeting;
     public bool IsBomb;
     public int RimitTarget = 10;
@@ -37,37 +37,32 @@ public class MissileTower : Tower
         currentProjectile = projectiles[Level - 1];
         currentMuzzleEffect = muzzleEffects[Level - 1];
         currentHitEffect = HitEffects[Level - 1];
+        targetMonsters = new List<Monster>();
         base.Start();
     }
 
     protected override void Detect()
     {
-        targetMonsters = new List<Monster>(); // targetMonsters 리스트 초기화
-        if (CurrentTarget == null)
+        targetMonsters.Clear();
+        
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
+        foreach (Collider target in hitColliders)
         {
-            int count = 0;
-            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
-            foreach (Collider target in hitColliders)
+            if (target.CompareTag("Monster"))
             {
-                if (target.CompareTag("Monster"))
+                Monster monster = target.GetComponent<Monster>();
+                if (monster != null && monster.gameObject.activeSelf)
                 {
-                    targetMonsters.Add(target.GetComponent<Monster>());
-                    count++;
-                    if (count == RimitTarget)
+                    targetMonsters.Add(monster);
+                    if (targetMonsters.Count >= RimitTarget)
                     {
                         break;
                     }
                 }
             }
         }
-        else
-        {
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range)
-            {
-                CurrentTarget = null;
-            }
-        }
-        currentProjectile.GetComponent<MissileProjectile>().SetTargets(targetMonsters);
+        
+        CurrentTarget = targetMonsters.Count > 0 ? targetMonsters[0].transform : null;
     }
 
     protected override IEnumerator Attack()
@@ -75,27 +70,39 @@ public class MissileTower : Tower
         while (true)
         {
             yield return new WaitForSeconds(FireRate);
-            if (targetMonsters.Count != 0)
+            
+            targetMonsters.RemoveAll(monster => 
+                monster == null || !monster.gameObject.activeSelf);
+            
+            if (targetMonsters.Count > 0)
             {
-                foreach (var monster in targetMonsters)
+                foreach (var monster in targetMonsters.ToArray())
                 {
-                    yield return new WaitForSeconds(0.05f);
-                    Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(currentProjectile, TowerMuzzle.transform.position);
-                    
-                    projectile.transform.rotation = TowerHead.transform.rotation;
-                    projectile.Damage = this.Damage;
-                    projectile.IsTargeting = this.IsTargeting;
-                    projectile.IsBomb = this.IsBomb;
-                    projectile.Target = monster.transform;
-                    projectile.Initialize();
+                    if (monster != null && monster.gameObject.activeSelf)
+                    {
+                        yield return new WaitForSeconds(0.05f);
+                        Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(
+                            currentProjectile, 
+                            TowerMuzzle.transform.position
+                        );
+                        
+                        projectile.transform.rotation = TowerHead.transform.rotation;
+                        projectile.Damage = this.Damage;
+                        projectile.IsTargeting = this.IsTargeting;
+                        projectile.IsBomb = this.IsBomb;
+                        projectile.Target = monster.transform;
+                        projectile.Initialize();
 
-                    PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
-                        currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation
-                    );
-                    muzzleEffect?.Initialize();
+                        PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                            currentMuzzleEffect, 
+                            TowerMuzzle.transform.position, 
+                            TowerHead.transform.rotation
+                        );
+                        muzzleEffect?.Initialize();
+                    }
                 }
             }
-            targetMonsters.Clear();
+            
             currentProjectile.GetComponent<MissileProjectile>().ClearTargets();
         }
     }

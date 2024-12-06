@@ -28,8 +28,6 @@ public class DroneTower : Tower
 
     protected override void Start()
     {
-        
-
         base.Start();
 
         if (drone != null && droneHomePosition != null)
@@ -44,6 +42,29 @@ public class DroneTower : Tower
         drone.projectileEffect = muzzleEffects[Level - 1];
         drone.projectileHitEffect = HitEffects[Level - 1];
     }
+
+    //protected virtual void Detect()
+    //{
+    //    if (CurrentTarget == null)
+    //    {
+    //        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
+    //        foreach (Collider target in hitColliders)
+    //        {
+    //            if (target.CompareTag("Monster"))
+    //            {
+    //                CurrentTarget = target.GetComponent<Transform>();
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range)
+    //        {
+    //            CurrentTarget = null;
+    //        }
+    //    }
+    //}
 
     protected override void Detect()
     {
@@ -69,6 +90,13 @@ public class DroneTower : Tower
             if (nearestTarget != null)
             {
                 drone.SetTarget(nearestTarget);
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range)
+            {
+                CurrentTarget = null;
             }
         }
     }

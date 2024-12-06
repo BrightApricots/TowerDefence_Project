@@ -4926,7 +4926,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -13852,7 +13852,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -14223,19 +14223,19 @@ MonoBehaviour:
   waves:
   - monsterSpawnData:
     - monsterPrefab: {fileID: 2452309151166013254, guid: 5469a7e840fe2a14f9c14d03cd2a34e6, type: 3}
-      spawnCount: 1
+      spawnCount: 50
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
   - monsterSpawnData:
     - monsterPrefab: {fileID: 5080724872136012700, guid: 22187cbd40f7b734cae8c12942087b38, type: 3}
-      spawnCount: 1
+      spawnCount: 100
     spawnInterval: 1
     spawnPoints:
     - {fileID: 1660414543}
   - monsterSpawnData:
     - monsterPrefab: {fileID: 7714184698131708119, guid: 596c9466bf54a764f879c66a8d64ab88, type: 3}
-      spawnCount: 1
+      spawnCount: 100
     spawnInterval: 1
     spawnPoints:
     - {fileID: 1541005857}
@@ -14267,6 +14267,7 @@ MonoBehaviour:
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
+  waveTextManager: {fileID: 0}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -16748,6 +16749,7 @@ MonoBehaviour:
   TowerCardLocation1: {fileID: 493096090}
   TowerCardLocation2: {fileID: 1573399811}
   EmptyCard: {fileID: 6441401193807679527, guid: 482413b0b95f8af4fa1e96dfb4f0d3d7, type: 3}
+  PausePanel: {fileID: 0}
 --- !u!114 &1124640184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17666,7 +17668,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
-  Panel: {fileID: 681567162}
+  gameOverScene: {fileID: 0}
+  EndPanel: {fileID: 0}
+  GameOverPanel: {fileID: 0}
+  gameOverButton: {fileID: 0}
   uiElementsToDisable: []
 --- !u!4 &1170214131
 Transform:
@@ -23901,7 +23906,7 @@ MonoBehaviour:
   CurrentExp: 10
   CurrentEmber: 10
   CurrentHp: 15
-  CurrentMoney: 50
+  CurrentMoney: 111111
   MaxHp: 15
   Difficulty: 0
   TotalTetrisList: 
@@ -23911,6 +23916,7 @@ MonoBehaviour:
   EquipTowerList: []
   UnEquipTowerList: []
   PlacedTowerList: []
+  tooltipCount: 0
 --- !u!224 &1498700928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24901,7 +24907,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -26185,7 +26191,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -31782,12 +31788,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawPrice: 5
-  OneSquarePrefab: {fileID: 8205607950013524934, guid: 80b59344d5d040f4d879e98f99f9237c, type: 3}
-  FourSquarePrefab: {fileID: 110272216088920707, guid: dedce792e84194745b2e13ce25841ffa, type: 3}
-  FuckYouPrefab: {fileID: 6162816463178265187, guid: 0ce703eacefcc6847858e89bc64f51cc, type: 3}
-  ZigzagPrefab: {fileID: 4520414062922787682, guid: 3ad7d572f0c5b4748bb76bd6b8464f1f, type: 3}
-  StraightPrefab: {fileID: 5417237943439139473, guid: 7fd25792605b2dc469233587c643b3e0, type: 3}
-  LPrefab: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
+  Dot: {fileID: 0}
+  O: {fileID: 0}
+  T: {fileID: 0}
+  Z: {fileID: 0}
+  I: {fileID: 0}
+  L: {fileID: 0}
   DrawButton: {fileID: 1108174728}
   DrawPriceText: {fileID: 1285029814}
   HorizontalLayout: {fileID: 519268450}
@@ -32183,7 +32189,7 @@ MonoBehaviour:
   parent: {fileID: 1099540087}
   MainCam: {fileID: 732528380}
   virtualCamera: {fileID: 1240128698}
-  moveSpeed: 20
+  moveSpeed: 30
   zoomSpeed: 10
 --- !u!1 &2067346653
 GameObject:

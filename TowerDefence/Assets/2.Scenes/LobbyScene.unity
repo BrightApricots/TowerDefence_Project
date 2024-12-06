@@ -7996,6 +7996,7 @@ MonoBehaviour:
   EquipTowerList: []
   UnEquipTowerList: []
   PlacedTowerList: []
+  tooltipCount: 0
 --- !u!4 &2109788630
 Transform:
   m_ObjectHideFlags: 0

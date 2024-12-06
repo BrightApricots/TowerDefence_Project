@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> UnEquipTowerList;
     public List<Tower> PlacedTowerList;
 
+    public bool tooltipCount = false;
+
     private void Awake()
     {
         if(instance == null)

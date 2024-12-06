@@ -194,6 +194,7 @@ MonoBehaviour:
   shootCooldown: 2
   damage: 1
   HomeTransform: {fileID: 8036534781049969696}
+  currentTarget: {fileID: 0}
   IsTargeting: 1
 --- !u!1 &1153013036359518022
 GameObject:
