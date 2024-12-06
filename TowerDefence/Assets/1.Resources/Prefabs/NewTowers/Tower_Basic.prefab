@@ -58,26 +58,26 @@ MonoBehaviour:
   TargetPriority: Most Progress
   Info: The basic defense tower.
   MaxLevel: 3
-  IsTargeting: 0
-  IsBomb: 0
   TowerHead: {fileID: 7767493726691107023}
   TowerMuzzle: {fileID: 2281615677248325660}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  mainCanvas: {fileID: 0}
   isPreview: 0
   isFollow: 0
+  mainCanvas: {fileID: 0}
   projectiles:
   - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
   - {fileID: 4036195920102418499, guid: 4b91063355f5e5643bb500e774eb0f1d, type: 3}
   - {fileID: 4036195920102418499, guid: 69db9fff1992ff74d868e959d28d14bb, type: 3}
   muzzleEffects:
-  - {fileID: 1751010978416606, guid: dd86b44dc327d2e45a0fbe3cdf9e1cd9, type: 3}
-  - {fileID: 1751010978416606, guid: 71052c1e9d47774439ae2a30c4489596, type: 3}
-  - {fileID: 1751010978416606, guid: 68f97a00b683f7e43aefe2e7c515bd89, type: 3}
+  - {fileID: 1751010978416606, guid: 0883469185f686f4aa02b6427008ed6a, type: 3}
+  - {fileID: 1751010978416606, guid: 6a0871306dc8a174cbb4f015ff3f19e9, type: 3}
+  - {fileID: 1751010978416606, guid: f6a28f3ce2b7b8642ba45984ab8ba54c, type: 3}
   HitEffects:
-  - {fileID: 7564637514454852452, guid: 8a8c74c1866a1d34692ba599bc39e1e4, type: 3}
-  - {fileID: 1873985756121678, guid: 5f6d6d77f4d0d074a8033eac55e37e4b, type: 3}
-  - {fileID: 1303102526221522, guid: 6c7761bc9a843da409235177477c7db3, type: 3}
+  - {fileID: 1257899049973296, guid: eadd9fdb3d6164443a340f98f8898aec, type: 3}
+  - {fileID: 1873985756121678, guid: 52e1aa65243a08e4ba1cced77d96b921, type: 3}
+  - {fileID: 1303102526221522, guid: 8f3b12113784b4242969932d9a7b05e3, type: 3}
+  IsTargeting: 1
+  IsBomb: 0
 --- !u!65 &7963059800701513188
 BoxCollider:
   m_ObjectHideFlags: 0

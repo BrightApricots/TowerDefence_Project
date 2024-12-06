@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            NonTagettingMove();
+            NonTargettingMove();
         }
     }
 
@@ -70,7 +70,6 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("들어옴");
             Vector3 randVec = new Vector3(Random.Range(0, 90), Random.Range(0, 30), Random.Range(0, 60)).normalized;
-            
             transform.Translate(randVec * 30f * Time.deltaTime);
         }
 
@@ -79,7 +78,7 @@ public class Projectile : MonoBehaviour
         transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
 
-    protected virtual void NonTagettingMove()
+    protected virtual void NonTargettingMove()
     {
         transform.Translate(Vector3.forward * MoveSpeed * Time.deltaTime);
     }
@@ -131,19 +130,20 @@ public class Projectile : MonoBehaviour
         
         if (other.CompareTag("Monster"))
         {
-            if(ExplosionParticle != null)
+            if (ExplosionParticle != null)
             {
                 PooledParticle hitEffect = ObjectManager.Instance.Spawn<PooledParticle>(
-                    ExplosionParticle, 
-                    transform.position, 
+                    ExplosionParticle,
+                    transform.position,
                     Quaternion.identity
                 );
                 hitEffect.Initialize();
             }
-            
+
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);
             Debug.Log("Base NonBomb - Despawning");  // 디버그 로그 추가
             ObjectManager.Instance.Despawn(this);
+
         }
     }
 

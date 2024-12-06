@@ -30,6 +30,8 @@ public class DroneController : MonoBehaviour
     private float moveThreshold = 0.1f;
     private float lastShootTime;
 
+    public bool IsTargeting;
+
     public void Initialize(Transform home, Transform tower, float range)
     {
         homePosition = home;
@@ -126,16 +128,26 @@ public class DroneController : MonoBehaviour
     {
         if (Time.time - lastShootTime >= shootCooldown)
         {
-            GameObject projectile = Instantiate(projectilePrefab, muzzlePosition.position, Quaternion.identity);
-            Projectile proj = projectile.GetComponent<Projectile>();
-            proj.Damage = damage;
-            proj.IsTargeting = true;
-            proj.IsBomb = this.IsBomb;
-            proj.Target = currentTarget;
+            Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(projectilePrefab, muzzlePosition.transform.position, Quaternion.identity);
+            projectile.Damage = this.damage;
+            projectile.IsTargeting = this.IsTargeting;
+            projectile.IsBomb = this.IsBomb;
+            projectile.Target = currentTarget;
 
-            GameObject _MuzzlEffect = Instantiate(projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation);
-            Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
+            //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition.position, Quaternion.identity);
+            //Projectile proj = projectile.GetComponent<Projectile>();
+            //proj.Damage = damage;
+            //proj.IsTargeting = true;
+            //proj.IsBomb = this.IsBomb;
+            //proj.Target = currentTarget;
 
+            PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                        projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation
+               );
+
+            muzzleEffect?.Initialize();
+            //  GameObject _MuzzlEffect = Instantiate(projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation);
+            //Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
             lastShootTime = Time.time;
         }
     }

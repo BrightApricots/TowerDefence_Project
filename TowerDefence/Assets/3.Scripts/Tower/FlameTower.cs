@@ -49,13 +49,14 @@ public class FlameTower: Tower
                 proj.Damage = this.Damage;
                 proj.IsTargeting = this.IsTargeting;
                 proj.Target = this.CurrentTarget;
-                //proj.IsBomb = this.IsBomb;
+                // FireRate 동안 활성화 유지
+                yield return new WaitForSeconds(FireRate);
             }
             else
             {
                 currentFlameProjectile.SetActive(false);
+                yield return null; // 타겟이 없을 때는 다음 프레임까지 대기
             }
-            yield return new WaitForSeconds(1f);
         }
     }
 

@@ -15,7 +15,7 @@ public class BasicTower : Tower
     private GameObject currentHitEffect;
 
     public bool IsTargeting;
-
+    public bool IsBomb;
     public BasicTower()
     {
         Name = "Basic Tower";
@@ -46,15 +46,16 @@ public class BasicTower : Tower
             yield return new WaitForSeconds(FireRate);
             if (CurrentTarget != null)
             {
-                GameObject projectile = Instantiate(currentProjectile, TowerMuzzle.transform.position, TowerHead.transform.rotation);
-                Projectile proj = projectile.gameObject.GetComponent<Projectile>();
-                proj.Damage = this.Damage;
-                proj.IsTargeting = this.IsTargeting;
-                //proj.IsBomb = this.IsBomb;
-                proj.Target = this.CurrentTarget;
+                Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(currentProjectile, TowerMuzzle.transform.position);
+                projectile.Damage = this.Damage;
+                projectile.IsTargeting = this.IsTargeting;
+                projectile.IsBomb = this.IsBomb;
+                projectile.Target = this.CurrentTarget;
 
-                GameObject _MuzzlEffect = Instantiate(currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation);
-                Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
+                PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                         currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation
+                );
+                muzzleEffect?.Initialize();
             }
         }
     }

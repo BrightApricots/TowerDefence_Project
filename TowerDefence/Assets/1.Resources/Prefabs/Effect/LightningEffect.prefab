@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1779108279420021837}
   - component: {fileID: 8130415863385685447}
   - component: {fileID: 4083872205159492734}
+  - component: {fileID: -8352747392002126607}
   m_Layer: 0
   m_Name: LightningEffect
   m_TagString: Untagged
@@ -155,3 +156,15 @@ MonoBehaviour:
   lightningColor: {r: 0.8666667, g: 1, b: 0, a: 1}
   startWidth: 0.72
   endWidth: 0.41
+--- !u!114 &-8352747392002126607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3017776589207227471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6096bc749c21c3040a5be02235d2f55a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

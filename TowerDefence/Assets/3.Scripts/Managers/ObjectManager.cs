@@ -84,7 +84,18 @@ public class ObjectManager
                 particle.transform.rotation = rotation.Value;
             return particle as T;
         }
+        else if (type == typeof(LightningEffect))
+        {
+            LightningEffect line = PoolManager.Instance.Pop(prefab.GetComponent<LightningEffect>());
+            line.transform.position = position;
+            if (rotation.HasValue)
+                line.transform.rotation = rotation.Value;
+            return line as T;
+        }
         
+
+
+
         return null;
     }
 
@@ -114,6 +125,10 @@ public class ObjectManager
         {
             PoolManager.Instance.Push(obj as PooledParticle);
         }
+        else if (type == typeof(LightningEffect))
+        {
+            PoolManager.Instance.Push(obj as LightningEffect);
+        }
     }
     public void Destroy(GameObject go)
     {
@@ -126,6 +141,8 @@ public class ObjectManager
             PoolManager.Instance.Push(go.GetComponent<Projectile>());
         else if (go.GetComponent<PooledParticle>() != null)
             PoolManager.Instance.Push(go.GetComponent<PooledParticle>());
+        else if (go.GetComponent<LightningEffect>() != null)
+            PoolManager.Instance.Push(go.GetComponent<LightningEffect>());
         else
             UnityEngine.Object.Destroy(go);
     }

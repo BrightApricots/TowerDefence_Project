@@ -14475,12 +14475,12 @@ MonoBehaviour:
   MoveSpeed: 50
   Damage: 5
   Duration: 3
-  IsTargeting: 0
+  IsTargeting: 1
   IsBomb: 0
-  isSelfDestroy: 0
   BombRange: 3
+  isSelfDestroy: 0
   Target: {fileID: 0}
-  ExplosionParticle: {fileID: 7564637514454852452, guid: 8a8c74c1866a1d34692ba599bc39e1e4, type: 3}
+  ExplosionParticle: {fileID: 5711083335939177453, guid: 460f2665821f6c64dacbea9751566a5b, type: 3}
 --- !u!136 &9218619332921162443
 CapsuleCollider:
   m_ObjectHideFlags: 0
