@@ -21,12 +21,13 @@ public class UI_Draggable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
         OriginalParent = transform.parent;
         OriginalPosition = transform.position;
         transform.SetParent(transform.root);
-        GetComponent<Image>().raycastTarget = false;
+        GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
+        
     }
 
     //public void OnEndDrag(PointerEventData eventData)
@@ -40,7 +41,7 @@ public class UI_Draggable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     {
         Debug.Log($"End drag: {gameObject.name}");
 
-        GetComponent<Image>().raycastTarget = true;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
 
         // 유효한 슬롯 위에 드롭되지 않은 경우
         if (eventData.pointerEnter == null ||

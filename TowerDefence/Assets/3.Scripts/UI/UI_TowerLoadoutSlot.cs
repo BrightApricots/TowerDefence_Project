@@ -39,7 +39,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
+public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
 {
     public SlotType slotType;
     private UI_Draggable currentTower;
@@ -115,6 +115,11 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
         {
             Debug.LogWarning($"UI_TowerLoadoutSlot on {gameObject.name} requires an Image component!");
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
     }
 #endif
 }
