@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6232635189348713071}
-  - component: {fileID: 5146096117131174251}
+  - component: {fileID: 4725702340338440808}
   - component: {fileID: 7963059800701513188}
   m_Layer: 0
   m_Name: Tower_Basic
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7767493726691107023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5146096117131174251
+--- !u!114 &4725702340338440808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,11 +43,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1143255420651060252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85939ba539e76d14b87b78d13900e896, type: 3}
+  m_Script: {fileID: 11500000, guid: 812dee8e82a1e0b44a6e9345511d6110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Basic Tower
-  Element: Normnal
+  Element: Normal
   Damage: 2
   Range: 4
   FireRate: 1.5
@@ -56,17 +56,28 @@ MonoBehaviour:
   UpgradePrice: 10
   SellPrice: 2
   TargetPriority: Most Progress
-  Info: 
-  IsTargeting: 0
-  IsBomb: 0
+  Info: The basic defense tower.
+  MaxLevel: 3
   TowerHead: {fileID: 7767493726691107023}
-  Barrel: {fileID: 7767493726691107023}
   TowerMuzzle: {fileID: 2281615677248325660}
-  Projectile: {fileID: 4655418500077788, guid: 04488629b32874a4bb0f234c6cac7eaf, type: 3}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  Quad: {fileID: 0}
-  mainCanvas: {fileID: 0}
   isPreview: 0
+  isFollow: 0
+  mainCanvas: {fileID: 0}
+  projectiles:
+  - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
+  - {fileID: 4036195920102418499, guid: 4b91063355f5e5643bb500e774eb0f1d, type: 3}
+  - {fileID: 4036195920102418499, guid: 69db9fff1992ff74d868e959d28d14bb, type: 3}
+  muzzleEffects:
+  - {fileID: 1751010978416606, guid: 0883469185f686f4aa02b6427008ed6a, type: 3}
+  - {fileID: 1751010978416606, guid: 6a0871306dc8a174cbb4f015ff3f19e9, type: 3}
+  - {fileID: 1751010978416606, guid: f6a28f3ce2b7b8642ba45984ab8ba54c, type: 3}
+  HitEffects:
+  - {fileID: 1257899049973296, guid: eadd9fdb3d6164443a340f98f8898aec, type: 3}
+  - {fileID: 1873985756121678, guid: 52e1aa65243a08e4ba1cced77d96b921, type: 3}
+  - {fileID: 1303102526221522, guid: 8f3b12113784b4242969932d9a7b05e3, type: 3}
+  IsTargeting: 1
+  IsBomb: 0
 --- !u!65 &7963059800701513188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,7 +111,7 @@ GameObject:
   - component: {fileID: 5780852349904417019}
   - component: {fileID: 1938995533330594025}
   m_Layer: 0
-  m_Name: ShootPos
+  m_Name: TowerMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +194,7 @@ GameObject:
   - component: {fileID: 6848086469910725010}
   - component: {fileID: 2323326898384189585}
   m_Layer: 0
-  m_Name: BasicHead
+  m_Name: TowerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

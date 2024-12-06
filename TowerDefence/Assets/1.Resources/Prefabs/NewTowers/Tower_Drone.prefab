@@ -184,12 +184,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 5
-  heightOffset: 0.1
-  attackRange: 8
-  projectilePrefab: {fileID: 4655418500077788, guid: 04488629b32874a4bb0f234c6cac7eaf, type: 3}
+  heightOffset: 0.5
+  attackRange: 2
+  projectilePrefab: {fileID: 0}
+  projectileEffect: {fileID: 0}
+  projectileHitEffect: {fileID: 0}
+  IsBomb: 0
   muzzlePosition: {fileID: 858689846512024143}
-  shootCooldown: 1
+  shootCooldown: 2
   damage: 1
+  HomeTransform: {fileID: 8036534781049969696}
+  IsTargeting: 1
 --- !u!1 &1153013036359518022
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,21 +333,31 @@ MonoBehaviour:
   DamageDealt: 0
   TotalKilled: 0
   UpgradePrice: 15
-  SellPrice: 3
+  SellPrice: 8
   TargetPriority: Most Progress
-  Info: 
-  IsTargeting: 0
-  IsBomb: 0
+  Info: Automatically tracks and continuously attacks enemies within its range until
+    they leave.
+  MaxLevel: 3
   TowerHead: {fileID: 0}
-  Barrel: {fileID: 0}
   TowerMuzzle: {fileID: 0}
-  Projectile: {fileID: 0}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  Quad: {fileID: 0}
-  mainCanvas: {fileID: 0}
   isPreview: 0
+  isFollow: 0
+  mainCanvas: {fileID: 0}
   drone: {fileID: 4565023363747429236}
   droneHomePosition: {fileID: 8036534781049969696}
+  projectiles:
+  - {fileID: 3031729019245985137, guid: f238f9586ff1a7b469b952f8bd5b8502, type: 3}
+  - {fileID: 7728831310326839812, guid: 278bcb55e9f9379468d830d20b463139, type: 3}
+  - {fileID: 7144311290435400609, guid: e86bdde02e68f994b9792c01543fcabe, type: 3}
+  muzzleEffects:
+  - {fileID: 6139676642507554418, guid: cb5aed57b50d1e343a4361e85df56c2f, type: 3}
+  - {fileID: 512051993849594517, guid: 955351637eb401a4aa56742f490cf658, type: 3}
+  - {fileID: 160900256878831438, guid: 688026b6f6efc494381451fb025d088f, type: 3}
+  HitEffects:
+  - {fileID: 5711083335939177453, guid: 460f2665821f6c64dacbea9751566a5b, type: 3}
+  - {fileID: 6794705595457562177, guid: f6f7445e7b5b5b44a97db2bf413f6eb7, type: 3}
+  - {fileID: 4069801270860620897, guid: 424a4e01929dfe24a86a057c4955857e, type: 3}
 --- !u!65 &6957242958140905745
 BoxCollider:
   m_ObjectHideFlags: 0

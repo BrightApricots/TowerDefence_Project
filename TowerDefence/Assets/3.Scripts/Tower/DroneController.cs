@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DroneController : MonoBehaviour
@@ -6,10 +8,16 @@ public class DroneController : MonoBehaviour
     public float rotationSpeed = 5f;
     public float heightOffset = 5f;
     public float attackRange = 8f;
-    public Transform projectilePrefab;
+
+    public GameObject projectilePrefab;
+    public GameObject projectileEffect;
+    public GameObject projectileHitEffect;
+
+    public bool IsBomb;
     public Transform muzzlePosition;
-    public float shootCooldown = 0.5f;
+    public float shootCooldown = 2f;
     public int damage = 1;
+    public Transform HomeTransform;
     
     private Transform homePosition;
     private Transform currentTarget;
@@ -21,6 +29,8 @@ public class DroneController : MonoBehaviour
     private float smoothTime = 0.5f;
     private float moveThreshold = 0.1f;
     private float lastShootTime;
+
+    public bool IsTargeting;
 
     public void Initialize(Transform home, Transform tower, float range)
     {
@@ -75,7 +85,7 @@ public class DroneController : MonoBehaviour
 
     private void AdjustHeight()
     {
-        float targetHeight = currentTarget != null ? currentTarget.position.y + heightOffset : defaultHeight;
+        float targetHeight = currentTarget != null ? currentTarget.position.y + heightOffset : homePosition.position.y + heightOffset; ;
         Vector3 currentPos = transform.position;
         currentPos.y = Mathf.Lerp(currentPos.y, targetHeight, Time.deltaTime * moveSpeed);
         transform.position = currentPos;
@@ -118,16 +128,26 @@ public class DroneController : MonoBehaviour
     {
         if (Time.time - lastShootTime >= shootCooldown)
         {
-            Transform projectile = Instantiate(projectilePrefab, muzzlePosition.position, Quaternion.identity);
-            Projectile projectileComponent = projectile.GetComponent<Projectile>();
-            
-            if (projectileComponent != null)
-            {
-                projectileComponent.Damage = damage;
-                projectileComponent.Target = currentTarget;
-                projectileComponent.IsTargeting = true;
-            }
-            
+            Projectile projectile = ObjectManager.Instance.Spawn<Projectile>(projectilePrefab, muzzlePosition.transform.position, Quaternion.identity);
+            projectile.Damage = this.damage;
+            projectile.IsTargeting = this.IsTargeting;
+            projectile.IsBomb = this.IsBomb;
+            projectile.Target = currentTarget;
+
+            //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition.position, Quaternion.identity);
+            //Projectile proj = projectile.GetComponent<Projectile>();
+            //proj.Damage = damage;
+            //proj.IsTargeting = true;
+            //proj.IsBomb = this.IsBomb;
+            //proj.Target = currentTarget;
+
+            PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
+                        projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation
+               );
+
+            muzzleEffect?.Initialize();
+            //  GameObject _MuzzlEffect = Instantiate(projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation);
+            //Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
             lastShootTime = Time.time;
         }
     }

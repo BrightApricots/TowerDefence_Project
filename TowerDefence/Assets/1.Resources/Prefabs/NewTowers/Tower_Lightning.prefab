@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929637352258750305}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.62, y: 0, z: 14.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -57,16 +57,14 @@ MonoBehaviour:
   SellPrice: 2
   TargetPriority: Most Progress
   Info: 
-  IsTargeting: 0
+  MaxLevel: 3
   IsBomb: 0
   TowerHead: {fileID: 5518478428060728232}
-  Barrel: {fileID: 5518478428060728232}
   TowerMuzzle: {fileID: 7735920187469573463}
-  Projectile: {fileID: 0}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  Quad: {fileID: 0}
   mainCanvas: {fileID: 0}
   isPreview: 0
+  isFollow: 0
   ChainCount: 4
   ChainRange: 4
   lightningEffectPrefab: {fileID: 3017776589207227471, guid: 838c2b16f50797f4fa59867d334d9975, type: 3}

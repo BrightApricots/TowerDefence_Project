@@ -1,41 +1,45 @@
 using System.Collections;
-using UnityEditor.iOS;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Tower : MonoBehaviour
 {
-    public string Name = "";
-    public string Element = "";
+    #region ToolTip
+    [Header("타워 정보")]
+    public string Name;
+    public string Element;
     public int Damage;
     public float Range;
-    public float FireRate = 1f;
+    public float FireRate;
+    public int DamageDealt;
+    public int TotalKilled;
+    public int UpgradePrice;
+    public int SellPrice;
+    public string TargetPriority;
+    public string Info;
+    #endregion
 
-    public int DamageDealt = 0;
-    public int TotalKilled = 0;
+    public int Level { get; protected set; } = 1;
+    public int MaxLevel = 3;
 
-    public string UpgradePrice = "";
-    public string SellPrice = "";
-    public string TargetPriority = "Most Progress";
-
-    public string Info = "";
-
-    public bool IsTargeting;
-    public bool IsBomb;
-
+    [Header("타워 파츠")]
     public Transform TowerHead;
-    public Transform Barrel;
     public Transform TowerMuzzle;
-    public Transform Projectile;
     public GameObject TowerTooltip;
-    public GameObject Quad;
+
+    [Header("공통 기능")]
+    [Tooltip("타워가 프리뷰 상태에서 발사하지 않게함")]
+    public bool isPreview = false;
+    [Tooltip("타워가 타겟을 바라봄")]
+    public bool isFollow = false;
+
+    [Header("툴팁 캔버스")]
     public Canvas mainCanvas;
-    protected Transform CurrentTarget=null;
+
+    protected Transform CurrentTarget = null;
     private GameObject currentTooltip;
     private Vector3 clickmousePointer;
-
-    public bool isPreview = false;
 
     protected virtual void Start()
     {
@@ -53,10 +57,18 @@ public class Tower : MonoBehaviour
         {
             Detect();
         }
-
-        FollowTarget();
+        if(!isFollow)
+        {
+            FollowTarget();
+        }
         TooltipPopupCheck();
     }
+
+    protected virtual void OnLevelUp()
+    {
+        // 각 타워에서 업그레이드 구현
+    }
+
 
     protected virtual void Detect()
     {
@@ -76,17 +88,16 @@ public class Tower : MonoBehaviour
         {
             if (Vector3.Distance(CurrentTarget.transform.position, transform.position)> Range)
             {
-                CurrentTarget=null;
+                CurrentTarget = null;
             }
         }
     }
 
     protected virtual void FollowTarget()
     {
-        if(CurrentTarget !=null)
+        if(CurrentTarget != null)
         {
             Vector3 towerDir = CurrentTarget.transform.position - TowerHead.transform.position;
-            if(!IsTargeting)Barrel.forward = towerDir;
             towerDir.y = 0;
             TowerHead.forward = towerDir;
         }
@@ -110,18 +121,8 @@ public class Tower : MonoBehaviour
 
     protected virtual IEnumerator Attack()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(FireRate);
-            if (CurrentTarget !=null)
-            {
-                Transform projectile = Instantiate(Projectile, TowerMuzzle.transform.position,Barrel.transform.rotation);
-                projectile.gameObject.GetComponent<Projectile>().Damage = this.Damage;
-                projectile.gameObject.GetComponent<Projectile>().IsTargeting = this.IsTargeting;
-                projectile.gameObject.GetComponent<Projectile>().IsBomb = this.IsBomb;
-                projectile.gameObject.GetComponent<Projectile>().Target = this.CurrentTarget;
-            }
-        }
+        //각자 타워에서 구현
+        yield return null;
     }
 
     private void OnDrawGizmos()
@@ -129,25 +130,35 @@ public class Tower : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 
-    private void OnMouseDown() //gameObject 클릭 시 발생 이벤트 MonoBehavior 내장
+    public virtual void Upgrade()
+    {
+        if (Level >= MaxLevel)
+        {
+            Debug.Log("타워 최대레벨 초과");
+            return;
+        }
+
+        Level++;
+        OnLevelUp();
+    }
+
+    private void OnMouseDown()
     {
         if (!isPreview)
         {
-            clickmousePointer = Input.mousePosition;
-            if (currentTooltip != null) //현재 툴팁이 있다면
+                clickmousePointer = Input.mousePosition;
+            if (currentTooltip != null)
             {
-                Destroy(currentTooltip); //툴팁 제거
+                Destroy(currentTooltip);
             }
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 화면에 Ray 쏘기
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit))
             {
-                //월드 좌표를 스크린 좌표로 변환
                 Vector2 screenPoint = Camera.main.WorldToScreenPoint(hit.point);
 
-                //UI 생성 및 위치 설정
                 currentTooltip = Instantiate(TowerTooltip, mainCanvas.transform);
                 UI_TowerTooltip toolTip = currentTooltip.GetComponent<UI_TowerTooltip>();
                 toolTip.Name = $"{this.Name}";
@@ -155,17 +166,17 @@ public class Tower : MonoBehaviour
                 toolTip.Damage = $"{this.Damage}";
                 toolTip.Range = $"{this.Range}";
                 toolTip.FireRate = $"{this.FireRate}";
-
                 toolTip.DamageDealt = $"{this.DamageDealt}";
                 toolTip.UpgradePrice = $"{this.UpgradePrice}";
                 toolTip.SellPrice = $"{this.SellPrice}";
                 toolTip.TargetPriority = $"{this.TargetPriority}";
                 toolTip.TotalKilled = $"{this.TotalKilled}";
                 toolTip.TowerImage.sprite = Resources.Load<Sprite>($"Sprites/{this.Name}");
-                     
+
+                toolTip.SetTower(this);
+
                 RectTransform rect = currentTooltip.GetComponent<RectTransform>();
 
-                //스크린 좌표를 캔버스 좌표로 변환
                 Vector2 localPoint;
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(
                     mainCanvas.transform.GetComponent<RectTransform>(),

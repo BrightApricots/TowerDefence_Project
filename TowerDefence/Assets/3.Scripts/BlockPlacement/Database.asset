@@ -94,3 +94,10 @@ MonoBehaviour:
     - {x: 0, y: 0}
     <Prefab>k__BackingField: {fileID: 5910751741922407090, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
     <Price>k__BackingField: 15
+  - <Name>k__BackingField: Tower_PoisonBridge
+    <ID>k__BackingField: 106
+    <OccupiedCells>k__BackingField:
+    - {x: 1, y: 0}
+    - {x: -1, y: 0}
+    <Prefab>k__BackingField: {fileID: 4318948246927493250, guid: c0026bc85c7ed204c8e8154e54fa00f5, type: 3}
+    <Price>k__BackingField: 45
