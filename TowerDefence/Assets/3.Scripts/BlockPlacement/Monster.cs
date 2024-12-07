@@ -26,34 +26,34 @@ public class Monster : MonoBehaviour
     public void Initialize(Transform spawn)
     {
         spawnPoint = spawn;
-        transform.position = PathManager.Instance.GetSpawnPosition(spawn);
-
-        Vector3[] newPath = PathManager.Instance.GetCurrentPath(spawn);
+        transform.position = PathManager.Instance.GetSpawnPosition(spawnPoint);
+        Vector3[] newPath = PathManager.Instance.GetActualPath(spawnPoint);
+        
         if (newPath != null && newPath.Length > 0)
         {
             path = newPath;
             currentWaypointIndex = 0;
             isMoving = true;
-
+            
             if (PathManager.Instance != null)
             {
-                PathManager.Instance.OnPathUpdated += OnPathUpdated;
+                PathManager.Instance.OnActualPathUpdated += OnActualPathUpdated;
             }
-
+            
             UpdateCurrentTarget();
         }
         else
         {
-            Debug.LogWarning("유효한 경로를 찾을 수 없습니다. 몬스터 초기화 실패.");
+            Debug.LogWarning("No valid path found for monster initialization");
         }
     }
 
-    private void OnPathUpdated(Transform updatedSpawnPoint, Vector3[] newPath)
+    private void OnActualPathUpdated(Transform updatedSpawnPoint, Vector3[] newPath)
     {
         if (spawnPoint == updatedSpawnPoint && newPath != null && newPath.Length > 0)
         {
             moveDirection = (currentTargetPosition - transform.position).normalized;
-
+            
             path = newPath;
             float bestScore = float.MinValue;
             int bestIndex = 0;
@@ -63,7 +63,7 @@ public class Monster : MonoBehaviour
                 Vector3 toWaypoint = (path[i] - transform.position);
                 float distance = toWaypoint.magnitude;
                 float dotProduct = Vector3.Dot(moveDirection, toWaypoint.normalized);
-
+                
                 float score = dotProduct / (distance + 0.1f);
 
                 if (score > bestScore)
@@ -141,23 +141,55 @@ public class Monster : MonoBehaviour
 
         if (PathManager.Instance != null)
         {
-            PathManager.Instance.OnPathUpdated -= OnPathUpdated;
+            PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
         Destroy(gameObject);
     }
 
     public void TakeDamage(int damage)
     {
-        GameObject damageText = Instantiate(Resources.Load<GameObject>("Effects/DamageFont"), GameObject.Find("DamageCanvas").transform);
-        damageText.GetComponent<TextMeshProUGUI>().text = $"{damage}";
-        damageText.transform.position = transform.position;
-
-        hp -= damage;
-        Debug.Log($"{gameObject.name} 남은 HP : {hp}");
-
-        if (hp <= 0)
+        try 
         {
-            Die();
+            GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
+            if (damageFontPrefab == null)
+            {
+                Debug.LogError("DamageFont 프리프를 찾을 수 없습니다!");
+                return;
+            }
+
+            GameObject damageCanvas = GameObject.Find("DamageCanvas");
+            if (damageCanvas == null)
+            {
+                Debug.LogError("DamageCanvas를 찾을 수 없습니다!");
+                return;
+            }
+
+            DamageFontEffect damageEffect = ObjectManager.Instance.Spawn<DamageFontEffect>(
+                damageFontPrefab, 
+                Vector3.zero,
+                Quaternion.identity
+            );
+
+            if (damageEffect == null)
+            {
+                Debug.LogError("DamageEffect를 생성할 수 없습니다!");
+                return;
+            }
+
+            damageEffect.transform.SetParent(damageCanvas.transform, false);
+            damageEffect.SetDamageText(damage.ToString(), transform.position);
+
+            hp -= damage;
+            Debug.Log($"{gameObject.name} 남은 HP : {hp}");
+
+            if (hp <= 0)
+            {
+                Die();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"데미지 효과 생성 중 에러 발생: {e.Message}");
         }
     }
 
@@ -172,7 +204,7 @@ public class Monster : MonoBehaviour
     {
         if (PathManager.Instance != null)
         {
-            PathManager.Instance.OnPathUpdated -= OnPathUpdated;
+            PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
 
         OnDestroyed?.Invoke();

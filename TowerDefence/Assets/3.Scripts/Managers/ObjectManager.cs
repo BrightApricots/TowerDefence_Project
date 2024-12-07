@@ -92,10 +92,16 @@ public class ObjectManager
                 line.transform.rotation = rotation.Value;
             return line as T;
         }
-        
+        else if (type == typeof(DamageFontEffect))
+        {
+            DamageFontEffect damageFont = PoolManager.Instance.Pop(prefab.GetComponent<DamageFontEffect>());
+            damageFont.transform.position = position;
+            if (rotation.HasValue)
+                damageFont.transform.rotation = rotation.Value;
+            return damageFont as T;
+        }
 
-
-
+        Debug.LogError($"Unhandled component type in Spawn: {type.Name}");
         return null;
     }
 
@@ -128,6 +134,10 @@ public class ObjectManager
         else if (type == typeof(LightningEffect))
         {
             PoolManager.Instance.Push(obj as LightningEffect);
+        }
+        else if (type == typeof(DamageFontEffect))
+        {
+            PoolManager.Instance.Push(obj as DamageFontEffect);
         }
     }
     public void Destroy(GameObject go)

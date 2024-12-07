@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7767493726691107023}
   m_Father: {fileID: 0}
@@ -57,12 +57,13 @@ MonoBehaviour:
   SellPrice: 2
   TargetPriority: Most Progress
   Info: The basic defense tower.
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
   TowerHead: {fileID: 7767493726691107023}
   TowerMuzzle: {fileID: 2281615677248325660}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   isPreview: 0
-  isFollow: 0
+  isFollow: 1
   mainCanvas: {fileID: 0}
   projectiles:
   - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}

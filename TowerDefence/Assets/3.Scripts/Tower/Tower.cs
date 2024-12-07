@@ -20,6 +20,9 @@ public class Tower : MonoBehaviour
     public string Info;
     #endregion
 
+    public GameObject rangeIndicatorPrefab;  // 라인 렌더러를 가진 프리팹
+    private RangeIndicator rangeIndicator;
+
     public int Level { get; protected set; } = 1;
     public int MaxLevel = 3;
 
@@ -43,11 +46,21 @@ public class Tower : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(!isPreview)
+        // 라인 렌더러 오브젝트를 자식으로 생성
+        GameObject indicatorObj = Instantiate(rangeIndicatorPrefab, transform);
+        rangeIndicator = indicatorObj.GetComponent<RangeIndicator>();
+        rangeIndicator.Initialize(Range);
+
+        // 기본적으로 범위 표시 숨기기
+        rangeIndicator.gameObject.SetActive(false);
+
+        // 기본적으로 범위 표시 숨기기
+        if (!isPreview)
         {
             GameManager.Instance.PlacedTowerList.Add(this);
             mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
             StartCoroutine(Attack());
+            rangeIndicator.gameObject.SetActive(false);
         }
     }
 
@@ -123,7 +136,11 @@ public class Tower : MonoBehaviour
         {
             // 마우스 포인터가 UI 위에 없거나, 처음 클릭했던 마우스 위치와 누른 마우스 포지션이 같지 않으면
             if (!EventSystem.current.IsPointerOverGameObject() && clickmousePointer != Input.mousePosition)
-            { 
+            {
+                if (rangeIndicator != null)
+                {
+                    rangeIndicator.gameObject.SetActive(false);
+                }
                 Destroy(currentTooltip);
                 GameManager.Instance.tooltipCount = false;
                 currentTooltip = null;
@@ -161,11 +178,21 @@ public class Tower : MonoBehaviour
     {
         if (!isPreview)
         {
+            if (rangeIndicator != null)
+            {
+                rangeIndicator.gameObject.SetActive(true);
+            }
+
             clickmousePointer = Input.mousePosition;
             if (currentTooltip != null)
             {
                 GameManager.Instance.tooltipCount = false;
                 Destroy(currentTooltip);
+
+                if (rangeIndicator != null)
+                {
+                    rangeIndicator.gameObject.SetActive(false);
+                }
             }
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

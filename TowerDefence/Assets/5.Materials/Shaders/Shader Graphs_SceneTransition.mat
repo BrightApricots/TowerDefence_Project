@@ -56,7 +56,7 @@ Material:
     - _BUILTIN_ZTest: 4
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
-    - _Scroll: 2.52
+    - _Scroll: 27.4
     m_Colors:
     - _InColor: {r: 1, g: 1, b: 1, a: 0}
     - _OutColor: {r: 0, g: 0, b: 0, a: 1}

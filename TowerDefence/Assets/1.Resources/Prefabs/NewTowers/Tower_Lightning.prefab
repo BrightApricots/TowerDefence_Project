@@ -57,14 +57,14 @@ MonoBehaviour:
   SellPrice: 2
   TargetPriority: Most Progress
   Info: 
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
-  IsBomb: 0
   TowerHead: {fileID: 5518478428060728232}
   TowerMuzzle: {fileID: 7735920187469573463}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  mainCanvas: {fileID: 0}
   isPreview: 0
   isFollow: 0
+  mainCanvas: {fileID: 0}
   ChainCount: 4
   ChainRange: 4
   lightningEffectPrefab: {fileID: 3017776589207227471, guid: 838c2b16f50797f4fa59867d334d9975, type: 3}

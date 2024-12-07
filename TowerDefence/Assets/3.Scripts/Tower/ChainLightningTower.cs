@@ -87,8 +87,7 @@ public class ChainLightningTower : Tower
     //지금 맞은 몬스터와 타겟 사이에 라이트닝 생성
     private void CreateLightningEffect(Vector3 start, Vector3 end)
     {
-        GameObject effect = Instantiate(lightningEffectPrefab, transform.position, Quaternion.identity);
-        LightningEffect lightning = effect.GetComponent<LightningEffect>();
+        LightningEffect lightning = ObjectManager.Instance.Spawn<LightningEffect>(lightningEffectPrefab, transform.position);
         lightning.CreateLightning(start, end);
     }
 
@@ -99,17 +98,17 @@ public class ChainLightningTower : Tower
         switch (Level)
         {
             case 1:
-                UnityEngine.Color color = new Color32(221, 255, 0, 255);
+                UnityEngine.Color color = new Color32(240, 255, 83, 255);
                 break;
             case 2:
-                color = new Color32(0, 122, 255, 255);
+                color = new Color32(84, 108, 255, 255);
                 effect.lightningColor = color;
                 ChainCount += 4;
                 break;
             case 3:
                 Damage += 2;
                 FireRate *= 0.5f;
-                color = new Color32(146, 0, 255, 255);
+                color = new Color32(255, 83, 243, 255);
                 effect.lightningColor = color;
                 break;
         }
