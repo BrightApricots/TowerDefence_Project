@@ -243,12 +243,28 @@ public class AGrid : MonoBehaviour
 
         if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY)
         {
+            bool previousState = nodeArray[gridX, gridY].walkable;
             nodeArray[gridX, gridY].walkable = !isBlocked;
-            Debug.Log($"Node updated at grid coordinates ({gridX}, {gridY}), walkable: {!isBlocked}");
+            
+            // 노드 상태 변경 로깅 강화
+            Debug.Log($"Node at ({gridX}, {gridY}) - Previous state: {previousState}, New state: {!isBlocked}");
+            
+            // 임시 상태인지 확인
+            if (temporaryNodeStates.ContainsKey(position))
+            {
+                Debug.Log($"Warning: Updating node that has temporary state at ({gridX}, {gridY})");
+            }
+
+            // GridData와 상태 �교
+            bool gridDataOccupied = GridData.Instance.IsPositionOccupied(position);
+            if (gridDataOccupied != isBlocked)
+            {
+                Debug.LogWarning($"State mismatch at ({gridX}, {gridY}): GridData: {gridDataOccupied}, Node blocked: {isBlocked}");
+            }
         }
         else
         {
-            Debug.LogWarning($"Attempted to update node outside grid bounds at ({gridX}, {gridY})");
+            Debug.LogError($"Attempted to update node outside grid bounds at ({gridX}, {gridY}). Original position: ({position.x}, {position.z})");
         }
     }
 
@@ -260,8 +276,16 @@ public class AGrid : MonoBehaviour
 
         if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY)
         {
-            temporaryNodeStates[position] = nodeArray[gridX, gridY].walkable;
-            nodeArray[gridX, gridY].walkable = walkable;
+            if (!temporaryNodeStates.ContainsKey(position))
+            {
+                temporaryNodeStates[position] = nodeArray[gridX, gridY].walkable;
+                nodeArray[gridX, gridY].walkable = walkable;
+                Debug.Log($"Set temporary state at ({gridX}, {gridY}): {walkable}");
+            }
+            else
+            {
+                Debug.LogWarning($"Attempted to set temporary state for node that already has one at ({gridX}, {gridY})");
+            }
         }
     }
 
@@ -276,9 +300,13 @@ public class AGrid : MonoBehaviour
             if (gridX >= 0 && gridX < gridSizeX && gridY >= 0 && gridY < gridSizeY)
             {
                 nodeArray[gridX, gridY].walkable = kvp.Value;
+                Debug.Log($"Restored node at ({gridX}, {gridY}) to {kvp.Value}");
             }
         }
+        
+        int count = temporaryNodeStates.Count;
         temporaryNodeStates.Clear();
+        Debug.Log($"Restored {count} temporary nodes");
     }
 
     private bool CheckPathValidity(Vector3Int gridPosition, List<Vector2Int> cells)
@@ -338,6 +366,32 @@ public class AGrid : MonoBehaviour
                 0,
                 Mathf.FloorToInt(z)
             );
+        }
+    }
+
+    public void ValidateNodeStates()
+    {
+        int mismatches = 0;
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
+                bool isOccupied = GridData.Instance.IsPositionOccupied(gridPosition);
+                bool shouldBeWalkable = !isOccupied;
+                
+                if (nodeArray[x, y].walkable != shouldBeWalkable)
+                {
+                    mismatches++;
+                    Debug.LogWarning($"Node state mismatch at ({x}, {y}): GridData occupied: {isOccupied}, Node walkable: {nodeArray[x, y].walkable}");
+                    nodeArray[x, y].walkable = shouldBeWalkable;
+                }
+            }
+        }
+        
+        if (mismatches > 0)
+        {
+            Debug.LogWarning($"Found {mismatches} node state mismatches during validation");
         }
     }
 }

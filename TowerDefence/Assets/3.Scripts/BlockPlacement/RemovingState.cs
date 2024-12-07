@@ -42,44 +42,45 @@ public class RemovingState : IBuildingState
         GridData selectedData = null;
         int index = -1;
         int id = -1;
+        PlacementData placementData = null;
 
         // 블록 데이터 확인
-        PlacementData blockData = BlockData.GetPlacementData(gridPosition);
-        if (blockData != null)
+        placementData = BlockData.GetPlacementData(gridPosition);
+        if (placementData != null)
         {
             selectedData = BlockData;
-            index = blockData.PlacedObjectIndex;
-            id = blockData.ID;
+            index = placementData.PlacedObjectIndex;
+            id = placementData.ID;
         }
         else
         {
             // 타워 데이터 확인
-            PlacementData towerData = TowerData.GetPlacementData(gridPosition);
-            if (towerData != null)
+            placementData = TowerData.GetPlacementData(gridPosition);
+            if (placementData != null)
             {
                 selectedData = TowerData;
-                index = towerData.PlacedObjectIndex;
-                id = towerData.ID;
+                index = placementData.PlacedObjectIndex;
+                id = placementData.ID;
             }
         }
 
-        if (selectedData != null)
+        if (selectedData != null && placementData != null)
         {
+            // 오브젝트 제거 전에 모든 점유 셀의 노드 상태를 업데이트
+            foreach (var pos in placementData.occupiedPositions)
+            {
+                // 노드 상태를 walkable로 변경
+                aGrid.UpdateNode(pos, false);
+                
+                // GridData에서도 해당 위치 제거
+                selectedData.RemoveObjectAt(pos);
+            }
+
             // 오브젝트 제거
-            selectedData.RemoveObjectAt(gridPosition);
             objectPlacer.RemoveObjectAt(index);
 
-            // AGrid 업데이트
-            foreach (var pos in blockData.occupiedPositions)
-            {
-                aGrid.UpdateNode(pos, false);
-            }
-
-            // 경로 업데이트
-            if (PathManager.Instance != null)
-            {
-                PathManager.Instance.UpdateAllPaths();
-            }
+            // PlacementSystem에 경로 업데이트 요청
+            PlacementSystem.Instance.RequestPathUpdate();
         }
     }
 

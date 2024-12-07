@@ -10,7 +10,7 @@ public class Tower : MonoBehaviour
     public string Name;
     public string Element;
     public int Damage;
-    public float Range;
+    //public float Range;
     public float FireRate;
     public int DamageDealt;
     public int TotalKilled;
@@ -44,23 +44,35 @@ public class Tower : MonoBehaviour
     private GameObject currentTooltip;
     private Vector3 clickmousePointer;
 
+    [SerializeField]
+    private float _range;  // private 필드 추가
+    public float Range  // 프로퍼티로 변경
+    {
+        get { return _range; }
+        protected set
+        {
+            _range = value;
+            // Range가 변경될 때마다 RangeIndicator 업데이트
+            if (rangeIndicator != null)
+            {
+                rangeIndicator.UpdateRange(_range);
+            }
+        }
+    }
+
     protected virtual void Start()
     {
         // 라인 렌더러 오브젝트를 자식으로 생성
         GameObject indicatorObj = Instantiate(rangeIndicatorPrefab, transform);
         rangeIndicator = indicatorObj.GetComponent<RangeIndicator>();
-        rangeIndicator.Initialize(Range);
-
-        // 기본적으로 범위 표시 숨기기
-        rangeIndicator.gameObject.SetActive(false);
-
-        // 기본적으로 범위 표시 숨기기
+        rangeIndicator.Initialize(Range);  // 초기 Range 설정
+        rangeIndicator.gameObject.SetActive(true);
         if (!isPreview)
         {
             GameManager.Instance.PlacedTowerList.Add(this);
             mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
             StartCoroutine(Attack());
-            rangeIndicator.gameObject.SetActive(false);
+            rangeIndicator.gameObject.SetActive(false);  // preview가 아닐 때만 숨김
         }
     }
 
@@ -70,26 +82,33 @@ public class Tower : MonoBehaviour
         {
             Detect();
         }
-        if(!isFollow)
+        if(isFollow)
         {
             FollowTarget();
         }
         TooltipPopupCheck();
+
+        // preview 상태일 때 indicator 위치 업데이트
+        if (!isPreview && rangeIndicator != null)
+        {
+            rangeIndicator.UpdatePosition();
+        }
     }
 
     protected virtual void OnLevelUp()
     {
-        // 각 타워에서 업그레이드 구현
+        // 각 타워에서 Range 값을 변경하면 자동으로 RangeIndicator가 업데이트됨
+        // Range = newRangeValue;  // 각 타워 클래스에서 이렇게 설정
     }
-
 
     protected virtual void Detect()
     {
-        if (CurrentTarget == null || !CurrentTarget.gameObject.activeSelf)  // 타겟이 비활성화된 경우도 체크
+        if (CurrentTarget == null || !CurrentTarget.gameObject.activeSelf)
         {
             float closestDistance = float.MaxValue;
             Transform closestTarget = null;
             
+            // Range 프로퍼티 사용
             Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
             foreach (Collider target in hitColliders)
             {
@@ -111,7 +130,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            // 현재 타겟이 범위를 벗어났거나 죽었는지 확인
+            // 현재 타겟이 범위를 벗어났는지 확인할 때도 Range 프로퍼티 사용
             if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range || 
                 !CurrentTarget.gameObject.activeSelf)
             {
@@ -159,6 +178,7 @@ public class Tower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Range 프로퍼티 사용
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 

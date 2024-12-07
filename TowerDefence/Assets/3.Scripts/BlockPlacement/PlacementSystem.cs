@@ -118,7 +118,7 @@ public class PlacementSystem : MonoBehaviour
         bool pathValid = false;
         bool checkComplete = false;
 
-        // 임시 노드 상�� 설정
+        // 임시 노드 상태 설정
         placementState.SetTemporaryNodes(gridPosition, false);
 
         PathManager.Instance.UpdatePreviewPathWithDelay((isValid) => {
@@ -129,7 +129,7 @@ public class PlacementSystem : MonoBehaviour
         float timeout = Time.time + 0.5f;
         while (!checkComplete && Time.time < timeout)
         {
-            // 대기 중에도 �속 유효성 검사
+            // 대기 중에도 지속 유효성 검사
             if (!placementState.IsValidPlacement(gridPosition))
             {
                 placementState.RestoreTemporaryNodes();
@@ -139,10 +139,10 @@ public class PlacementSystem : MonoBehaviour
             yield return null;
         }
 
-        // 노드 상태 �원
+        // 노드 상태 원복
         placementState.RestoreTemporaryNodes();
 
-        // 최종 유효� 검사
+        // 최종 유효성 검사
         if (pathValid && placementState.IsValidPlacement(gridPosition))
         {
             placementState.OnAction(gridPosition);
@@ -183,6 +183,23 @@ public class PlacementSystem : MonoBehaviour
         {
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
+        }
+    }
+
+    public void RequestPathUpdate()
+    {
+        StartCoroutine(UpdatePathsAfterDelay());
+    }
+
+    private IEnumerator UpdatePathsAfterDelay()
+    {
+        // 노드 상태가 완전히 업데이트될 때까지 잠시 대기
+        yield return new WaitForEndOfFrame();
+
+        // 경로 업데이트
+        if (PathManager.Instance != null)
+        {
+            PathManager.Instance.UpdateAllPaths();
         }
     }
 }

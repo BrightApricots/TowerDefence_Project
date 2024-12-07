@@ -155,6 +155,8 @@ public class PathManager : MonoBehaviour
 
     public void UpdateAllPaths()
     {
+        // 경로 업데이트 �에 노드 상태 검증
+
         UpdatePath();
     }
 
