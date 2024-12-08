@@ -87,6 +87,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         }
         for (int i = 0; i < 3; i++)
         {
+            print(Enum.GetName(typeof(TowerEnum), tower[i]));
             TowerList.Add(Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
                 TowerListLocation.transform));
             TowerNameList.Add(Enum.GetName(typeof(TowerEnum), tower[i]));

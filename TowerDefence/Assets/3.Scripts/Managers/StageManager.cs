@@ -32,21 +32,6 @@ public class StageManager : MonoBehaviour
         CheckNextStageTransition(); // 웨이브 클리어 후 마우스 클릭 시 다음 스테이지로 이동
     }
 
-    private void Update()
-    {
-        // 게임 오버 조건 확인
-        if (GameManager.Instance.CurrentHp <= 0)
-        {
-            ShowGameOverPanel();
-        }
-
-        // 웨이브 종료 후 클릭으로 다음 스테이지 이동
-        if (allWavesCleared && EndPanel.activeSelf && Input.GetMouseButtonDown(0))
-        {
-            LoadNextStage();
-        }
-    }
-
     private void OnDestroy()
     {
         UnregisterEvents(); // 이벤트 등록 해제
@@ -176,7 +161,6 @@ public class StageManager : MonoBehaviour
         Time.timeScale = 1f; // 타임스케일 복구
         SceneManager.LoadScene(sceneName); // 씬 로드
     }
-}
 
     // 게임 오버 버튼에 할당할 메서드 추가
     public void OpenGameOverScene()
