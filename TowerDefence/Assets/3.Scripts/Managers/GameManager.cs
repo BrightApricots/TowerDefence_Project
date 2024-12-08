@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +19,8 @@ public class GameManager : MonoBehaviour
     public List<string> EquipTowerList;
     public List<string> UnEquipTowerList;
     public List<Tower> PlacedTowerList;
+
+    public bool tooltipCount = false;
 
     private void Awake()
     {

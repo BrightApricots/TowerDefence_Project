@@ -79,7 +79,7 @@ public class CameraMove : MonoBehaviour
                 Vector3 moveDirection = (forward * mouseY + right * mouseX).normalized;
 
                 // 이동 적용
-                parent.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+                parent.transform.Translate(moveDirection * moveSpeed * Time.unscaledDeltaTime, Space.World);
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") != 0)
