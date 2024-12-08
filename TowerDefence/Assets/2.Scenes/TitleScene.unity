@@ -19779,8 +19779,25 @@ MonoBehaviour:
   TotalTowerList: 
   PlayerTetrisList: []
   HandTetrisList: []
-  EquipTowerList: []
-  UnEquipTowerList: []
+  EquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  UnEquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   PlacedTowerList: []
 --- !u!4 &626632889
 Transform:
