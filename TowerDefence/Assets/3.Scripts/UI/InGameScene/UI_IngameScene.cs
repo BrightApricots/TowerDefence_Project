@@ -1,5 +1,6 @@
 using System.Xml.Serialization;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_IngameScene : MonoBehaviour
@@ -47,26 +48,30 @@ public class UI_IngameScene : MonoBehaviour
 
     private void TowerCardSet()
     {
-        for(int i= 0; i<GameManager.Instance.EquipTowerList.Count;i++)
+        for(int i= 0; i<8;i++)
         {
-            if (i < 4)
+            print(GameManager.Instance.EquipTowerList[i]);
+            if (GameManager.Instance.EquipTowerList[i]!="" && GameManager.Instance.EquipTowerList[i]!=null)
             {
-                Instantiate(GameManager.Instance.EquipTowerList[i], TowerCardLocation1);
+                if (i < 4)
+                {
+                    Instantiate(Resources.Load($"InGameTowerCard/{GameManager.Instance.EquipTowerList[i]}"), TowerCardLocation1);
+                }
+                else
+                {
+                    Instantiate(Resources.Load($"InGameTowerCard/{GameManager.Instance.EquipTowerList[i]}"), TowerCardLocation2);
+                }
             }
             else
             {
-                Instantiate(GameManager.Instance.EquipTowerList[i],TowerCardLocation2 ); 
-            }
-        }
-        for(int i = GameManager.Instance.EquipTowerList.Count; i < 8; i++)
-        {
-            if(i< 4)
-            {
-                Instantiate(EmptyCard, TowerCardLocation1);
-            }
-            else
-            {
-                Instantiate(EmptyCard, TowerCardLocation2 );
+                if (i< 4)
+                {
+                    Instantiate(EmptyCard, TowerCardLocation1);
+                }
+                else
+                {
+                    Instantiate(EmptyCard, TowerCardLocation2);
+                }
             }
         }
     }

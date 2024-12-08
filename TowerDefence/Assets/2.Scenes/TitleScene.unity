@@ -605,10 +605,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae27a724f26884a8c0973aefd50b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EmberAmount: 0
-  ExpAmount: 0
-  HpAmount: 0
+  CurrentExp: 10
+  CurrentEmber: 10
+  CurrentHp: 15
+  CurrentMoney: 50
+  MaxHp: 15
   Difficulty: 0
+  TotalTetrisList: 000000000100000002000000030000000400000005000000
+  TotalTowerList: 
+  PlayerTetrisList: []
+  HandTetrisList: []
+  EquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  UnEquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  PlacedTowerList: []
 --- !u!4 &626632889
 Transform:
   m_ObjectHideFlags: 0
