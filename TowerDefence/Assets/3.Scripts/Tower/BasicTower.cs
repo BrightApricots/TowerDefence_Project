@@ -64,15 +64,48 @@ public class BasicTower : Tower
     {
         if (Level == 2)
         {
-            Damage += 2;
-            Range += 1f;
-            SetByLevel();
+            // 기본 스탯 증가
+            baseAttackDamage += 2;
+            baseRange += 1f;
+            
+            // 버프가 없을 경우 현재 값 설정
+            if (originalStats.Count == 0)
+            {
+                Damage = baseAttackDamage;
+                Range = baseRange;
+            }
         }
         else if (Level == 3)
         {
             FireRate /= 2f;
-            Range += 3f;
-            SetByLevel();
+            baseRange += 3f;
+            
+            // 버프가 없을 경우 현재 값 설정
+            if (originalStats.Count == 0)
+            {
+                Range = baseRange;
+            }
+        }
+
+        SetByLevel();
+        
+        // 버프가 있다면 재적용
+        if (originalStats.Count > 0)
+        {
+            // 현재 적용된 모든 버프를 저장
+            var currentBuffs = new List<BuffField>(originalStats.Keys);
+            
+            // 모든 버프 제거
+            foreach (var buff in currentBuffs)
+            {
+                RemoveBuff(buff);
+            }
+
+            // 버프 재적용
+            foreach (var buff in currentBuffs)
+            {
+                ApplyBuff(buff);
+            }
         }
     }
 

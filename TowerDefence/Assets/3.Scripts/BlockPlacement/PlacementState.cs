@@ -104,7 +104,23 @@ public class PlacementState : IBuildingState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview = false)
     {
-        // 시작 위치와 종료 위치 체크
+        // 1. 먼저 모든 셀이 그리드 범위 내에 있는지 확인
+        foreach (var cell in cells)
+        {
+            Vector3Int blockPos = new Vector3Int(
+                gridPosition.x + cell.x,
+                gridPosition.y,
+                gridPosition.z + cell.y
+            );
+
+            // 이미 점유된 셀인지 확인
+            if (BlockData.IsPositionOccupied(blockPos) || TowerData.IsPositionOccupied(blockPos))
+            {
+                return false;
+            }
+        }
+
+        // 2. 시작 위치와 종료 위치 체크
         Vector3Int targetGridPos = grid.WorldToCell(PathManager.Instance.GetTargetPosition());
         foreach (var spawnPoint in PathManager.Instance.GetSpawnPoints())
         {
@@ -126,7 +142,7 @@ public class PlacementState : IBuildingState
             }
         }
 
-        // 임시로 노드들을 막음
+        // 3. 임시로 노드들을 막음
         foreach (var cell in cells)
         {
             Vector3Int blockPos = new Vector3Int(
@@ -137,11 +153,11 @@ public class PlacementState : IBuildingState
             aGrid.SetTemporaryNodeState(blockPos, false);
         }
 
-        // 경로 체크
+        // 4. 경로 체크
         PathManager.Instance.CheckPreviewPath();
         bool isValid = PathManager.Instance.HasValidPath;
 
-        // 노드 상태 복원
+        // 5. 노드 상태 복원
         aGrid.RestoreTemporaryNodes();
 
         return isValid && GridData.Instance.CanPlaceObjectAt(gridPosition, cells);
@@ -373,5 +389,10 @@ public class PlacementState : IBuildingState
     public void RestoreTemporaryNodes()
     {
         aGrid.RestoreTemporaryNodes();
+    }
+
+    public int GetCurrentID()
+    {
+        return database.objectsData[selectedObjectIndex].ID;
     }
 }

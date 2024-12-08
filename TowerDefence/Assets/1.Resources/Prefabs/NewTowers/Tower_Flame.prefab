@@ -9780,8 +9780,8 @@ MonoBehaviour:
   Duration: 3
   IsTargeting: 0
   IsBomb: 0
-  isSelfDestroy: 0
   BombRange: 3
+  isSelfDestroy: 0
   Target: {fileID: 0}
   ExplosionParticle: {fileID: 0}
   DamageInterval: 0.5
@@ -34064,8 +34064,8 @@ MonoBehaviour:
   Duration: 3
   IsTargeting: 0
   IsBomb: 0
-  isSelfDestroy: 0
   BombRange: 3
+  isSelfDestroy: 0
   Target: {fileID: 0}
   ExplosionParticle: {fileID: 0}
   DamageInterval: 0.5
@@ -38994,7 +38994,6 @@ MonoBehaviour:
   Name: Flame Tower
   Element: Flmae Tower
   Damage: 2
-  Range: 3.5
   FireRate: 2.5
   DamageDealt: 0
   TotalKilled: 0
@@ -39003,14 +39002,15 @@ MonoBehaviour:
   TargetPriority: Most Progress
   Info: Continuously spews flames at its target, roasting a large group of monsters
     to ashes!
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
-  IsBomb: 0
   TowerHead: {fileID: 441837894699148981}
   TowerMuzzle: {fileID: 441837894699148981}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  mainCanvas: {fileID: 0}
   isPreview: 0
   isFollow: 0
+  mainCanvas: {fileID: 0}
+  _range: 3.5
   flameProjeciles:
   - {fileID: 6789872993577127074}
   - {fileID: 5612713678545289812}
@@ -48735,8 +48735,8 @@ MonoBehaviour:
   Duration: 3
   IsTargeting: 0
   IsBomb: 0
-  isSelfDestroy: 0
   BombRange: 3
+  isSelfDestroy: 0
   Target: {fileID: 0}
   ExplosionParticle: {fileID: 0}
   DamageInterval: 0.5

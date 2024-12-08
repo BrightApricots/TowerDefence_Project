@@ -49,7 +49,6 @@ MonoBehaviour:
   Name: Basic Tower
   Element: Normal
   Damage: 2
-  Range: 4
   FireRate: 1.5
   DamageDealt: 0
   TotalKilled: 0
@@ -65,6 +64,10 @@ MonoBehaviour:
   isPreview: 0
   isFollow: 1
   mainCanvas: {fileID: 0}
+  _range: 4
+  originalMaterial: {fileID: 2100000, guid: 4ab70832a21b948469a8ef7baeca5bd3, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: a6c5db515b4e26a468041e9e22e41af4, type: 2}
+  towerRenderers: []
   projectiles:
   - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
   - {fileID: 4036195920102418499, guid: 4b91063355f5e5643bb500e774eb0f1d, type: 3}

@@ -386,7 +386,6 @@ MonoBehaviour:
   Name: Missile Tower
   Element: Electric
   Damage: 3
-  Range: 15
   FireRate: 1
   DamageDealt: 0
   TotalKilled: 0
@@ -395,6 +394,7 @@ MonoBehaviour:
   TargetPriority: Most Progress
   Info: Each attack fires 10 missiles, targeting random enemies within the attack
     range.
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
   TowerHead: {fileID: 1363359531549946460}
   TowerMuzzle: {fileID: 8996524052376631843}
@@ -402,6 +402,7 @@ MonoBehaviour:
   isPreview: 0
   isFollow: 0
   mainCanvas: {fileID: 0}
+  _range: 15
   projectiles:
   - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
   - {fileID: 7103630920753419783, guid: aab2e24961d93c946aa39473a4369471, type: 3}
@@ -414,6 +415,8 @@ MonoBehaviour:
   - {fileID: 4962512088551435691, guid: e7c38fe5db846b947a4fa3af67858609, type: 3}
   - {fileID: 4178172552778980234, guid: 8a69cbf6abcccc442b37c1540fc542ff, type: 3}
   - {fileID: 7564372826126219967, guid: 873470cf1704c5e45bd860bbf5728091, type: 3}
+  leftMuzzle: {fileID: 8996524052376631843}
+  rightMuzzle: {fileID: 583464363086899684}
   IsTargeting: 1
   IsBomb: 0
   RimitTarget: 10

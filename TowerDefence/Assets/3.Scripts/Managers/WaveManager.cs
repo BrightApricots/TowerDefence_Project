@@ -48,9 +48,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI wavePrepareTimeText_1;    // 남은 초 표시 텍스트
     [SerializeField]
-    private Image timeBarBackground;                  // 웨이브 준비 시간 바 배경
-    [SerializeField]
-    private Image timeBarFill;                        // 웨이브 준비 시간 바 필 채우기 이미지
+    private Slider timeBar;                  // 웨이브 준비 시간 바
     [SerializeField]
     private GameObject speedButtonGroup;              // 배속 버튼 그룹 오브젝트
 
@@ -147,8 +145,7 @@ public class WaveManager : MonoBehaviour
         // 웨이브 준비 시간 관련 UI 비활성화
         if (wavePrepareTimeText != null) wavePrepareTimeText.gameObject.SetActive(false);
         if (wavePrepareTimeText_1 != null) wavePrepareTimeText_1.gameObject.SetActive(false);
-        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
-        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
+        if (timeBar != null) timeBar.gameObject.SetActive(false);
 
         UpdateWaveText();
         UpdateWavePrepareText();
@@ -193,11 +190,10 @@ public class WaveManager : MonoBehaviour
             wavePrepareTimeText.text = "NEXT WAVE IN";
         }
 
-        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(true);
-        if (timeBarFill != null)
+        if (timeBar != null)
         {
-            timeBarFill.gameObject.SetActive(true);
-            timeBarFill.fillAmount = 0f;
+            timeBar.gameObject.SetActive(true);
+            timeBar.value = 0f;
         }
 
         while (elapsed < prepareCooldown)
@@ -214,9 +210,9 @@ public class WaveManager : MonoBehaviour
                 wavePrepareTimeText_1.gameObject.SetActive(true);
             }
 
-            if (timeBarFill != null)
+            if (timeBar != null)
             {
-                timeBarFill.fillAmount = elapsed / prepareCooldown;
+                timeBar.value = elapsed / prepareCooldown;
             }
 
             yield return new WaitForSeconds(0.1f);
@@ -366,8 +362,7 @@ public class WaveManager : MonoBehaviour
 
     private void HideTimeBar()
     {
-        if (timeBarBackground != null) timeBarBackground.gameObject.SetActive(false);
-        if (timeBarFill != null) timeBarFill.gameObject.SetActive(false);
+        if (timeBar != null) timeBar.gameObject.SetActive(false);
     }
 
     private void SetBattleButtonState(bool isActive)

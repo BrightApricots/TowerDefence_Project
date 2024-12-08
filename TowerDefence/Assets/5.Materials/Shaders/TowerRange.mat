@@ -31,7 +31,7 @@ Material:
     - _Radius: 0.1
     - _Width: 0.8
     m_Colors:
-    - _LineColor: {r: 0, g: 1.562052, b: 33.04626, a: 0}
+    - _LineColor: {r: 0, g: 53.293312, b: 149.83931, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8380713551634012104
 MonoBehaviour:

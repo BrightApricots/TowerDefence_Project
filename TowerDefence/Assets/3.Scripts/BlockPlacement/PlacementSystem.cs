@@ -9,7 +9,26 @@ using UnityEngine.EventSystems;
 public class PlacementSystem : MonoBehaviour
 {
     private static PlacementSystem instance;
-    public static PlacementSystem Instance {  get { return instance; } }
+    public static PlacementSystem Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                // 씬에서 기존 인스턴스 찾기
+                instance = FindObjectOfType<PlacementSystem>();
+                
+                // 없으면 새로 생성
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("PlacementSystem");
+                    instance = go.AddComponent<PlacementSystem>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return instance;
+        }
+    }
 
     [SerializeField]
     private InputManager inputManager;
@@ -38,17 +57,42 @@ public class PlacementSystem : MonoBehaviour
 
     private bool isPlacing = false;
 
+    // 블록 배치 성공 시 발생하는 이벤트
+    public event System.Action<int, string> OnPlacementSuccess;
+    private string currentCardID;  // 현재 선택된 카드의 ID
+
     private void Awake()
     {
         if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            // 새로운 루트 게임오브젝트 생성
+            GameObject newGO = new GameObject("PlacementSystem");
+            
+            // 현재 컴포넌트의 모든 참조와 값을 새 오브젝트로 복사
+            PlacementSystem newSystem = newGO.AddComponent<PlacementSystem>();
+            newSystem.inputManager = this.inputManager;
+            newSystem.grid = this.grid;
+            newSystem.aGrid = this.aGrid;
+            newSystem.database = this.database;
+            newSystem.gridVisualization = this.gridVisualization;
+            newSystem.preview = this.preview;
+            newSystem.objectPlacer = this.objectPlacer;
+            
+            // 새 오브젝트를 DontDestroyOnLoad로 설정
+            DontDestroyOnLoad(newGO);
+            
+            instance = newSystem;
+            
+            // 원래 오브젝트 제거
+            Destroy(gameObject);
         }
-        else
+        else if (instance != this)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
+
+        BlockData = new();
+        TowerData = new();
     }
 
     private void Start()
@@ -58,9 +102,9 @@ public class PlacementSystem : MonoBehaviour
         TowerData = new();
     }
 
-    public void StartPlacement(int ID)
+    public void StartPlacement(int ID, string cardID)
     {
-        //StopPlacement();
+        currentCardID = cardID;  // 카드 ID 저장
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
         inputManager.OnClicked += PlaceStructure;
@@ -129,7 +173,7 @@ public class PlacementSystem : MonoBehaviour
         float timeout = Time.time + 0.5f;
         while (!checkComplete && Time.time < timeout)
         {
-            // 대기 중에도 지속 유효성 검사
+            // 대기 중에도 지속 유효성 ���사
             if (!placementState.IsValidPlacement(gridPosition))
             {
                 placementState.RestoreTemporaryNodes();
@@ -146,6 +190,8 @@ public class PlacementSystem : MonoBehaviour
         if (pathValid && placementState.IsValidPlacement(gridPosition))
         {
             placementState.OnAction(gridPosition);
+            // 배치 성공 시 이벤트에 카드 ID도 함께 전달
+            OnPlacementSuccess?.Invoke(placementState.GetCurrentID(), currentCardID);
         }
 
         isPlacing = false;
@@ -201,5 +247,32 @@ public class PlacementSystem : MonoBehaviour
         {
             PathManager.Instance.UpdateAllPaths();
         }
+    }
+
+    // 타워 배치 메서드
+    public void StartTowerPlacement(int ID)
+    {
+        if (!database.IsTower(ID))
+        {
+            Debug.LogError($"Attempted to place non-tower object (ID: {ID}) using StartTowerPlacement");
+            return;
+        }
+
+        gridVisualization.SetActive(true);
+        buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
+        inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += StopPlacement;
+        inputManager.OnExit += StopPlacement;
+    }
+
+    public void Initialize(InputManager inputManager, AGrid grid, ObjectsDatabaseSO database, PreviewSystem preview)
+    {
+        this.inputManager = inputManager;
+        this.grid = grid;
+        this.database = database;
+        this.preview = preview;
+        
+        BlockData = new GridData();
+        TowerData = new GridData();
     }
 }

@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour
     private int gold = 1;
     [SerializeField]
     private float rotationSpeed = 5f; // 회전 속도
+    public bool IsDead { get; private set; }
 
     private Vector3[] path;
     private int currentWaypointIndex;
@@ -184,6 +185,7 @@ public class Monster : MonoBehaviour
 
             if (hp <= 0)
             {
+                IsDead = true;
                 Die();
             }
         }
@@ -210,5 +212,3 @@ public class Monster : MonoBehaviour
         OnDestroyed?.Invoke();
     }
 }
-
-//

@@ -113,7 +113,20 @@ public class UI_TowerTooltip : MonoBehaviour
             // 판매 금액 추가
             GameManager.Instance.CurrentMoney += int.Parse(SellPrice);
             
-            // 타워 제거
+            // 타워의 그리드 위치 계산
+            Vector3Int gridPosition = GridData.Instance.WorldToGridPosition(selectedTower.transform.position);
+            
+            // GridData에서 타워 정보 제거
+            PlacementData data = GridData.Instance.GetPlacementData(gridPosition);
+            if (data != null)
+            {
+                // ObjectPlacer에서 타워 제거
+                ObjectPlacer.Instance.RemoveObjectAt(data.PlacedObjectIndex);
+                // GridData에서 타워 정보 제거
+                GridData.Instance.RemoveObjectAt(gridPosition);
+            }
+
+            // 타워 리스트에서 제거
             GameManager.Instance.PlacedTowerList.Remove(selectedTower);
             Destroy(selectedTower.gameObject);
 

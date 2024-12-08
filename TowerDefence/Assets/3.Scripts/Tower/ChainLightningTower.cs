@@ -24,8 +24,6 @@ public class ChainLightningTower : Tower
         Info = "Fires chain lightning that bounces between multiple targets.";
     }
 
-
-
     protected override IEnumerator Attack()
     {
         while (true)
@@ -99,6 +97,7 @@ public class ChainLightningTower : Tower
         {
             case 1:
                 UnityEngine.Color color = new Color32(240, 255, 83, 255);
+                effect.lightningColor = color;
                 break;
             case 2:
                 color = new Color32(84, 108, 255, 255);

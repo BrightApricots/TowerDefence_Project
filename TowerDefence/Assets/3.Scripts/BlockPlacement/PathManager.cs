@@ -76,14 +76,22 @@ public class PathManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Material pathLineMaterial;  // Inspector에서 할당할 Material
+    private Material actualPathMaterial;  // 실제 경로용 머티리얼
+    [SerializeField]
+    private Material previewPathMaterial; // 프리뷰 경로용 머티리얼
 
     private void Start()
     {
-        if (pathLineMaterial == null)
+        if (actualPathMaterial == null)
         {
-            pathLineMaterial = new Material(Shader.Find("Sprites/Default"));
-            pathLineMaterial.color = Color.white;
+            actualPathMaterial = new Material(Shader.Find("Sprites/Default"));
+            actualPathMaterial.color = Color.white;
+        }
+
+        if (previewPathMaterial == null)
+        {
+            previewPathMaterial = new Material(Shader.Find("Sprites/Default"));
+            previewPathMaterial.color = new Color(1f, 0.5f, 0f, 0.5f);
         }
 
         // pathUnits와 pathDataMap 초기화
@@ -97,8 +105,8 @@ public class PathManager : MonoBehaviour
             GameObject unitObj = new GameObject($"PathUnit_{spawnPoint.name}");
             AUnit unit = unitObj.AddComponent<AUnit>();
             
-            // Material 설정
-            unit.SetLineMaterial(pathLineMaterial);
+            // 각각 다른 머티리얼 설정
+            unit.SetLineMaterials(actualPathMaterial, previewPathMaterial);
             
             // 위치와 타겟 설정
             unit.transform.position = spawnPoint.position;
@@ -155,7 +163,7 @@ public class PathManager : MonoBehaviour
 
     public void UpdateAllPaths()
     {
-        // 경로 업데이트 �에 노드 상태 검증
+        // 경로 업데이트 전에 노드 상태 검증
 
         UpdatePath();
     }

@@ -150,12 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dd00b65b31856468ac314ac76f88e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segments: 20
+  segments: 70
   amplitude: 0.5
   duration: 0.2
-  lightningColor: {r: 0.9411765, g: 1, b: 0.3254902, a: 1}
-  startWidth: 0.72
-  endWidth: 0.41
+  lightningColor: {r: 0.96727955, g: 1, b: 0.3254717, a: 255}
+  startWidth: 0.7
+  endWidth: 0.4
 --- !u!114 &-8352747392002126607
 MonoBehaviour:
   m_ObjectHideFlags: 0

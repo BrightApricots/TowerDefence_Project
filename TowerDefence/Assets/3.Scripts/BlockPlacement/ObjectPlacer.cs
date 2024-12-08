@@ -13,9 +13,14 @@ public class ObjectPlacer : MonoBehaviour
         {
             if (instance == null)
             {
-                GameObject go = new GameObject("ObjectPlacer");
-                instance = go.AddComponent<ObjectPlacer>();
-                instance.placedGameObjects = new List<GameObject>();
+                instance = FindObjectOfType<ObjectPlacer>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("ObjectPlacer");
+                    instance = go.AddComponent<ObjectPlacer>();
+                    DontDestroyOnLoad(go);
+                }
+                instance.Initialize();
             }
             return instance;
         }
@@ -30,12 +35,16 @@ public class ObjectPlacer : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Initialize();
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
+    }
 
+    private void Initialize()
+    {
         if (placedGameObjects == null)
         {
             placedGameObjects = new List<GameObject>();
@@ -45,20 +54,47 @@ public class ObjectPlacer : MonoBehaviour
     public int PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         GameObject newObject = Instantiate(prefab, position, rotation);
+        
+        // null 항목 제거
+        placedGameObjects.RemoveAll(item => item == null);
+        
         placedGameObjects.Add(newObject);
         return placedGameObjects.Count - 1;
     }
 
-    internal void RemoveObjectAt(int gameObjectIndex)
+    public void RemoveObjectAt(int gameObjectIndex)
     {
-        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null)
+        if (gameObjectIndex < 0 || gameObjectIndex >= placedGameObjects.Count)
+        {
+            Debug.LogWarning($"Invalid index for object removal: {gameObjectIndex}");
             return;
-        Destroy(placedGameObjects[gameObjectIndex]);
-        placedGameObjects[gameObjectIndex] = null;
+        }
+
+        if (placedGameObjects[gameObjectIndex] != null)
+        {
+            Destroy(placedGameObjects[gameObjectIndex]);
+            placedGameObjects[gameObjectIndex] = null;
+            Debug.Log($"Removed object at index: {gameObjectIndex}");
+        }
     }
 
     public void Clear()
     {
-        //TODO : 싱글톤 이기 때문에 맵 변경시 초기화 필요함.
+        foreach (var obj in placedGameObjects)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+        placedGameObjects.Clear();
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 }

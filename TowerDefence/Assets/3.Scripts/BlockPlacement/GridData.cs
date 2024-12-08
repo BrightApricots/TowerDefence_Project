@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -75,7 +76,7 @@ public class GridData
         //    placedObjects[pos] = data;
         //}
 
-        //// 이미 해당 위치에 오브젝트가 있는지 확인
+        //// 이미 해당 위치에 오브젝 는지 확인
         //if (!placedObjects.ContainsKey(newPos))
         //{
         //    AddObjectAt(newPos, occupiedCells, 1, 0, 0); // ID와 placedObjectIndex는 임의의 값 사용
@@ -114,9 +115,39 @@ public class GridData
 
     public void RemoveObjectAt(Vector3Int gridPosition)
     {
-        foreach (var pos in placedObjects[gridPosition].occupiedPositions)
+        if (!placedObjects.ContainsKey(gridPosition))
+        {
+            Debug.LogWarning($"No object found at position: {gridPosition}");
+            return;
+        }
+
+        PlacementData data = placedObjects[gridPosition];
+        Debug.Log($"Attempting to remove object at {gridPosition}, ID: {data.ID}, Index: {data.PlacedObjectIndex}");
+
+        // 해당 위치의 데이터를 직접 제거
+        placedObjects.Remove(gridPosition);
+        Debug.Log($"Removed data at position: {gridPosition}");
+
+        // 데이터 제거 후 확인
+        if (placedObjects.ContainsKey(gridPosition))
+        {
+            Debug.LogError($"Failed to remove data at position: {gridPosition}");
+        }
+        else
+        {
+            Debug.Log($"Successfully removed data at position: {gridPosition}");
+        }
+
+        // Dictionary의 모든 키를 확인하여 같은 PlacementData를 참조하는 다른 위치도 제거
+        var positionsToRemove = placedObjects
+            .Where(kvp => ReferenceEquals(kvp.Value, data))
+            .Select(kvp => kvp.Key)
+            .ToList();
+
+        foreach (var pos in positionsToRemove)
         {
             placedObjects.Remove(pos);
+            Debug.Log($"Removed additional data at position: {pos}");
         }
     }
 
@@ -129,7 +160,23 @@ public class GridData
 
     public bool IsPositionOccupied(Vector3Int position)
     {
-        return placedObjects.ContainsKey(position);
+        bool isOccupied = placedObjects.ContainsKey(position);
+        if (isOccupied)
+        {
+            Debug.Log($"Position {position} is occupied by object with ID: {placedObjects[position].ID}");
+        }
+        return isOccupied;
+    }
+
+    public Vector3Int WorldToGridPosition(Vector3 worldPosition)
+    {
+        Vector3Int gridPos = new Vector3Int(
+            Mathf.FloorToInt(worldPosition.x),
+            0,
+            Mathf.FloorToInt(worldPosition.z)
+        );
+        Debug.Log($"Converting world position {worldPosition} to grid position {gridPos}");
+        return gridPos;
     }
 }
 

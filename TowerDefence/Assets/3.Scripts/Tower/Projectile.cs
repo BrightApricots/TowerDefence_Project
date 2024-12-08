@@ -69,8 +69,7 @@ public class Projectile : MonoBehaviour
         if (time > Time.time)
         {
             Debug.Log("들어옴");
-            Vector3 randVec = new Vector3(Random.Range(0, 90), Random.Range(0, 30), Random.Range(0, 60)).normalized;
-            transform.Translate(randVec * 30f * Time.deltaTime);
+            transform.Translate(Vector3.up* 30f * Time.deltaTime);
         }
 
         Vector3 dir = Target.position - transform.position;

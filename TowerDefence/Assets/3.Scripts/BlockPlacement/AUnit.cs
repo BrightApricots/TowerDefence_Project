@@ -10,8 +10,11 @@ public class AUnit : MonoBehaviour
     private Vector3[] previewPath;
     private LineRenderer actualPathRenderer;
     private LineRenderer previewPathRenderer;
+    
     [SerializeField]
-    private Material lineMaterial;
+    private Material actualPathMaterial;  // 실제 경로용 머티리얼
+    [SerializeField]
+    private Material previewPathMaterial; // 프리뷰 경로용 머티리얼
     [SerializeField]
     private Color actualPathColor = Color.black;
     [SerializeField]
@@ -24,19 +27,13 @@ public class AUnit : MonoBehaviour
 
     private void InitializeLineRenderers()
     {
-        // 기본 Material 생성
-        if (lineMaterial == null)
-        {
-            lineMaterial = new Material(Shader.Find("Sprites/Default"));
-        }
-
         // 실제 경로용 LineRenderer
         if (actualPathRenderer == null)
         {
             GameObject actualPathObj = new GameObject("ActualPathRenderer");
             actualPathObj.transform.SetParent(transform);
             actualPathRenderer = actualPathObj.AddComponent<LineRenderer>();
-            SetupLineRenderer(actualPathRenderer, actualPathColor);
+            SetupLineRenderer(actualPathRenderer, actualPathColor, actualPathMaterial);
         }
 
         // 프리뷰 경로용 LineRenderer
@@ -45,20 +42,27 @@ public class AUnit : MonoBehaviour
             GameObject previewObj = new GameObject("PreviewPathRenderer");
             previewObj.transform.SetParent(transform);
             previewPathRenderer = previewObj.AddComponent<LineRenderer>();
-            SetupLineRenderer(previewPathRenderer, previewPathColor);
+            SetupLineRenderer(previewPathRenderer, previewPathColor, previewPathMaterial);
         }
 
         ShowPreviewPath(false);
         ShowActualPath(true);
     }
 
-    private void SetupLineRenderer(LineRenderer renderer, Color color)
+    private void SetupLineRenderer(LineRenderer renderer, Color color, Material material)
     {
         if (renderer != null)
         {
             renderer.startWidth = 0.15f;
             renderer.endWidth = 0.15f;
-            renderer.material = new Material(lineMaterial);
+            
+            // 머티리얼이 할당되지 않은 경우에만 기본 머티리얼 생성
+            if (material == null)
+            {
+                material = new Material(Shader.Find("Sprites/Default"));
+            }
+            
+            renderer.material = new Material(material);
             renderer.material.color = color;
             renderer.startColor = color;
             renderer.endColor = color;
@@ -67,8 +71,6 @@ public class AUnit : MonoBehaviour
             renderer.textureMode = LineTextureMode.Tile;
             renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             renderer.allowOcclusionWhenDynamic = false;
-
-            //renderer.textureMode = LineRenderer.textureMode;
         }
     }
 
@@ -213,12 +215,25 @@ public class AUnit : MonoBehaviour
     public delegate void PathUpdatedHandler(Vector3[] newPath, bool success);
     public event PathUpdatedHandler OnPathUpdated;
 
+    public void SetLineMaterials(Material actualMat, Material previewMat)
+    {
+        if (actualMat != null && actualPathRenderer != null)
+        {
+            actualPathMaterial = actualMat;
+            actualPathRenderer.material = new Material(actualMat);
+            actualPathRenderer.material.color = actualPathColor;
+        }
+
+        if (previewMat != null && previewPathRenderer != null)
+        {
+            previewPathMaterial = previewMat;
+            previewPathRenderer.material = new Material(previewMat);
+            previewPathRenderer.material.color = previewPathColor;
+        }
+    }
+
     public void SetLineMaterial(Material material)
     {
-        lineMaterial = material;
-        if (actualPathRenderer != null)
-            actualPathRenderer.material = new Material(material);
-        if (previewPathRenderer != null)
-            previewPathRenderer.material = new Material(material);
+        SetLineMaterials(material, material);
     }
 }

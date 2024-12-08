@@ -329,7 +329,6 @@ MonoBehaviour:
   Name: Drone Tower
   Element: Electric
   Damage: 2
-  Range: 5
   FireRate: 2
   DamageDealt: 0
   TotalKilled: 0
@@ -338,6 +337,7 @@ MonoBehaviour:
   TargetPriority: Most Progress
   Info: Automatically tracks and continuously attacks enemies within its range until
     they leave.
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
   TowerHead: {fileID: 0}
   TowerMuzzle: {fileID: 0}
@@ -345,6 +345,7 @@ MonoBehaviour:
   isPreview: 0
   isFollow: 0
   mainCanvas: {fileID: 0}
+  _range: 5
   drone: {fileID: 4565023363747429236}
   droneHomePosition: {fileID: 8036534781049969696}
   projectiles:
