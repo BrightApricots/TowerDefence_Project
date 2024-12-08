@@ -10,12 +10,13 @@ public class AGrid : MonoBehaviour
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
-    private ANode[,] nodeArray;
+    public float nodeRadius;
+    ANode[,] nodeArray;
+    float nodeDiameter;
+    int gridSizeX, gridSizeY;
 
     [SerializeField]
     private List<Vector2Int> obstaclePositions = new List<Vector2Int>();
-
-    int gridSizeX, gridSizeY;
 
     [SerializeField]
     private ObjectsDatabaseSO database;
@@ -27,10 +28,10 @@ public class AGrid : MonoBehaviour
 
     void Awake()
     {
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x);
-        gridSizeY = Mathf.RoundToInt(gridWorldSize.y);
+        nodeDiameter = nodeRadius * 2;
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
+        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         BlockData = GridData.Instance;
-        
         CreateGrid();
     }
 
@@ -243,7 +244,7 @@ public class AGrid : MonoBehaviour
                 Debug.Log($"Warning: Updating node that has temporary state at ({gridX}, {gridY})");
             }
 
-            // GridData와 상태 �교
+            // GridData와 상태 비교
             bool gridDataOccupied = GridData.Instance.IsPositionOccupied(position);
             if (gridDataOccupied != isBlocked)
             {
@@ -335,5 +336,70 @@ public class AGrid : MonoBehaviour
         }
 
         return anyValidPath;
+    }
+
+    public void ResetNodes()
+    {
+        if (nodeArray != null)
+        {
+            for (int x = 0; x < gridSizeX; x++)
+            {
+                for (int y = 0; y < gridSizeY; y++)
+                {
+                    Vector3 worldPoint = WorldPointFromGrid(new Vector2Int(x, y));
+                    Vector3Int gridPosition = new Vector3Int(
+                        Mathf.RoundToInt(worldPoint.x),
+                        Mathf.RoundToInt(worldPoint.y),
+                        Mathf.RoundToInt(worldPoint.z)
+                    );
+                    bool isBlocked = GridData.Instance.IsPositionOccupied(gridPosition);
+                    nodeArray[x, y].walkable = !isBlocked;
+                }
+            }
+        }
+    }
+
+    public Vector3 WorldPointFromGrid(Vector2Int gridPosition)
+    {
+        float x = gridPosition.x * nodeDiameter;
+        float z = gridPosition.y * nodeDiameter;
+        return new Vector3(x + (nodeRadius), 0, z + (nodeRadius));
+    }
+
+    public void Clear()
+    {
+        // GridData 초기화
+        if (BlockData != null)
+        {
+            BlockData.Clear();
+        }
+
+        // 노드 배열 초기화
+        if (nodeArray != null)
+        {
+            for (int x = 0; x < gridSizeX; x++)
+            {
+                for (int y = 0; y < gridSizeY; y++)
+                {
+                    nodeArray[x, y].walkable = true;
+                    nodeArray[x, y].parent = null;
+                    nodeArray[x, y].gCost = 0;
+                    nodeArray[x, y].hCost = 0;
+                    nodeArray[x, y].directionPreference = 0;
+                }
+            }
+        }
+
+        // 장애물 위치 리스트 초기화
+        obstaclePositions.Clear();
+
+        // 그리드 재생성
+        CreateGrid();
+
+        // 경로 업데이트 요청
+        if (PathManager.Instance != null)
+        {
+            PathManager.Instance.UpdateAllPaths();
+        }
     }
 }

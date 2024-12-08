@@ -81,8 +81,6 @@ public class Tower : MonoBehaviour
     protected int baseAttackDamage;
     protected float baseRange;
 
-    public bool IsBuffed => originalStats.Count > 0;
-
     protected virtual void Start()
     {
         // 시작할 때 기본 스탯 저장
@@ -92,15 +90,14 @@ public class Tower : MonoBehaviour
         // 라인 렌더러 오브젝트를 자식으로 생성
         GameObject indicatorObj = Instantiate(rangeIndicatorPrefab, transform);
         rangeIndicator = indicatorObj.GetComponent<RangeIndicator>();
-        rangeIndicator.Initialize(Range);
+        rangeIndicator.Initialize(Range);  // 초기 Range 설정
         rangeIndicator.gameObject.SetActive(true);
-        
         if (!isPreview)
         {
             GameManager.Instance.PlacedTowerList.Add(this);
             mainCanvas = UI_IngameScene.Instance.GetComponent<Canvas>();
             StartCoroutine(Attack());
-            rangeIndicator.gameObject.SetActive(false);
+            rangeIndicator.gameObject.SetActive(false);  // preview가 아닐 때만 숨김
         }
     }
 
@@ -125,17 +122,17 @@ public class Tower : MonoBehaviour
 
     protected virtual void OnLevelUp()
     {
-        // 레벨업 시 기본 스탯 업데이트
-        baseAttackDamage = Damage;
-        baseRange = Range;
-
-        // 현재 적용된 버프 재적용
+        // 레벨업 후 현재 적용된 버프 재적용
         if (originalStats.Count > 0)
         {
-            var currentBuffs = new List<BuffField>(originalStats.Keys);
-            originalStats.Clear();
-            
-            foreach (var buff in currentBuffs)
+            // 현재 적용된 모든 버프 효과 제거
+            foreach (var buff in new List<BuffField>(originalStats.Keys))
+            {
+                RemoveBuff(buff);
+            }
+
+            // 버프 재적용
+            foreach (var buff in new List<BuffField>(originalStats.Keys))
             {
                 ApplyBuff(buff);
             }
@@ -354,31 +351,19 @@ public class Tower : MonoBehaviour
     {
         if (!originalStats.ContainsKey(buff))
         {
-            // 현재 스탯 저장
+            // 현재 스탯 저장 (baseStats 기준으로)
             originalStats[buff] = new TowerStats
             {
-                damage = Damage,
-                range = Range
+                damage = baseAttackDamage,
+                range = baseRange
             };
+
+            // 버프 적용 (기본 스탯에 곱하기)
+            Damage = Mathf.RoundToInt(baseAttackDamage * buff.damageMultiplier);
+            Range = baseRange * buff.rangeMultiplier;
+
+            ShowBuffEffect(true);
         }
-
-        // 모든 버프를 고려하여 최종 값 계산
-        float maxDamageMultiplier = 1f;
-        float maxRangeMultiplier = 1f;
-
-        foreach (var activeBuff in originalStats.Keys)
-        {
-            maxDamageMultiplier = Mathf.Max(maxDamageMultiplier, activeBuff.damageMultiplier);
-            maxRangeMultiplier = Mathf.Max(maxRangeMultiplier, activeBuff.rangeMultiplier);
-        }
-
-        // 가장 높은 버프 효과 적용
-        Damage = Mathf.RoundToInt(baseAttackDamage * maxDamageMultiplier);
-        Range = baseRange * maxRangeMultiplier;
-
-        ShowBuffEffect(true);
-        
-        Debug.Log($"[{Name}] Buff Applied - Damage: {Damage} (Base: {baseAttackDamage}), Range: {Range} (Base: {baseRange})");
     }
 
     // 버프 제거
@@ -386,32 +371,16 @@ public class Tower : MonoBehaviour
     {
         if (originalStats.ContainsKey(buff))
         {
+            // 기본 스탯으로 복구
+            Damage = baseAttackDamage;
+            Range = baseRange;
             originalStats.Remove(buff);
 
-            if (originalStats.Count > 0)
+            // 다른 버프가 없으면 이펙트 숨김
+            if (originalStats.Count == 0)
             {
-                // 남은 버프 중 가장 높은 효과 적용
-                float maxDamageMultiplier = 1f;
-                float maxRangeMultiplier = 1f;
-
-                foreach (var activeBuff in originalStats.Keys)
-                {
-                    maxDamageMultiplier = Mathf.Max(maxDamageMultiplier, activeBuff.damageMultiplier);
-                    maxRangeMultiplier = Mathf.Max(maxRangeMultiplier, activeBuff.rangeMultiplier);
-                }
-
-                Damage = Mathf.RoundToInt(baseAttackDamage * maxDamageMultiplier);
-                Range = baseRange * maxRangeMultiplier;
-            }
-            else
-            {
-                // 모든 버프가 제거되면 기본 스탯으로 복구
-                Damage = baseAttackDamage;
-                Range = baseRange;
                 ShowBuffEffect(false);
             }
-            
-            Debug.Log($"[{Name}] Buff Removed - Damage: {Damage} (Base: {baseAttackDamage}), Range: {Range} (Base: {baseRange})");
         }
     }
 }

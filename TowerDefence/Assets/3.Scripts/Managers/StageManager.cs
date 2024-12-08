@@ -1,5 +1,6 @@
 // UnityEngine 네임스페이스와 UI 관련 기능 포함
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -98,12 +99,14 @@ public class StageManager : MonoBehaviour
     {
         allWavesCleared = true; // 웨이브 클리어 상태 갱신
         ShowPreparationPanel(); // 준비 패널 표시
-        UI_Map.clearStage += 1; // 클리어된 스테이지 카운트 증가
+        GameManager.Instance.clearStage += 1; // 클리어된 스테이지 카운트 증가
     }
 
     private void ShowPreparationPanel()
     {
         SetPanelActive(EndPanel, true); // 준비 패널 활성화
+        GameManager.Instance.ClearWin();
+        GameManager.Instance.clearStage++;
         PrefabManager.Instance.ReplaceChildWithPrefab(); // 프리팹 업데이트
         SetUIElementsActive(uiElementsToDisable, false); // UI 비활성화
         Time.timeScale = 1f; // 게임 속도 복구
@@ -142,6 +145,7 @@ public class StageManager : MonoBehaviour
 
     public void OnGameOverButtonClicked()
     {
+        GameManager.Instance.Clear();
         LoadScene(gameOverScene); // 게임 오버 버튼 클릭 시 게임 오버 씬 로드
     }
 
@@ -156,7 +160,7 @@ public class StageManager : MonoBehaviour
     private void LoadScene(Object scene)
     {
         if (scene == null) return;
-
+        
         string sceneName = scene.name; // 씬 이름 가져오기
         Time.timeScale = 1f; // 타임스케일 복구
         SceneManager.LoadScene(sceneName); // 씬 로드

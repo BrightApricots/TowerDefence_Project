@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System.Linq;
 
 
 public class ObjectManager
@@ -156,27 +157,23 @@ public class ObjectManager
         else
             UnityEngine.Object.Destroy(go);
     }
-    //public void ShowDamageFont(Vector2 pos, float damage, float healAmount, UnityEngine.Transform parent, bool isCritical = false)
-    //{
-    //    string prefabName;
-    //    if (isCritical)
-    //    {
-    //        prefabName = "CriticalDamageText";
-    //    }
-    //    else
-    //    {
-    //        prefabName = "DamageText";
-    //    }
-    //    GameObject go = Managers.Instance.Resource.Instantiate(prefabName, pooling: true);
-    //    ShowDamage damageText = go.GetOrAddComponent<ShowDamage>();
-    //    damageText.SetInfo(pos, damage, healAmount, parent, isCritical);
-    //}
 
-    //public void ShowEffect(Vector2 pos, string name)
-    //{
-    //    string prefabName = name;
-    //    GameObject go = Managers.Instance.Resource.Instantiate(prefabName, pooling: true);
-    //    EffectBase effect = go.GetOrAddComponent<EffectBase>();
-    //    effect.SetInfo(pos);
-    //}
+    public void Clear()
+    {
+        // 모든 몬스터 정리
+        foreach (var monster in Monsters.ToList())
+        {
+            if (monster != null)
+                Despawn(monster);
+        }
+        Monsters.Clear();
+
+        // 모든 발사체 정리
+        foreach (var projectile in Projectiles.ToList())
+        {
+            if (projectile != null)
+                Despawn(projectile);
+        }
+        Projectiles.Clear();
+    }
 }

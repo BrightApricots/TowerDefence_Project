@@ -12335,37 +12335,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858297422}
   m_Mesh: {fileID: -3114268974010914483, guid: fdd5639a76137d34084da45affc8534e, type: 3}
---- !u!1 &863753569 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3554983962591803622, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-  m_PrefabInstance: {fileID: 9033120480076366062}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &863753570 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 871544641785033432, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
   m_PrefabInstance: {fileID: 9033120480076366062}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &863753571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863753569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53a14b7946d9304683f07c88ebae719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageMultiplier: 2
-  rangeMultiplier: 2
-  checkInterval: 0.2
-  checkHeight: 2
-  heightOffset: 0.1
-  checkSize: {x: 0.7, y: 2, z: 0.7}
-  checkLayers:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &866028442
 GameObject:
   m_ObjectHideFlags: 0
@@ -78353,57 +78327,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3379180346712811141, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3554983962591803622, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_Name
       value: FieldBuff
       objectReference: {fileID: 0}
-    - target: {fileID: 3554983962591803622, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3766671917958931334, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
+      propertyPath: checkInterval
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4340313278377855019, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e8c6e46b915d4f44cb2f18ce094107d0, type: 3}
-    - target: {fileID: 4340313278377855019, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6020626121873084417, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8276452131683303837, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e8c6e46b915d4f44cb2f18ce094107d0, type: 3}
-    - target: {fileID: 8276452131683303837, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
+    - target: {fileID: 3766671917958931334, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
+      propertyPath: checkLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3554983962591803622, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 863753571}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
 --- !u!198 &9080757384913088844
 ParticleSystem:

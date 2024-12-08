@@ -16,8 +16,17 @@ public class Tower_Placement : Block
 
     protected override void Start()
     {
-        button.onClick.AddListener(PlaceTower);  // Placement 대신 PlaceTower 사용
-        // 타워는 재사용 가능하므로 OnPlacementSuccess 이벤트를 구독하지 않음
+        base.Start();  // 부모 클래스의 Start 메서드 호출
+        
+        if (button != null)
+        {
+            button.onClick.RemoveAllListeners();  // 기존 리스너 제거
+            button.onClick.AddListener(PlaceTower);  // 새로운 리스너 추가
+        }
+        else
+        {
+            Debug.LogError($"Button component is missing on {gameObject.name}");
+        }
     }
 
     private void PlaceTower()

@@ -20,9 +20,26 @@ public class AUnit : MonoBehaviour
     [SerializeField]
     private Color previewPathColor = new Color(1f, 0.5f, 0f, 0.5f);
 
+    public event Action<Vector3[], bool> OnPathUpdated;
+
     void Awake()
     {
         InitializeLineRenderers();
+    }
+
+    public void Clear()
+    {
+        path = null;
+        previewPath = null;
+        if (actualPathRenderer != null)
+        {
+            actualPathRenderer.positionCount = 0;
+        }
+        if (previewPathRenderer != null)
+        {
+            previewPathRenderer.positionCount = 0;
+        }
+        OnPathUpdated = null;
     }
 
     private void InitializeLineRenderers()
@@ -211,9 +228,6 @@ public class AUnit : MonoBehaviour
     {
         return path;
     }
-
-    public delegate void PathUpdatedHandler(Vector3[] newPath, bool success);
-    public event PathUpdatedHandler OnPathUpdated;
 
     public void SetLineMaterials(Material actualMat, Material previewMat)
     {

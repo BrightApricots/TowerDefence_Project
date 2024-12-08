@@ -55,7 +55,7 @@ public class PrefabManager : MonoBehaviour
             return;
         }
 
-        // 교체할 프리팹 랜덤 선택
+        // 교체할 프리팹 랜덤 선택 
         GameObject selectedPrefab = availablePrefabs[Random.Range(0, availablePrefabs.Count)];
 
         if (selectedPrefab != null)

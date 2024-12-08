@@ -249,4 +249,37 @@ public class PlacementSystem : MonoBehaviour
     {
         return TowerData;
     }
+
+    public void Clear()
+    {
+        // 배치 상태 초기화
+        StopPlacement();
+        
+        // 그리드 데이터 초기화
+        BlockData = new GridData();
+        TowerData = new GridData();
+        
+        // 프리뷰 시스템 초기화
+        if (preview != null)
+        {
+            preview.StopShowingPreview();
+        }
+        
+        // 그리드 시각화 비활성화
+        if (gridVisualization != null)
+        {
+            gridVisualization.SetActive(false);
+        }
+
+        // 이벤트 리스너 초기화
+        OnPlacementSuccess = null;
+        
+        // 상태 변수 초기화
+        isPlacing = false;
+        lastDetectedPosition = Vector3Int.zero;
+        currentCardID = null;
+        
+        // 코루틴 정리
+        StopAllCoroutines();
+    }
 }

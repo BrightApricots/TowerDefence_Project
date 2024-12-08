@@ -34,7 +34,7 @@ namespace MyGame
 public class WaveManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Wave> waves = new List<Wave>();      // 전체 웨이브 리스트
+    private List<Wave> waves = new List<Wave>();      // ���체 웨이브 리스트
     [SerializeField]
     private MonsterSpawner monsterSpawner;            // 몬스터 스포너
     [SerializeField]
@@ -76,8 +76,16 @@ public class WaveManager : MonoBehaviour
 
     public event System.Action OnAllWavesCleared;     // 모든 웨이브 클리어 시 발생하는 이벤트
 
+    public List<Transform> spawnPoints;
+    public Transform targetPoint;
     private void Start()
     {
+        // PathManager 초기화
+        if (PathManager.Instance != null)
+        {
+            PathManager.Instance.SetupPoints(spawnPoints, targetPoint);
+        }
+
         InitializeBattleButton();
         InitializeSpeedButtonGroup();
         InitializeWaveTextManager();

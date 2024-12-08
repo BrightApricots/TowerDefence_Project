@@ -60918,7 +60918,6 @@ MonoBehaviour:
   gridWorldSize: {x: 50, y: 50}
   obstaclePositions: []
   database: {fileID: 11400000, guid: 9cb9899a278eb634699b46feeb33d428, type: 2}
-  grid: {fileID: 0}
 --- !u!1 &1862625223
 GameObject:
   m_ObjectHideFlags: 0

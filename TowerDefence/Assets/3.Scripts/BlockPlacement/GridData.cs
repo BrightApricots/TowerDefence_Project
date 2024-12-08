@@ -219,17 +219,14 @@ public class GridData
 
     public void Clear()
     {
-        // Dictionary 초기화 전에 모든 데이터 정리
-        foreach (var data in placedObjects.Values.Distinct())
-        {
-            if (data != null && data.PlacedObjectIndex >= 0)
-            {
-                ObjectPlacer.Instance?.RemoveObjectAt(data.PlacedObjectIndex);
-            }
-        }
-
+        // 모든 배치된 오브젝트 데이터 초기화
         placedObjects.Clear();
-        Debug.Log("GridData cleared");
+        
+        // ObjectPlacer 참조 초기화
+        placer = null;
+        
+        // 싱글톤 인스턴스 초기화
+        instance = null;
     }
 }
 
