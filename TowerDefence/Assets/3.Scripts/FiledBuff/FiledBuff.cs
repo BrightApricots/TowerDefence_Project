@@ -5,106 +5,94 @@ using UnityEngine;
 public class BuffField : MonoBehaviour
 {
     [Header("버프 효과")]
-    public float damageMultiplier = 2f;    // 공격력 30% 증가
-    public float rangeMultiplier = 2f;     // 범위 20% 증가
+    public float damageMultiplier = 2f;
+    public float rangeMultiplier = 2f;
 
     [Header("감지 설정")]
-    public float checkInterval = 0.2f;        // 체크 주기
-    public float checkHeight = 2f;          // 체크 높이
-    public float heightOffset = 0.1f;         // 버프필드가 타워 아래에 위치할 높이
-    public Vector3 checkSize = new Vector3(1f, 2f, 1f);  // 체크 영역 크기
-    public LayerMask checkLayers;            // Inspector에서 Unwalkable 레이어 설정
+    public float checkInterval = 1f;
+    public float checkHeight = 2f;
+    public float heightOffset = 0.1f;
+    public Vector3 checkSize = new Vector3(.7f, 2f, .7f);
+    public LayerMask checkLayers;
 
     private Tower currentBuffedTower;
     private float originalHeight;
-    private bool isChecking = false;  // 체크 중복 방지용 플래그
+    private bool isChecking = false;
+    private Vector3 lastPosition;
+    private Collider[] hitColliders = new Collider[5];
 
     private void Start()
     {
         originalHeight = transform.position.y;
-        checkLayers = LayerMask.GetMask("Unwalkable");
+        lastPosition = transform.position;
+        checkLayers = LayerMask.GetMask("Unwalkable", "Tower");
         StartCoroutine(CheckForTowerAndBlock());
     }
 
     private IEnumerator CheckForTowerAndBlock()
     {
+        WaitForSeconds wait = new WaitForSeconds(checkInterval);
+        
         while (true)
         {
             if (!isChecking)
             {
                 isChecking = true;
-                Vector3 currentPos = transform.position;
-                Vector3 checkCenter = new Vector3(currentPos.x, originalHeight + checkHeight * 0.5f, currentPos.z);
+                lastPosition = transform.position;
 
-                // 먼저 블록 높이 체크
+                Vector3 checkCenter = new Vector3(transform.position.x, originalHeight + checkHeight * 0.5f, transform.position.z);
+                int hitCount = Physics.OverlapBoxNonAlloc(checkCenter,checkSize * 0.5f,hitColliders,Quaternion.identity,checkLayers);
+
                 float blockHeight = originalHeight;
-                Collider[] blockColliders = Physics.OverlapBox(
-                    checkCenter,
-                    checkSize * 0.5f,
-                    Quaternion.identity,
-                    checkLayers
-                );
-
-                foreach (Collider collider in blockColliders)
+                for (int i = 0; i < hitCount; i++)
                 {
-                    float colliderTop = collider.bounds.max.y;
-                    if (colliderTop > blockHeight)
+                    if (hitColliders[i] != null)
                     {
-                        blockHeight = colliderTop;
+                        float colliderTop = hitColliders[i].bounds.max.y;
+                        if (colliderTop > blockHeight)
+                        {
+                            blockHeight = colliderTop;
+                        }
                     }
                 }
 
-                // 버프 필드를 블록 위로 이동
-                transform.position = new Vector3(
-                    currentPos.x,
-                    blockHeight + heightOffset,
-                    currentPos.z
-                );
+                transform.position = new Vector3(transform.position.x, blockHeight + heightOffset,transform.position.z);
 
-                // 타워 감지 (위치는 변경하지 않고 버프만 적용)
-                Collider[] towerColliders = Physics.OverlapBox(
-                    new Vector3(transform.position.x, transform.position.y, transform.position.z),
-                    new Vector3(2f, checkHeight, 2f),  // 감지 범위를 좀 더 넓게
-                    Quaternion.identity
-                );
-
-                bool foundTower = false;
+                Collider[] towerColliders = Physics.OverlapSphere(transform.position, checkSize.x/2);
                 Tower newTower = null;
 
-                foreach (var col in towerColliders)
+                foreach (var collider in towerColliders)
                 {
-                    Tower tower = col.GetComponentInParent<Tower>();
+                    Tower tower = collider.GetComponentInParent<Tower>();
                     if (tower != null && !tower.isPreview)
                     {
                         newTower = tower;
-                        foundTower = true;
-                        Debug.Log($"타워 감지: {tower.name}");
                         break;
                     }
                 }
 
-                // 타워 버프 처리
-                if (foundTower && newTower != currentBuffedTower)
+                // 타워 버프 상태 업데이트
+                if (newTower != currentBuffedTower)
                 {
-                    Debug.Log($"새로운 타워에 버프 적용: {newTower.name}");
                     if (currentBuffedTower != null)
                     {
                         RemoveBuff(currentBuffedTower);
                     }
-                    currentBuffedTower = newTower;
-                    ApplyBuff(currentBuffedTower);
-                }
-                else if (!foundTower && currentBuffedTower != null)
-                {
-                    Debug.Log("타워가 없어져 버프 제거");
-                    RemoveBuff(currentBuffedTower);
-                    currentBuffedTower = null;
+                    if (newTower != null)
+                    {
+                        currentBuffedTower = newTower;
+                        ApplyBuff(currentBuffedTower);
+                    }
+                    else
+                    {
+                        currentBuffedTower = null;
+                    }
                 }
 
                 isChecking = false;
             }
 
-            yield return new WaitForSeconds(checkInterval);
+            yield return wait;
         }
     }
 
@@ -112,10 +100,7 @@ public class BuffField : MonoBehaviour
     {
         if (tower != null)
         {
-            Debug.Log($"Before buff - Damage: {tower.Damage}, Range: {tower.Range}");
             tower.ApplyBuff(this);
-            Debug.Log($"After buff - Damage: {tower.Damage}, Range: {tower.Range}");
-            ShowBuffEffect(true);
         }
     }
 
@@ -123,38 +108,23 @@ public class BuffField : MonoBehaviour
     {
         if (tower != null)
         {
-            Debug.Log($"Before remove buff - Damage: {tower.Damage}, Range: {tower.Range}");
             tower.RemoveBuff(this);
-            Debug.Log($"After remove buff - Damage: {tower.Damage}, Range: {tower.Range}");
-            ShowBuffEffect(false);
         }
     }
-
-    private void ShowBuffEffect(bool isActive)
-    {
-        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        Color targetColor = isActive ?
-            new Color(1f, 1f, 1f, 0.8f) :
-            new Color(1f, 1f, 1f, 0.5f);
-
-        foreach (var sprite in sprites)
-        {
-            sprite.color = targetColor;
-        }
-    }
-
     private void OnDestroy()
     {
         if (currentBuffedTower != null)
         {
-            //RemoveBuff(currentBuffedTower);
+            RemoveBuff(currentBuffedTower);
         }
     }
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)
         {
+            // 체크 영역 표시
             Gizmos.color = Color.yellow;
             Vector3 checkCenter = new Vector3(
                 transform.position.x,
@@ -163,11 +133,17 @@ public class BuffField : MonoBehaviour
             );
             Gizmos.DrawWireCube(checkCenter, checkSize);
 
+            // 타워 감지 범위 표시
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, checkSize.x/2);
+
+            // 현재 버프 중인 타워와의 연결선 표시
             if (currentBuffedTower != null)
             {
-                Gizmos.color = Color.blue;
+                Gizmos.color = Color.green;
                 Gizmos.DrawLine(transform.position, currentBuffedTower.transform.position);
             }
         }
     }
+    #endif
 }

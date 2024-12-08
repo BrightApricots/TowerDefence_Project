@@ -8,35 +8,59 @@ public class FlameTower: Tower
     private GameObject currentFlameProjectile;
 
     public bool IsTargeting;
-
-    public FlameTower()
-    {
-        Name = "Flame Tower";
-        Element = "Fire";
-        Damage = 2;
-        Range = 3.5f;
-        FireRate = 2.5f;
-        DamageDealt = 0;
-        TotalKilled = 0;
-        UpgradePrice = 30;
-        SellPrice = 15;
-        TargetPriority = "Most Progress";
-        Info = "Continuously spews flames at its target, roasting a large group of monsters to ashes!";
-    }
+    private int originalDamage;
+    private float originalRange;
 
     protected override void Start()
     {
+        originalDamage = Damage;
+        originalRange = Range;
         currentFlameProjectile = flameProjeciles[Level - 1];
         base.Start();
     }
 
-    protected override void Update()
+    public override void ApplyBuff(BuffField buff)
     {
-        Detect();
-        FollowTarget();
-        TooltipPopupCheck();
+        //if (!IsBuffed)  // 버프가 처음 적용될 때만 원본 값 저장
+        //{
+        //    originalDamage = Damage;
+        //    originalRange = Range;
+        //}
+        
+        base.ApplyBuff(buff);
+        
+        // 화염 발사체에도 버프 적용
+        if (currentFlameProjectile != null)
+        {
+            FlameProjectile proj = currentFlameProjectile.GetComponent<FlameProjectile>();
+            if (proj != null)
+            {
+                proj.Damage = Mathf.RoundToInt(originalDamage * buff.damageMultiplier);
+            }
+        }
     }
 
+    public override void RemoveBuff(BuffField buff)
+    {
+        base.RemoveBuff(buff);
+        
+        // 화염 발사체 데미지 원래대로 복구
+        if (currentFlameProjectile != null)
+        {
+            FlameProjectile proj = currentFlameProjectile.GetComponent<FlameProjectile>();
+            if (proj != null)
+            {
+                proj.Damage = originalDamage;
+            }
+        }
+
+        //// 버프가 모두 제거되면 원본 값으로 복구
+        //if (!IsBuffed)
+        //{
+        //    Damage = originalDamage;
+        //    Range = originalRange;
+        //}
+    }
 
     protected override IEnumerator Attack()
     {
@@ -46,20 +70,18 @@ public class FlameTower: Tower
             {
                 currentFlameProjectile.SetActive(true);
                 FlameProjectile proj = currentFlameProjectile.GetComponent<FlameProjectile>();
-                proj.Damage = this.Damage;
+                proj.Damage = this.Damage;  // 현재 타워의 데미지 적용
                 proj.IsTargeting = this.IsTargeting;
                 proj.Target = this.CurrentTarget;
-                // FireRate 동안 활성화 유지
                 yield return new WaitForSeconds(FireRate);
             }
             else
             {
                 currentFlameProjectile.SetActive(false);
-                yield return null; // 타겟이 없을 때는 다음 프레임까지 대기
+                yield return null;
             }
         }
     }
-
 
     protected override void OnLevelUp()
     {
@@ -69,6 +91,7 @@ public class FlameTower: Tower
             currentFlameProjectile.SetActive(false);
             currentFlameProjectile = flameProjeciles[Level - 1];
             StartCoroutine(Attack());
+            originalDamage += 3;  // 원본 데미지도 증가
             Damage += 3;
         }
         else if (Level == 3)
@@ -77,8 +100,17 @@ public class FlameTower: Tower
             currentFlameProjectile.SetActive(false);
             currentFlameProjectile = flameProjeciles[Level - 1];
             StartCoroutine(Attack());
+            originalDamage += 1;  // 원본 데미지도 증가
             Damage += 1;
+            originalRange += 2f;  // 원본 범위도 증가
             Range += 2f;
         }
+    }
+
+    protected override void Update()
+    {
+        Detect();
+        FollowTarget();
+        TooltipPopupCheck();
     }
 }

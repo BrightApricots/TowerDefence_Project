@@ -25,19 +25,31 @@ public class MissileTower : Tower
 
     private bool isAttacking = false;
 
+    private int originalDamage;
+    private float originalRange;
+    private float originalSplashRange;
+
+    public float splashRange = 2f;
+    public GameObject explosionEffect;
+    public GameObject missilePrefab;
+
     public MissileTower() 
     {
         Name = "Missile Tower";
-        Element = "Electric";
+        Element = "Explosive";
         Damage = 3;
-        Range = 15;
-        FireRate = 3f;
+        Range = 6f;
+        FireRate = 1.5f;
         DamageDealt = 0;
         TotalKilled = 0;
-        UpgradePrice = 65;
-        SellPrice = 33;
+        UpgradePrice = 20;
+        SellPrice = 10;
         TargetPriority = "Most Progress";
-        Info = "Each attack fires 10 missiles, targeting random enemies within the attack range.";
+        Info = "Launches missiles that deal splash damage to groups of enemies.";
+
+        originalDamage = Damage;
+        originalRange = Range;
+        originalSplashRange = splashRange;
     }
     protected override void Start()
     {
@@ -162,5 +174,17 @@ public class MissileTower : Tower
         currentProjectile = projectiles[Level - 1];
         currentMuzzleEffect = muzzleEffects[Level - 1];
         currentHitEffect = HitEffects[Level - 1];
+    }
+
+    public override void ApplyBuff(BuffField buff)
+    {
+        base.ApplyBuff(buff);
+        splashRange = originalSplashRange * buff.rangeMultiplier;
+    }
+
+    public override void RemoveBuff(BuffField buff)
+    {
+        base.RemoveBuff(buff);
+        splashRange = originalSplashRange;
     }
 }

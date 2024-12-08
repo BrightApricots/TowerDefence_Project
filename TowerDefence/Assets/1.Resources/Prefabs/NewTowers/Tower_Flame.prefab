@@ -39011,6 +39011,7 @@ MonoBehaviour:
   isFollow: 0
   mainCanvas: {fileID: 0}
   _range: 3.5
+  buffEffect: {fileID: 0}
   flameProjeciles:
   - {fileID: 6789872993577127074}
   - {fileID: 5612713678545289812}

@@ -7287,6 +7287,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527290032}
   m_Mesh: {fileID: 4300000, guid: 7c2fe9e2f3418684f83b55e10b41735a, type: 2}
+--- !u!1 &527741688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3706936160302216349, guid: b75dd993cc9049748aea53167a767b54, type: 3}
+  m_PrefabInstance: {fileID: 1146140177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &528810076
 GameObject:
   m_ObjectHideFlags: 0
@@ -12357,7 +12362,7 @@ MonoBehaviour:
   checkInterval: 0.2
   checkHeight: 2
   heightOffset: 0.1
-  checkSize: {x: 0.5, y: 2, z: 0.5}
+  checkSize: {x: 0.7, y: 2, z: 0.7}
   checkLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -17356,11 +17361,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b75dd993cc9049748aea53167a767b54, type: 3}
---- !u!1 &1146140178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3706936160302216349, guid: b75dd993cc9049748aea53167a767b54, type: 3}
-  m_PrefabInstance: {fileID: 1146140177}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1146140179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4217279997386698761, guid: b75dd993cc9049748aea53167a767b54, type: 3}
@@ -25943,7 +25943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewYOffset: 0.06
   previewAlpha: 0.5
-  cellIndicator: {fileID: 1146140178}
+  cellIndicator: {fileID: 527741688}
 --- !u!1 &1605800556
 GameObject:
   m_ObjectHideFlags: 0
@@ -31748,19 +31748,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2023792358}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlacementSystem, Assembly-CSharp
-        m_MethodName: StartRemoving
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2023792358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78331,7 +78319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 871544641785033432, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 871544641785033432, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_LocalPosition.z

@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
             DestroyImmediate(gameObject);
         }
     }
-}
 
-//
+    //타워 필드버프체크용
+    public event System.Action<Tower> OnTowerSold;
+    public void NotifyTowerSold(Tower tower)
+    {
+        OnTowerSold?.Invoke(tower);
+    }
+}

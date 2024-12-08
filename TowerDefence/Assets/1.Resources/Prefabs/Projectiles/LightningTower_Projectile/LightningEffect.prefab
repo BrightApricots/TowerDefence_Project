@@ -153,7 +153,7 @@ MonoBehaviour:
   segments: 70
   amplitude: 0.5
   duration: 0.2
-  lightningColor: {r: 0.96727955, g: 1, b: 0.3254717, a: 255}
+  lightningColor: {r: 0.9411765, g: 1, b: 0.3254902, a: 255}
   startWidth: 0.7
   endWidth: 0.4
 --- !u!114 &-8352747392002126607

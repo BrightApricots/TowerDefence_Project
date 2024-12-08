@@ -8,7 +8,7 @@ public class LightningEffect : MonoBehaviour
     public int segments = 70;
     public float amplitude = 0.5f;
     public float duration = 0.2f;
-    public Color lightningColor = new Color(240, 255, 83, 255);
+    public Color lightningColor;
     public float startWidth = 0.7f;
     public float endWidth = 0.4f;
     
@@ -19,7 +19,7 @@ public class LightningEffect : MonoBehaviour
         lineRenderer.endColor = lightningColor;
         lineRenderer.startWidth = startWidth;
         lineRenderer.endWidth = endWidth;
-    }
+    }   
 
     public void CreateLightning(Vector3 start, Vector3 end)
     {
