@@ -18,6 +18,8 @@ public class PlacementState : IBuildingState
     AGrid aGrid;
     private LayerMask towerPlaceableLayer;
     private bool isCalculatingPath = false;
+    private bool isDisposed = false;
+    private List<IEnumerator> activeCoroutines = new List<IEnumerator>();
 
     public PlacementState(int ID, Grid grid, PreviewSystem preview, ObjectsDatabaseSO database, GridData blockData,
             GridData towerData, ObjectPlacer objectPlacer, InputManager inputManager, AGrid aGrid)
@@ -56,8 +58,25 @@ public class PlacementState : IBuildingState
 
     public void EndState()
     {
+        isDisposed = true;
         preview.StopShowingPreview();
         inputManager.OnRotate -= RotateStructure;
+
+        // 임시 노드 상태 복원
+        RestoreTemporaryNodes();
+
+        // 진행 중인 모든 코루틴 정리
+        activeCoroutines.Clear();
+    }
+
+    private IEnumerator StartSafeCoroutine(IEnumerator coroutine)
+    {
+        if (!isDisposed)
+        {
+            activeCoroutines.Add(coroutine);
+            yield return coroutine;
+            activeCoroutines.Remove(coroutine);
+        }
     }
 
     private IEnumerator CheckPlacementValidityCoroutine(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview, System.Action<bool> callback)
@@ -219,6 +238,9 @@ public class PlacementState : IBuildingState
             return;
         }
 
+        // 실행 중인 코루틴이 있다면 중단
+        activeCoroutines.Clear();
+
         int floor = 0;
         bool canPlace = false;
         int currentID = database.objectsData[selectedObjectIndex].ID;
@@ -258,41 +280,26 @@ public class PlacementState : IBuildingState
 
         if (canPlace)
         {
+            // 배치 전에 임시 상태 복원
+            RestoreTemporaryNodes();
+
             GridData selectedData = database.IsBlock(currentID) ? BlockData : TowerData;
             Vector3 position = grid.CellToWorld(gridPosition);
             position += new Vector3(0.5f, floor, 0.5f);
 
-            // 블록 설치 전에 해당 위치의 나무 체크
-            if (database.IsBlock(currentID))
+            // 타워 설치 전에 해당 위치가 이미 점유되어 있는지 다시 한번 확인
+            if (database.IsTower(currentID))
             {
-                foreach (var cell in database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation))
+                Vector3Int checkPos = new Vector3Int(gridPosition.x, floor, gridPosition.z);
+                if (TowerData.IsPositionOccupied(checkPos))
                 {
-                    Vector3 checkPosition = position + new Vector3(cell.x, 0, cell.y);
-                    Collider[] colliders = Physics.OverlapSphere(checkPosition, 0.5f);
-                    foreach (var collider in colliders)
-                    {
-                        TreeDisapearEffect treeEffect = collider.GetComponent<TreeDisapearEffect>();
-                        if (treeEffect != null)
-                        {
-                            ParticleSystem particle = UnityEngine.Object.Instantiate(treeEffect.effect, treeEffect.transform.position, Quaternion.identity);
-                            UnityEngine.Object.Destroy(particle.gameObject, particle.main.duration);
-                            UnityEngine.Object.Destroy(treeEffect.gameObject);
-                        }
-                    }
+                    Debug.LogWarning($"Position {checkPos} is already occupied. Skipping tower placement.");
+                    return;
                 }
             }
 
             int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, 
                 position, Quaternion.Euler(0, 90 * currentRotation, 0));
-
-            if (database.IsBlock(currentID))
-            {
-                GameObject placedObject = ObjectPlacer.Instance.placedGameObjects[index];
-                if (placedObject != null)
-                {
-                    placedObject.layer = LayerMask.NameToLayer("Unwalkable");
-                }
-            }
 
             selectedData.AddObjectAt(gridPosition, 
                 database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
@@ -374,6 +381,9 @@ public class PlacementState : IBuildingState
 
     public void SetTemporaryNodes(Vector3Int gridPosition, bool walkable)
     {
+        // 이전 임시 상태 복원
+        RestoreTemporaryNodes();
+
         List<Vector2Int> cells = database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation);
         foreach (var cell in cells)
         {
@@ -394,5 +404,10 @@ public class PlacementState : IBuildingState
     public int GetCurrentID()
     {
         return database.objectsData[selectedObjectIndex].ID;
+    }
+
+    public GridData GetTowerData()
+    {
+        return TowerData;
     }
 }

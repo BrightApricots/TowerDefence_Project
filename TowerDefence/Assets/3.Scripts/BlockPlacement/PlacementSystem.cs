@@ -9,102 +9,81 @@ using UnityEngine.EventSystems;
 public class PlacementSystem : MonoBehaviour
 {
     private static PlacementSystem instance;
-    public static PlacementSystem Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                // 씬에서 기존 인스턴스 찾기
-                instance = FindObjectOfType<PlacementSystem>();
-                
-                // 없으면 새로 생성
-                if (instance == null)
-                {
-                    GameObject go = new GameObject("PlacementSystem");
-                    instance = go.AddComponent<PlacementSystem>();
-                    DontDestroyOnLoad(go);
-                }
-            }
-            return instance;
-        }
-    }
+    public static PlacementSystem Instance { get { return instance; } }
 
-    [SerializeField]
-    private InputManager inputManager;
-    [SerializeField]
-    private Grid grid;
-    [SerializeField]
-    private AGrid aGrid;
+    [Header("Required Components")]
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private Grid grid;
+    [SerializeField] private AGrid aGrid;
+    [SerializeField] private ObjectsDatabaseSO database;
+    [SerializeField] private GameObject gridVisualization;
+    [SerializeField] private PreviewSystem preview;
+    [SerializeField] private ObjectPlacer objectPlacer;
 
-    [SerializeField]
-    private ObjectsDatabaseSO database;
-
-    [SerializeField]
-    private GameObject gridVisualization;
-
-    private GridData BlockData, TowerData;
-
-    [SerializeField]
-    private PreviewSystem preview;
-
+    private GridData BlockData;
+    private GridData TowerData;
+    private IBuildingState buildingState;
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
-
-    [SerializeField]
-    private ObjectPlacer objectPlacer;
-
-    IBuildingState buildingState;
-
     private bool isPlacing = false;
 
-    // 블록 배치 성공 시 발생하는 이벤트
     public event System.Action<int, string> OnPlacementSuccess;
-    private string currentCardID;  // 현재 선택된 카드의 ID
+    private string currentCardID;
 
     private void Awake()
     {
         if (instance == null)
         {
-            // 새로운 루트 게임오브젝트 생성
-            GameObject newGO = new GameObject("PlacementSystem");
-            
-            // 현재 컴포넌트의 모든 참조와 값을 새 오브젝트로 복사
-            PlacementSystem newSystem = newGO.AddComponent<PlacementSystem>();
-            newSystem.inputManager = this.inputManager;
-            newSystem.grid = this.grid;
-            newSystem.aGrid = this.aGrid;
-            newSystem.database = this.database;
-            newSystem.gridVisualization = this.gridVisualization;
-            newSystem.preview = this.preview;
-            newSystem.objectPlacer = this.objectPlacer;
-            
-            // 새 오브젝트를 DontDestroyOnLoad로 설정
-            DontDestroyOnLoad(newGO);
-            
-            instance = newSystem;
-            
-            // 원래 오브젝트 제거
-            Destroy(gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (instance != this)
+        else
         {
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
+            return;
         }
 
-        BlockData = new();
-        TowerData = new();
+        // 필수 컴포넌트 확인
+        ValidateComponents();
+
+        // 데이터 초기화
+        BlockData = new GridData();
+        TowerData = new GridData();
+
+        StopPlacement();
+    }
+
+    private void ValidateComponents()
+    {
+        if (inputManager == null) inputManager = GetComponent<InputManager>();
+        if (grid == null) grid = GetComponent<Grid>();
+        if (aGrid == null) aGrid = GetComponent<AGrid>();
+        if (preview == null) preview = GetComponent<PreviewSystem>();
+        if (objectPlacer == null) objectPlacer = GetComponent<ObjectPlacer>();
+
+        // 필수 컴포넌트 누락 체크
+        if (inputManager == null) Debug.LogError("InputManager is missing!");
+        if (grid == null) Debug.LogError("Grid is missing!");
+        if (aGrid == null) Debug.LogError("AGrid is missing!");
+        if (database == null) Debug.LogError("ObjectsDatabaseSO is missing!");
+        if (gridVisualization == null) Debug.LogError("GridVisualization is missing!");
+        if (preview == null) Debug.LogError("PreviewSystem is missing!");
+        if (objectPlacer == null) Debug.LogError("ObjectPlacer is missing!");
     }
 
     private void Start()
     {
-        gridVisualization.SetActive(false);
-        BlockData = new();
-        TowerData = new();
+        if (gridVisualization != null)
+        {
+            gridVisualization.SetActive(false);
+        }
     }
 
     public void StartPlacement(int ID, string cardID)
     {
-        currentCardID = cardID;  // 카드 ID 저장
+        // 필수 컴포넌트 재확인
+        if (!ValidateBeforePlacement()) return;
+
+        currentCardID = cardID;
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
         inputManager.OnClicked += PlaceStructure;
@@ -112,19 +91,31 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
-    public void StartRemoving()
+    private bool ValidateBeforePlacement()
     {
-        StopPlacement();
+        if (inputManager == null || grid == null || preview == null || 
+            database == null || objectPlacer == null || aGrid == null)
+        {
+            Debug.LogError("Cannot start placement: Some required components are missing!");
+            return false;
+        }
+        return true;
+    }
+
+    public void StartTowerPlacement(int ID)
+    {
+        if (!database.IsTower(ID))
+        {
+            Debug.LogError($"Attempted to place non-tower object (ID: {ID}) using StartTowerPlacement");
+            return;
+        }
+
+        if (!ValidateBeforePlacement()) return;
+
         gridVisualization.SetActive(true);
-        buildingState = new RemovingState(
-            grid, 
-            preview, 
-            BlockData, 
-            TowerData, 
-            objectPlacer, 
-            aGrid,
-            inputManager);
+        buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
         inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += StopPlacement;
         inputManager.OnExit += StopPlacement;
     }
 
@@ -173,7 +164,7 @@ public class PlacementSystem : MonoBehaviour
         float timeout = Time.time + 0.5f;
         while (!checkComplete && Time.time < timeout)
         {
-            // 대기 중에도 지속 유효성 ���사
+            // 대기 중에도 지속 유효성 검사
             if (!placementState.IsValidPlacement(gridPosition))
             {
                 placementState.RestoreTemporaryNodes();
@@ -249,30 +240,13 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    // 타워 배치 메서드
-    public void StartTowerPlacement(int ID)
+    public PlacementState GetCurrentPlacementState()
     {
-        if (!database.IsTower(ID))
-        {
-            Debug.LogError($"Attempted to place non-tower object (ID: {ID}) using StartTowerPlacement");
-            return;
-        }
-
-        gridVisualization.SetActive(true);
-        buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
-        inputManager.OnClicked += PlaceStructure;
-        inputManager.OnClicked += StopPlacement;
-        inputManager.OnExit += StopPlacement;
+        return buildingState as PlacementState;
     }
 
-    public void Initialize(InputManager inputManager, AGrid grid, ObjectsDatabaseSO database, PreviewSystem preview)
+    public GridData GetTowerData()
     {
-        this.inputManager = inputManager;
-        this.grid = grid;
-        this.database = database;
-        this.preview = preview;
-        
-        BlockData = new GridData();
-        TowerData = new GridData();
+        return TowerData;
     }
 }

@@ -21,7 +21,7 @@ public class MapSystemManager : MonoBehaviour
     // 필요한 시스템 컴포넌트들
     public PlacementSystem PlacementSystem { get; private set; }
     public PathManager PathManager { get; private set; }
-    public AGrid Grid { get; private set; }
+    public AGrid AGrid { get; private set; }  // Grid를 AGrid로 변경
     public PathFinding PathFinding { get; private set; }
     public PathRequestManager PathRequestManager { get; private set; }
     public PreviewSystem PreviewSystem { get; private set; }
@@ -40,8 +40,8 @@ public class MapSystemManager : MonoBehaviour
         PathManager = pathManagerGO.AddComponent<PathManager>();
         pathManagerGO.transform.SetParent(transform);
 
-        var gridGO = new GameObject("Grid");
-        Grid = gridGO.AddComponent<AGrid>();
+        var gridGO = new GameObject("AGrid");
+        AGrid = gridGO.AddComponent<AGrid>();  // Grid를 AGrid로 변경
         gridGO.transform.SetParent(transform);
 
         var pathFindingGO = new GameObject("PathFinding");
@@ -58,28 +58,27 @@ public class MapSystemManager : MonoBehaviour
         inputGO.transform.SetParent(transform);
 
         // 시스템 간의 참조 설정
-        PlacementSystem.Initialize(InputManager, Grid, database, PreviewSystem);
-        PathManager.Initialize(Grid);
-        Grid.Initialize();
-        PathFinding.Initialize(Grid, PathRequestManager);
-        PreviewSystem.Initialize();
+        //PlacementSystem.Initialize(InputManager, AGrid, database, PreviewSystem);  // Grid를 AGrid로 변경
+        //PathManager.Initialize(AGrid);  // Grid를 AGrid로 변경
+        //AGrid.Initialize();  // Grid를 AGrid로 변경
+        //PathFinding.Initialize(AGrid, PathRequestManager);  // Grid를 AGrid로 변경
+        //PreviewSystem.Initialize();
     }
 
-    // 씬 전환 시 맵 데이터 초기화
     public void ResetMapData()
     {
-        Grid.UpdateGrid();
-        PathManager.UpdateAllPaths();
-        ObjectPlacer.Instance.Clear();
+        // 순서 중요: GridData를 먼저 정리하고 나머지 처리
         GridData.Instance.Clear();
+        ObjectPlacer.Instance.Clear();
+        
+        if (AGrid != null)  // Grid를 AGrid로 변경
+        {
+            AGrid.UpdateGrid();
+        }
+        
+        if (PathManager != null)
+        {
+            PathManager.UpdateAllPaths();
+        }
     }
-
-    // 씬 전환 시 호출될 메서드
-    public void SetupNewMap(MapData mapData)
-    {
-        ResetMapData();
-        // 새로운 맵 데이터로 초기화
-        Grid.SetupGrid(mapData.gridSize, mapData.unwalkableMask);
-        // 기타 필요한 초기화...
-    }
-} 
+}

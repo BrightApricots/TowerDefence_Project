@@ -19,8 +19,6 @@ public class AGrid : MonoBehaviour
 
     [SerializeField]
     private ObjectsDatabaseSO database;
-    [SerializeField]
-    private Grid grid;
 
     private GridData BlockData;
 
@@ -32,16 +30,6 @@ public class AGrid : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y);
         BlockData = GridData.Instance;
-        
-        // Grid 컴포넌트가 없으면 가져오기
-        if (grid == null)
-        {
-            grid = GetComponent<Grid>();
-            if (grid == null)
-            {
-                grid = gameObject.AddComponent<Grid>();
-            }
-        }
         
         CreateGrid();
     }
@@ -347,51 +335,5 @@ public class AGrid : MonoBehaviour
         }
 
         return anyValidPath;
-    }
-
-    // WorldToCell 대신 자체 변환 메서드 추가
-    private Vector3Int WorldToGridPosition(Vector3 worldPosition)
-    {
-        if (grid != null)
-        {
-            return grid.WorldToCell(worldPosition);
-        }
-        else
-        {
-            // Grid 컴포넌트가 없을 경우 수동으로 계산
-            float x = worldPosition.x + gridWorldSize.x / 2;
-            float z = worldPosition.z + gridWorldSize.y / 2;
-            return new Vector3Int(
-                Mathf.FloorToInt(x),
-                0,
-                Mathf.FloorToInt(z)
-            );
-        }
-    }
-
-    public void ValidateNodeStates()
-    {
-        int mismatches = 0;
-        for (int x = 0; x < gridSizeX; x++)
-        {
-            for (int y = 0; y < gridSizeY; y++)
-            {
-                Vector3Int gridPosition = new Vector3Int(x - gridSizeX/2, 0, y - gridSizeY/2);
-                bool isOccupied = GridData.Instance.IsPositionOccupied(gridPosition);
-                bool shouldBeWalkable = !isOccupied;
-                
-                if (nodeArray[x, y].walkable != shouldBeWalkable)
-                {
-                    mismatches++;
-                    Debug.LogWarning($"Node state mismatch at ({x}, {y}): GridData occupied: {isOccupied}, Node walkable: {nodeArray[x, y].walkable}");
-                    nodeArray[x, y].walkable = shouldBeWalkable;
-                }
-            }
-        }
-        
-        if (mismatches > 0)
-        {
-            Debug.LogWarning($"Found {mismatches} node state mismatches during validation");
-        }
     }
 }

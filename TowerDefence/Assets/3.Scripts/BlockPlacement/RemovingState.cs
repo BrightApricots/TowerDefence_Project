@@ -30,6 +30,10 @@ public class RemovingState : IBuildingState
     public void EndState()
     {
         previewSystem.StopShowingPreview();
+        if (aGrid != null)
+        {
+            aGrid.RestoreTemporaryNodes();
+        }
     }
 
     public void OnAction(Vector3Int gridPosition)
@@ -40,47 +44,23 @@ public class RemovingState : IBuildingState
         }
 
         GridData selectedData = null;
-        int index = -1;
-        int id = -1;
-        PlacementData placementData = null;
-
-        // 블록 데이터 확인
-        placementData = BlockData.GetPlacementData(gridPosition);
-        if (placementData != null)
+        PlacementData data = GridData.Instance.GetPlacementData(gridPosition);
+        
+        if (data != null)
         {
-            selectedData = BlockData;
-            index = placementData.PlacedObjectIndex;
-            id = placementData.ID;
-        }
-        else
-        {
-            // 타워 데이터 확인
-            placementData = TowerData.GetPlacementData(gridPosition);
-            if (placementData != null)
+            aGrid.RestoreTemporaryNodes();
+            
+            GridData.Instance.RemoveObjectAt(gridPosition);
+            
+            foreach (var pos in data.occupiedPositions)
             {
-                selectedData = TowerData;
-                index = placementData.PlacedObjectIndex;
-                id = placementData.ID;
-            }
-        }
-
-        if (selectedData != null && placementData != null)
-        {
-            // 오브젝트 제거 전에 모든 점유 셀의 노드 상태를 업데이트
-            foreach (var pos in placementData.occupiedPositions)
-            {
-                // 노드 상태를 walkable로 변경
                 aGrid.UpdateNode(pos, false);
-                
-                // GridData에서도 해당 위치 제거
-                selectedData.RemoveObjectAt(pos);
             }
 
-            // 오브젝트 제거
-            objectPlacer.RemoveObjectAt(index);
-
-            // PlacementSystem에 경로 업데이트 요청
-            PlacementSystem.Instance.RequestPathUpdate();
+            if (PathManager.Instance != null)
+            {
+                PathManager.Instance.UpdateAllPaths();
+            }
         }
     }
 

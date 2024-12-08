@@ -12357,7 +12357,7 @@ MonoBehaviour:
   checkInterval: 0.2
   checkHeight: 2
   heightOffset: 0.1
-  checkSize: {x: 1, y: 2, z: 1}
+  checkSize: {x: 0.5, y: 2, z: 0.5}
   checkLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -29657,7 +29657,6 @@ MonoBehaviour:
   gridWorldSize: {x: 50, y: 50}
   obstaclePositions: []
   database: {fileID: 11400000, guid: 04938bc5fa434594b80d1a7b3b492fea, type: 2}
-  grid: {fileID: 0}
 --- !u!1 &1862625223
 GameObject:
   m_ObjectHideFlags: 0
@@ -78381,22 +78380,22 @@ PrefabInstance:
     - target: {fileID: 4340313278377855019, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c0947046604294781a54818d5efaa1ea, type: 3}
+      objectReference: {fileID: 21300000, guid: e8c6e46b915d4f44cb2f18ce094107d0, type: 3}
     - target: {fileID: 4340313278377855019, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_SortingOrder
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4625876084188098046, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.8
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6020626121873084417, guid: 514ce546ab8d5564191efee3fa9847ac, type: 3}
       propertyPath: m_SortingOrder
