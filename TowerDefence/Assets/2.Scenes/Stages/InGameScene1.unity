@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6f74b956294c11d43a383072cf8b55aa, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -6064,7 +6064,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: -876546973899608171, guid: 6892b5ebbb62f8c4dbebb972790e3023, type: 3}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!1 &365816812
@@ -16335,6 +16336,7 @@ MonoBehaviour:
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
+  waveTextManager: {fileID: 0}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -19789,7 +19791,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
+  gameOverScene: {fileID: 0}
   EndPanel: {fileID: 0}
+  GameOverPanel: {fileID: 0}
+  gameOverButton: {fileID: 0}
   uiElementsToDisable:
   - {fileID: 706286640}
   - {fileID: 916069969}
@@ -26185,6 +26190,7 @@ MonoBehaviour:
   EquipTowerList: []
   UnEquipTowerList: []
   PlacedTowerList: []
+  tooltipCount: 0
 --- !u!224 &1498700928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27325,7 +27331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: -876546973899608171, guid: 6892b5ebbb62f8c4dbebb972790e3023, type: 3}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!135 &1541005854
@@ -28684,7 +28691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  lineMaterial: {fileID: -876546973899608171, guid: 6892b5ebbb62f8c4dbebb972790e3023, type: 3}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!135 &1660414540
@@ -30126,7 +30134,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8a24bb5db0c997e4b9782f3789d16e83, type: 2}
+  - {fileID: 2100000, guid: b2f757cd7cf532d47a7bcf255b46a3f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32498,7 +32506,8 @@ MonoBehaviour:
   - {fileID: 1660414543}
   - {fileID: 1541005857}
   targetPoint: {fileID: 943508852}
-  pathLineMaterial: {fileID: -876546973899608171, guid: 6892b5ebbb62f8c4dbebb972790e3023, type: 3}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
 --- !u!114 &1862580661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34960,7 +34969,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3772002a264f779478a85a0003d6ee50, type: 2}
+  - {fileID: -876546973899608171, guid: fc884337d8e681c4baa711efe58b89aa, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

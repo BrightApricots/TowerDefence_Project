@@ -8,20 +8,46 @@ public class Block : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     protected Button button;
     protected int blockType;
+    protected string uniqueID;
+    private bool isSelected = false;
 
     protected virtual void Awake()
     {
         button = GetComponent<Button>();
+        uniqueID = System.Guid.NewGuid().ToString();
     }   
 
     protected virtual void Start()
     {
         button.onClick.AddListener(Placement);
+        PlacementSystem.Instance.OnPlacementSuccess += HandlePlacementSuccess;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (PlacementSystem.Instance != null)
+        {
+            PlacementSystem.Instance.OnPlacementSuccess -= HandlePlacementSuccess;
+        }
     }
 
     protected virtual void Placement()
     {
-        PlacementSystem.Instance.StartPlacement(blockType);
+        foreach (var block in FindObjectsOfType<Block>())
+        {
+            block.isSelected = false;
+        }
+        
+        isSelected = true;
+        PlacementSystem.Instance.StartPlacement(blockType, uniqueID);
+    }
+
+    protected virtual void HandlePlacementSuccess(int placedBlockID, string selectedCardID)
+    {
+        if (placedBlockID == blockType && isSelected && uniqueID == selectedCardID)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

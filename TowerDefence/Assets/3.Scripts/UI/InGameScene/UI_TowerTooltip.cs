@@ -31,9 +31,27 @@ public class UI_TowerTooltip : MonoBehaviour
     public Button SellButton;
 
     private Tower selectedTower; // 현재 선택된 타워
+    private GridData towerData; // 타워 데이터 참조
+    private PlacementSystem placementSystem; // PlacementSystem 참조 추가
 
     private void Start()
     {
+        // PlacementSystem 찾기
+        placementSystem = FindObjectOfType<PlacementSystem>();
+        if (placementSystem != null)
+        {
+            // TowerData 직접 가져오기
+            towerData = placementSystem.GetTowerData();
+            if (towerData == null)
+            {
+                Debug.LogError("Failed to get TowerData from PlacementSystem");
+            }
+        }
+        else
+        {
+            Debug.LogError("PlacementSystem not found in scene");
+        }
+        
         UpdateUI();
     }
 
@@ -56,37 +74,49 @@ public class UI_TowerTooltip : MonoBehaviour
 
     private void UpdateUI()
     {
-        NameText.text = Name;
-        InfoText.text =
-            $"Element: {Element}" + System.Environment.NewLine +
-            $"Damage: {Damage}" + System.Environment.NewLine +
-            $"Range: {Range}" + System.Environment.NewLine +
-            $"Fire Rate: {FireRate}" + System.Environment.NewLine +
-            System.Environment.NewLine + System.Environment.NewLine +
-            $"Damage Dealt: {DamageDealt}" + System.Environment.NewLine +
-            $"Total Killed: {TotalKilled}";
-
-        TargetPriorityText.text = $"Target: {TargetPriority}";
-        SellPriceText.text = $"Sell       ${SellPrice}";
-        
-        // 최대 레벨이면 업그레이드 버튼 비활성화
-        if (selectedTower.Level >= selectedTower.MaxLevel)
+        if (NameText != null) NameText.text = Name;
+        if (InfoText != null)
         {
-            UpgradeText.text = "Max Level";
-            UpgradeButton.interactable = false;
+            InfoText.text =
+                $"Element: {Element}" + System.Environment.NewLine +
+                $"Damage: {Damage}" + System.Environment.NewLine +
+                $"Range: {Range}" + System.Environment.NewLine +
+                $"Fire Rate: {FireRate}" + System.Environment.NewLine +
+                System.Environment.NewLine + System.Environment.NewLine +
+                $"Damage Dealt: {DamageDealt}" + System.Environment.NewLine +
+                $"Total Killed: {TotalKilled}";
         }
-        else
+
+        if (TargetPriorityText != null) TargetPriorityText.text = $"Target: {TargetPriority}";
+        if (SellPriceText != null) SellPriceText.text = $"Sell       ${SellPrice}";
+        
+        if (selectedTower != null && UpgradeButton != null && UpgradeText != null)
         {
-            UpgradeText.text = $"Upgrade   ${UpgradePrice}";
-            UpgradeButton.interactable = true;
+            // 최대 레벨이면 업그레이드 버튼 비활성화
+            if (selectedTower.Level >= selectedTower.MaxLevel)
+            {
+                UpgradeText.text = "Max Level";
+                UpgradeButton.interactable = false;
+            }
+            else
+            {
+                UpgradeText.text = $"Upgrade   ${UpgradePrice}";
+                UpgradeButton.interactable = true;
+            }
         }
 
         // 버튼 이벤트 연결
-        UpgradeButton.onClick.RemoveAllListeners();
-        SellButton.onClick.RemoveAllListeners();
+        if (UpgradeButton != null)
+        {
+            UpgradeButton.onClick.RemoveAllListeners();
+            UpgradeButton.onClick.AddListener(OnUpgradeClick);
+        }
         
-        UpgradeButton.onClick.AddListener(OnUpgradeClick);
-        SellButton.onClick.AddListener(OnSellClick);
+        if (SellButton != null)
+        {
+            SellButton.onClick.RemoveAllListeners();
+            SellButton.onClick.AddListener(OnSellClick);
+        }
     }
 
     private void OnUpgradeClick()
@@ -108,18 +138,68 @@ public class UI_TowerTooltip : MonoBehaviour
 
     private void OnSellClick()
     {
-        if (selectedTower != null)
+        if (selectedTower != null && towerData != null)
         {
             // 판매 금액 추가
             GameManager.Instance.CurrentMoney += int.Parse(SellPrice);
             
-            // 타워 제거
+            // 타워의 그리드 위치 계산 (floor 값 포함)
+            Vector3 worldPos = selectedTower.transform.position;
+            Vector3Int gridPosition = towerData.WorldToGridPosition(worldPos);
+            
+            Debug.Log($"Selling tower at world position {worldPos}, grid position {gridPosition}");
+            
+            // TowerData에서 타워 정보 제거
+            PlacementData data = towerData.GetPlacementData(gridPosition);
+            if (data != null)
+            {
+                Debug.Log($"Found tower data at {gridPosition} with ID: {data.ID}, Index: {data.PlacedObjectIndex}, OccupiedPositions: {data.occupiedPositions.Count}");
+                
+                // TowerData에서 타워 정보 제거
+                towerData.RemoveObjectAt(gridPosition);
+                
+                // ObjectPlacer에서 타워 제거
+                if (data.PlacedObjectIndex >= 0)
+                {
+                    Debug.Log($"Removing tower object at index: {data.PlacedObjectIndex}");
+                    ObjectPlacer.Instance?.RemoveObjectAt(data.PlacedObjectIndex);
+                }
+                
+                Debug.Log($"Successfully removed tower data from grid position {gridPosition}");
+            }
+            else
+            {
+                Debug.LogWarning($"No tower data found at grid position {gridPosition}");
+            }
+
+            // 타워 리스트에서 제거
             GameManager.Instance.PlacedTowerList.Remove(selectedTower);
+            
+            // 타워 게임 오브젝트 제거
+            Debug.Log($"Destroying tower game object");
             Destroy(selectedTower.gameObject);
 
             GameManager.Instance.tooltipCount = false;
             // 툴팁 제거
             Destroy(gameObject);
+            
+            // 제거 후 해당 위치가 비어있는지 확인
+            if (towerData.IsPositionOccupied(gridPosition))
+            {
+                Debug.LogError($"Position {gridPosition} is still occupied after tower removal!");
+                
+                // 강제로 한 번 더 제거 시도
+                Debug.Log($"Attempting to force remove tower data from position {gridPosition}");
+                towerData.RemoveObjectAt(gridPosition);
+            }
+            else
+            {
+                Debug.Log($"Position {gridPosition} is now free");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Cannot sell tower: selectedTower is {(selectedTower == null ? "null" : "not null")}, towerData is {(towerData == null ? "null" : "not null")}");
         }
     }
 }

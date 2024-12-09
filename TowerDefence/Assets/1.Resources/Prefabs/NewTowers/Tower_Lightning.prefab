@@ -49,7 +49,6 @@ MonoBehaviour:
   Name: Lightning Tower
   Element: Electric
   Damage: 4
-  Range: 4
   FireRate: 0.75
   DamageDealt: 0
   TotalKilled: 0
@@ -57,17 +56,23 @@ MonoBehaviour:
   SellPrice: 2
   TargetPriority: Most Progress
   Info: 
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
-  IsBomb: 0
   TowerHead: {fileID: 5518478428060728232}
   TowerMuzzle: {fileID: 7735920187469573463}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
-  mainCanvas: {fileID: 0}
   isPreview: 0
   isFollow: 0
+  mainCanvas: {fileID: 0}
+  _range: 4
+  buffEffect: {fileID: 0}
   ChainCount: 4
   ChainRange: 4
-  lightningEffectPrefab: {fileID: 3017776589207227471, guid: 838c2b16f50797f4fa59867d334d9975, type: 3}
+  lightningEffectPrefabs:
+  - {fileID: 3017776589207227471, guid: 838c2b16f50797f4fa59867d334d9975, type: 3}
+  - {fileID: 3017776589207227471, guid: 463dd60fca267ed45a87cf49f10439e6, type: 3}
+  - {fileID: 3017776589207227471, guid: 26d416025484c0344a2a609e34116818, type: 3}
+  currentEffect: {fileID: 0}
 --- !u!65 &8826128345493874805
 BoxCollider:
   m_ObjectHideFlags: 0

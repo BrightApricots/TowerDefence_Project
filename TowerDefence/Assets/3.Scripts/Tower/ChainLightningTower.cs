@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
@@ -6,9 +7,13 @@ public class ChainLightningTower : Tower
 {
     public int ChainCount = 3;  //체인 횟수
     public float ChainRange = 5f; //다음 타겟 탐지거리
+    
+    private int originalDamage;
+    private float originalRange;
+    private float originalChainRange;
 
-    public GameObject lightningEffectPrefab;
-
+    public List<GameObject> lightningEffectPrefabs;
+    public GameObject currentEffect;
     public ChainLightningTower()
     {
         Name = "Lightning Tower";
@@ -22,9 +27,29 @@ public class ChainLightningTower : Tower
         SellPrice = 13;
         TargetPriority = "Most Progress";
         Info = "Fires chain lightning that bounces between multiple targets.";
+
+        originalDamage = Damage;
+        originalRange = Range;
+        originalChainRange = ChainRange;
+    }
+    protected override void Start()
+    {
+        currentEffect = lightningEffectPrefabs[Level - 1];
+        base.Start();
     }
 
 
+    public override void ApplyBuff(BuffField buff)
+    {
+        base.ApplyBuff(buff);
+        ChainRange = originalChainRange * buff.rangeMultiplier;
+    }
+
+    public override void RemoveBuff(BuffField buff)
+    {
+        base.RemoveBuff(buff);
+        ChainRange = originalChainRange;
+    }
 
     protected override IEnumerator Attack()
     {
@@ -87,31 +112,55 @@ public class ChainLightningTower : Tower
     //지금 맞은 몬스터와 타겟 사이에 라이트닝 생성
     private void CreateLightningEffect(Vector3 start, Vector3 end)
     {
-        GameObject effect = Instantiate(lightningEffectPrefab, transform.position, Quaternion.identity);
-        LightningEffect lightning = effect.GetComponent<LightningEffect>();
+        LightningEffect lightning = ObjectManager.Instance.Spawn<LightningEffect>(currentEffect, transform.position);
         lightning.CreateLightning(start, end);
     }
 
     protected override void OnLevelUp()
     {
-        LightningEffect effect = lightningEffectPrefab.GetComponent<LightningEffect>();
-        
         switch (Level)
         {
             case 1:
-                UnityEngine.Color color = new Color32(221, 255, 0, 255);
+                //UnityEngine.Color color = new Color32(240, 255, 83, 255);
+                //effect.lightningColor = color;
+                currentEffect = lightningEffectPrefabs[Level - 1];
                 break;
             case 2:
-                color = new Color32(0, 122, 255, 255);
-                effect.lightningColor = color;
+                //color = new Color32(84, 108, 255, 255);
+                //effect.lightningColor = color;
+                currentEffect = lightningEffectPrefabs[Level - 1];
                 ChainCount += 4;
                 break;
             case 3:
-                Damage += 2;
+                baseAttackDamage += 2;
+                if (originalStats.Count == 0)
+                {
+                    Damage = baseAttackDamage;
+                }
+                //Damage += 2;
                 FireRate *= 0.5f;
-                color = new Color32(146, 0, 255, 255);
-                effect.lightningColor = color;
+                currentEffect = lightningEffectPrefabs[Level - 1];  
+                //color = new Color32(255, 83, 243, 255);
+                //effect.lightningColor = color;
                 break;
+        }
+        // 버프가 있다면 재적용
+        if (originalStats.Count > 0)
+        {
+            // 현재 적용된 모든 버프를 저장
+            var currentBuffs = new List<BuffField>(originalStats.Keys);
+
+            // 모든 버프 제거
+            foreach (var buff in currentBuffs)
+            {
+                RemoveBuff(buff);
+            }
+
+            // 버프 재적용
+            foreach (var buff in currentBuffs)
+            {
+                ApplyBuff(buff);
+            }
         }
     }
 } 

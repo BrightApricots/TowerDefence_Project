@@ -17,6 +17,9 @@ public class PlacementState : IBuildingState
     InputManager inputManager;
     AGrid aGrid;
     private LayerMask towerPlaceableLayer;
+    private bool isCalculatingPath = false;
+    private bool isDisposed = false;
+    private List<IEnumerator> activeCoroutines = new List<IEnumerator>();
 
     public PlacementState(int ID, Grid grid, PreviewSystem preview, ObjectsDatabaseSO database, GridData blockData,
             GridData towerData, ObjectPlacer objectPlacer, InputManager inputManager, AGrid aGrid)
@@ -55,8 +58,25 @@ public class PlacementState : IBuildingState
 
     public void EndState()
     {
+        isDisposed = true;
         preview.StopShowingPreview();
         inputManager.OnRotate -= RotateStructure;
+
+        // 임시 노드 상태 복원
+        RestoreTemporaryNodes();
+
+        // 진행 중인 모든 코루틴 정리
+        activeCoroutines.Clear();
+    }
+
+    private IEnumerator StartSafeCoroutine(IEnumerator coroutine)
+    {
+        if (!isDisposed)
+        {
+            activeCoroutines.Add(coroutine);
+            yield return coroutine;
+            activeCoroutines.Remove(coroutine);
+        }
     }
 
     private IEnumerator CheckPlacementValidityCoroutine(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview, System.Action<bool> callback)
@@ -103,7 +123,23 @@ public class PlacementState : IBuildingState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, List<Vector2Int> cells, bool isPreview = false)
     {
-        // 시작 위치와 종료 위치 체크
+        // 1. 먼저 모든 셀이 그리드 범위 내에 있는지 확인
+        foreach (var cell in cells)
+        {
+            Vector3Int blockPos = new Vector3Int(
+                gridPosition.x + cell.x,
+                gridPosition.y,
+                gridPosition.z + cell.y
+            );
+
+            // 이미 점유된 셀인지 확인
+            if (BlockData.IsPositionOccupied(blockPos) || TowerData.IsPositionOccupied(blockPos))
+            {
+                return false;
+            }
+        }
+
+        // 2. 시작 위치와 종료 위치 체크
         Vector3Int targetGridPos = grid.WorldToCell(PathManager.Instance.GetTargetPosition());
         foreach (var spawnPoint in PathManager.Instance.GetSpawnPoints())
         {
@@ -120,20 +156,12 @@ public class PlacementState : IBuildingState
                 if ((blockPos.x == spawnGridPos.x && blockPos.z == spawnGridPos.z) ||
                     (blockPos.x == targetGridPos.x && blockPos.z == targetGridPos.z))
                 {
-                    if (isPreview) Debug.Log("Cannot place block on spawn or target position");
                     return false;
                 }
             }
         }
 
-        // 현재 위치에 이미 블록이 있는지 확인
-        if (!BlockData.CanPlaceObjectAt(gridPosition, cells, 0) ||
-            !TowerData.CanPlaceObjectAt(gridPosition, cells, 0))
-        {
-            return false;
-        }
-
-        // 임시로 노드들을 막음
+        // 3. 임시로 노드들을 막음
         foreach (var cell in cells)
         {
             Vector3Int blockPos = new Vector3Int(
@@ -144,19 +172,14 @@ public class PlacementState : IBuildingState
             aGrid.SetTemporaryNodeState(blockPos, false);
         }
 
-        // 즉시 경로 체크
+        // 4. 경로 체크
         PathManager.Instance.CheckPreviewPath();
         bool isValid = PathManager.Instance.HasValidPath;
 
-        // 노드 상태 복원
+        // 5. 노드 상태 복원
         aGrid.RestoreTemporaryNodes();
 
-        if (!isValid && isPreview)
-        {
-            Debug.Log("Block placement would block all possible paths");
-        }
-
-        return isValid;
+        return isValid && GridData.Instance.CanPlaceObjectAt(gridPosition, cells);
     }
 
     public void UpdateState(Vector3Int gridPosition)
@@ -215,6 +238,9 @@ public class PlacementState : IBuildingState
             return;
         }
 
+        // 실행 중인 코루틴이 있다면 중단
+        activeCoroutines.Clear();
+
         int floor = 0;
         bool canPlace = false;
         int currentID = database.objectsData[selectedObjectIndex].ID;
@@ -226,10 +252,7 @@ public class PlacementState : IBuildingState
             bool hasBlockBelow = BlockData.GetRepresentationIndex(positionBelow) != -1;
             bool hasObstacleBelow = false;
 
-            // 장애물 체크
             Vector3 checkPosition = grid.CellToWorld(positionBelow) + new Vector3(0.5f, 0, 0.5f);
-            
-            // 장애물 있는지 체크하고, 있다면 그 장애물이 타워 설치 가능한지 확인
             Collider[] obstacles = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
             foreach (var obstacle in obstacles)
             {
@@ -237,7 +260,7 @@ public class PlacementState : IBuildingState
                 if (obstacle.CompareTag("TowerPlaceable"))
                 {
                     canPlaceTower = true;
-                    break;  // 타워 설치 가능한 장애물을 찾았으면 더 이상 검사할 필요 없음
+                    break;
                 }
             }
 
@@ -247,69 +270,40 @@ public class PlacementState : IBuildingState
                 canPlace = TowerData.CanPlaceObjectAt(gridPosition, 
                     database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
                     floor);
-                Debug.Log($"Tower placement - Block below: {hasBlockBelow}, Obstacle below: {hasObstacleBelow}, Can place tower: {canPlaceTower}");
             }
         }
         else
         {
-            canPlace = GridData.Instance.CanPlaceObjectAt(gridPosition, 
-                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation)) &&
-                CheckPlacementValidity(gridPosition, 
-                    database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), false);
+            List<Vector2Int> cells = database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation);
+            canPlace = CheckPlacementValidity(gridPosition, cells, false);
         }
 
         if (canPlace)
         {
-            Debug.Log($"Attempting to place {(database.IsTower(currentID) ? "tower" : "block")} ID: {currentID}");
+            // 배치 전에 임시 상태 복원
+            RestoreTemporaryNodes();
+
             GridData selectedData = database.IsBlock(currentID) ? BlockData : TowerData;
-            
             Vector3 position = grid.CellToWorld(gridPosition);
             position += new Vector3(0.5f, floor, 0.5f);
 
-            // 블록 설치 전에 해당 위치의 나무 체크
-            if (database.IsBlock(currentID))
+            // 타워 설치 전에 해당 위치가 이미 점유되어 있는지 다시 한번 확인
+            if (database.IsTower(currentID))
             {
-                // 블록이 차지할 모든 셀에 대해 나무 체크
-                foreach (var cell in database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation))
+                Vector3Int checkPos = new Vector3Int(gridPosition.x, floor, gridPosition.z);
+                if (TowerData.IsPositionOccupied(checkPos))
                 {
-                    Vector3 checkPosition = position + new Vector3(cell.x, 0, cell.y);
-                    Collider[] colliders = Physics.OverlapSphere(checkPosition, 0.5f);
-                    foreach (var collider in colliders)
-                    {
-                        TreeDisapearEffect treeEffect = collider.GetComponent<TreeDisapearEffect>();
-                        if (treeEffect != null)
-                        {
-                            // 나무 이펙트 직접 실행
-                            ParticleSystem particle = Object.Instantiate(treeEffect.effect, treeEffect.transform.position, Quaternion.identity);
-                            Object.Destroy(particle.gameObject, particle.main.duration);
-                            Object.Destroy(treeEffect.gameObject);
-                        }
-                    }
-                }
-            }
-            //database.objectsData[selectedObjectIndex].price
-            int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, position, Quaternion.Euler(0, 90 * currentRotation, 0));
-            
-            if (database.IsBlock(currentID))
-            {
-                GameObject placedObject = ObjectPlacer.Instance.placedGameObjects[index];
-                if (placedObject != null)
-                {
-                    //// BoxCollider가 없으면 추가
-                    //if (placedObject.GetComponent<BoxCollider>() == null)
-                    //{
-                    //    BoxCollider collider = placedObject.AddComponent<BoxCollider>();
-                    //    collider.size = Vector3.one;  // 크기는 블록 크기에 맞게 조정
-                    //    collider.center = Vector3.zero;  // 중심점 설정
-                        
-                    //    // unwalkableMask 레이어로 설정
-                    //    placedObject.layer = LayerMask.NameToLayer("Unwalkable");
-                    //}
-                    placedObject.layer = LayerMask.NameToLayer("Unwalkable");
+                    Debug.LogWarning($"Position {checkPos} is already occupied. Skipping tower placement.");
+                    return;
                 }
             }
 
-            selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), currentID, index, floor);
+            int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, 
+                position, Quaternion.Euler(0, 90 * currentRotation, 0));
+
+            selectedData.AddObjectAt(gridPosition, 
+                database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
+                currentID, index, floor);
 
             if (!database.IsTower(currentID))
             {
@@ -324,7 +318,6 @@ public class PlacementState : IBuildingState
                 if (PathManager.Instance != null)
                 {
                     PathManager.Instance.UpdateAllPaths();
-                    Debug.Log($"Path validity after placing block {currentID}: {PathManager.Instance.HasValidPath}");
                 }
             }
 
@@ -334,19 +327,87 @@ public class PlacementState : IBuildingState
                 {
                     if (database.objectsData[i].ID == currentID)
                     {
-                        Debug.Log($"타워설치 {database.objectsData[i].Price} 만큼 빠져나감...");
                         GameManager.Instance.CurrentMoney -= database.objectsData[i].Price;
                         break;
                     }
                 }
             }
         }
+    }
+
+    public bool IsValidPlacement(Vector3Int gridPosition)
+    {
+        if (database.IsTower(database.objectsData[selectedObjectIndex].ID))
+        {
+            return CheckTowerPlacement(gridPosition);
+        }
         else
         {
-            Debug.Log($"Cannot place {(database.IsTower(currentID) ? "tower" : "block")} ID {currentID} - placement conditions not met");
+            return CheckBlockPlacement(gridPosition);
+        }
+    }
+
+    private bool CheckTowerPlacement(Vector3Int gridPosition)
+    {
+        Vector3Int positionBelow = new Vector3Int(gridPosition.x, 0, gridPosition.z);
+        bool hasBlockBelow = BlockData.GetRepresentationIndex(positionBelow) != -1;
+        bool hasObstacleBelow = false;
+        bool canPlaceTower = false;
+
+        Vector3 checkPosition = grid.CellToWorld(positionBelow) + new Vector3(0.5f, 0, 0.5f);
+        Collider[] obstacles = Physics.OverlapSphere(checkPosition, 0.3f, aGrid.unwalkableMask);
+        foreach (var obstacle in obstacles)
+        {
+            hasObstacleBelow = true;
+            if (obstacle.CompareTag("TowerPlaceable"))
+            {
+                canPlaceTower = true;
+                break;
+            }
         }
 
-        
+        return (hasBlockBelow || (hasObstacleBelow && canPlaceTower)) &&
+               TowerData.CanPlaceObjectAt(gridPosition, 
+                   database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation), 
+                   1);
+    }
 
+    private bool CheckBlockPlacement(Vector3Int gridPosition)
+    {
+        List<Vector2Int> cells = database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation);
+        return GridData.Instance.CanPlaceObjectAt(gridPosition, cells) &&
+               CheckPlacementValidity(gridPosition, cells, true);
+    }
+
+    public void SetTemporaryNodes(Vector3Int gridPosition, bool walkable)
+    {
+        // 이전 임시 상태 복원
+        RestoreTemporaryNodes();
+
+        List<Vector2Int> cells = database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation);
+        foreach (var cell in cells)
+        {
+            Vector3Int blockPos = new Vector3Int(
+                gridPosition.x + cell.x,
+                gridPosition.y,
+                gridPosition.z + cell.y
+            );
+            aGrid.SetTemporaryNodeState(blockPos, walkable);
+        }
+    }
+
+    public void RestoreTemporaryNodes()
+    {
+        aGrid.RestoreTemporaryNodes();
+    }
+
+    public int GetCurrentID()
+    {
+        return database.objectsData[selectedObjectIndex].ID;
+    }
+
+    public GridData GetTowerData()
+    {
+        return TowerData;
     }
 }

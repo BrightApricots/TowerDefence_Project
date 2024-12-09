@@ -8,7 +8,7 @@ public class Tower_PoisonBridge : Tower_Placement
     protected override void Awake()
     {
         blockType = 106;
-        TowerPrice = _TowerPrice;
+        //TowerPrice = _TowerPrice;
         base.Awake();
     }
 }

@@ -30,6 +30,10 @@ public class RemovingState : IBuildingState
     public void EndState()
     {
         previewSystem.StopShowingPreview();
+        if (aGrid != null)
+        {
+            aGrid.RestoreTemporaryNodes();
+        }
     }
 
     public void OnAction(Vector3Int gridPosition)
@@ -40,42 +44,19 @@ public class RemovingState : IBuildingState
         }
 
         GridData selectedData = null;
-        int index = -1;
-        int id = -1;
-
-        // 블록 데이터 확인
-        PlacementData blockData = BlockData.GetPlacementData(gridPosition);
-        if (blockData != null)
+        PlacementData data = GridData.Instance.GetPlacementData(gridPosition);
+        
+        if (data != null)
         {
-            selectedData = BlockData;
-            index = blockData.PlacedObjectIndex;
-            id = blockData.ID;
-        }
-        else
-        {
-            // 타워 데이터 확인
-            PlacementData towerData = TowerData.GetPlacementData(gridPosition);
-            if (towerData != null)
-            {
-                selectedData = TowerData;
-                index = towerData.PlacedObjectIndex;
-                id = towerData.ID;
-            }
-        }
-
-        if (selectedData != null)
-        {
-            // 오브젝트 제거
-            selectedData.RemoveObjectAt(gridPosition);
-            objectPlacer.RemoveObjectAt(index);
-
-            // AGrid 업데이트
-            foreach (var pos in blockData.occupiedPositions)
+            aGrid.RestoreTemporaryNodes();
+            
+            GridData.Instance.RemoveObjectAt(gridPosition);
+            
+            foreach (var pos in data.occupiedPositions)
             {
                 aGrid.UpdateNode(pos, false);
             }
 
-            // 경로 업데이트
             if (PathManager.Instance != null)
             {
                 PathManager.Instance.UpdateAllPaths();

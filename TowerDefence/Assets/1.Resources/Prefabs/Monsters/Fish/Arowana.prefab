@@ -520,9 +520,10 @@ GameObject:
   - component: {fileID: 3218262974224348412}
   - component: {fileID: 3218262974224348403}
   - component: {fileID: 8430191611629619837}
-  m_Layer: 0
+  - component: {fileID: -1994318492361929198}
+  m_Layer: 8
   m_Name: Arowana
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -639,6 +640,33 @@ MonoBehaviour:
   damage: 1
   gold: 1
   rotationSpeed: 100
+--- !u!54 &-1994318492361929198
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3218262974224348414}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3218262974872404649
 GameObject:
   m_ObjectHideFlags: 0

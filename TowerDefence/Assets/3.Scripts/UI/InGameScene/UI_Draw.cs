@@ -11,7 +11,7 @@ public class UI_Draw : MonoBehaviour
     public GameObject O;
     public GameObject T;
     public GameObject Z;
-    public GameObject I;
+    public GameObject I; 
     public GameObject L;
     public Button DrawButton;
     public TextMeshProUGUI DrawPriceText;

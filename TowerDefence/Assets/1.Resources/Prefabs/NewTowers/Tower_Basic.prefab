@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7767493726691107023}
   m_Father: {fileID: 0}
@@ -49,7 +49,6 @@ MonoBehaviour:
   Name: Basic Tower
   Element: Normal
   Damage: 2
-  Range: 4
   FireRate: 1.5
   DamageDealt: 0
   TotalKilled: 0
@@ -57,13 +56,18 @@ MonoBehaviour:
   SellPrice: 2
   TargetPriority: Most Progress
   Info: The basic defense tower.
+  rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
   TowerHead: {fileID: 7767493726691107023}
   TowerMuzzle: {fileID: 2281615677248325660}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   isPreview: 0
-  isFollow: 0
+  isFollow: 1
   mainCanvas: {fileID: 0}
+  _range: 4
+  originalMaterial: {fileID: 2100000, guid: 4ab70832a21b948469a8ef7baeca5bd3, type: 2}
+  selectedMaterial: {fileID: 2100000, guid: a6c5db515b4e26a468041e9e22e41af4, type: 2}
+  towerRenderers: []
   projectiles:
   - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
   - {fileID: 4036195920102418499, guid: 4b91063355f5e5643bb500e774eb0f1d, type: 3}

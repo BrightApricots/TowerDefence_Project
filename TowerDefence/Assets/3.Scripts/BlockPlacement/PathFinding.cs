@@ -18,6 +18,14 @@ public class PathFinding : MonoBehaviour
         grid = GetComponent<AGrid>();
     }
 
+    public void Clear()
+    {
+        if (grid != null)
+        {
+            grid.ResetNodes();
+        }
+        StopAllCoroutines();
+    }
 
     public void StartFindPath(Vector3 startPos, Vector3 targetPos)
     {
