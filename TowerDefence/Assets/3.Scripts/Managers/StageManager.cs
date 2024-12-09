@@ -115,8 +115,7 @@ public class StageManager : MonoBehaviour
     {
         // 모든 웨이브 클리어 처리
         allWavesCleared = true;
-        ShowPreparationPanel();
-        GameManager.Instance.clearStage += 1;
+        ShowPreparationPanel();        
     }
 
     private void ShowPreparationPanel()
@@ -178,6 +177,7 @@ public class StageManager : MonoBehaviour
         // 다음 스테이지 씬 로드
         if (allWavesCleared)
         {
+            GameManager.Instance.clearStage += 1;
             LoadScene(nextStageScene);
         }
     }

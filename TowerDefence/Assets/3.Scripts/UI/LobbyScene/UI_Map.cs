@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class UI_Map : MonoBehaviour
 {
-    
     public Button Academy;
     public Button Stage1;
     public Button Stage2;
     public Button Stage3;
     public Button Stage4;
-    public Button Stage5;
+    public Button Stage5; // Boss
+
+    public GameObject StageIndicator;
+    private UI_StageIndicator indicatorComponent;
+    private Button currentTargetButton;
+    private Vector3 offset = new Vector3(0, 120f, 0);
 
     private void Awake()
     {
@@ -22,8 +26,58 @@ public class UI_Map : MonoBehaviour
         Stage3.onClick.AddListener(LoadStage3);
         Stage4.onClick.AddListener(LoadStage4);
         Stage5.onClick.AddListener(LoadStage5);
+
+        // 인디케이터 컴포넌트 가져오기
+        indicatorComponent = StageIndicator.GetComponent<UI_StageIndicator>();
+        if (indicatorComponent == null)
+        {
+            indicatorComponent = StageIndicator.AddComponent<UI_StageIndicator>();
+        }
     }
-    
+
+    private void Start()
+    {
+        int count = GameManager.Instance.clearStage;
+        
+        // 현재 타겟 버튼 설정
+        switch (count)
+        {
+            case 0:
+                currentTargetButton = Academy;
+                break;
+            case 1:
+                currentTargetButton = Stage1;
+                break;
+            case 2:
+                currentTargetButton = Stage2;
+                break;
+            case 3:
+                currentTargetButton = Stage3;
+                break;
+            case 4:
+                currentTargetButton = Stage4;
+                break;
+            case 5:
+                currentTargetButton = Stage5;
+                break;
+        }
+
+        // 초기 위치 설정
+        if (currentTargetButton != null)
+        {
+            indicatorComponent.SetPosition(currentTargetButton.transform.position + offset);
+        }
+    }
+
+    private void Update()
+    {
+        // 스크롤 시에도 인디케이터가 버튼을 따라다니도록 매 프레임 위치 업데이트
+        if (currentTargetButton != null)
+        {
+            indicatorComponent.SetPosition(currentTargetButton.transform.position + offset);
+        }
+    }
+
     private void EnterAcademy()
     {
          SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
