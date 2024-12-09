@@ -2161,7 +2161,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 9
@@ -10576,7 +10576,7 @@ MonoBehaviour:
     FieldOfView: 60
     OrthographicSize: 9
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -46255,7 +46255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +N
+  m_text: +10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
@@ -58124,7 +58124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +N
+  m_text: +10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
