@@ -14,7 +14,7 @@ public class UI_LobbyScene : MonoBehaviour
     public Button TowerLoadout;
     public Button Backpack;
     public Button Talents;
-    //public GameObject SettingPopup;
+    public GameObject SettingPopup;
     public GameObject TowerLoadoutPopup;
     public GameObject BackpackPopup;
     //public GameObject TalentsPopup;
@@ -26,7 +26,7 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void Awake()
     {
-        //Setting.onClick.AddListener(PopupSetting);
+        Setting.onClick.AddListener(PopupSetting);
         Title.onClick.AddListener(BackToTitle);
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
         Backpack.onClick.AddListener(PopupBackpack);
@@ -35,6 +35,7 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.IsSaved = true;
         TowerCard();
     }
 
@@ -45,10 +46,10 @@ public class UI_LobbyScene : MonoBehaviour
         HpAmountText.text = $"{GameManager.Instance.CurrentHp}/15";
     }
 
-    //private void PopupSetting()
-    //{ 
-    //    SettingPopup.SetActive(true);
-    //}
+    private void PopupSetting()
+    {
+        SettingPopup.SetActive(true);
+    }
     private void BackToTitle()
     {
         SceneManager.LoadScene("TitleScene");

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +7,9 @@ public class UI_TitleScene : MonoBehaviour
 {
     public Button NewGame;
     public Button Continue;
+    public TextMeshProUGUI ContiText;
     public Button Exit;
-    public GameObject Difficulty;
+    public GameObject CheckNewGame;
 
     private void OnEnable()
     {
@@ -19,16 +19,26 @@ public class UI_TitleScene : MonoBehaviour
         SoundManager.Instance.Play("Bonfire", SoundManager.Sound.Bgm);
     }
 
+    private void Start()
+    {
+        if (!GameManager.Instance.IsSaved)
+        {
+            ContiText.color = Color.gray;
+        }
+    }
+
     private void LoadNewGame()
     {
         SoundManager.Instance.Play("Click03", SoundManager.Sound.Effect);
-        Difficulty.SetActive(true);
-        //TODO : 불러오기를 만들면 새 게임 시작 시 저장 데이터 삭제 경고 팝업
+        CheckNewGame.SetActive(true);
     }
 
     private void LoadContinue()
     {
-        //TODO : 불러오기
+        if (GameManager.Instance.IsSaved)
+        {
+            SceneManager.LoadScene("LobbyScene");
+        }
     }
 
     private void LoadExit()
