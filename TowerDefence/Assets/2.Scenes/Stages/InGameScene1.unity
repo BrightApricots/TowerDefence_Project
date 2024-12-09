@@ -3037,7 +3037,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 128211725}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -16314,8 +16314,7 @@ MonoBehaviour:
   wavePrepareText: {fileID: 2073483914}
   wavePrepareTimeText: {fileID: 246345596}
   wavePrepareTimeText_1: {fileID: 1340275302}
-  timeBarBackground: {fileID: 603927883}
-  timeBarFill: {fileID: 1341719826}
+  timeBar: {fileID: 0}
   speedButtonGroup: {fileID: 1500631962}
   speedSettings:
   - speedMultiplier: 0.5
@@ -16337,6 +16336,8 @@ MonoBehaviour:
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
   waveTextManager: {fileID: 0}
+  spawnPoints: []
+  targetPoint: {fileID: 0}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -26190,6 +26191,7 @@ MonoBehaviour:
   EquipTowerList: []
   UnEquipTowerList: []
   PlacedTowerList: []
+  clearStage: 0
   tooltipCount: 0
 --- !u!224 &1498700928
 RectTransform:
@@ -32549,9 +32551,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gridWorldSize: {x: 50, y: 50}
+  nodeRadius: 0
   obstaclePositions: []
   database: {fileID: 11400000, guid: 04938bc5fa434594b80d1a7b3b492fea, type: 2}
-  grid: {fileID: 0}
 --- !u!1 &1862625223
 GameObject:
   m_ObjectHideFlags: 0
