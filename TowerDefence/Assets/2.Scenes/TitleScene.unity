@@ -20290,8 +20290,25 @@ MonoBehaviour:
   TotalTowerList: 
   PlayerTetrisList: []
   HandTetrisList: []
-  EquipTowerList: []
-  UnEquipTowerList: []
+  EquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  UnEquipTowerList:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   PlacedTowerList: []
   clearStage: 0
   tooltipCount: 0

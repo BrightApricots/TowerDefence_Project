@@ -40,23 +40,13 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         Count
     };
 
-    enum ImageTowerEnum
-    {
-        Image_Basic,
-        Image_Missile,
-        Image_Lightning,
-        Image_Poison,
-        Image_Flame,
-        Image_Drone,
-        Count
-    };
-
     public GameObject TetrisListLocation;
     public GameObject TowerListLocation;
     public List<GameObject> ImageTetrisList;
     public List<GameObject> TetrisList;
     public List<GameObject> ImageTowerList;
     public List<GameObject> TowerList;
+    public List<string> TowerNameList;
 
     private void Awake()
     {
@@ -95,19 +85,21 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
             tower[random1] = tower[random2];
             tower[random2] = temp;
         }
-        GameObject go;
         for (int i = 0; i < 3; i++)
         {
-            go = Instantiate(Resources.Load<GameObject>($"TowerCardPrefab/{Enum.GetName(typeof(ImageTowerEnum), tower[i])}"),
-                TowerListLocation.transform);
-            ImageTowerList.Add(go);
-            TowerList.Add(Resources.Load<GameObject>($"TowerCardPrefab/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
+            print(Enum.GetName(typeof(TowerEnum), tower[i]));
+            TowerList.Add(Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
+                TowerListLocation.transform));
+            TowerNameList.Add(Enum.GetName(typeof(TowerEnum), tower[i]));
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.Instance.EquipTowerList=TowerList;
+        for (int i = 0; i < TowerList.Count; i++)
+        {
+            GameManager.Instance.EquipTowerList[i]=TowerNameList[i];
+        }
         GameManager.Instance.PlayerTetrisList=TetrisList;
         GameManager.Instance.clearStage++;
         SceneManager.LoadScene("LobbyScene");

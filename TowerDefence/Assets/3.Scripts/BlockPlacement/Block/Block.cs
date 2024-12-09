@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     protected Button button;
     protected int blockType;
@@ -47,5 +48,16 @@ public class Block : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        print("ondrag");
+        PlacementSystem.Instance.StartPlacementForDrag(blockType);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        PlacementSystem.Instance.StopPlacementForDrag();
     }
 }

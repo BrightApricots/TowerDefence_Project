@@ -91,7 +91,21 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
-    private bool ValidateBeforePlacement()
+    public void StartPlacementForDrag(int ID)
+    {
+        //StopPlacement();
+        gridVisualization.SetActive(true);
+        buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
+    }
+
+    public void StopPlacementForDrag()
+    {
+        inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += StopPlacement;
+        inputManager.OnExit += StopPlacement;
+    }
+
+    public void StartRemoving()
     {
         if (inputManager == null || grid == null || preview == null || 
             database == null || objectPlacer == null || aGrid == null)

@@ -165,6 +165,19 @@ public class StageManager : MonoBehaviour
         Time.timeScale = 1f; // 타임스케일 복구
         SceneManager.LoadScene(sceneName); // 씬 로드
     }
-}
 
-//
+    // 게임 오버 버튼에 할당할 메서드 추가
+    public void OpenGameOverScene()
+    {
+        if (gameOverScene != null)
+        {
+            string sceneName = gameOverScene.name; // Inspector에서 설정된 씬 이름 가져오기
+            Time.timeScale = 1f; // 씬 전환 전 게임 속도 정상화
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogError("게임 오버 씬이 설정되지 않았습니다.");
+        }
+    }
+}
