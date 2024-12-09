@@ -13,7 +13,7 @@ public class UI_IngameScene : MonoBehaviour
     public Transform TowerCardLocation1;
     public Transform TowerCardLocation2;
     public GameObject EmptyCard;
-    public GameObject PausePanel;
+    public GameObject PausePanel; 
     public static int PopupCount;
 
     private void Awake()
