@@ -105,7 +105,7 @@ public class StageManager : MonoBehaviour
     private void ShowPreparationPanel()
     {
         SetPanelActive(EndPanel, true); // 준비 패널 활성화
-        GameManager.Instance.ClearWin();
+        
         GameManager.Instance.clearStage++;
         PrefabManager.Instance.ReplaceChildWithPrefab(); // 프리팹 업데이트
         SetUIElementsActive(uiElementsToDisable, false); // UI 비활성화
@@ -154,6 +154,7 @@ public class StageManager : MonoBehaviour
         if (allWavesCleared)
         {
             LoadScene(nextStageScene); // 다음 스테이지 씬 로드
+            GameManager.Instance.ClearWin();
         }
     }
 

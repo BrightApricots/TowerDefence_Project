@@ -37,6 +37,8 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         Tower_Poison,
         Tower_Flame,
         Tower_Drone,
+        Tower_Ice,
+        Tower_Sniper,
         Count
     };
 
