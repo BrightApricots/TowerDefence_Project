@@ -41,9 +41,7 @@ public class UI_TitleScene : MonoBehaviour
 
         // "Fire" 효과음 정지
         StopSpecificEffect();
-
-        Difficulty.SetActive(true);
-        // TODO : 불러오기를 만들면 새 게임 시작 시 저장 데이터 삭제 경고 팝업
+        CheckNewGame.SetActive(true);
     }
 
     private void LoadContinue()
