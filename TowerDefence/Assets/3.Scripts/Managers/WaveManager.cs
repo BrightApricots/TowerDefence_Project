@@ -115,6 +115,7 @@ public class WaveManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && battleButton != null && battleButton.interactable)
             {
+
                 battleButton.onClick.Invoke();
             }
         }
@@ -248,7 +249,7 @@ public class WaveManager : MonoBehaviour
     public void StartNextWaveManually()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
-
+        SoundManager.Instance.Play("BattleButton", SoundManager.Sound.Effect);
         if (!isFirstBattleClicked)
         {
             isFirstBattleClicked = true;
@@ -271,7 +272,7 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
-
+        SoundManager.Instance.Play("InWave", SoundManager.Sound.Bgm);
         isWaveActive = true;
         isReadyForNextWave = false;
         SetBattleButtonState(false);
@@ -311,7 +312,8 @@ public class WaveManager : MonoBehaviour
         // 이벤트 해제
         monsterSpawner.OnMonsterSpawned -= OnMonsterSpawned;
         monsterSpawner.OnMonsterDestroyed -= OnMonsterDestroyed;
-
+        
+        SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
         // 웨이브 클리어 처리
         for (int i = 0; i < 3; i++)
         {
@@ -328,6 +330,7 @@ public class WaveManager : MonoBehaviour
 
         if (currentWaveIndex < waves.Count)
         {
+            SoundManager.Instance.Play("WaveClearEffect", SoundManager.Sound.Effect);
             isReadyForNextWave = true;
             UpdateWaveText();
             UpdateWavePrepareText();

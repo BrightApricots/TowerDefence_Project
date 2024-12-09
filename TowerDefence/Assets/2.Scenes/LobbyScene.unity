@@ -4091,9 +4091,9 @@ RectTransform:
   - {fileID: 750120991}
   - {fileID: 259103623}
   - {fileID: 840979309}
+  - {fileID: 1425996259}
   - {fileID: 347878198}
   - {fileID: 1111876946}
-  - {fileID: 1425996259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7486,7 +7486,6 @@ GameObject:
   - component: {fileID: 1425996259}
   - component: {fileID: 1425996261}
   - component: {fileID: 1425996260}
-  - component: {fileID: 1425996262}
   m_Layer: 5
   m_Name: UI_StageIndicator
   m_TagString: Untagged
@@ -7501,7 +7500,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425996258}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7551,20 +7550,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425996258}
   m_CullTransparentMesh: 1
---- !u!114 &1425996262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425996258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e23dfb38257b1e4cab8cb2cd2de98cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 10
-  moveSpeed: 4
 --- !u!1 &1454125184
 GameObject:
   m_ObjectHideFlags: 0

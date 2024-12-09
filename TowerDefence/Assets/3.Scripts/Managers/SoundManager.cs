@@ -80,12 +80,15 @@ public class SoundManager : MonoBehaviour
 
     public void Play(string path, Sound type = Sound.Effect, float pitch = 1.0f)
     {
-        AudioClip audioClip = GetOrAddAudioClip(path, type);
-        Play(audioClip, type, pitch);
+        Play(path, type, pitch, true);  // 기본적으로 BGM은 loop
     }
 
-    public void Play(AudioClip audioClip, Sound type = Sound.Effect, float pitch = 1.0f)
+    public void Play(string path, Sound type, float pitch, bool loop)
     {
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        AudioClip audioClip = GetOrAddAudioClip(path, type);
         if (audioClip == null)
             return;
 
@@ -96,8 +99,8 @@ public class SoundManager : MonoBehaviour
                 audioSource.Stop();
 
             audioSource.pitch = pitch;
+            audioSource.loop = loop;
             audioSource.clip = audioClip;
-            audioSource.volume = 0.7f; // BGM 소리크기 수정하는곳
             audioSource.Play();
         }
         else

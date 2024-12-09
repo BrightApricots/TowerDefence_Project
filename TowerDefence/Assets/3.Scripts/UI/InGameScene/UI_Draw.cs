@@ -23,6 +23,13 @@ public class UI_Draw : MonoBehaviour
         DrawButton.onClick.AddListener(PayDrawCard);
         draw = () => { DrawCard(); };
     }
+    private void Start()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            DrawCard();
+        }
+    }
 
     private void Update()
     {
@@ -72,7 +79,8 @@ public class UI_Draw : MonoBehaviour
     public void PayDrawCard()
     {
         if(GameManager.Instance.HandTetrisList.Count < 7 && GameManager.Instance.CurrentMoney >= DrawPrice)
-        { 
+        {
+            SoundManager.Instance.Play("DrawCard", SoundManager.Sound.Effect);
             GameManager.Instance.CurrentMoney -= DrawPrice;
             int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
             DrawCard();

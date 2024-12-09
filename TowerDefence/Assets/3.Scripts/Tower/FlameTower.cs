@@ -11,6 +11,21 @@ public class FlameTower: Tower
     private int originalDamage;
     private float originalRange;
 
+    public FlameTower()
+    {
+        Name = "Flame Tower";
+        Element = "Fire";
+        Damage = 2;
+        Range = 3f;
+        FireRate = 3f;
+        DamageDealt = 0;
+        TotalKilled = 0;
+        UpgradePrice = 30;
+        SellPrice = 15;
+        TargetPriority = "Most Progress";
+        Info = "Fire!";
+    }
+
     protected override void Start()
     {
         originalDamage = Damage;

@@ -28,6 +28,7 @@ public class UI_IngameScene : MonoBehaviour
         {
             DestroyImmediate(this);
         }
+        GameManager.Instance.CurrentMoney = 50;
     }
 
     private void Start()

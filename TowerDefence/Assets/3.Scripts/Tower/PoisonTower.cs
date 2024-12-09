@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class PoisonTower : Tower
 {

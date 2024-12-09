@@ -327,6 +327,7 @@ public class PlacementState : IBuildingState
                 {
                     if (database.objectsData[i].ID == currentID)
                     {
+                        SoundManager.Instance.Play("TowerBuy", SoundManager.Sound.Effect);
                         GameManager.Instance.CurrentMoney -= database.objectsData[i].Price;
                         break;
                     }

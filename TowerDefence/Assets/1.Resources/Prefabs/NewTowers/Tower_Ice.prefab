@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Ice Tower
   Element: Ice
-  Damage: 1
+  Damage: 5
   FireRate: 1
   DamageDealt: 0
   TotalKilled: 0

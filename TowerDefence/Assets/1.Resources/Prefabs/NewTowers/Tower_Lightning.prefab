@@ -53,9 +53,9 @@ MonoBehaviour:
   DamageDealt: 0
   TotalKilled: 0
   UpgradePrice: 25
-  SellPrice: 2
+  SellPrice: 13
   TargetPriority: Most Progress
-  Info: 
+  Info: Fires chain lightning that bounces between multiple targets.
   rangeIndicatorPrefab: {fileID: 3573461533840652110, guid: 9af6964c13cc78845b61bec621479da8, type: 3}
   MaxLevel: 3
   TowerHead: {fileID: 5518478428060728232}
