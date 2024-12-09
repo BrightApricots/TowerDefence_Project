@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +16,11 @@ public class GameManager : MonoBehaviour
     public List<int> TotalTowerList;  //101~200
     public List<GameObject> PlayerTetrisList;
     public List<GameObject> HandTetrisList;
-    public List<GameObject> EquipTowerList;
-    public List<GameObject> UnEquipTowerList;
+    public List<string> EquipTowerList;
+    public List<string> UnEquipTowerList;
     public List<Tower> PlacedTowerList;
+
+    public bool tooltipCount = false;
 
     private void Awake()
     {

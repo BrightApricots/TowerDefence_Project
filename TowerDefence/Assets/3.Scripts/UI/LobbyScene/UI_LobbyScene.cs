@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class UI_LobbyScene : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class UI_LobbyScene : MonoBehaviour
     //}
 
     public List<GameObject> towerCards = new List<GameObject>();
+
     public void TowerCard()
     {
         foreach (var item in towerCards)
@@ -75,16 +77,16 @@ public class UI_LobbyScene : MonoBehaviour
         towerCards = new List<GameObject>();
         for (int i = 0; i<8; i++)
         {
-            if (GameManager.Instance.EquipTowerList[i] == null)
+
+            if (GameManager.Instance.EquipTowerList[i] == ""||GameManager.Instance.EquipTowerList[i]==null)
             {
                 towerCards.Add(Instantiate(EmptyCard, TowerCardLocation));
             }
             else
             {
-                print(i);
-                var go = Instantiate(Resources.Load($"AcademyTowerCard/{GameManager.Instance.EquipTowerList[i].name}"), TowerCardLocation);
-                towerCards.Add((GameObject)go);
+                towerCards.Add((GameObject)Instantiate(Resources.Load($"AcademyTowerCard/{GameManager.Instance.EquipTowerList[i]}"), TowerCardLocation));
             }
+            
         }
     }
 } 

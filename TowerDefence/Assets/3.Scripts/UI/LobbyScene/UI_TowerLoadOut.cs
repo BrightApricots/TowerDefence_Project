@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class UI_TowerLoadOut : MonoBehaviour
 {
     public Button Exit;
-    public Transform EquipTower;
-    public Transform UnEquipTower;
 
     public List<Transform> EquipSlotList;
     public List<Transform> UnEquipSlotList;
@@ -21,11 +19,11 @@ public class UI_TowerLoadOut : MonoBehaviour
     {
         for (int i = 0; i<GameManager.Instance.EquipTowerList.Count; i++)
         {
-            Instantiate(GameManager.Instance.EquipTowerList[i], EquipSlotList[i]);
+            Instantiate(Resources.Load($"TowerLoadoutCard/{GameManager.Instance.EquipTowerList[i]}"), EquipSlotList[i]);
         }
         for(int i= 0; i<GameManager.Instance.UnEquipTowerList.Count; i++)
         {
-            Instantiate(GameManager.Instance.UnEquipTowerList[i], UnEquipSlotList[i]);
+            Instantiate(Resources.Load($"TowerLoadoutCard/{GameManager.Instance.UnEquipTowerList[i]}"), UnEquipSlotList[i]);
         }
     }
 

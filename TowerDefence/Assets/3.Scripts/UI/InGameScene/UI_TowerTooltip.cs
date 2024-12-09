@@ -27,7 +27,34 @@ public class UI_TowerTooltip : MonoBehaviour
     public TextMeshProUGUI SellPriceText;
     public TextMeshProUGUI TargetPriorityText;
 
-    public void Start()
+    public Button UpgradeButton;
+    public Button SellButton;
+
+    private Tower selectedTower; // 현재 선택된 타워
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
+    public void SetTower(Tower tower)
+    {
+        selectedTower = tower;
+        Name = tower.Name;
+        Element = tower.Element;
+        Damage = tower.Damage.ToString();
+        Range = tower.Range.ToString();
+        FireRate = tower.FireRate.ToString();
+        DamageDealt = tower.DamageDealt.ToString();
+        TotalKilled = tower.TotalKilled.ToString();
+        UpgradePrice = $"{tower.UpgradePrice}";
+        SellPrice = $"{tower.SellPrice}";
+        TargetPriority = tower.TargetPriority;
+        
+        UpdateUI();
+    }
+
+    private void UpdateUI()
     {
         NameText.text = Name;
         InfoText.text =
@@ -41,6 +68,58 @@ public class UI_TowerTooltip : MonoBehaviour
 
         TargetPriorityText.text = $"Target: {TargetPriority}";
         SellPriceText.text = $"Sell       ${SellPrice}";
-        UpgradeText.text = $"Upgrade   ${UpgradePrice}";
+        
+        // 최대 레벨이면 업그레이드 버튼 비활성화
+        if (selectedTower.Level >= selectedTower.MaxLevel)
+        {
+            UpgradeText.text = "Max Level";
+            UpgradeButton.interactable = false;
+        }
+        else
+        {
+            UpgradeText.text = $"Upgrade   ${UpgradePrice}";
+            UpgradeButton.interactable = true;
+        }
+
+        // 버튼 이벤트 연결
+        UpgradeButton.onClick.RemoveAllListeners();
+        SellButton.onClick.RemoveAllListeners();
+        
+        UpgradeButton.onClick.AddListener(OnUpgradeClick);
+        SellButton.onClick.AddListener(OnSellClick);
+    }
+
+    private void OnUpgradeClick()
+    {
+        if (selectedTower != null)
+        {
+            if (GameManager.Instance.CurrentMoney >= int.Parse(UpgradePrice))
+            {
+                GameManager.Instance.CurrentMoney -= int.Parse(UpgradePrice);
+                selectedTower.Upgrade();
+                SetTower(selectedTower);
+            }
+            else
+            {
+                Debug.Log("Not enough gold!");
+            }
+        }
+    }
+
+    private void OnSellClick()
+    {
+        if (selectedTower != null)
+        {
+            // 판매 금액 추가
+            GameManager.Instance.CurrentMoney += int.Parse(SellPrice);
+            
+            // 타워 제거
+            GameManager.Instance.PlacedTowerList.Remove(selectedTower);
+            Destroy(selectedTower.gameObject);
+
+            GameManager.Instance.tooltipCount = false;
+            // 툴팁 제거
+            Destroy(gameObject);
+        }
     }
 }

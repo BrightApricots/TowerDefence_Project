@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class SoundManager : MonoBehaviour
 {
-    // SoundManager.Instance.Play("BGM_Name", SoundManager.Sound.Bgm); 사용예시
+    // 사용예시 : SoundManager.Instance.Play("BGM_Name", SoundManager.Sound.Bgm); 
+    // Resources/Sounds 폴더 안에 BGM_Name이라는 사운드 존재해야 함.
+
     public enum Sound
     {
         Bgm,
@@ -160,5 +163,25 @@ public class SoundManager : MonoBehaviour
     {
         AudioSource audioSource = _audioSources[(int)type];
         return audioSource.volume;
+    }
+
+    public void SetMasterVolume(int masterAmount)
+    {
+        AudioSource effectSource = _audioSources[(int)Sound.Effect];
+        AudioSource bgmSource = _audioSources[(int)Sound.Bgm];
+        effectSource.volume *= (masterAmount / 100);
+        bgmSource.volume *= (masterAmount / 100);
+    }
+
+    public void SetEffectVolume(int effectAmount)
+    {
+        AudioSource effectSource = _audioSources[(int)Sound.Effect];
+        effectSource.volume = effectAmount;
+    }
+
+    public void SetBgmVolume(int bgmAmount)
+    {
+        AudioSource bgmSource = _audioSources[(int)Sound.Bgm];
+        bgmSource.volume = bgmAmount;
     }
 }   

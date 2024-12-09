@@ -46,6 +46,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
     public List<GameObject> TetrisList;
     public List<GameObject> ImageTowerList;
     public List<GameObject> TowerList;
+    public List<string> TowerNameList;
 
     private void Awake()
     {
@@ -84,14 +85,12 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
             tower[random1] = tower[random2];
             tower[random2] = temp;
         }
-        GameObject go;
         for (int i = 0; i < 3; i++)
         {
-            go = Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
-                TowerListLocation.transform);
-            ImageTowerList.Add(go);
-            //TowerList.Add(Resources.Load<GameObject>($"TowerLoadoutCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"));
-            TowerList.Add(go);
+            print(Enum.GetName(typeof(TowerEnum), tower[i]));
+            TowerList.Add(Instantiate(Resources.Load<GameObject>($"AcademyTowerCard/{Enum.GetName(typeof(TowerEnum), tower[i])}"),
+                TowerListLocation.transform));
+            TowerNameList.Add(Enum.GetName(typeof(TowerEnum), tower[i]));
         }
     }
 
@@ -99,7 +98,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
     {
         for (int i = 0; i < TowerList.Count; i++)
         {
-            GameManager.Instance.EquipTowerList[i]=TowerList[i];
+            GameManager.Instance.EquipTowerList[i]=TowerNameList[i];
         }
         GameManager.Instance.PlayerTetrisList=TetrisList;
         UI_Map.clearStage++;
