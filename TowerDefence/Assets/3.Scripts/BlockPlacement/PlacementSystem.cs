@@ -81,7 +81,7 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID, string cardID)
     {
         // 필수 컴포넌트 재확인
-        if (!ValidateBeforePlacement()) return;
+        //if (!ValidateBeforePlacement()) return;
 
         currentCardID = cardID;
         gridVisualization.SetActive(true);
@@ -105,16 +105,16 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
-    public void StartRemoving()
-    {
-        if (inputManager == null || grid == null || preview == null || 
-            database == null || objectPlacer == null || aGrid == null)
-        {
-            Debug.LogError("Cannot start placement: Some required components are missing!");
-            return false;
-        }
-        return true;
-    }
+    //public void StartRemoving()
+    //{
+    //    if (inputManager == null || grid == null || preview == null || 
+    //        database == null || objectPlacer == null || aGrid == null)
+    //    {
+    //        Debug.LogError("Cannot start placement: Some required components are missing!");
+    //        return false;
+    //    }
+    //    return true;
+    //}
 
     public void StartTowerPlacement(int ID)
     {
@@ -124,7 +124,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        if (!ValidateBeforePlacement()) return;
+        //if (!ValidateBeforePlacement()) return;
 
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);

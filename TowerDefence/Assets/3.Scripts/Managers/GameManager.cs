@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -70,20 +71,18 @@ public class GameManager : MonoBehaviour
 
         if (EquipTowerList != null)
         {
-            foreach (var obj in EquipTowerList)
+            for (int i = 0; i < EquipTowerList.Count; i++)
             {
-                if (obj != null)
-                    Destroy(obj);
+                EquipTowerList[i] = null;
             }
-            EquipTowerList.Clear();
+            //EquipTowerList.Clear();
         }
 
         if (UnEquipTowerList != null)
         {
-            foreach (var obj in UnEquipTowerList)
+            for (int i = 0; i < UnEquipTowerList.Count; i++)
             {
-                if (obj != null)
-                    Destroy(obj);
+                UnEquipTowerList[i] = null;
             }
             UnEquipTowerList.Clear();
         }
@@ -100,8 +99,8 @@ public class GameManager : MonoBehaviour
 
         PlayerTetrisList = new List<GameObject>();
         HandTetrisList = new List<GameObject>();
-        EquipTowerList = new List<GameObject>();
-        UnEquipTowerList = new List<GameObject>();
+        //EquipTowerList = new List<string>();
+        UnEquipTowerList = new List<string>();
         PlacedTowerList = new List<Tower>();
 
         //각 매니저들 초기화

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
-{
+{ 
     enum TetrisEnum
     {
         Block_L,

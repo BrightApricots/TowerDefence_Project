@@ -224,6 +224,7 @@ MonoBehaviour:
   TetrisList: []
   ImageTowerList: []
   TowerList: []
+  TowerNameList: []
 --- !u!1 &243622738
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,6 +395,7 @@ MonoBehaviour:
   TetrisList: []
   ImageTowerList: []
   TowerList: []
+  TowerNameList: []
 --- !u!1 &311705550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,7 +1846,6 @@ GameObject:
   - component: {fileID: 2083403592}
   - component: {fileID: 2083403591}
   - component: {fileID: 2083403590}
-  - component: {fileID: 2083403594}
   m_Layer: 5
   m_Name: UI_AcademyScene
   m_TagString: Untagged
@@ -1935,18 +1936,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2083403594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083403589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077ca0890f86b945b06efd496c7c3d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &21854349397069862
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2334,6 +2323,7 @@ MonoBehaviour:
   TetrisList: []
   ImageTowerList: []
   TowerList: []
+  TowerNameList: []
 --- !u!61 &8508266761190650075
 BoxCollider2D:
   m_ObjectHideFlags: 0
