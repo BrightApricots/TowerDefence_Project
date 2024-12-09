@@ -35,6 +35,7 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.Play("MBGM", SoundManager.Sound.Bgm);
         TowerCard();
     }
 
@@ -51,14 +52,17 @@ public class UI_LobbyScene : MonoBehaviour
     //}
     private void BackToTitle()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         SceneManager.LoadScene("TitleScene");
     }
     private void PopupTowerLoadout()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         TowerLoadoutPopup.SetActive(true);
     }
     private void PopupBackpack()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         BackpackPopup.SetActive(true);
     }
     //private void PopupTalents()

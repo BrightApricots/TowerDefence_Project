@@ -52,12 +52,17 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
 
     private void Awake()
     {
+        // 배경음악 재생
+        SoundManager.Instance.Play("Academy", SoundManager.Sound.Bgm);
+
         RandomTetrisCard();
         RandomTowerCard();
     }
 
+
     private void RandomTetrisCard()
     {
+
         for (int i = 0; i < 7; i++)
         {
             int cardnum;
@@ -98,6 +103,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         for (int i = 0; i < TowerList.Count; i++)
         {
             GameManager.Instance.EquipTowerList[i]=TowerNameList[i];

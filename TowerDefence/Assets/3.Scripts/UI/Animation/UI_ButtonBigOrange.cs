@@ -45,6 +45,7 @@ public class UI_ButtonBigOrange : MonoBehaviour
 
     private void OnEnter()
     {
+        SoundManager.Instance.Play("Click03", SoundManager.Sound.Effect);
         currentSequence?.Kill();
         currentSequence = DOTween.Sequence();
         currentSequence

@@ -45,6 +45,7 @@ public class UI_Backpack : MonoBehaviour
 
     private void ExitBackpack()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         gameObject.SetActive(false);
     }
 }
