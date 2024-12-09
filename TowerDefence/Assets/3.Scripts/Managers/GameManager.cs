@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
+    public bool IsSaved=false;
     public int CurrentExp = 10;
     public int CurrentEmber = 10;
     public int CurrentHp = 15;
@@ -108,7 +109,10 @@ public class GameManager : MonoBehaviour
         PathManager.Instance.Clear();
         ObjectPlacer.Instance.Clear();
         PathManager.Instance.Clear();
-        PlacementSystem.Instance.Clear();
+        if (PlacementSystem.Instance != null)
+        {
+            PlacementSystem.Instance.Clear();
+        }
         PoolManager.Instance.Clear();
         ObjectManager.Instance.Clear();
     }

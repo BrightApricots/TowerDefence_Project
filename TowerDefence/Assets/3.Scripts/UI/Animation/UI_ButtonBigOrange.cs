@@ -30,20 +30,20 @@ public class UI_ButtonBigOrange : MonoBehaviour
         originalScale = transform.localScale;
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         eventHandler.OnPointerEnterHandler += OnEnter;
         eventHandler.OnPointerExitHandler += OnExit;
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         eventHandler.OnPointerEnterHandler -= OnEnter;
         eventHandler.OnPointerExitHandler -= OnExit;
     }
 
 
-    private void OnEnter()
+    protected virtual void OnEnter()
     {
         SoundManager.Instance.Play("Click03", SoundManager.Sound.Effect);
         currentSequence?.Kill();
@@ -54,7 +54,7 @@ public class UI_ButtonBigOrange : MonoBehaviour
             .Join(text.DOColor(targetColor, 0.01f).SetEase(Ease.Linear)); 
     }
 
-    private void OnExit()
+    protected virtual void OnExit()
     {
         currentSequence?.Kill();
         currentSequence = DOTween.Sequence();
@@ -62,5 +62,4 @@ public class UI_ButtonBigOrange : MonoBehaviour
             .SetEase(Ease.Linear, 0.5f, 0.3f))
             .Join(text.DOColor(baseColor, 0.01f).SetEase(Ease.Linear)); 
     }
-
 }

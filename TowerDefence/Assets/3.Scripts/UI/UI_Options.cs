@@ -12,16 +12,29 @@ public class UI_Options : MonoBehaviour
     public TextMeshProUGUI MasterVolumeRatio;
     public TextMeshProUGUI SoundVolumeRatio;
     public TextMeshProUGUI MusicVolumeRatio;
+    public Button Check;
 
-    public void Update()
+    private void Awake()
+    {
+        MasterVolume.value = 50;
+        SoundVolume.value = 100;
+        MusicVolume.value = 100;
+        Check.onClick.AddListener(Confirm);
+    }
+
+    private void Update()
     {
         MasterVolumeRatio.text = $"{(int)MasterVolume.value}%";
         SoundVolumeRatio.text = $"{(int)SoundVolume.value}%";
         MusicVolumeRatio.text = $"{(int)MusicVolume.value}%";
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 1f;
             gameObject.SetActive(false);
         }
+    }
+
+    private void Confirm()
+    {
+        gameObject.SetActive(false);
     }
 }

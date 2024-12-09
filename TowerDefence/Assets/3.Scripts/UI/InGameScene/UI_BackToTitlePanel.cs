@@ -14,7 +14,14 @@ public class UI_BackToTitlePanel : MonoBehaviour
         Yes.onClick.AddListener(ClickYes);
         No.onClick.AddListener(ClickNo);
     }
-
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Time.timeScale = 1f;
+            gameObject.SetActive(false);
+        }
+    }
     private void ClickYes()
     {
         Time.timeScale = 1f;

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +7,9 @@ public class UI_TitleScene : MonoBehaviour
 {
     public Button NewGame;
     public Button Continue;
+    public TextMeshProUGUI ContiText;
     public Button Exit;
-    public GameObject Difficulty;
+    public GameObject CheckNewGame;
 
     private AudioSource fireEffectSource; // "Fire" 효과음을 재생하는 AudioSource
 
@@ -26,6 +26,14 @@ public class UI_TitleScene : MonoBehaviour
         fireEffectSource = PlayEffect("Fire");
     }
 
+    private void Start()
+    {
+        if (!GameManager.Instance.IsSaved)
+        {
+            ContiText.color = Color.gray;
+        }
+    }
+
     private void LoadNewGame()
     {
         // 버튼 소리
@@ -33,9 +41,7 @@ public class UI_TitleScene : MonoBehaviour
 
         // "Fire" 효과음 정지
         StopSpecificEffect();
-
-        Difficulty.SetActive(true);
-        // TODO : 불러오기를 만들면 새 게임 시작 시 저장 데이터 삭제 경고 팝업
+        CheckNewGame.SetActive(true);
     }
 
     private void LoadContinue()
