@@ -1,9 +1,17 @@
+// WaveManager.cs는 게임의 웨이브 진행을 관리하는 스크립트
+// 주요 기능
+// 1. 웨이브 초기화 및 진행: 웨이브별 몬스터 정보, 스폰 지점, 스폰 간격 설정 및 웨이브 시작/종료 관리
+// 2. UI 갱신: 현재 웨이브 상태, 웨이브 준비 시간, 웨이브 정보 표시 패널, 배틀 버튼, 배속 UI 상태 업데이트
+// 3. 배속 변경: Z, X, C, V 키 또는 버튼 클릭으로 게임 배속 변경
+// 4. 웨이브 클리어 처리: 모든 몬스터 처치 시 웨이브 종료 및 다음 웨이브 준비 시간 카운트다운
+// 5. 모든 웨이브 클리어 시 이벤트 호출
+// 6. 게임 오버 처리: HP가 0 이하일 경우 게임 오버 상태로 전환
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using MyGame;
 
 [System.Serializable]
 public class Wave
@@ -34,7 +42,7 @@ namespace MyGame
 public class WaveManager : MonoBehaviour
 {
     [SerializeField]
-    private List<Wave> waves = new List<Wave>();      // ���체 웨이브 리스트
+    private List<Wave> waves = new List<Wave>();      // 전체 웨이브 데이터를 저장하는 리스트
     [SerializeField]
     private MonsterSpawner monsterSpawner;            // 몬스터 스포너
     [SerializeField]
@@ -48,7 +56,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI wavePrepareTimeText_1;    // 남은 초 표시 텍스트
     [SerializeField]
-    private Slider timeBar;                  // 웨이브 준비 시간 바
+    private Slider timeBar;                           // 웨이브 준비 시간 바
     [SerializeField]
     private GameObject speedButtonGroup;              // 배속 버튼 그룹 오브젝트
 

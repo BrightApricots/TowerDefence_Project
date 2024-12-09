@@ -29,6 +29,7 @@ public class UI_TowerLoadOut : MonoBehaviour
 
     private void ExitTowerLoadOut()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         gameObject.SetActive(false);
     }
 }

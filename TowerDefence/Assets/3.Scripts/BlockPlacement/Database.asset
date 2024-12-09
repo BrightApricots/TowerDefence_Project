@@ -94,10 +94,21 @@ MonoBehaviour:
     - {x: 0, y: 0}
     <Prefab>k__BackingField: {fileID: 5910751741922407090, guid: da4116115e66c1d4986a1b778acf1893, type: 3}
     <Price>k__BackingField: 15
-  - <Name>k__BackingField: Tower_PoisonBridge
+  - <Name>k__BackingField: Tower_Poison
     <ID>k__BackingField: 106
     <OccupiedCells>k__BackingField:
-    - {x: 1, y: 0}
-    - {x: -1, y: 0}
-    <Prefab>k__BackingField: {fileID: 4318948246927493250, guid: c0026bc85c7ed204c8e8154e54fa00f5, type: 3}
-    <Price>k__BackingField: 45
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 169241451886559074, guid: 9e98ffdf442fed74489cca63e139c498, type: 3}
+    <Price>k__BackingField: 10
+  - <Name>k__BackingField: Tower_Sniper
+    <ID>k__BackingField: 107
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 5076540907013298459, guid: 4003c231d85dcdd47a8e9fffcff79b50, type: 3}
+    <Price>k__BackingField: 50
+  - <Name>k__BackingField: Tower_Ice
+    <ID>k__BackingField: 108
+    <OccupiedCells>k__BackingField:
+    - {x: 0, y: 0}
+    <Prefab>k__BackingField: {fileID: 6147881343108851349, guid: a40ff5e674c5edc409be972f1a1c93e4, type: 3}
+    <Price>k__BackingField: 10

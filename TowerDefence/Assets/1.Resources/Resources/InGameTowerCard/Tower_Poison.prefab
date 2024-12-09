@@ -140,9 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '40
-
-'
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
@@ -276,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f26fd75c5bb7794d8ec5ca4f58f2e5a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 112ebf445f96b7a49979903795d99d4b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -434,3 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c67275caea98045895c44c163f6854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerID: 101
+  TowerPrice: 0
+  _TowerPrice: 10

@@ -13142,8 +13142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  actualPathMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
-  previewPathMaterial: {fileID: 2100000, guid: 03be3667974436f4e8b58d7577850d8b, type: 2}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!1 &364768552
@@ -32285,7 +32285,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -33071,6 +33071,11 @@ MonoBehaviour:
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
   waveTextManager: {fileID: 902036303}
+  spawnPoints:
+  - {fileID: 362881107}
+  - {fileID: 1660414543}
+  - {fileID: 1541005857}
+  targetPoint: {fileID: 943508852}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -38404,7 +38409,7 @@ GameObject:
   - component: {fileID: 1176954588}
   - component: {fileID: 1176954587}
   m_Layer: 5
-  m_Name: Ember_Text
+  m_Name: emberTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38449,7 +38454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +N
+  m_text: +10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
@@ -41570,7 +41575,7 @@ GameObject:
   - component: {fileID: 1291900409}
   - component: {fileID: 1291900408}
   m_Layer: 5
-  m_Name: Exp_Text
+  m_Name: expTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41615,7 +41620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +N
+  m_text: +10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d465de76ca1ad9646a673cfb56b4a228, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9e868b02acda2b8428e4371d8642e843, type: 2}
@@ -51825,6 +51830,7 @@ MonoBehaviour:
   EquipTowerList: []
   UnEquipTowerList: []
   PlacedTowerList: []
+  clearStage: 0
   tooltipCount: 0
 --- !u!224 &1498700928
 RectTransform:
@@ -53345,8 +53351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  actualPathMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
-  previewPathMaterial: {fileID: 2100000, guid: 03be3667974436f4e8b58d7577850d8b, type: 2}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!23 &1541005855
@@ -56056,8 +56062,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 943508852}
-  actualPathMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
-  previewPathMaterial: {fileID: 2100000, guid: 03be3667974436f4e8b58d7577850d8b, type: 2}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
   actualPathColor: {r: 0, g: 0, b: 0, a: 1}
   previewPathColor: {r: 1, g: 0.5, b: 0, a: 1}
 --- !u!23 &1660414541
@@ -60969,8 +60975,8 @@ MonoBehaviour:
   - {fileID: 1660414543}
   - {fileID: 1541005857}
   targetPoint: {fileID: 943508852}
-  actualPathMaterial: {fileID: 2100000, guid: c3b2b892ac52128409b45cc6c069e247, type: 2}
-  previewPathMaterial: {fileID: 2100000, guid: 03be3667974436f4e8b58d7577850d8b, type: 2}
+  actualPathMaterial: {fileID: 0}
+  previewPathMaterial: {fileID: 0}
 --- !u!114 &1862580661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61012,6 +61018,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   gridWorldSize: {x: 50, y: 50}
+  nodeRadius: 0.5
   obstaclePositions: []
   database: {fileID: 11400000, guid: 9cb9899a278eb634699b46feeb33d428, type: 2}
 --- !u!1 &1862625223
@@ -102275,5 +102282,5 @@ SceneRoots:
   - {fileID: 1336762233}
   - {fileID: 1170214131}
   - {fileID: 979587328}
-  - {fileID: 466795051}
   - {fileID: 615413082}
+  - {fileID: 902036304}
