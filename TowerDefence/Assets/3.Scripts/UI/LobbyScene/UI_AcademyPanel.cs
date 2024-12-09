@@ -102,7 +102,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("AcademySelect", SoundManager.Sound.Effect);
         for (int i = 0; i < TowerList.Count; i++)
         {
             GameManager.Instance.EquipTowerList[i]=TowerNameList[i];
