@@ -168,4 +168,4 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
             }
         }
     }
-}
+} 
