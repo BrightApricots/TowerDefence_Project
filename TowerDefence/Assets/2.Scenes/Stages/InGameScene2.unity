@@ -56275,6 +56275,10 @@ MonoBehaviour:
   - monsterSpawnData:
     - monsterPrefab: {fileID: 1584092720678730763, guid: 4287d15d60a4fa1439a6724cfa233402, type: 3}
       spawnCount: 5
+    - monsterPrefab: {fileID: 1584092720678730763, guid: 4287d15d60a4fa1439a6724cfa233402, type: 3}
+      spawnCount: 5
+    - monsterPrefab: {fileID: 1584092720678730763, guid: 4287d15d60a4fa1439a6724cfa233402, type: 3}
+      spawnCount: 5
     spawnInterval: 1
     spawnPoints:
     - {fileID: 2029089215}
@@ -56312,11 +56316,14 @@ MonoBehaviour:
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
   waveTextManager: {fileID: 902036303}
+  remainingMonsters: 0
   spawnPoints:
   - {fileID: 2029089215}
   - {fileID: 1890111012}
   - {fileID: 1371365567}
   targetPoint: {fileID: 804980043}
+  gameClearUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
