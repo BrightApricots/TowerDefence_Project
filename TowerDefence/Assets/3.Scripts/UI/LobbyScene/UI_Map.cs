@@ -116,7 +116,7 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 3)
         {
-            FadeManager.Instance.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameSceneWinter");
             //SceneManager.LoadScene("InGameScene3");
         }
     }
@@ -125,7 +125,7 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 4)
         {
-            FadeManager.Instance.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene2");
             //SceneManager.LoadScene("InGameScene3");
         }
     }

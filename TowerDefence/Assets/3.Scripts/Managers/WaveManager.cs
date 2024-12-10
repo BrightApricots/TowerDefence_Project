@@ -1,17 +1,9 @@
-// WaveManager.cs는 게임의 웨이브 진행을 관리하는 스크립트
-// 주요 기능
-// 1. 웨이브 초기화 및 진행: 웨이브별 몬스터 정보, 스폰 지점, 스폰 간격 설정 및 웨이브 시작/종료 관리
-// 2. UI 갱신: 현재 웨이브 상태, 웨이브 준비 시간, 웨이브 정보 표시 패널, 배틀 버튼, 배속 UI 상태 업데이트
-// 3. 배속 변경: Z, X, C, V 키 또는 버튼 클릭으로 게임 배속 변경
-// 4. 웨이브 클리어 처리: 모든 몬스터 처치 시 웨이브 종료 및 다음 웨이브 준비 시간 카운트다운
-// 5. 모든 웨이브 클리어 시 이벤트 호출
-// 6. 게임 오버 처리: HP가 0 이하일 경우 게임 오버 상태로 전환
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Security.Cryptography;
 
 [System.Serializable]
 public class Wave
@@ -75,7 +67,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;                 // 현재 웨이브 인덱스
     private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부
-    private int remainingMonsters = 0;                // 남은 몬스터 수
+    [SerializeField]private int remainingMonsters = 0;                // 남은 몬스터 수
     private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
     private bool isGameOver = false;                  // 게임 오버 여부
     private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
@@ -84,14 +76,34 @@ public class WaveManager : MonoBehaviour
 
     public event System.Action OnAllWavesCleared;     // 모든 웨이브 클리어 시 발생하는 이벤트
 
-    public List<Transform> spawnPoints;
-    public Transform targetPoint;
+    [Header("Spawn Settings")]
+    [SerializeField]
+    private List<Transform> spawnPoints;
+    [SerializeField]
+    private Transform targetPoint;
+
+    [Header("UI Elements")]
+    [SerializeField]
+    private GameObject gameClearUI;                    // 게임 클리어 UI
+    [SerializeField]
+    private GameObject gameOverUI;                     // 게임 오버 UI
+
+    // 추가된 변수들
+    private int totalMonstersToSpawn = 0; // 현재 웨이브에서 총 스폰할 몬스터 수
+    private int spawnedMonsters = 0;      // 현재까지 스폰된 몬스터 수
+
+    private const int WaveClearEffectsCount = 3; // 매직 넘버 상수화
+
     private void Start()
     {
         // PathManager 초기화
         if (PathManager.Instance != null)
         {
             PathManager.Instance.SetupPoints(spawnPoints, targetPoint);
+        }
+        else
+        {
+            Debug.LogError("PathManager 인스턴스가 존재하지 않습니다!");
         }
 
         InitializeBattleButton();
@@ -115,7 +127,6 @@ public class WaveManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && battleButton != null && battleButton.interactable)
             {
-
                 battleButton.onClick.Invoke();
             }
         }
@@ -127,12 +138,24 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    private void GetCurrentStageMonsterCount()
+    {
+        for (int j = 0; j < waves[currentWaveIndex].monsterSpawnData.Count; j++)
+        {
+            remainingMonsters += waves[currentWaveIndex].monsterSpawnData[j].spawnCount;
+        }
+    }
+
     private void InitializeBattleButton()
     {
         if (battleButton != null)
         {
             battleButton.onClick.AddListener(StartNextWaveManually);
             SetBattleButtonState(true);
+        }
+        else
+        {
+            Debug.LogError("BattleButton이 할당되지 않았습니다!");
         }
     }
 
@@ -145,17 +168,24 @@ public class WaveManager : MonoBehaviour
             {
                 button.onClick.AddListener(() =>
                 {
-                    // 버튼 이름에서 배속 값 파싱
-                    float speed = float.Parse(button.name);
-                    ChangeGameSpeed(speed);
-
-                    // 버튼 클릭 시 소리 재생
-                    SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
+                    if (float.TryParse(button.name, out float speed))
+                    {
+                        ChangeGameSpeed(speed);
+                        // 버튼 클릭 시 소리 재생
+                        SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
+                    }
+                    else
+                    {
+                        Debug.LogError($"배속 값 파싱 실패: {button.name}");
+                    }
                 });
             }
         }
+        else
+        {
+            Debug.LogError("SpeedButtonGroup이 할당되지 않았습니다!");
+        }
     }
-
 
     private void InitializeWaveTextManager()
     {
@@ -163,6 +193,10 @@ public class WaveManager : MonoBehaviour
         {
             waveTextManager.Initialize(waves);
             waveTextManager.ShowWaveInfo();
+        }
+        else
+        {
+            Debug.LogError("WaveTextManager가 할당되지 않았습니다!");
         }
     }
 
@@ -245,8 +279,8 @@ public class WaveManager : MonoBehaviour
                 timeBar.value = elapsed / prepareCooldown;
             }
 
-            yield return new WaitForSeconds(0.1f);
-            elapsed += 0.1f;
+            yield return null; // 매 프레임마다 업데이트
+            elapsed += Time.deltaTime;
         }
 
         HideTimeBar();
@@ -262,7 +296,9 @@ public class WaveManager : MonoBehaviour
     public void StartNextWaveManually()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
+
         SoundManager.Instance.Play("BattleButton", SoundManager.Sound.Effect);
+
         if (!isFirstBattleClicked)
         {
             isFirstBattleClicked = true;
@@ -285,6 +321,7 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
+        GetCurrentStageMonsterCount();
         SoundManager.Instance.Play("InWave", SoundManager.Sound.Bgm);
         isWaveActive = true;
         isReadyForNextWave = false;
@@ -300,6 +337,16 @@ public class WaveManager : MonoBehaviour
         // 이벤트 등록
         monsterSpawner.OnMonsterSpawned += OnMonsterSpawned;
         monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed;
+        monsterSpawner.OnSpawnComplete += OnSpawnComplete; // 추가된 이벤트
+
+        // 총 몬스터 수 계산
+        totalMonstersToSpawn = 0;
+        foreach (var spawnData in currentWave.monsterSpawnData)
+        {
+            totalMonstersToSpawn += spawnData.spawnCount;
+        }
+        spawnedMonsters = 0;
+        remainingMonsters = 0;
 
         monsterSpawner.StartSpawning();
         UpdateWaveText();
@@ -307,14 +354,23 @@ public class WaveManager : MonoBehaviour
 
     private void OnMonsterSpawned(GameObject monster)
     {
-        remainingMonsters++;
+        //remainingMonsters++;
     }
 
     private void OnMonsterDestroyed(GameObject monster)
     {
         remainingMonsters--;
 
-        if (remainingMonsters <= 0 && isWaveActive)
+        if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete())
+        {
+            EndCurrentWave();
+        }
+    }
+
+    private void OnSpawnComplete()
+    {
+        // 모든 몬스터가 스폰된 상태를 표시
+        if (spawnedMonsters >= totalMonstersToSpawn && remainingMonsters <= 0)
         {
             EndCurrentWave();
         }
@@ -325,8 +381,10 @@ public class WaveManager : MonoBehaviour
         // 이벤트 해제
         monsterSpawner.OnMonsterSpawned -= OnMonsterSpawned;
         monsterSpawner.OnMonsterDestroyed -= OnMonsterDestroyed;
-        
+        monsterSpawner.OnSpawnComplete -= OnSpawnComplete;
+
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
+
         // 웨이브 클리어 처리
         if (GameManager.Instance.HandTetrisList.Count < 10)
         {
@@ -357,26 +415,38 @@ public class WaveManager : MonoBehaviour
             {
                 prepareCooldownCoroutine = StartCoroutine(PrepareCooldownRoutine());
             }
-        }
-        else
-        {
-            OnAllWavesCleared?.Invoke();
-        }
 
-        if (currentWaveIndex < waves.Count)
-        {
-            isReadyForNextWave = true;
+            // 다음 웨이브 준비를 위한 UI 업데이트
             waveTextManager?.SetCurrentWaveIndex(currentWaveIndex);
             waveTextManager?.ShowWaveInfo();
         }
         else
         {
+            // 모든 웨이브 완료 시 이벤트 호출
             OnAllWavesCleared?.Invoke();
+            HandleAllWavesCleared();
         }
+    }
+
+    private void HandleAllWavesCleared()
+    {
+        // 게임 클리어 처리 로직 추가 (예: UI 표시, 보상 지급 등)
+        Debug.Log("All waves cleared! Game Cleared!");
+        if (gameClearUI != null)
+        {
+            gameClearUI.SetActive(true); // 게임 클리어 UI 활성화
+        }
+        Time.timeScale = 0; // 게임 정지
     }
 
     private void ChangeGameSpeed(float speed)
     {
+        if (speed <= 0)
+        {
+            Debug.LogError("배속 값은 0보다 커야 합니다!");
+            return;
+        }
+
         Time.timeScale = speed;
         UpdateSpeedImageColors(speed);
     }
@@ -438,7 +508,26 @@ public class WaveManager : MonoBehaviour
         SetBattleButtonState(false);
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
         Time.timeScale = 0; // 게임 정지
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true); // 게임 오버 UI 활성화
+        }
+    }
+
+    private void OnAllWavesClearedHandler()
+    {
+        // 추가적인 게임 클리어 로직 구현 가능
+        HandleAllWavesCleared();
+    }
+
+    private void OnEnable()
+    {
+        OnAllWavesCleared += OnAllWavesClearedHandler;
+    }
+
+    private void OnDisable()
+    {
+        OnAllWavesCleared -= OnAllWavesClearedHandler;
     }
 }
-
-// 최적화 처리

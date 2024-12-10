@@ -1,10 +1,3 @@
-// MonsterSpawner.cs는 몬스터 스폰(생성)을 관리하는 스크립트
-// 주요 기능
-// 1. 몬스터 데이터 설정: 웨이브마다 등장할 몬스터와 스폰 지점, 생성 주기 설정.
-// 2. 몬스터 생성 관리: 활성화된 스폰 지점에서 몬스터를 순환 방식으로 생성.
-// 3. 가중치 기반 스폰: 몬스터의 등장 확률을 가중치로 반영하여 스폰.
-// 4. 이벤트 처리: 몬스터 생성, 파괴, 스폰 완료 시 이벤트 호출.
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,9 +19,11 @@ public class MonsterSpawner : MonoBehaviour
     private Dictionary<GameObject, int> remainingSpawnCount = new Dictionary<GameObject, int>(); // 남은 몬스터 수량
     private List<GameObject> weightedMonsterPool = new List<GameObject>();    // 가중치 기반 몬스터 풀
 
-    public event System.Action OnSpawnComplete;          // 모든 몬스터 스폰 완료 이벤트
-    public event System.Action<GameObject> OnMonsterSpawned;  // 몬스터 생성 이벤트
-    public event System.Action<GameObject> OnMonsterDestroyed; // 몬스터 파괴 이벤트
+    public event System.Action OnSpawnComplete;                      // 모든 몬스터 스폰 완료 이벤트
+    public event System.Action<GameObject> OnMonsterSpawned;        // 몬스터 생성 이벤트
+    public event System.Action<GameObject> OnMonsterDestroyed;       // 몬스터 파괴 이벤트
+
+    private bool spawnComplete = false; // 스폰 완료 여부
 
     // 몬스터 수량 초기화
     private void InitializeSpawnCounts()
@@ -38,10 +33,18 @@ public class MonsterSpawner : MonoBehaviour
         {
             if (spawnData.monsterPrefab != null)
             {
-                remainingSpawnCount[spawnData.monsterPrefab] = spawnData.spawnCount;
+                if (remainingSpawnCount.ContainsKey(spawnData.monsterPrefab))
+                {
+                    remainingSpawnCount[spawnData.monsterPrefab] += spawnData.spawnCount; // 누적
+                }
+                else
+                {
+                    remainingSpawnCount[spawnData.monsterPrefab] = spawnData.spawnCount;
+                }
             }
         }
     }
+
 
     // 가중치 기반 몬스터 풀 생성
     private void CreateWeightedMonsterPool()
@@ -108,12 +111,14 @@ public class MonsterSpawner : MonoBehaviour
     // 몬스터 생성 루틴
     private IEnumerator SpawnRoutine()
     {
+        spawnComplete = false;
         while (isSpawning)
         {
             SpawnMonster();
             yield return new WaitForSeconds(spawnInterval);
         }
 
+        spawnComplete = true;
         OnSpawnComplete?.Invoke(); // 모든 몬스터 스폰 완료 이벤트 호출
     }
 
@@ -145,5 +150,11 @@ public class MonsterSpawner : MonoBehaviour
         this.activeSpawnPoints = activeSpawnPoints; // 활성화된 스폰 지점 설정
         InitializeSpawnCounts(); // 몬스터 수량 초기화
         CreateWeightedMonsterPool(); // 가중치 풀 생성
+    }
+
+    // 모든 몬스터가 스폰되었는지 확인하는 메서드
+    public bool IsSpawningComplete()
+    {
+        return spawnComplete;
     }
 }

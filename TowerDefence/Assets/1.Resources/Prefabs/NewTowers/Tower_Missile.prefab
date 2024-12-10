@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4275588154783881826}
   - component: {fileID: 4076610172178671850}
   - component: {fileID: 4914326468364333772}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MissileHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8996524052376631843}
   - component: {fileID: 8506020052864630864}
   - component: {fileID: 8915277836086164226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootPos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 583464363086899684}
   - component: {fileID: 4098158683273016635}
   - component: {fileID: 5364272216278680139}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 5588223922261882595}
   - component: {fileID: 2763751404091634840}
   - component: {fileID: 8580535570793577164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MissileBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 1363359531549946460}
   - component: {fileID: 3145255694369611420}
   - component: {fileID: 6562114099687935198}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,6 +403,7 @@ MonoBehaviour:
   isFollow: 0
   mainCanvas: {fileID: 0}
   _range: 15
+  buffEffect: {fileID: 0}
   projectiles:
   - {fileID: 1552339098034316, guid: 3720370842d0a124baa530637202c7ab, type: 3}
   - {fileID: 7103630920753419783, guid: aab2e24961d93c946aa39473a4369471, type: 3}
@@ -420,6 +421,9 @@ MonoBehaviour:
   IsTargeting: 1
   IsBomb: 0
   RimitTarget: 10
+  splashRange: 2
+  explosionEffect: {fileID: 0}
+  missilePrefab: {fileID: 0}
 --- !u!65 &6562114099687935198
 BoxCollider:
   m_ObjectHideFlags: 0

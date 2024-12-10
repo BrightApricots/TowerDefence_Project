@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5518478428060728232}
   - component: {fileID: 4955794807359036584}
   - component: {fileID: 8826128345493874805}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2060088739406627309}
   - component: {fileID: 7625460057210971751}
   - component: {fileID: 7925906311989452727}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LightningHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 7596328101142743326}
   - component: {fileID: 473411969923383101}
   - component: {fileID: 2183257078572347600}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

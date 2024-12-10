@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1729782568872891218}
   - component: {fileID: 7877062972475897817}
   - component: {fileID: 7510954660961764718}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3526044597540868722}
   - component: {fileID: 173338481482661189}
   - component: {fileID: 9132505643169183896}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 758678627868450243}
   - component: {fileID: 8874503491852428474}
   - component: {fileID: 1474692769010651490}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
