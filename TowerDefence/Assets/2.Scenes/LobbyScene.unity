@@ -2728,6 +2728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Exit: {fileID: 652712280}
+  NoOtherCardsAvailable: {fileID: 958319220}
   EquipSlotList:
   - {fileID: 587621206}
   - {fileID: 2133398288}
@@ -15439,6 +15440,7 @@ MonoBehaviour:
   - 
   - 
   UnEquipTowerList:
+  - 
   - 
   - 
   - 
