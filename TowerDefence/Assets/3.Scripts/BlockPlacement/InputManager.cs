@@ -22,19 +22,19 @@ public class InputManager : MonoBehaviour
         {
             OnClicked?.Invoke();
         }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OnExit?.Invoke();
         }
+
         if (Input.GetMouseButtonDown(1))
         {
             OnRotate?.Invoke();
+
             // 타워 프리뷰 회전 소리
-            SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+            SoundManager.Instance.Play("TowerPreviewRotationSound", SoundManager.Sound.Effect);
         }
-            
-        
-        
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
