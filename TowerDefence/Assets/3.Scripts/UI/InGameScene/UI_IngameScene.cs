@@ -25,11 +25,12 @@ public class UI_IngameScene : MonoBehaviour
         {
             DestroyImmediate(this);
         }
-        GameManager.Instance.CurrentMoney = 50;
+        
     }
 
     private void Start()
     {
+        GameManager.Instance.CurrentMoney = 50;
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
         TowerCardSet();
     }
