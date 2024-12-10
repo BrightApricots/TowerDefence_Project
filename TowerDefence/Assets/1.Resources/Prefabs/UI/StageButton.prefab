@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 4801161362407484092}
   - component: {fileID: 1792102676833869552}
   - component: {fileID: -7139066345966771146}
+  - component: {fileID: -6025635851041799429}
+  - component: {fileID: -1765745742556274294}
   m_Layer: 5
   m_Name: StageButton
   m_TagString: Untagged
@@ -168,6 +170,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-6025635851041799429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5962816167751897112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b759845812fa942b7585420fcc4da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1765745742556274294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5962816167751897112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a35df0f8b828ea41bf7c74762b219c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addScale: 1.2
+  enterDuration: 0.1
+  text: {fileID: 0}
 --- !u!1 &6108982079900515113
 GameObject:
   m_ObjectHideFlags: 0

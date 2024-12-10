@@ -312,6 +312,8 @@ GameObject:
   - component: {fileID: 6277303516459651294}
   - component: {fileID: 6328191131596614341}
   - component: {fileID: -8695320460594648990}
+  - component: {fileID: -4556943981466973721}
+  - component: {fileID: -462152921920217916}
   m_Layer: 5
   m_Name: AcademyButton
   m_TagString: Untagged
@@ -394,6 +396,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-4556943981466973721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907030438828005270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b759845812fa942b7585420fcc4da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-462152921920217916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907030438828005270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a35df0f8b828ea41bf7c74762b219c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addScale: 1.2
+  enterDuration: 0.1
+  text: {fileID: 0}
 --- !u!1 &7567288840023351621
 GameObject:
   m_ObjectHideFlags: 0

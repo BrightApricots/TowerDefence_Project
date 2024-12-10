@@ -46,8 +46,12 @@ public class UI_TitleScene : MonoBehaviour
 
     private void LoadContinue()
     {
-        // "Fire" 효과음 정지
+        // "Fire" 효과음 정지 
         StopSpecificEffect();
+        if (GameManager.Instance.IsSaved)
+        {
+            SceneManager.LoadScene("LobbyScene");
+        }
 
         // TODO : 불러오기
     }

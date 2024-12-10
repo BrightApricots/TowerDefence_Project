@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 public class UI_LobbyScene : MonoBehaviour
 {
-    public Button Setting;
+    public Button Setting; 
     public Button Title;
     public Button TowerLoadout;
     public Button Backpack;
@@ -36,6 +36,7 @@ public class UI_LobbyScene : MonoBehaviour
     {
         SoundManager.Instance.Play("MBGM", SoundManager.Sound.Bgm);
         TowerCard();
+        GameManager.Instance.IsSaved = true;
     }
 
     private void Update()

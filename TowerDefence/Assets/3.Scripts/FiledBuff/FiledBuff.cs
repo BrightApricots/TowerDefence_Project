@@ -12,7 +12,7 @@ public class BuffField : MonoBehaviour
     public float checkInterval = 1f;
     public float checkHeight = 2f;
     public float heightOffset = 0.1f;
-    public Vector3 checkSize = new Vector3(.7f, 2f, .7f);
+    public Vector3 checkSize = new Vector3(.4f, 2f, .4f);
     public LayerMask checkLayers;
 
     private Tower currentBuffedTower;
