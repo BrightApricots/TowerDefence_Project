@@ -87,8 +87,9 @@ public class UI_Map : MonoBehaviour
     {
          SoundManager.Instance.Play("AcademyClickSound", SoundManager.Sound.Effect);
         if(GameManager.Instance.clearStage == 0)
-        { 
-            SceneManager.LoadScene("AcademyScene");
+        {
+            FadeManager.Instance.LoadScene("AcademyScene");
+            //SceneManager.LoadScene("AcademyScene");
         }
     }
 
@@ -97,7 +98,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 1)
         {
-            SceneManager.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void LoadStage2()
@@ -105,7 +107,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 2)
         {
-            SceneManager.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void LoadStage3()
@@ -113,7 +116,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 3)
         {
-            SceneManager.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void LoadStage4()
@@ -121,7 +125,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 4)
         {
-            SceneManager.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void EnterAltar()
@@ -129,7 +134,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)
         {
-            SceneManager.LoadScene("AltarScene");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void LoadStage6()
@@ -137,7 +143,8 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("BossStageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)
         {
-            SceneManager.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene3");
+            //SceneManager.LoadScene("InGameScene3");
         }
     }
 }

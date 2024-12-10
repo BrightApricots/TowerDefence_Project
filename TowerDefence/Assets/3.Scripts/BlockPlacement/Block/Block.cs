@@ -39,7 +39,7 @@ public class Block : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         
         isSelected = true;
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("BlockClickSound", SoundManager.Sound.Effect);
         PlacementSystem.Instance.StartPlacement(blockType, uniqueID);
         
     }

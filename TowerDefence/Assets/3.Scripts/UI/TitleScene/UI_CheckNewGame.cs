@@ -25,6 +25,7 @@ public class UI_CheckNewGame : MonoBehaviour
 
     private void NewGame()
     {
+
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         GameManager.Instance.Clear();
         Difficulty.SetActive(true);

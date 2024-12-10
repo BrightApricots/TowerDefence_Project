@@ -10,7 +10,7 @@ public class UI_BackToTitlePanel : MonoBehaviour
     public Button No;
 
     private void Awake()
-    {
+    { 
         Yes.onClick.AddListener(ClickYes);
         No.onClick.AddListener(ClickNo);
     }
@@ -25,7 +25,8 @@ public class UI_BackToTitlePanel : MonoBehaviour
     private void ClickYes()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("TitleScene");
+        FadeManager.Instance.LoadScene("TitleScene");
+        //SceneManager.LoadScene("TitleScene");
     }
 
     private void ClickNo()

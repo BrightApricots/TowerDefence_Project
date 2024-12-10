@@ -321,7 +321,7 @@ public class PlacementState : IBuildingState
                 }
             }
 
-            if (database.IsTower(currentID))
+            if (database.IsTower(currentID)) //설치된 시점
             {
                 for (int i = 0; i < database.objectsData.Count; i++)
                 {
@@ -334,6 +334,7 @@ public class PlacementState : IBuildingState
                 }
             }
         }
+
     }
 
     public bool IsValidPlacement(Vector3Int gridPosition)

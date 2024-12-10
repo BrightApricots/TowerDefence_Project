@@ -54,7 +54,8 @@ public class UI_LobbyScene : MonoBehaviour
     private void BackToTitle()
     {
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
-        SceneManager.LoadScene("TitleScene");
+        FadeManager.Instance.LoadScene("TitleScene");
+        //SceneManager.LoadScene("TitleScene");
     }
     private void PopupTowerLoadout()
     {

@@ -7,8 +7,11 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField]
     private float previewYOffset = 0.06f;
     [SerializeField]
-    private float previewAlpha = 0.5f; 
-
+    private float previewAlpha = 0.5f;
+    public Canvas MainCanvas;
+    private GameObject MouseTooltip = null;
+    public GameObject MouseTooltipPrefab;
+    
     [SerializeField]
     private GameObject cellIndicator;
     private GameObject previewObject;
@@ -26,12 +29,23 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.SetActive(false);
         cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
     }
-
+    private void Update()
+    {
+        if (MouseTooltip != null) 
+        {
+            Vector2 mousePos = Input.mousePosition;
+            mousePos.x += 100;
+            mousePos.y -= 50;
+            MouseTooltip.transform.position = mousePos;
+        }
+    }
     public void StartShowingPlacementPreview(GameObject prefab, List<Vector2Int> occupiedCells, int rotationIndex)
     {
         currentOccupiedCells = new List<Vector2Int>(occupiedCells);
         currentRotation = rotationIndex;
         previewObject = Instantiate(prefab);
+        MouseTooltip = Instantiate(MouseTooltipPrefab,MainCanvas.transform);
+        print("프리뷰 생성");
         previewObject.name = prefab.name;
 
         Tower[] towers = previewObject.GetComponentsInChildren<Tower>();
@@ -129,6 +143,8 @@ public class PreviewSystem : MonoBehaviour
 
             Destroy(previewObject);
         }
+        Destroy(MouseTooltip);
+        print("프리뷰 제거");
     }
 
     public void UpdatePosition(Vector3 position, bool validity, int floor = 0)

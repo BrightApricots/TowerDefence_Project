@@ -21,18 +21,21 @@ public class UI_DifficultySelect : MonoBehaviour
 
     private void EnterCasual()
     {
-        GameManager.Instance.Difficulty=1;
-        SceneManager.LoadScene("LobbyScene");
+        FadeManager.Instance.LoadScene("LobbyScene");
+        //GameManager.Instance.Difficulty=1;
+        //SceneManager.LoadScene("LobbyScene");
     }
     private void EnterNormal()
     {
-        GameManager.Instance.Difficulty=2;
-        SceneManager.LoadScene("LobbyScene");
+        FadeManager.Instance.LoadScene("LobbyScene");
+        //GameManager.Instance.Difficulty=2;
+        //SceneManager.LoadScene("LobbyScene");
     }
     private void EnterHeroic()
     {
-        GameManager.Instance.Difficulty=3;
-        SceneManager.LoadScene("LobbyScene");
+        FadeManager.Instance.LoadScene("LobbyScene");
+        //GameManager.Instance.Difficulty=3;
+        //SceneManager.LoadScene("LobbyScene");
     }
     private void EnterBackToTitle()
     {
