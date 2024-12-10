@@ -7,6 +7,7 @@ public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance; // 싱글톤 패턴
     private Image fadeImage; // Canvas 하위 Image
+    private Coroutine currentCoroutine; // 현재 실행 중인 코루틴 추적변수
 
     public float fadeDuration = 1.0f; // 페이드 지속 시간
     public int canvasSortOrder = 100; // 페이드 캔버스의 Sort Order
@@ -58,13 +59,13 @@ public class FadeManager : MonoBehaviour
         {
             fadeImage.gameObject.SetActive(true);
             fadeImage.color = new Color(0, 0, 0, 1);
-            StartCoroutine(FadeIn());
+            StartCoroutineSafely(FadeIn());
         }
     }
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(FadeOutBeforeSceneChange(sceneName));
+        StartCoroutineSafely(FadeOutBeforeSceneChange(sceneName));
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -73,7 +74,7 @@ public class FadeManager : MonoBehaviour
         {
             fadeImage.gameObject.SetActive(true);
             fadeImage.color = new Color(0, 0, 0, 1);
-            StartCoroutine(FadeIn()); // 새로운 씬이 로드된 후 페이드 인 실행
+            StartCoroutineSafely(FadeIn()); // 새로운 씬이 로드된 후 페이드 인 실행
         }
     }
 
@@ -115,5 +116,17 @@ public class FadeManager : MonoBehaviour
 
         // 씬 전환
         SceneManager.LoadScene(sceneName);
+    }
+
+    private void StartCoroutineSafely(IEnumerator routine)
+    {
+        // 현재 실행 중인 코루틴이 있으면 정지
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+
+        // 새로운 코루틴 실행
+        currentCoroutine = StartCoroutine(routine);
     }
 }

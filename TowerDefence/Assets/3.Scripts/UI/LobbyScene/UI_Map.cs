@@ -98,7 +98,7 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 1)
         {
-            FadeManager.Instance.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("InGameScene2");
             //SceneManager.LoadScene("InGameScene3");
         }
     }
@@ -131,7 +131,7 @@ public class UI_Map : MonoBehaviour
     }
     private void EnterAltar()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)
         {
             FadeManager.Instance.LoadScene("InGameScene3");
