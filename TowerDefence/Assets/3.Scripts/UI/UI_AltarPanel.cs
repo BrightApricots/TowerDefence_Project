@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -23,9 +21,9 @@ public class UI_AltarPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Start()
     {
-        if(EmberPrice>GameManager.Instance.CurrentEmber|| HpPrice > GameManager.Instance.CurrentHp)
+        if (EmberPrice > GameManager.Instance.CurrentEmber || HpPrice > GameManager.Instance.CurrentHp ||
+            (gameObject.name == "RecoverPanel" && GameManager.Instance.MaxHp == GameManager.Instance.CurrentHp))
         {
-            print("못삼");
             Outline.SetActive(false);
             CantBuy.SetActive(true);
         }

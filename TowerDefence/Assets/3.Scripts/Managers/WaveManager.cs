@@ -328,9 +328,14 @@ public class WaveManager : MonoBehaviour
         
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
         // 웨이브 클리어 처리
-        for (int i = 0; i < 3; i++)
+        if (GameManager.Instance.HandTetrisList.Count < 10)
         {
-            UI_Draw.draw();
+            for (int i = 0; i < 3; i++)
+            {
+                UI_Draw.draw();
+                if(GameManager.Instance.HandTetrisList.Count==10)
+                { break; }
+            }
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;

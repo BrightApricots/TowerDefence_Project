@@ -16,6 +16,10 @@ public class UI_Draw : MonoBehaviour
     public Button DrawButton;
     public TextMeshProUGUI DrawPriceText;
     public RectTransform HorizontalLayout;
+    public GameObject DialogBox;
+    public GameObject DrawPriceInfo;
+    public GameObject FullHandText;
+
     public static Action draw;
 
     private void Awake()
@@ -33,7 +37,26 @@ public class UI_Draw : MonoBehaviour
 
     private void Update()
     {
-        DrawPriceText.text = $"{DrawPrice}";
+        if (GameManager.Instance.HandTetrisList.Count >= 10)
+        {
+            DialogBox.SetActive(true);
+            DrawPriceInfo.SetActive(false);
+            FullHandText.SetActive(true);
+        }
+        
+        else if (GameManager.Instance.HandTetrisList.Count <7)
+        {
+            DialogBox.SetActive(true);
+            DrawPriceInfo.SetActive(true);
+            FullHandText.SetActive(false);
+            DrawPriceText.text = $"{DrawPrice}";
+        }
+
+        else
+        {
+            DialogBox.SetActive(false);
+        }
+
     }
 
     public void DrawCard()

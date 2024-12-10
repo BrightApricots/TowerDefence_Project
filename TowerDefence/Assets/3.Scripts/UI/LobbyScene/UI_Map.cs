@@ -134,14 +134,14 @@ public class UI_Map : MonoBehaviour
         SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)
         {
-            FadeManager.Instance.LoadScene("InGameScene3");
+            FadeManager.Instance.LoadScene("AltarScene");
             //SceneManager.LoadScene("InGameScene3");
         }
     }
     private void LoadStage6()
     {
         SoundManager.Instance.Play("BossStageClickSound", SoundManager.Sound.Effect);
-        if (GameManager.Instance.clearStage == 5)
+        if (GameManager.Instance.clearStage == 6)
         {
             FadeManager.Instance.LoadScene("InGameScene3");
             //SceneManager.LoadScene("InGameScene3");
