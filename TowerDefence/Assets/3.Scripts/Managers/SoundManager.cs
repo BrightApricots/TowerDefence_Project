@@ -168,23 +168,31 @@ public class SoundManager : MonoBehaviour
         return audioSource.volume;
     }
 
-    public void SetMasterVolume(int masterAmount)
+    private float masterVolume = 1f;
+    private float effectVolume = 1f;
+    private float bgmVolume = 1f;
+
+    public void SetMasterVolume(float masterAmount)
     {
+        masterVolume = masterAmount / 100f;
         AudioSource effectSource = _audioSources[(int)Sound.Effect];
         AudioSource bgmSource = _audioSources[(int)Sound.Bgm];
-        effectSource.volume *= (masterAmount / 100);
-        bgmSource.volume *= (masterAmount / 100);
+
+        effectSource.volume = masterVolume * effectVolume;
+        bgmSource.volume = masterVolume * bgmVolume;
     }
 
-    public void SetEffectVolume(int effectAmount)
+    public void SetEffectVolume(float effectAmount)
     {
+        effectVolume = effectAmount / 100f;
         AudioSource effectSource = _audioSources[(int)Sound.Effect];
-        effectSource.volume = effectAmount;
+        effectSource.volume = masterVolume * effectVolume;
     }
 
-    public void SetBgmVolume(int bgmAmount)
+    public void SetBgmVolume(float bgmAmount)
     {
+        bgmVolume = bgmAmount / 100f;
         AudioSource bgmSource = _audioSources[(int)Sound.Bgm];
-        bgmSource.volume = bgmAmount;
+        bgmSource.volume = masterVolume * bgmVolume;
     }
 }   
