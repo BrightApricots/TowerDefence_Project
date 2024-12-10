@@ -16,7 +16,7 @@ public class UI_Options : MonoBehaviour
 
     private void Awake()
     {
-        MasterVolume.value = 50;
+        MasterVolume.value = 100;
         SoundVolume.value = 100;
         MusicVolume.value = 100;
         Check.onClick.AddListener(Confirm);
@@ -27,14 +27,20 @@ public class UI_Options : MonoBehaviour
         MasterVolumeRatio.text = $"{(int)MasterVolume.value}%";
         SoundVolumeRatio.text = $"{(int)SoundVolume.value}%";
         MusicVolumeRatio.text = $"{(int)MusicVolume.value}%";
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameObject.SetActive(false);
         }
+
+        SoundManager.Instance.SetMasterVolume(MasterVolume.value);
+        SoundManager.Instance.SetEffectVolume(SoundVolume.value);
+        SoundManager.Instance.SetBgmVolume(MusicVolume.value);
     }
 
     private void Confirm()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         gameObject.SetActive(false);
     }
 }
