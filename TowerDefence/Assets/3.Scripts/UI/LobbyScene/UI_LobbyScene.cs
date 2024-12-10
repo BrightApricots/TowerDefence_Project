@@ -48,6 +48,7 @@ public class UI_LobbyScene : MonoBehaviour
 
     private void PopupSetting()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         SettingPopup.SetActive(true);
     }
     private void BackToTitle()
