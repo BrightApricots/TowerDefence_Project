@@ -297,6 +297,8 @@ GameObject:
   - component: {fileID: 8387228153551679927}
   - component: {fileID: 2022830373428428149}
   - component: {fileID: 465203529226023573}
+  - component: {fileID: 2789802737697820586}
+  - component: {fileID: -4583756775148819679}
   m_Layer: 5
   m_Name: Tower_Flame
   m_TagString: Untagged
@@ -364,3 +366,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2789802737697820586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097985763082699476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b759845812fa942b7585420fcc4da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4583756775148819679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097985763082699476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bec30d835745ec4c9dd0d3dfbee1362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 4450456943516201754, guid: e3e81928c490aea42a19949384a4f2fb, type: 3}
+  Data: {fileID: 11400000, guid: 9f089e7705d936d428cee14d6dba898e, type: 2}

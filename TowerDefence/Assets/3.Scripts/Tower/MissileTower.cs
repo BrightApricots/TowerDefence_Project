@@ -42,8 +42,8 @@ public class MissileTower : Tower
         FireRate = 1.5f;
         DamageDealt = 0;
         TotalKilled = 0;
-        UpgradePrice = 20;
-        SellPrice = 10;
+        UpgradePrice = 65;
+        SellPrice = 33;
         TargetPriority = "Most Progress";
         Info = "Launches missiles that deal splash damage to groups of enemies.";
 

@@ -168,9 +168,22 @@ public class SoundManager : MonoBehaviour
         return audioSource.volume;
     }
 
-    private float masterVolume = 1f;
+    private float masterVolume= 1f;
     private float effectVolume = 1f;
     private float bgmVolume = 1f;
+
+    public float getMasterVolume()
+    {
+        return masterVolume;
+    }
+    public float getEffectVolume()
+    {
+        return effectVolume;
+    }
+    public float getBgmVolume()
+    {
+        return bgmVolume;
+    }
 
     public void SetMasterVolume(float masterAmount)
     {

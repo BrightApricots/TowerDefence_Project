@@ -23,8 +23,8 @@ public class IceTower : Tower
         FireRate = 3f;
         DamageDealt = 0;
         TotalKilled = 0;
-        UpgradePrice = 25;
-        SellPrice = 13;
+        UpgradePrice = 10;
+        SellPrice = 5;
         TargetPriority = "Most Progress";
         Info = "Fires sharp icicles. The lower an enemy's health, the more damage it inflicts, up to 300%!.";
     }

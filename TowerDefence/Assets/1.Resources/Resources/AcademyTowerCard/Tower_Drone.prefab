@@ -295,6 +295,8 @@ GameObject:
   - component: {fileID: 8387228153551679927}
   - component: {fileID: 2022830373428428149}
   - component: {fileID: 465203529226023573}
+  - component: {fileID: -2651253488727262246}
+  - component: {fileID: -1621845841397933625}
   m_Layer: 5
   m_Name: Tower_Drone
   m_TagString: Untagged
@@ -362,3 +364,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2651253488727262246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097985763082699476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b759845812fa942b7585420fcc4da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1621845841397933625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097985763082699476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bec30d835745ec4c9dd0d3dfbee1362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 4450456943516201754, guid: e3e81928c490aea42a19949384a4f2fb, type: 3}
+  Data: {fileID: 11400000, guid: 1f91cc1ac6b802249b0cd709fabc04c3, type: 2}

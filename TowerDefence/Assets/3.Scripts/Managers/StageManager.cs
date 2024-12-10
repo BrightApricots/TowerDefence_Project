@@ -178,6 +178,8 @@ public class StageManager : MonoBehaviour
         if (allWavesCleared)
         {
             GameManager.Instance.clearStage += 1;
+            GameManager.Instance.CurrentEmber += 10;
+            GameManager.Instance.CurrentExp += 10;
             LoadScene(nextStageScene);
         }
     }

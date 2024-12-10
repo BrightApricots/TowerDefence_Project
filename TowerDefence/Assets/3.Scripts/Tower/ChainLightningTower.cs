@@ -114,6 +114,7 @@ public class ChainLightningTower : Tower
     {
         LightningEffect lightning = ObjectManager.Instance.Spawn<LightningEffect>(currentEffect, transform.position);
         lightning.CreateLightning(start, end);
+        SoundManager.Instance.Play("LightningTowerEffect", SoundManager.Sound.Effect);
     }
 
     protected override void OnLevelUp()

@@ -16,9 +16,9 @@ public class UI_Options : MonoBehaviour
 
     private void Awake()
     {
-        MasterVolume.value = 100;
-        SoundVolume.value = 100;
-        MusicVolume.value = 100;
+        MasterVolume.value = SoundManager.Instance.getMasterVolume() * 100;
+        SoundVolume.value = SoundManager.Instance.getEffectVolume() * 100;
+        MusicVolume.value = SoundManager.Instance.getBgmVolume() * 100;
         Check.onClick.AddListener(Confirm);
     }
 

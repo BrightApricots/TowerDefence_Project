@@ -315,10 +315,7 @@ public class Tower : MonoBehaviour
 
         RectTransform rect = currentTooltip.GetComponent<RectTransform>();
         Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            mainCanvas.transform.GetComponent<RectTransform>(),
-            screenPoint, mainCanvas.worldCamera, out localPoint);
-
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(mainCanvas.transform.GetComponent<RectTransform>(),screenPoint, mainCanvas.worldCamera, out localPoint);
         rect.anchoredPosition = localPoint;
         GameManager.Instance.tooltipCount = true;
     }

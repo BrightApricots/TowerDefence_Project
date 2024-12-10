@@ -49,7 +49,7 @@ public class PoisonTower : Tower
                 projectile.IsTargeting = this.IsTargeting;
                 projectile.IsBomb = this.IsBomb;
                 projectile.Target = this.CurrentTarget;
-
+                SoundManager.Instance.Play("PoisonTowerEffect", SoundManager.Sound.Effect);
                 PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
                          currentMuzzleEffect, TowerMuzzle.transform.position, TowerHead.transform.rotation
                 );

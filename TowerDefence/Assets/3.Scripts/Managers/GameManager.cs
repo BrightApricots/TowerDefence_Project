@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
             {
                 UnEquipTowerList[i] = null;
             }
-            UnEquipTowerList.Clear();
+            //UnEquipTowerList.Clear();
         }
 
         if (PlacedTowerList != null)
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         PlayerTetrisList = new List<GameObject>();
         HandTetrisList = new List<GameObject>();
         //EquipTowerList = new List<string>();
-        UnEquipTowerList = new List<string>();
+        //UnEquipTowerList = new List<string>();
         PlacedTowerList = new List<Tower>();
 
         //각 매니저들 초기화
