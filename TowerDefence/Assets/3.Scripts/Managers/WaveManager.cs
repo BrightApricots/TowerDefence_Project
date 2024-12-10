@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Security.Cryptography;
 
 [System.Serializable]
 public class Wave
@@ -65,9 +64,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private WaveTextManager waveTextManager;          // 웨이브 정보 표시를 관리하는 매니저
 
-    private int currentWaveIndex = 0;                 // 현재 웨이브 인덱스
-    private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부
-    [SerializeField]private int remainingMonsters = 0;                // 남은 몬스터 수
+    private int currentWaveIndex = 0;                 // 현재 웨이브 위치 -> 1단계인지 2단계인지를 나타내는 개념
+    private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부, 웨이브 활성화 상태인지 알기 위한 개념
+    [SerializeField]
+    private int remainingMonsters = 0;                // 남은 몬스터 수
     private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
     private bool isGameOver = false;                  // 게임 오버 여부
     private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
@@ -135,14 +135,6 @@ public class WaveManager : MonoBehaviour
         if (isWaveActive)
         {
             HandleSpeedInput();
-        }
-    }
-
-    private void GetCurrentStageMonsterCount()
-    {
-        for (int j = 0; j < waves[currentWaveIndex].monsterSpawnData.Count; j++)
-        {
-            remainingMonsters += waves[currentWaveIndex].monsterSpawnData[j].spawnCount;
         }
     }
 
@@ -321,7 +313,12 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
-        GetCurrentStageMonsterCount();
+        if (monsterSpawner == null)
+        {
+            Debug.LogError("MonsterSpawner가 할당되지 않았습니다!");
+            return;
+        }
+
         SoundManager.Instance.Play("InWave", SoundManager.Sound.Bgm);
         isWaveActive = true;
         isReadyForNextWave = false;
@@ -346,7 +343,7 @@ public class WaveManager : MonoBehaviour
             totalMonstersToSpawn += spawnData.spawnCount;
         }
         spawnedMonsters = 0;
-        remainingMonsters = 0;
+        remainingMonsters = totalMonstersToSpawn; // 변경된 부분: 전체 몬스터 수로 초기화
 
         monsterSpawner.StartSpawning();
         UpdateWaveText();
@@ -354,18 +351,24 @@ public class WaveManager : MonoBehaviour
 
     private void OnMonsterSpawned(GameObject monster)
     {
-        //remainingMonsters++;
+        spawnedMonsters++;
+        // remainingMonsters++; // 이 줄을 주석 처리하거나 제거합니다.
+        Debug.Log($"Monster Spawned: {spawnedMonsters}, Remaining: {remainingMonsters}");
     }
+
 
     private void OnMonsterDestroyed(GameObject monster)
     {
         remainingMonsters--;
+        Debug.Log($"Monster Destroyed: Remaining: {remainingMonsters}");
 
+        // 모든 몬스터가 스폰되고 모두 파괴되었을 때 웨이브 종료
         if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete())
         {
             EndCurrentWave();
         }
     }
+
 
     private void OnSpawnComplete()
     {
@@ -386,14 +389,9 @@ public class WaveManager : MonoBehaviour
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
 
         // 웨이브 클리어 처리
-        if (GameManager.Instance.HandTetrisList.Count < 10)
+        for (int i = 0; i < WaveClearEffectsCount; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                UI_Draw.draw();
-                if(GameManager.Instance.HandTetrisList.Count==10)
-                { break; }
-            }
+            UI_Draw.draw(); // 매직 넘버 3을 상수로 정의하는 것이 좋습니다.
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;
