@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7117395134529837048}
   - component: {fileID: 2077065837743848452}
   - component: {fileID: 4273686615680188051}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8728168440686929861}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

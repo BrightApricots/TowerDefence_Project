@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2889333321966707451}
   - component: {fileID: 1736413935065960062}
   - component: {fileID: 4854577956329677467}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Posion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4835624190763837047}
   - component: {fileID: 687167121221974439}
   - component: {fileID: 4500191407315815834}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 6873950998714519214}
   - component: {fileID: 1399061664671677949}
   - component: {fileID: 1440028710214486484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PoisonHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}

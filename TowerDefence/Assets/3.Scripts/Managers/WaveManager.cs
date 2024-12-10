@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Security.Cryptography;
 
 [System.Serializable]
 public class Wave
@@ -75,7 +76,7 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;                 // 현재 웨이브 인덱스
     private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부
-    private int remainingMonsters = 0;                // 남은 몬스터 수
+    [SerializeField]private int remainingMonsters = 0;                // 남은 몬스터 수
     private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
     private bool isGameOver = false;                  // 게임 오버 여부
     private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
@@ -124,6 +125,14 @@ public class WaveManager : MonoBehaviour
         if (isWaveActive)
         {
             HandleSpeedInput();
+        }
+    }
+
+    private void GetCurrentStageMonsterCount()
+    {
+        for (int j = 0; j < waves[currentWaveIndex].monsterSpawnData.Count; j++)
+        {
+            remainingMonsters += waves[currentWaveIndex].monsterSpawnData[j].spawnCount;
         }
     }
 
@@ -285,6 +294,7 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
+        GetCurrentStageMonsterCount();
         SoundManager.Instance.Play("InWave", SoundManager.Sound.Bgm);
         isWaveActive = true;
         isReadyForNextWave = false;
@@ -307,7 +317,7 @@ public class WaveManager : MonoBehaviour
 
     private void OnMonsterSpawned(GameObject monster)
     {
-        remainingMonsters++;
+        //remainingMonsters++;
     }
 
     private void OnMonsterDestroyed(GameObject monster)
@@ -435,5 +445,3 @@ public class WaveManager : MonoBehaviour
         Time.timeScale = 0; // 게임 정지
     }
 }
-
-// 최적화 처리

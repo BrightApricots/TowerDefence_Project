@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6232635189348713071}
   - component: {fileID: 4725702340338440808}
   - component: {fileID: 7963059800701513188}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,9 +65,7 @@ MonoBehaviour:
   isFollow: 1
   mainCanvas: {fileID: 0}
   _range: 4
-  originalMaterial: {fileID: 2100000, guid: 4ab70832a21b948469a8ef7baeca5bd3, type: 2}
-  selectedMaterial: {fileID: 2100000, guid: a6c5db515b4e26a468041e9e22e41af4, type: 2}
-  towerRenderers: []
+  buffEffect: {fileID: 0}
   projectiles:
   - {fileID: 1833988619539146, guid: 1ee33d172b417d64fa1a9bb85f8d91fc, type: 3}
   - {fileID: 4036195920102418499, guid: 4b91063355f5e5643bb500e774eb0f1d, type: 3}
@@ -114,7 +112,7 @@ GameObject:
   - component: {fileID: 2281615677248325660}
   - component: {fileID: 5780852349904417019}
   - component: {fileID: 1938995533330594025}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +195,7 @@ GameObject:
   - component: {fileID: 7767493726691107023}
   - component: {fileID: 6848086469910725010}
   - component: {fileID: 2323326898384189585}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}

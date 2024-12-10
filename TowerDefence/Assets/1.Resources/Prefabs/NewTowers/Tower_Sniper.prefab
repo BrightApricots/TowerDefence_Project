@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5494628504292643551}
   - component: {fileID: 3610489384253763581}
   - component: {fileID: 8643985524760748162}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TowerMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4548399479982253875}
   - component: {fileID: 2066439229231788694}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tower_Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6299349499679632735}
   - component: {fileID: 4535220986746332876}
   - component: {fileID: 9064757139629276388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SniperHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
