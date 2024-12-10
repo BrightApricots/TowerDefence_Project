@@ -49,7 +49,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
     }
 
-    private void ValidateComponents()
+    private void ValidateComponents() 
     {
         if (inputManager == null) inputManager = GetComponent<InputManager>();
         if (grid == null) grid = GetComponent<Grid>();

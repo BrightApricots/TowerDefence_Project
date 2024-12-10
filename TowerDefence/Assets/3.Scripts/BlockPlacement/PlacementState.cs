@@ -49,7 +49,7 @@ public class PlacementState : IBuildingState
 
     private void RotateStructure()
     {
-        if (!inputManager.IsPointerOverUI())
+        if (!inputManager.IsPointerOverUI()) 
         {
             currentRotation = (currentRotation + 1) % 4;
             preview.UpdateRotation(currentRotation);
@@ -287,7 +287,24 @@ public class PlacementState : IBuildingState
             Vector3 position = grid.CellToWorld(gridPosition);
             position += new Vector3(0.5f, floor, 0.5f);
 
-            // 타워 설치 전에 해당 위치가 이미 점유되어 있는지 다시 한번 확인
+            // 나무 감지 및 제거 로직을 블록과 타워 모두에 적용
+            foreach (var cell in database.objectsData[selectedObjectIndex].GetRotatedCells(currentRotation))
+            {
+                Vector3 checkPosition = position + new Vector3(cell.x, 0, cell.y);
+                Collider[] colliders = Physics.OverlapSphere(checkPosition, 0.5f);
+                foreach (var collider in colliders)
+                {
+                    TreeDisapearEffect treeEffect = collider.GetComponent<TreeDisapearEffect>();
+                    if (treeEffect != null)
+                    {
+                        ParticleSystem particle = Object.Instantiate(treeEffect.effect, treeEffect.transform.position, Quaternion.identity);
+                        Object.Destroy(particle.gameObject, particle.main.duration);
+                        Object.Destroy(treeEffect.gameObject);
+                    }
+                }
+            }
+
+            // 타워 설치 전 추가 검사
             if (database.IsTower(currentID))
             {
                 Vector3Int checkPos = new Vector3Int(gridPosition.x, floor, gridPosition.z);

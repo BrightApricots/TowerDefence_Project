@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class FadeManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class FadeManager : MonoBehaviour
 
     public float fadeDuration = 1.0f; // 페이드 지속 시간
     public int canvasSortOrder = 100; // 페이드 캔버스의 Sort Order
+
+    private Coroutine CoFade;
 
     private void Awake()
     {
@@ -64,7 +67,11 @@ public class FadeManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(FadeOutBeforeSceneChange(sceneName));
+        if(CoFade == null)
+        {
+            Debug.Log("코루틴 실행됨");
+            CoFade = StartCoroutine(FadeOutBeforeSceneChange(sceneName));
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -114,6 +121,7 @@ public class FadeManager : MonoBehaviour
         fadeImage.color = color;
 
         // 씬 전환
+        CoFade = null;
         SceneManager.LoadScene(sceneName);
     }
 }

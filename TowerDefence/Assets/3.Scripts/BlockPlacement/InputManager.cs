@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     private Camera sceneCamera;
 
     private Vector3 lastPosition;
-
+     
     [SerializeField]
     private LayerMask placementLayermask;
 
