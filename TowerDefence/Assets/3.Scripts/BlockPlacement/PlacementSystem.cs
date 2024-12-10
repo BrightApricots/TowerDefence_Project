@@ -291,6 +291,6 @@ public class PlacementSystem : MonoBehaviour
         currentCardID = null;
         
         // 코루틴 정리
-        StopAllCoroutines();
+        //StopAllCoroutines();
     }
 }

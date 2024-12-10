@@ -386,9 +386,14 @@ public class WaveManager : MonoBehaviour
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
 
         // 웨이브 클리어 처리
-        for (int i = 0; i < WaveClearEffectsCount; i++)
+        if (GameManager.Instance.HandTetrisList.Count < 10)
         {
-            UI_Draw.draw(); // 매직 넘버 3을 상수로 정의하는 것이 좋습니다.
+            for (int i = 0; i < 3; i++)
+            {
+                UI_Draw.draw();
+                if(GameManager.Instance.HandTetrisList.Count==10)
+                { break; }
+            }
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;

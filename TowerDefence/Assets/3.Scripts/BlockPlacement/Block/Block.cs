@@ -28,6 +28,7 @@ public class Block : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if (PlacementSystem.Instance != null)
         {
             PlacementSystem.Instance.OnPlacementSuccess -= HandlePlacementSuccess;
+            GameManager.Instance.HandTetrisList.Remove(this.gameObject);
         }
     }
 

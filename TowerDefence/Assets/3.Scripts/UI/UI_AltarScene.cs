@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class UI_AltarScene : MonoBehaviour
 {
     public TextMeshProUGUI CurrentEmberText;
     public Button Recover;
@@ -41,7 +41,8 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 GameManager.Instance.CurrentHp += 5;
             }
-            SceneManager.LoadScene("LobbyScene");
+            GameManager.Instance.clearStage += 1;
+            FadeManager.Instance.LoadScene("LobbyScene");
         }
     }
 
@@ -51,7 +52,8 @@ public class NewBehaviourScript : MonoBehaviour
         {
             GameManager.Instance.CurrentHp -= 5;
             //TODO:: Increase start gold by 30
-            SceneManager.LoadScene("LobbyScene");
+            GameManager.Instance.clearStage += 1; 
+            FadeManager.Instance.LoadScene("LobbyScene");
         }
     }
 
@@ -61,7 +63,8 @@ public class NewBehaviourScript : MonoBehaviour
         {
             GameManager.Instance.CurrentEmber -= 10;
             GameManager.Instance.MaxHp += 5;
-            SceneManager.LoadScene("LobbyScene");
+            GameManager.Instance.clearStage += 1;
+            FadeManager.Instance.LoadScene("LobbyScene");
         }
     }
 
@@ -72,13 +75,15 @@ public class NewBehaviourScript : MonoBehaviour
             GameManager.Instance.CurrentEmber -= 60;
             GameManager.Instance.CurrentHp += 5;
             GameManager.Instance.MaxHp += 5;
-            SceneManager.LoadScene("LobbyScene");
+            GameManager.Instance.clearStage += 1;
+            FadeManager.Instance.LoadScene("LobbyScene");
         }
     }
 
     private void GoToLobby()
     {
-        SceneManager.LoadScene("LobbyScene");
+        GameManager.Instance.clearStage += 1;
+        FadeManager.Instance.LoadScene("LobbyScene");
     }
 
     private void PopupTowerLoadout()
