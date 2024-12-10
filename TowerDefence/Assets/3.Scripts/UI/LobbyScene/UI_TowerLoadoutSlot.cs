@@ -12,7 +12,6 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
     }
 
     public SlotType slotType;  // 현재 슬롯의 타입
-    private UI_Draggable currentTower;  // 현재 슬롯에 있는 타워
     private RectTransform rectTransform;  // 슬롯의 RectTransform
     public int SlotNum;  // 슬롯 번호
 
@@ -50,10 +49,6 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
         // 타워 교환 실행
         SwapTowers(draggedTower);
 
-        for (int i = 0; i<8; i++)
-        {
-            
-        }
     }
 
     // 타워 교환을 처리하는 메서드

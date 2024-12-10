@@ -17,12 +17,12 @@ public class UI_LobbyScene : MonoBehaviour
     public GameObject SettingPopup;
     public GameObject TowerLoadoutPopup;
     public GameObject BackpackPopup;
-    //public GameObject TalentsPopup;
     public TextMeshProUGUI EmberAmountText;
     public TextMeshProUGUI ExpAmountText;
     public TextMeshProUGUI HpAmountText;
     public GameObject EmptyCard;
     public Transform TowerCardLocation;
+    public List<GameObject> towerCards = new List<GameObject>();
 
     private void Awake()
     {
@@ -30,7 +30,6 @@ public class UI_LobbyScene : MonoBehaviour
         Title.onClick.AddListener(BackToTitle);
         TowerLoadout.onClick.AddListener(PopupTowerLoadout);
         Backpack.onClick.AddListener(PopupBackpack);
-        //Talents.onClick.AddListener(PopupTalents);
     }
 
     private void Start()
@@ -66,12 +65,6 @@ public class UI_LobbyScene : MonoBehaviour
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         BackpackPopup.SetActive(true);
     }
-    //private void PopupTalents()
-    //{
-    //    TalentsPopup.SetActive(true);
-    //}
-
-    public List<GameObject> towerCards = new List<GameObject>();
 
     public void TowerCard()
     {
