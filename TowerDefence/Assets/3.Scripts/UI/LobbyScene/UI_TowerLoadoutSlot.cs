@@ -45,6 +45,8 @@ public class UI_TowerLoadoutSlot : MonoBehaviour, IDropHandler
             return;
         }
 
+        SoundManager.Instance.Play("DropSound", SoundManager.Sound.Effect);
+
         // 타워 교환 실행
         SwapTowers(draggedTower);
 

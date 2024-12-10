@@ -143,10 +143,19 @@ public class WaveManager : MonoBehaviour
             speedButtonGroup.SetActive(false);
             foreach (var button in speedButtonGroup.GetComponentsInChildren<Button>())
             {
-                button.onClick.AddListener(() => ChangeGameSpeed(float.Parse(button.name)));
+                button.onClick.AddListener(() =>
+                {
+                    // 버튼 이름에서 배속 값 파싱
+                    float speed = float.Parse(button.name);
+                    ChangeGameSpeed(speed);
+
+                    // 버튼 클릭 시 소리 재생
+                    SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
+                });
             }
         }
     }
+
 
     private void InitializeWaveTextManager()
     {
@@ -174,18 +183,22 @@ public class WaveManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) // Z키: 배속 0.5x
         {
             ChangeGameSpeed(0.5f);
+            SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
         }
         else if (Input.GetKeyDown(KeyCode.X)) // X키: 배속 1x
         {
             ChangeGameSpeed(1f);
+            SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
         }
         else if (Input.GetKeyDown(KeyCode.C)) // C키: 배속 2x
         {
             ChangeGameSpeed(2f);
+            SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
         }
         else if (Input.GetKeyDown(KeyCode.V)) // V키: 배속 3x
         {
             ChangeGameSpeed(3f);
+            SoundManager.Instance.Play("SpeedChangeSound", SoundManager.Sound.Effect);
         }
     }
 

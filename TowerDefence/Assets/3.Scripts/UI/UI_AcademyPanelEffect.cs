@@ -27,7 +27,7 @@ public class UI_AcademyPanelEffect : MonoBehaviour
 
     protected virtual void OnEnter()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("AcademyFocusSound", SoundManager.Sound.Effect);
         focusFrame.gameObject.SetActive(true);
         baseFrame.gameObject.SetActive(false);
     }

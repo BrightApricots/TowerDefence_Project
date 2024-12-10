@@ -1,8 +1,5 @@
-using System.Xml.Serialization;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI; // Button 사용을 위해 추가
 
 public class UI_IngameScene : MonoBehaviour
 {
@@ -80,19 +77,6 @@ public class UI_IngameScene : MonoBehaviour
                 else
                 {
                     cardInstance = Instantiate(EmptyCard, TowerCardLocation2);
-                }
-            }
-
-            // 카드 인스턴스에 Button 컴포넌트가 있다고 가정하고 클릭 시 사운드 재생 리스너 등록
-            if (cardInstance != null)
-            {
-                Button cardButton = cardInstance.GetComponent<Button>();
-                if (cardButton != null)
-                {
-                    cardButton.onClick.AddListener(() =>
-                    {
-                        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
-                    });
                 }
             }
         }

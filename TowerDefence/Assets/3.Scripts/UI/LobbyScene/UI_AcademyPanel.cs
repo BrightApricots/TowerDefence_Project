@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
+using Random = UnityEngine.Random; 
 
 public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
 { 

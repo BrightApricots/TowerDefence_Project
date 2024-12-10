@@ -46,7 +46,7 @@ public class Tower_Placement : Block
     private void OnPlaceTowerClicked()
     {
         // 버튼 클릭 시 사운드 재생
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("TowerClickSound", SoundManager.Sound.Effect);
 
         // 타워 배치 시도
         PlaceTower();
@@ -71,9 +71,6 @@ public class Tower_Placement : Block
     protected override void HandlePlacementSuccess(int placedBlockID, string selectedCardID)
     {
         base.HandlePlacementSuccess(placedBlockID, selectedCardID);
-
-        // 타워 배치 성공 시 사운드 재생
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
     }
 }
 

@@ -25,6 +25,7 @@ public class UI_CheckNewGame : MonoBehaviour
 
     private void NewGame()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         GameManager.Instance.Clear();
         Difficulty.SetActive(true);
         gameObject.SetActive(false);
@@ -32,6 +33,7 @@ public class UI_CheckNewGame : MonoBehaviour
 
     private void Cancel()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         gameObject.SetActive(false);
     }
 }

@@ -9,7 +9,7 @@ public class UI_TitleScene : MonoBehaviour
     public Button Continue;
     public TextMeshProUGUI ContiText;
     public Button Exit;
-    public GameObject CheckNewGame;
+    public GameObject CheckNewGame; 
 
     private AudioSource fireEffectSource; // "Fire" 효과음을 재생하는 AudioSource
 

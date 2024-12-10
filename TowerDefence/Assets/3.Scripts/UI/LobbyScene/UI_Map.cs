@@ -85,7 +85,7 @@ public class UI_Map : MonoBehaviour
 
     private void EnterAcademy()
     {
-         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+         SoundManager.Instance.Play("AcademyClickSound", SoundManager.Sound.Effect);
         if(GameManager.Instance.clearStage == 0)
         { 
             SceneManager.LoadScene("AcademyScene");
@@ -94,7 +94,7 @@ public class UI_Map : MonoBehaviour
 
     private void LoadStage1()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 1)
         {
             SceneManager.LoadScene("InGameScene3");
@@ -102,7 +102,7 @@ public class UI_Map : MonoBehaviour
     }
     private void LoadStage2()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 2)
         {
             SceneManager.LoadScene("InGameScene3");
@@ -110,7 +110,7 @@ public class UI_Map : MonoBehaviour
     }
     private void LoadStage3()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 3)
         {
             SceneManager.LoadScene("InGameScene3");
@@ -118,7 +118,7 @@ public class UI_Map : MonoBehaviour
     }
     private void LoadStage4()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("StageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 4)
         {
             SceneManager.LoadScene("InGameScene3");
@@ -134,7 +134,7 @@ public class UI_Map : MonoBehaviour
     }
     private void LoadStage6()
     {
-        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        SoundManager.Instance.Play("BossStageClickSound", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)
         {
             SceneManager.LoadScene("InGameScene3");
