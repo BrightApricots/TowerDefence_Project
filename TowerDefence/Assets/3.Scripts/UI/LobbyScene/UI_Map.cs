@@ -11,7 +11,8 @@ public class UI_Map : MonoBehaviour
     public Button Stage2;
     public Button Stage3;
     public Button Stage4;
-    public Button Stage5; // Boss
+    public Button Altar;
+    public Button Stage6; // Boss
 
     public GameObject StageIndicator;
     private UI_StageIndicator indicatorComponent;
@@ -25,7 +26,8 @@ public class UI_Map : MonoBehaviour
         Stage2.onClick.AddListener(LoadStage2);
         Stage3.onClick.AddListener(LoadStage3);
         Stage4.onClick.AddListener(LoadStage4);
-        Stage5.onClick.AddListener(LoadStage5);
+        Altar.onClick.AddListener(EnterAltar);
+        Stage6.onClick.AddListener(LoadStage6);
 
         // 인디케이터 컴포넌트 가져오기
         indicatorComponent = StageIndicator.GetComponent<UI_StageIndicator>();
@@ -58,7 +60,10 @@ public class UI_Map : MonoBehaviour
                 currentTargetButton = Stage4;
                 break;
             case 5:
-                currentTargetButton = Stage5;
+                currentTargetButton = Altar;
+                break;
+            case 6:
+                currentTargetButton = Stage6;
                 break;
         }
 
@@ -119,7 +124,15 @@ public class UI_Map : MonoBehaviour
             SceneManager.LoadScene("InGameScene3");
         }
     }
-    private void LoadStage5()
+    private void EnterAltar()
+    {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+        if (GameManager.Instance.clearStage == 5)
+        {
+            SceneManager.LoadScene("AltarScene");
+        }
+    }
+    private void LoadStage6()
     {
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         if (GameManager.Instance.clearStage == 5)

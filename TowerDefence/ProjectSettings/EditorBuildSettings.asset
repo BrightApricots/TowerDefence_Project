@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2.Scenes/Stages/InGameScene2.unity
     guid: 5fdf9da34676c9947bad608420341013
+  - enabled: 1
+    path: Assets/2.Scenes/AltarScene.unity
+    guid: a74e01658e5f7d042a8b528235f3493c
   m_configObjects: {}
