@@ -140,6 +140,7 @@ public class UI_TowerTooltip : MonoBehaviour
     {
         if (selectedTower != null && towerData != null)
         {
+            SoundManager.Instance.Play("TowerSell", SoundManager.Sound.Effect);
             // 판매 금액 추가
             GameManager.Instance.CurrentMoney += int.Parse(SellPrice);
             

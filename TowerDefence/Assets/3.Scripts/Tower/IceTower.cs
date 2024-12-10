@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class IceTower : Tower
 {
@@ -20,7 +18,7 @@ public class IceTower : Tower
     {
         Name = "Ice Tower";
         Element = "Ice";
-        Damage = 1;
+        Damage = 5;
         Range = 5f;
         FireRate = 3f;
         DamageDealt = 0;

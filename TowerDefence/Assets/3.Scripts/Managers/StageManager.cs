@@ -115,14 +115,13 @@ public class StageManager : MonoBehaviour
     {
         // 모든 웨이브 클리어 처리
         allWavesCleared = true;
-        ShowPreparationPanel();
-        GameManager.Instance.clearStage += 1;
+        ShowPreparationPanel();        
     }
 
     private void ShowPreparationPanel()
     {
         // 준비 패널 표시
-        SoundManager.Instance.Play("Win_Bgm", SoundManager.Sound.Bgm);
+        SoundManager.Instance.Play("Win_Bgm", SoundManager.Sound.Bgm, 1, false);
         SetPanelActive(EndPanel, true);
         SetUIElementsActive(uiElementsToDisable, false);
 
@@ -178,6 +177,7 @@ public class StageManager : MonoBehaviour
         // 다음 스테이지 씬 로드
         if (allWavesCleared)
         {
+            GameManager.Instance.clearStage += 1;
             LoadScene(nextStageScene);
         }
     }

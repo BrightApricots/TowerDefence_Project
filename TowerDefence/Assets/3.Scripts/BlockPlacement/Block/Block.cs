@@ -39,13 +39,16 @@ public class Block : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         
         isSelected = true;
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         PlacementSystem.Instance.StartPlacement(blockType, uniqueID);
+        
     }
 
     protected virtual void HandlePlacementSuccess(int placedBlockID, string selectedCardID)
     {
         if (placedBlockID == blockType && isSelected && uniqueID == selectedCardID)
         {
+            SoundManager.Instance.Play("BlcokPlace", SoundManager.Sound.Effect);
             Destroy(gameObject);
         }
     }
