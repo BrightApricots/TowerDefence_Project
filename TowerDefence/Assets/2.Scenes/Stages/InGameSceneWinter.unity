@@ -333,10 +333,8 @@ GameObject:
   - component: {fileID: 10551415}
   - component: {fileID: 10551420}
   - component: {fileID: 10551419}
-  - component: {fileID: 10551418}
   - component: {fileID: 10551417}
-  - component: {fileID: 10551416}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,27 +356,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1392364811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &10551416
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10551414}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &10551417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,27 +370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &10551418
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10551414}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &10551419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8193,10 +8149,8 @@ GameObject:
   - component: {fileID: 244040102}
   - component: {fileID: 244040107}
   - component: {fileID: 244040106}
-  - component: {fileID: 244040105}
   - component: {fileID: 244040104}
-  - component: {fileID: 244040103}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8218,27 +8172,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 907199820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &244040103
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244040101}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &244040104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8253,27 +8186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &244040105
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244040101}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &244040106
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14213,10 +14125,8 @@ GameObject:
   - component: {fileID: 337888488}
   - component: {fileID: 337888493}
   - component: {fileID: 337888492}
-  - component: {fileID: 337888491}
   - component: {fileID: 337888490}
-  - component: {fileID: 337888489}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14238,27 +14148,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 548972792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &337888489
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337888487}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &337888490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14273,27 +14162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &337888491
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337888487}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &337888492
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19884,10 +19752,8 @@ GameObject:
   - component: {fileID: 375767779}
   - component: {fileID: 375767784}
   - component: {fileID: 375767783}
-  - component: {fileID: 375767782}
   - component: {fileID: 375767781}
-  - component: {fileID: 375767780}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19909,27 +19775,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 152335632}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &375767780
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375767778}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &375767781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19944,27 +19789,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &375767782
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375767778}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &375767783
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21702,10 +21526,8 @@ GameObject:
   - component: {fileID: 494507555}
   - component: {fileID: 494507560}
   - component: {fileID: 494507559}
-  - component: {fileID: 494507558}
   - component: {fileID: 494507557}
-  - component: {fileID: 494507556}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21727,27 +21549,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1322490796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &494507556
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494507554}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &494507557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21762,27 +21563,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &494507558
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494507554}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &494507559
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27213,10 +26993,8 @@ GameObject:
   - component: {fileID: 599404175}
   - component: {fileID: 599404180}
   - component: {fileID: 599404179}
-  - component: {fileID: 599404178}
   - component: {fileID: 599404177}
-  - component: {fileID: 599404176}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27238,27 +27016,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1431674348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &599404176
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599404174}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &599404177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27273,27 +27030,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &599404178
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599404174}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &599404179
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27467,10 +27203,8 @@ GameObject:
   - component: {fileID: 608606572}
   - component: {fileID: 608606577}
   - component: {fileID: 608606576}
-  - component: {fileID: 608606575}
   - component: {fileID: 608606574}
-  - component: {fileID: 608606573}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27492,27 +27226,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1043082059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &608606573
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608606571}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &608606574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27527,27 +27240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &608606575
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608606571}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &608606576
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39282,10 +38974,8 @@ GameObject:
   - component: {fileID: 788820262}
   - component: {fileID: 788820267}
   - component: {fileID: 788820266}
-  - component: {fileID: 788820265}
   - component: {fileID: 788820264}
-  - component: {fileID: 788820263}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39307,27 +38997,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1669836431}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &788820263
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788820261}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &788820264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39342,27 +39011,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &788820265
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788820261}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &788820266
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40191,10 +39839,8 @@ GameObject:
   - component: {fileID: 854176647}
   - component: {fileID: 854176652}
   - component: {fileID: 854176651}
-  - component: {fileID: 854176650}
   - component: {fileID: 854176649}
-  - component: {fileID: 854176648}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40216,27 +39862,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1543882867}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &854176648
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854176646}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &854176649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40251,27 +39876,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &854176650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854176646}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &854176651
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -40729,10 +40333,8 @@ GameObject:
   - component: {fileID: 879255085}
   - component: {fileID: 879255090}
   - component: {fileID: 879255089}
-  - component: {fileID: 879255088}
   - component: {fileID: 879255087}
-  - component: {fileID: 879255086}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40754,27 +40356,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 342949240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &879255086
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879255084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &879255087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40789,27 +40370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &879255088
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879255084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &879255089
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -51857,10 +51417,8 @@ GameObject:
   - component: {fileID: 974325750}
   - component: {fileID: 974325755}
   - component: {fileID: 974325754}
-  - component: {fileID: 974325753}
   - component: {fileID: 974325752}
-  - component: {fileID: 974325751}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51882,27 +51440,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1681796584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &974325751
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974325749}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &974325752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51917,27 +51454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &974325753
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974325749}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &974325754
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -52917,10 +52433,8 @@ GameObject:
   - component: {fileID: 1041277412}
   - component: {fileID: 1041277417}
   - component: {fileID: 1041277416}
-  - component: {fileID: 1041277415}
   - component: {fileID: 1041277414}
-  - component: {fileID: 1041277413}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52942,27 +52456,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1859092075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1041277413
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041277411}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1041277414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52977,27 +52470,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1041277415
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041277411}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1041277416
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -53384,10 +52856,8 @@ GameObject:
   - component: {fileID: 1046778884}
   - component: {fileID: 1046778889}
   - component: {fileID: 1046778888}
-  - component: {fileID: 1046778887}
   - component: {fileID: 1046778886}
-  - component: {fileID: 1046778885}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53409,27 +52879,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1542402488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1046778885
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1046778883}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1046778886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53444,27 +52893,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1046778887
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1046778883}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1046778888
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -53847,10 +53275,8 @@ GameObject:
   - component: {fileID: 1089082767}
   - component: {fileID: 1089082772}
   - component: {fileID: 1089082771}
-  - component: {fileID: 1089082770}
   - component: {fileID: 1089082769}
-  - component: {fileID: 1089082768}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53872,27 +53298,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1407610379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1089082768
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089082766}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1089082769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53907,27 +53312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1089082770
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089082766}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1089082771
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54117,7 +53501,7 @@ MonoBehaviour:
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 64
-  gridWorldSize: {x: 50, y: 50}
+  gridWorldSize: {x: 50, y: 70}
   nodeRadius: 0.5
   obstaclePositions: []
   database: {fileID: 11400000, guid: 9cb9899a278eb634699b46feeb33d428, type: 2}
@@ -60054,8 +59438,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8486633836335946881, guid: 5383f90efc0db2142ab9c2eabee98fd6, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 168392216508773252, guid: 5383f90efc0db2142ab9c2eabee98fd6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5383f90efc0db2142ab9c2eabee98fd6, type: 3}
@@ -60125,8 +59511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91538ef85652f41bb8eed367a584d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
-  gameOverScene: {fileID: 102900000, guid: 4f654ed664c00894d8accb37cd42dd1f, type: 3}
+  lobbySceneName: LobbyScene
+  titleSceneName: TitleScene
   EndPanel: {fileID: 681567162}
   GameOverPanel: {fileID: 1646685900}
   gameOverButton: {fileID: 1832563053}
@@ -60410,10 +59796,8 @@ GameObject:
   - component: {fileID: 1180522868}
   - component: {fileID: 1180522873}
   - component: {fileID: 1180522872}
-  - component: {fileID: 1180522871}
   - component: {fileID: 1180522870}
-  - component: {fileID: 1180522869}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60435,27 +59819,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 50540160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1180522869
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180522867}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1180522870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60470,27 +59833,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1180522871
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180522867}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1180522872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61558,10 +60900,8 @@ GameObject:
   - component: {fileID: 1273731752}
   - component: {fileID: 1273731757}
   - component: {fileID: 1273731756}
-  - component: {fileID: 1273731755}
   - component: {fileID: 1273731754}
-  - component: {fileID: 1273731753}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61583,27 +60923,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1283718994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1273731753
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273731751}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1273731754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61618,27 +60937,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1273731755
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273731751}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1273731756
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61705,10 +61003,8 @@ GameObject:
   - component: {fileID: 1276682073}
   - component: {fileID: 1276682078}
   - component: {fileID: 1276682077}
-  - component: {fileID: 1276682076}
   - component: {fileID: 1276682075}
-  - component: {fileID: 1276682074}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61730,27 +61026,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 330406891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1276682074
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276682072}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1276682075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61765,27 +61040,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1276682076
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1276682072}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1276682077
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64142,10 +63396,8 @@ GameObject:
   - component: {fileID: 1408071206}
   - component: {fileID: 1408071211}
   - component: {fileID: 1408071210}
-  - component: {fileID: 1408071209}
   - component: {fileID: 1408071208}
-  - component: {fileID: 1408071207}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64167,27 +63419,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1898809191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1408071207
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408071205}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1408071208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64202,27 +63433,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1408071209
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1408071205}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1408071210
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64553,10 +63763,8 @@ GameObject:
   - component: {fileID: 1445683657}
   - component: {fileID: 1445683662}
   - component: {fileID: 1445683661}
-  - component: {fileID: 1445683660}
   - component: {fileID: 1445683659}
-  - component: {fileID: 1445683658}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64578,27 +63786,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1260440285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1445683658
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445683656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1445683659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64613,27 +63800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1445683660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445683656}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1445683661
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65666,10 +64832,8 @@ GameObject:
   - component: {fileID: 1530476429}
   - component: {fileID: 1530476434}
   - component: {fileID: 1530476433}
-  - component: {fileID: 1530476432}
   - component: {fileID: 1530476431}
-  - component: {fileID: 1530476430}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65691,27 +64855,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1371034854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1530476430
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530476428}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1530476431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65726,27 +64869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1530476432
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530476428}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1530476433
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65813,10 +64935,8 @@ GameObject:
   - component: {fileID: 1531733681}
   - component: {fileID: 1531733686}
   - component: {fileID: 1531733685}
-  - component: {fileID: 1531733684}
   - component: {fileID: 1531733683}
-  - component: {fileID: 1531733682}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65838,27 +64958,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734702415}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1531733682
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531733680}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1531733683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65873,27 +64972,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1531733684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1531733680}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1531733685
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -83236,10 +82314,8 @@ GameObject:
   - component: {fileID: 1663404795}
   - component: {fileID: 1663404800}
   - component: {fileID: 1663404799}
-  - component: {fileID: 1663404798}
   - component: {fileID: 1663404797}
-  - component: {fileID: 1663404796}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83261,27 +82337,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1236481949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1663404796
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663404794}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1663404797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83296,27 +82351,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1663404798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663404794}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1663404799
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84520,10 +83554,8 @@ GameObject:
   - component: {fileID: 1726902840}
   - component: {fileID: 1726902845}
   - component: {fileID: 1726902844}
-  - component: {fileID: 1726902843}
   - component: {fileID: 1726902842}
-  - component: {fileID: 1726902841}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84545,27 +83577,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 173017966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1726902841
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726902839}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1726902842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84580,27 +83591,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1726902843
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726902839}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1726902844
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84699,10 +83689,8 @@ GameObject:
   - component: {fileID: 1745183227}
   - component: {fileID: 1745183232}
   - component: {fileID: 1745183231}
-  - component: {fileID: 1745183230}
   - component: {fileID: 1745183229}
-  - component: {fileID: 1745183228}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84724,27 +83712,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 624832525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1745183228
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745183226}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1745183229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84759,27 +83726,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1745183230
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745183226}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1745183231
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85576,10 +84522,8 @@ GameObject:
   - component: {fileID: 1824227226}
   - component: {fileID: 1824227231}
   - component: {fileID: 1824227230}
-  - component: {fileID: 1824227229}
   - component: {fileID: 1824227228}
-  - component: {fileID: 1824227227}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85601,27 +84545,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 504331301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1824227227
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824227225}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1824227228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85636,27 +84559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1824227229
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824227225}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1824227230
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86321,10 +85223,8 @@ GameObject:
   - component: {fileID: 1862996198}
   - component: {fileID: 1862996203}
   - component: {fileID: 1862996202}
-  - component: {fileID: 1862996201}
   - component: {fileID: 1862996200}
-  - component: {fileID: 1862996199}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86346,27 +85246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 786235443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1862996199
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1862996197}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1862996200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86381,27 +85260,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1862996201
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1862996197}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1862996202
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86821,10 +85679,8 @@ GameObject:
   - component: {fileID: 1887725027}
   - component: {fileID: 1887725032}
   - component: {fileID: 1887725031}
-  - component: {fileID: 1887725030}
   - component: {fileID: 1887725029}
-  - component: {fileID: 1887725028}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86846,27 +85702,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1697474999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1887725028
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887725026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1887725029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86881,27 +85716,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1887725030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887725026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1887725031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87214,10 +86028,8 @@ GameObject:
   - component: {fileID: 1908391632}
   - component: {fileID: 1908391637}
   - component: {fileID: 1908391636}
-  - component: {fileID: 1908391635}
   - component: {fileID: 1908391634}
-  - component: {fileID: 1908391633}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87239,27 +86051,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 142397399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1908391633
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908391631}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &1908391634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87274,27 +86065,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1908391635
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908391631}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1908391636
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87843,10 +86613,8 @@ GameObject:
   - component: {fileID: 1984358973}
   - component: {fileID: 1984358978}
   - component: {fileID: 1984358977}
-  - component: {fileID: 1984358976}
   - component: {fileID: 1984358975}
-  - component: {fileID: 1984358974}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87868,27 +86636,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2015907228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1984358974
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984358972}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.00000005960466, y: 2.7716475, z: -0.000050246726}
 --- !u!114 &1984358975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87903,27 +86650,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &1984358976
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984358972}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &1984358977
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -88026,10 +86752,8 @@ GameObject:
   - component: {fileID: 2008242762}
   - component: {fileID: 2008242767}
   - component: {fileID: 2008242766}
-  - component: {fileID: 2008242765}
   - component: {fileID: 2008242764}
-  - component: {fileID: 2008242763}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88051,27 +86775,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 398847116}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2008242763
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008242761}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!114 &2008242764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88086,27 +86789,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: {fileID: 1297434090908049322, guid: c964a47582513e3459d0b6002d472330, type: 3}
   checkRadius: 1
---- !u!65 &2008242765
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008242761}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7, y: 5.545726, z: 0.7}
-  m_Center: {x: -0.000000059604645, y: 2.7716475, z: -0.000050246716}
 --- !u!23 &2008242766
 MeshRenderer:
   m_ObjectHideFlags: 0

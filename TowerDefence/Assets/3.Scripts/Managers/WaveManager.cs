@@ -50,6 +50,15 @@ public class WaveManager : MonoBehaviour
     private Slider timeBar;                           // 웨이브 준비 시간 바
     [SerializeField]
     private GameObject speedButtonGroup;              // 배속 버튼 그룹 오브젝트
+    [SerializeField]
+    private GameObject waveStartText;                 // 웨이브 시작 텍스트 
+    [SerializeField]
+    private TextMeshProUGUI waveStartStateText;            // 웨이브 시작 상세 텍스트 
+    [SerializeField]
+    private GameObject waveEndText;                   // 웨이브 클리어 텍스트 
+    [SerializeField]
+    private TextMeshProUGUI waveEndStateText;              // 웨이브 클리어 상세 텍스트 
+
 
     [SerializeField]
     private List<SpeedSetting> speedSettings = new List<SpeedSetting>(); // 배속별 UI 상태
@@ -71,7 +80,7 @@ public class WaveManager : MonoBehaviour
     private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
     private bool isGameOver = false;                  // 게임 오버 여부
     private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
-    private int waveClearMoney = 50;                  // 웨이브 클리어 시 지급할 머니
+    private int waveClearMoney = 30;                  // 웨이브 클리어 시 지급할 머니
     private Coroutine prepareCooldownCoroutine;       // 준비 시간 코루틴 참조
 
     public event System.Action OnAllWavesCleared;     // 모든 웨이브 클리어 시 발생하는 이벤트
@@ -290,6 +299,7 @@ public class WaveManager : MonoBehaviour
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
 
         SoundManager.Instance.Play("BattleButton", SoundManager.Sound.Effect);
+        StartCoroutine(ShowWaveStateText(waveStartText));
 
         if (!isFirstBattleClicked)
         {
@@ -395,16 +405,19 @@ public class WaveManager : MonoBehaviour
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;
+        waveEndStateText.text = $"Bounus Reward : {waveClearMoney}";
         waveClearMoney += 10;
 
         isWaveActive = false;
         currentWaveIndex++;
+        waveStartStateText.text = $"-WAVE {currentWaveIndex + 1}-";
 
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
 
         if (currentWaveIndex < waves.Count)
         {
             SoundManager.Instance.Play("WaveClearEffect", SoundManager.Sound.Effect);
+            StartCoroutine(ShowWaveStateText(waveEndText));
             isReadyForNextWave = true;
             UpdateWaveText();
             UpdateWavePrepareText();
@@ -527,5 +540,13 @@ public class WaveManager : MonoBehaviour
     private void OnDisable()
     {
         OnAllWavesCleared -= OnAllWavesClearedHandler;
+    }
+    
+    private IEnumerator ShowWaveStateText(GameObject go)
+    {
+        go.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        go.SetActive(false);
+        yield return null;
     }
 }
