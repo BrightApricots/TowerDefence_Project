@@ -144,7 +144,7 @@ public class Monster : MonoBehaviour
         {
             PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
-        Destroy(gameObject);
+        Die();
     }
 
     public void TakeDamage(int damage)
@@ -197,6 +197,7 @@ public class Monster : MonoBehaviour
 
     private void Die()
     {
+        SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
         Debug.Log($"획득 골드 : {gold}");
         GameManager.Instance.CurrentMoney += gold;
         Destroy(gameObject);
@@ -210,15 +211,5 @@ public class Monster : MonoBehaviour
         }
 
         OnDestroyed?.Invoke();
-
-        // GameManager의 HP를 확인하여 사운드 처리
-        if (GameManager.Instance.CurrentHp <= 0)
-        {
-            SoundManager.Instance.Stop(SoundManager.Sound.Effect); // MonsterDeathSound 중지
-        }
-        else
-        {
-            SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect); // MonsterDeathSound 재생
-        }
     }
 }
