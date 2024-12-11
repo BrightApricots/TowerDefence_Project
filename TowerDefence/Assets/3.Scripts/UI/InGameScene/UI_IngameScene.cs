@@ -30,7 +30,7 @@ public class UI_IngameScene : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.CurrentMoney = 50;
+        GameManager.Instance.CurrentMoney = 50 + GameManager.Instance.bounusMoney;
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
         TowerCardSet();
     }

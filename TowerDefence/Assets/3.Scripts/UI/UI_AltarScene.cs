@@ -50,6 +50,7 @@ public class UI_AltarScene : MonoBehaviour
     {
         if (GameManager.Instance.CurrentHp > 5)
         {
+            GameManager.Instance.bounusMoney += 30;
             GameManager.Instance.CurrentHp -= 5;
             //TODO:: Increase start gold by 30
             GameManager.Instance.clearStage += 1; 

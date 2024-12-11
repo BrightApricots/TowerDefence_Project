@@ -167,6 +167,7 @@ public class StageManager : MonoBehaviour
         // 준비 패널 표시
         SoundManager.Instance.Play("Win_Bgm", SoundManager.Sound.Bgm, 1, false);
         SetPanelActive(EndPanel, true);
+        EndPanel.GetComponent<UI_EndPanel>().init();
         SetUIElementsActive(uiElementsToDisable, false);
 
         if (nextStageButton != null)

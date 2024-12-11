@@ -502,7 +502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Poison Tower
+  m_text: 'Sniper Tower
 
 '
   m_isRightToLeft: 0

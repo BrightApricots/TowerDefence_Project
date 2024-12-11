@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
     public int MaxHp = 15;
     public int Difficulty;
     public List<int> TotalTetrisList = new List<int> { 0,1,2,3,4,5}; //0~100
-    public List<int> TotalTowerList;  //101~200
+    public List<string> TotalTowerList;  //101~200
     public List<GameObject> PlayerTetrisList;
     public List<GameObject> HandTetrisList;
     public List<string> EquipTowerList;
     public List<string> UnEquipTowerList;
     public List<Tower> PlacedTowerList;
 
+    public int bounusMoney = 0;
     public int clearStage = 0;
 
 

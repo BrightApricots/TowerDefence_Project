@@ -48,6 +48,7 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
     public List<GameObject> ImageTowerList;
     public List<GameObject> TowerList;
     public List<string> TowerNameList;
+    public List<string> RandomTowerList;
 
     private void Awake()
     {
@@ -91,6 +92,13 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
             tower[random1] = tower[random2];
             tower[random2] = temp;
         }
+
+        
+        for (int i = 0; i < (int)TowerEnum.Count; i++)
+        {
+            RandomTowerList.Add(Enum.GetName(typeof(TowerEnum), tower[i]));            
+        }
+
         for (int i = 0; i < 3; i++)
         {
             print(Enum.GetName(typeof(TowerEnum), tower[i]));
@@ -107,9 +115,9 @@ public class UI_AcademyPanel : MonoBehaviour, IPointerClickHandler
         {
             GameManager.Instance.EquipTowerList[i]=TowerNameList[i];
         }
+        GameManager.Instance.TotalTowerList = RandomTowerList;
         GameManager.Instance.PlayerTetrisList = TetrisList;
         FadeManager.Instance.LoadScene("LobbyScene");
         GameManager.Instance.clearStage = 1 ;
-        //SceneManager.LoadScene("LobbyScene");
     }
 }
