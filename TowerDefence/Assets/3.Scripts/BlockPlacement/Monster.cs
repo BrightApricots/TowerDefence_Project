@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -12,8 +13,11 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private int gold = 1;
     [SerializeField]
-    private float rotationSpeed = 5f; // 회전 속도
+    private float rotationSpeed = 5f;
+    [SerializeField]
+    private int maxHp = 100;  
     public bool IsDead { get; private set; }
+    public Transform spawnPos;
 
     private Vector3[] path;
     private int currentWaypointIndex;
@@ -21,8 +25,15 @@ public class Monster : MonoBehaviour
     private Vector3 currentTargetPosition;
     private Vector3 moveDirection;
     private Transform spawnPoint;
+    public bool IsSpawnDirect = false;
 
-    public event System.Action OnDestroyed;
+    public event Action OnDead;
+
+    private void Awake()
+    {
+        //프리팹 스탯을 적용하기 위한 체력스탯
+        maxHp = hp;  
+    }
 
     public void Initialize(Transform spawn)
     {
@@ -84,7 +95,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void UpdateCurrentTarget() // 현재 목표 위치
+    private void UpdateCurrentTarget()
     {
         if (path != null && currentWaypointIndex < path.Length)
         {
@@ -100,9 +111,15 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
+        if(IsSpawnDirect == true)
+        {
+            Initialize(spawnPoint);
+            IsSpawnDirect = false;
+        }
+
         if (!isMoving) return;
 
-        Vector3 targetDirection = (currentTargetPosition - transform.position).normalized; // 현재 목표 위치 - 몬스터의 현재 위치
+        Vector3 targetDirection = (currentTargetPosition - transform.position).normalized;
         moveDirection = Vector3.Lerp(moveDirection, targetDirection, Time.deltaTime * 10);
 
         // 이동
@@ -138,8 +155,6 @@ public class Monster : MonoBehaviour
     private void OnReachedTarget()
     {
         GameManager.Instance.CurrentHp -= damage;
-        Debug.Log($"{gameObject.name} / 목표 지점에 도달 / {damage}만큼 체력을 감소");
-
         if (PathManager.Instance != null)
         {
             PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
@@ -149,58 +164,28 @@ public class Monster : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        try 
+        GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
+        GameObject damageCanvas = GameObject.Find("DamageCanvas");
+        DamageFontEffect damageEffect = ObjectManager.Instance.Spawn<DamageFontEffect>(damageFontPrefab, Vector3.zero,Quaternion.identity);
+        
+        damageEffect.transform.SetParent(damageCanvas.transform, false);
+        damageEffect.SetDamageText(damage.ToString(), transform.position);
+        
+        hp -= damage;
+        if (hp <= 0 && !IsDead)
         {
-            GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
-            if (damageFontPrefab == null)
-            {
-                Debug.LogError("DamageFont 프리프를 찾을 수 없습니다!");
-                return;
-            }
-
-            GameObject damageCanvas = GameObject.Find("DamageCanvas");
-            if (damageCanvas == null)
-            {
-                Debug.LogError("DamageCanvas를 찾을 수 없습니다!");
-                return;
-            }
-
-            DamageFontEffect damageEffect = ObjectManager.Instance.Spawn<DamageFontEffect>(
-                damageFontPrefab, 
-                Vector3.zero,
-                Quaternion.identity
-            );
-
-            if (damageEffect == null)
-            {
-                Debug.LogError("DamageEffect를 생성할 수 없습니다!");
-                return;
-            }
-
-            damageEffect.transform.SetParent(damageCanvas.transform, false);
-            damageEffect.SetDamageText(damage.ToString(), transform.position);
-
-            hp -= damage;
-            Debug.Log($"{gameObject.name} 남은 HP : {hp}");
-
-            if (hp <= 0)
-            {
-                IsDead = true;
-                Die();
-            }
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"데미지 효과 생성 중 에러 발생: {e.Message}");
+            Die();
         }
     }
 
     private void Die()
     {
+        if (IsDead) return;
         SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
-        Debug.Log($"획득 골드 : {gold}");
         GameManager.Instance.CurrentMoney += gold;
-        Destroy(gameObject);
+        
+        IsDead = true;
+        OnDead?.Invoke();
     }
 
     void OnDestroy()
@@ -209,7 +194,23 @@ public class Monster : MonoBehaviour
         {
             PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
+    }
 
-        OnDestroyed?.Invoke();
+    private void OnDisable()
+    {
+        if (!IsDead) return;
+        //풀링시 초기화 해야할 값들
+        IsDead = false;
+        isMoving = false;
+        currentWaypointIndex = 0;
+        spawnPoint = null;
+        IsSpawnDirect = false;
+        hp = maxHp;  
+
+        //이벤트 해제 안하면 remaining 중첩해서 빠짐
+        if (PathManager.Instance != null)
+        {
+            PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
+        }
     }
 }

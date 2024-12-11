@@ -102,7 +102,6 @@ public class ObjectManager
             return damageFont as T;
         }
 
-        Debug.LogError($"Unhandled component type in Spawn: {type.Name}");
         return null;
     }
 
@@ -110,16 +109,13 @@ public class ObjectManager
     {
         if (obj == null)
         {
-            Debug.Log("Trying to despawn null object");
             return;
         }
 
         System.Type type = typeof(T);
-        Debug.Log($"Despawning object of type: {type.Name}");
 
         if (type == typeof(Projectile))
         {
-            Debug.Log($"Despawning Projectile: {obj.name}");
             Projectiles.Remove(obj as Projectile);
             PoolManager.Instance.Push(obj as Projectile);
         }
@@ -160,7 +156,6 @@ public class ObjectManager
 
     public void Clear()
     {
-        // 모든 몬스터 정리
         foreach (var monster in Monsters.ToList())
         {
             if (monster != null)
@@ -168,7 +163,6 @@ public class ObjectManager
         }
         Monsters.Clear();
 
-        // 모든 발사체 정리
         foreach (var projectile in Projectiles.ToList())
         {
             if (projectile != null)
