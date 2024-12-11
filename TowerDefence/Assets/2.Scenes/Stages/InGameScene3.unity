@@ -602,9 +602,9 @@ RectTransform:
   - {fileID: 768576170}
   m_Father: {fileID: 1500631963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.32503, y: -37.399994}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15223501
@@ -2302,9 +2302,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 624789948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126695833
@@ -3673,9 +3673,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 624789948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &225984054
@@ -9924,9 +9924,9 @@ RectTransform:
   - {fileID: 1474661230}
   m_Father: {fileID: 1500631963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 183.87505, y: -37.399994}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &314428649
@@ -36223,9 +36223,9 @@ RectTransform:
   - {fileID: 2137451888}
   m_Father: {fileID: 1500631963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 76.77501, y: -37.399994}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &913712002
@@ -37766,40 +37766,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 3658147867063539864, guid: b17e009fb23bc5a44bfbe1820c42fac8, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 5688514589227935463, guid: 729918e0b02ff0a418ba2b475e99afe2, type: 3}
-      spawnCount: 5
-    spawnInterval: 1
-    spawnPoints:
-    - {fileID: 362881107}
-  - monsterSpawnData:
-    - monsterPrefab: {fileID: 1584092720678730763, guid: 4287d15d60a4fa1439a6724cfa233402, type: 3}
-      spawnCount: 5
-    spawnInterval: 1
-    spawnPoints:
-    - {fileID: 362881107}
-  - monsterSpawnData:
-    - monsterPrefab: {fileID: 3658147867063539864, guid: b17e009fb23bc5a44bfbe1820c42fac8, type: 3}
-      spawnCount: 10
-    - monsterPrefab: {fileID: 1703209682340281143, guid: 3720b55516b84244d8f06b78d9d5dd98, type: 3}
-      spawnCount: 10
-    - monsterPrefab: {fileID: 9074739552759902731, guid: ec1444c3b8c954d46ad607198e1113f4, type: 3}
-      spawnCount: 10
-    spawnInterval: 1
-    spawnPoints:
-    - {fileID: 362881107}
-    - {fileID: 1660414543}
-  - monsterSpawnData:
-    - monsterPrefab: {fileID: 5688514589227935463, guid: 729918e0b02ff0a418ba2b475e99afe2, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 1703209682340281143, guid: 3720b55516b84244d8f06b78d9d5dd98, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 2996241165480011711, guid: f9a8729015e787741b27ba50111646e4, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 3658147867063539864, guid: b17e009fb23bc5a44bfbe1820c42fac8, type: 3}
-      spawnCount: 10
-    - monsterPrefab: {fileID: 2377433268561859353, guid: 950581b7150c9a44eb4e0610afd430ac, type: 3}
+    - monsterPrefab: {fileID: 2704021896978371004, guid: 041945405bbc89a4790427d1453048f7, type: 3}
+      spawnCount: 6
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
       spawnCount: 3
     spawnInterval: 1
     spawnPoints:
@@ -37807,18 +37776,46 @@ MonoBehaviour:
     - {fileID: 1660414543}
     - {fileID: 1541005857}
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 5688514589227935463, guid: 729918e0b02ff0a418ba2b475e99afe2, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 1703209682340281143, guid: 3720b55516b84244d8f06b78d9d5dd98, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 2996241165480011711, guid: f9a8729015e787741b27ba50111646e4, type: 3}
-      spawnCount: 5
-    - monsterPrefab: {fileID: 3658147867063539864, guid: b17e009fb23bc5a44bfbe1820c42fac8, type: 3}
-      spawnCount: 10
-    - monsterPrefab: {fileID: 2377433268561859353, guid: 950581b7150c9a44eb4e0610afd430ac, type: 3}
-      spawnCount: 10
-    - monsterPrefab: {fileID: 2616939357083828643, guid: 6a6eb30185b183a4d867ce93feb1b7ea, type: 3}
-      spawnCount: 5
+    - monsterPrefab: {fileID: 2704021896978371004, guid: 041945405bbc89a4790427d1453048f7, type: 3}
+      spawnCount: 20
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 3
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 40
+    - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+      spawnCount: 1
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 20
+    - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
+      spawnCount: 4
+    - monsterPrefab: {fileID: 7441999123610416450, guid: 2850ca9d56c1cd84eb475b6ca247f570, type: 3}
+      spawnCount: 2
+    - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+      spawnCount: 1
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 60
+    - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
+      spawnCount: 24
+    - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+      spawnCount: 2
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
@@ -37858,8 +37855,8 @@ MonoBehaviour:
   - {fileID: 1660414543}
   - {fileID: 1541005857}
   targetPoint: {fileID: 943508852}
-  gameClearUI: {fileID: 0}
-  gameOverUI: {fileID: 0}
+  gameClearUI: {fileID: 681567162}
+  gameOverUI: {fileID: 1646685900}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -43482,9 +43479,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 229420536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1033526876
@@ -44242,9 +44239,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1804202896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 6.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1072211174
@@ -46725,8 +46722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91538ef85652f41bb8eed367a584d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
-  gameOverScene: {fileID: 102900000, guid: 4f654ed664c00894d8accb37cd42dd1f, type: 3}
+  lobbySceneName: LobbyScene
+  titleSceneName: TitleScene
   EndPanel: {fileID: 681567162}
   GameOverPanel: {fileID: 1646685900}
   gameOverButton: {fileID: 1832563053}
@@ -47056,9 +47053,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1804202896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178128127
@@ -60573,9 +60570,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1038279335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374269701
@@ -61968,9 +61965,9 @@ RectTransform:
   - {fileID: 64683508}
   m_Father: {fileID: 1500631963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 237.42506, y: -37.399994}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447137503
@@ -67600,7 +67597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1500631963
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72573,9 +72570,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1804202896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 14.5, y: -13}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 13, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681600562
