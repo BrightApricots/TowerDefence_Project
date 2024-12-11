@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         CurrentHp = 15;
         CurrentMoney = 50;
         MaxHp = 15;
+        IsSaved = false;
 
         if (PlayerTetrisList != null)
         {
