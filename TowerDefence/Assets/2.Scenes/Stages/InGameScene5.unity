@@ -17907,7 +17907,6 @@ GameObject:
   - component: {fileID: 342731680}
   - component: {fileID: 342731681}
   - component: {fileID: 342731682}
-  - component: {fileID: 342731683}
   m_Layer: 0
   m_Name: MainCam
   m_TagString: Untagged
@@ -17987,27 +17986,6 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
---- !u!95 &342731683
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342731679}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 29ee4c0c0e96ddc4f8c8a6c36fdd6ccf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &344858005
 GameObject:
   m_ObjectHideFlags: 0
@@ -54464,18 +54442,18 @@ MonoBehaviour:
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
-  m_AnimatedTarget: {fileID: 342731683}
+  m_AnimatedTarget: {fileID: 6647131507215148121}
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_ChildCameras:
   - {fileID: 342731681}
   - {fileID: 1561369475}
   m_Instructions:
-  - m_FullHash: 1432961145
+  - m_FullHash: -827840423
     m_VirtualCamera: {fileID: 342731681}
-    m_ActivateAfter: 0
+    m_ActivateAfter: 1
     m_MinDuration: 0
-  - m_FullHash: -1371832959
+  - m_FullHash: 788460410
     m_VirtualCamera: {fileID: 1561369475}
     m_ActivateAfter: 0
     m_MinDuration: 0
@@ -54490,9 +54468,41 @@ MonoBehaviour:
       m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_ParentHash:
-  - m_Hash: 1432961145
+  - m_Hash: 1130333774
     m_ParentHash: 756556552
-  - m_Hash: -1371832959
+  - m_Hash: -2036113620
+    m_ParentHash: 756556552
+  - m_Hash: -754380916
+    m_ParentHash: 756556552
+  - m_Hash: -1546996312
+    m_ParentHash: 756556552
+  - m_Hash: 68006787
+    m_ParentHash: 756556552
+  - m_Hash: 984990098
+    m_ParentHash: 756556552
+  - m_Hash: -850129110
+    m_ParentHash: 756556552
+  - m_Hash: -1005802792
+    m_ParentHash: 756556552
+  - m_Hash: -184486876
+    m_ParentHash: 756556552
+  - m_Hash: 1812571550
+    m_ParentHash: 756556552
+  - m_Hash: 453940488
+    m_ParentHash: 756556552
+  - m_Hash: 788460410
+    m_ParentHash: 756556552
+  - m_Hash: -1476868190
+    m_ParentHash: 756556552
+  - m_Hash: -827840423
+    m_ParentHash: 756556552
+  - m_Hash: -729815479
+    m_ParentHash: 756556552
+  - m_Hash: -1689792029
+    m_ParentHash: 756556552
+  - m_Hash: 117544668
+    m_ParentHash: 756556552
+  - m_Hash: 81563449
     m_ParentHash: 756556552
 --- !u!1 &934213788
 GameObject:
@@ -95826,10 +95836,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6647131507215148120}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.19, y: 0, z: 25.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 6.5, y: 0, z: 25.5}
+  m_LocalScale: {x: 4.93, y: 4.93, z: 4.93}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4284089284031989822}
   - {fileID: 6647131506387686771}
@@ -95837,7 +95847,7 @@ Transform:
   - {fileID: 6647131506666102959}
   - {fileID: 6647131506167552795}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &6647131507215148128
 MonoBehaviour:
   m_ObjectHideFlags: 0

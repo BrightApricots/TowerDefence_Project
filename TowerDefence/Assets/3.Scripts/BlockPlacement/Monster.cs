@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
 
     private Vector3[] path;
     private int currentWaypointIndex;
-    private bool isMoving = false;
+    protected bool isMoving = false;
     private Vector3 currentTargetPosition;
     private Vector3 moveDirection;
     private Transform spawnPoint;
