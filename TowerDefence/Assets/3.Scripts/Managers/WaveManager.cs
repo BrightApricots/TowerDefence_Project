@@ -101,7 +101,7 @@ public class WaveManager : MonoBehaviour
     private int totalMonstersToSpawn = 0; // 현재 웨이브에서 총 스폰할 몬스터 수
     private int spawnedMonsters = 0;      // 현재까지 스폰된 몬스터 수
 
-    private const int WaveClearEffectsCount = 3; // 매직 넘버 상수화
+    private const int WaveClearDrawCount = 3; // 매직 넘버 상수화
 
     private void Start()
     {
@@ -193,6 +193,8 @@ public class WaveManager : MonoBehaviour
         if (waveTextManager != null)
         {
             waveTextManager.Initialize(waves);
+            waveTextManager.ShowWaveInfo();
+            waveTextManager.ShowWaveInfo();
             waveTextManager.ShowWaveInfo();
         }
         else
@@ -399,9 +401,13 @@ public class WaveManager : MonoBehaviour
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
 
         // 웨이브 클리어 처리
-        for (int i = 0; i < WaveClearEffectsCount; i++)
+        if (GameManager.Instance.HandTetrisList.Count < 10)
         {
-            UI_Draw.draw(); // 매직 넘버 3을 상수로 정의하는 것이 좋습니다.
+            for (int i = 0; i < WaveClearDrawCount; i++)
+            {
+                UI_Draw.draw(); // 매직 넘버 3을 상수로 정의하는 것이 좋습니다.   
+                if (GameManager.Instance.HandTetrisList.Count >= 10) break;
+            }
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;
