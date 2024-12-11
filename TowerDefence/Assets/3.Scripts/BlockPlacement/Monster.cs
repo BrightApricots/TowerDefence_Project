@@ -201,6 +201,7 @@ public class Monster : MonoBehaviour
         GameManager.Instance.CurrentMoney += gold;
         Destroy(gameObject);
     }
+
     void OnDestroy()
     {
         if (PathManager.Instance != null)
@@ -210,8 +211,14 @@ public class Monster : MonoBehaviour
 
         OnDestroyed?.Invoke();
 
-        // 몬스터가 제거될 때 항상 소리 발생
-        SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
+        // GameManager의 HP를 확인하여 사운드 처리
+        if (GameManager.Instance.CurrentHp <= 0)
+        {
+            SoundManager.Instance.Stop(SoundManager.Sound.Effect); // MonsterDeathSound 중지
+        }
+        else
+        {
+            SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect); // MonsterDeathSound 재생
+        }
     }
-
 }
