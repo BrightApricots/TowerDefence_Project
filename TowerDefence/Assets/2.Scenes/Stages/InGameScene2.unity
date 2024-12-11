@@ -66092,10 +66092,10 @@ RectTransform:
   - {fileID: 681567163}
   - {fileID: 1646685901}
   - {fileID: 802305574}
-  - {fileID: 896651300}
   - {fileID: 392782260}
   - {fileID: 830959052}
   - {fileID: 262127878}
+  - {fileID: 896651300}
   - {fileID: 494605840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

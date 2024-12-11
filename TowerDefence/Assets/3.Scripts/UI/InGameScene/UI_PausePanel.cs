@@ -29,17 +29,23 @@ public class UI_PausePanel : MonoBehaviour
 
     private void EnterContinue()
     {
+        // 버튼 소리
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         Time.timeScale = 1f;
         gameObject.SetActive(false);
     }
 
     private void EnterOptions()
     {
+        // 버튼 소리
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         OptionsPanel.SetActive(true);
     }
 
     private void BackToTitle()
     {
+        // 버튼 소리
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         BackTitlePopup.SetActive(true);
     }
 }
