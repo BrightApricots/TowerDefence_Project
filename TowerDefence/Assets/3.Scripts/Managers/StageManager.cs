@@ -195,7 +195,7 @@ public class StageManager : MonoBehaviour
         {
             SetUIElementsActive(uiElementsToDisable, false);
         }
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         Debug.Log("GameOverPanel 활성화 완료.");
     }
 
