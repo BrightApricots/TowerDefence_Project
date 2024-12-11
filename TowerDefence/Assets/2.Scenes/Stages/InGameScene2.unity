@@ -67128,7 +67128,7 @@ MonoBehaviour:
   - {fileID: 1124488417}
   - {fileID: 2115218082}
   - {fileID: 2033399253}
-  - {fileID: 770527175}
+  - {fileID: 802305573}
 --- !u!4 &1170214131
 Transform:
   m_ObjectHideFlags: 0
@@ -105233,6 +105233,9 @@ MonoBehaviour:
   DrawButton: {fileID: 1108174728}
   DrawPriceText: {fileID: 1285029814}
   HorizontalLayout: {fileID: 519268450}
+  DialogBox: {fileID: 0}
+  DrawPriceInfo: {fileID: 0}
+  FullHandText: {fileID: 0}
 --- !u!1 &2034275543
 GameObject:
   m_ObjectHideFlags: 0
