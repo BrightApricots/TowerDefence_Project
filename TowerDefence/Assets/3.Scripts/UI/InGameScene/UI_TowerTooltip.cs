@@ -121,6 +121,8 @@ public class UI_TowerTooltip : MonoBehaviour
 
     private void OnUpgradeClick()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+
         if (selectedTower != null)
         {
             if (GameManager.Instance.CurrentMoney >= int.Parse(UpgradePrice))
@@ -138,6 +140,8 @@ public class UI_TowerTooltip : MonoBehaviour
 
     private void OnSellClick()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
+
         if (selectedTower != null && towerData != null)
         {
             SoundManager.Instance.Play("TowerSell", SoundManager.Sound.Effect);
