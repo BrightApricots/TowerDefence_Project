@@ -15,7 +15,6 @@ public class UI_DifficultySelect : MonoBehaviour
     {
         Casual.onClick.AddListener(EnterCasual);
         Normal.onClick.AddListener(EnterNormal);
-        Heroic.onClick.AddListener(EnterHeroic);
         BackToTitle.onClick.AddListener(EnterBackToTitle);
     }
 
