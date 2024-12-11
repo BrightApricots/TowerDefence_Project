@@ -7,16 +7,24 @@ using TMPro;
 [System.Serializable]
 public class Wave
 {
-    public List<MonsterSpawnData> monsterSpawnData;   // 각 웨이브별 몬스터 스폰 데이터 리스트
-    public float spawnInterval = 1f;                  // 몬스터 스폰 간격
-    public List<Transform> spawnPoints = new List<Transform>(); // 몬스터 스폰 위치 리스트
+    [Tooltip("각 웨이브별 몬스터 스폰 데이터 리스트")]
+    public List<MonsterSpawnData> monsterSpawnData;
+
+    [Tooltip("몬스터 스폰 간격")]
+    public float spawnInterval = 1f;
+
+    [Tooltip("몬스터 스폰 위치 리스트")]
+    public List<Transform> spawnPoints = new List<Transform>();
 }
 
 [System.Serializable]
 public class SpeedSetting
 {
-    public float speedMultiplier; // 배속 값 (0.5x, 1x, 2x, 3x 등)
-    public List<Image> speedImages; // 해당 배속 상태일 때 활성/비활성 색상을 적용할 이미지들
+    [Tooltip("배속 값 (예: 0.5x, 1x, 2x, 3x")]
+    public float speedMultiplier;
+
+    [Tooltip("해당 배속 상태일 색상을 적용할 아이콘들")]
+    public List<Image> speedImages;
 }
 
 namespace MyGame
@@ -24,75 +32,145 @@ namespace MyGame
     [System.Serializable]
     public class MonsterSpawnData
     {
-        public GameObject monsterPrefab; // 몬스터 프리팹
-        public string monsterName;       // 몬스터 이름
-        public int spawnCount;           // 해당 웨이브에서 스폰할 몬스터 수
+        [Tooltip("스폰할 몬스터의 프리팹")]
+        public GameObject monsterPrefab;
+
+        [Tooltip("몬스터의 이름")]
+        public string monsterName;
+
+        [Tooltip("해당 웨이브에서 스폰할 몬스터 수")]
+        public int spawnCount;
     }
 }
 
 public class WaveManager : MonoBehaviour
 {
+    #region 웨이브 설정
+    [Header("웨이브 설정")]
+    [Tooltip("전체 웨이브 데이터를 저장하는 리스트")]
     [SerializeField]
-    private List<Wave> waves = new List<Wave>();      // 전체 웨이브 데이터를 저장하는 리스트
-    [SerializeField]
-    private MonsterSpawner monsterSpawner;            // 몬스터 스포너
-    [SerializeField]
-    private Button battleButton;                      // 배틀 시작 버튼
-    [SerializeField]
-    private TextMeshProUGUI waveStatusText;           // 현재 웨이브 상태 텍스트 (Ex: Wave 1/5)
-    [SerializeField]
-    private TextMeshProUGUI wavePrepareText;          // 다음 웨이브 준비 텍스트
-    [SerializeField]
-    private TextMeshProUGUI wavePrepareTimeText;      // 다음 웨이브까지 남은 시간 안내 텍스트
-    [SerializeField]
-    private TextMeshProUGUI wavePrepareTimeText_1;    // 남은 초 표시 텍스트
-    [SerializeField]
-    private Slider timeBar;                           // 웨이브 준비 시간 바
-    [SerializeField]
-    private GameObject speedButtonGroup;              // 배속 버튼 그룹 오브젝트
+    private List<Wave> waves = new List<Wave>();
 
+    [Tooltip("웨이브 정보 표시를 관리하는 매니저")]
     [SerializeField]
-    private List<SpeedSetting> speedSettings = new List<SpeedSetting>(); // 배속별 UI 상태
-    [SerializeField]
-    private Color activeColor = Color.green;          // 활성 배속 색상
-    [SerializeField]
-    private Color inactiveColor = Color.gray;         // 비활성 배속 색상
+    private WaveTextManager waveTextManager;
 
+    [Tooltip("현재 웨이브 인덱스 (0부터 시작)")]
     [SerializeField]
-    private float prepareCooldown = 10f;              // 웨이브 시작 전 대기 시간(쿨다운)
+    private int currentWaveIndex = 0;
 
+    [Tooltip("웨이브 클리어 시 지급할 머니")]
     [SerializeField]
-    private WaveTextManager waveTextManager;          // 웨이브 정보 표시를 관리하는 매니저
+    private int waveClearMoney = 30;
+    #endregion
 
-    private int currentWaveIndex = 0;                 // 현재 웨이브 위치 -> 1단계인지 2단계인지를 나타내는 개념
-    private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부, 웨이브 활성화 상태인지 알기 위한 개념
+    #region 스포너 설정
+    [Header("스포너 설정")]
+    [Tooltip("몬스터 스포너")]
     [SerializeField]
-    private int remainingMonsters = 0;                // 남은 몬스터 수
-    private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
-    private bool isGameOver = false;                  // 게임 오버 여부
-    private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
-    private int waveClearMoney = 50;                  // 웨이브 클리어 시 지급할 머니
-    private Coroutine prepareCooldownCoroutine;       // 준비 시간 코루틴 참조
+    private MonsterSpawner monsterSpawner;
 
-    public event System.Action OnAllWavesCleared;     // 모든 웨이브 클리어 시 발생하는 이벤트
-
-    [Header("Spawn Settings")]
+    [Tooltip("몬스터 스폰 위치 리스트")]
     [SerializeField]
     private List<Transform> spawnPoints;
+
+    [Tooltip("몬스터의 목표 지점")]
     [SerializeField]
     private Transform targetPoint;
+    #endregion
 
-    [Header("UI Elements")]
+    #region UI 요소
+    [Header("UI 요소")]
+    [Tooltip("배틀 시작 버튼")]
     [SerializeField]
-    private GameObject gameClearUI;                    // 게임 클리어 UI
-    [SerializeField]
-    private GameObject gameOverUI;                     // 게임 오버 UI
+    private Button battleButton;
 
-    // 추가된 변수들
+    [Space(10)]
+    [Tooltip("현재 웨이브 상태 텍스트 (예: Wave 1/5)")]
+    [SerializeField]
+    private TextMeshProUGUI waveStatusText;
+
+    [Tooltip("다음 웨이브 준비 텍스트")]
+    [SerializeField]
+    private TextMeshProUGUI wavePrepareText;
+
+    [Tooltip("다음 웨이브까지 남은 시간 안내 텍스트")]
+    [SerializeField]
+    private TextMeshProUGUI wavePrepareTimeText;
+
+    [Tooltip("남은 초 표시 텍스트")]
+    [SerializeField]
+    private TextMeshProUGUI wavePrepareTimeText_1;
+
+    [Tooltip("웨이브 준비 시간 바")]
+    [SerializeField]
+    private Slider timeBar;
+
+    [Tooltip("배속 버튼 그룹 오브젝트")]
+    [SerializeField]
+    private GameObject speedButtonGroup;
+
+    [Space(10)]
+    [Tooltip("웨이브 시작 텍스트")]
+    [SerializeField]
+    private GameObject waveStartText;
+
+    [Tooltip("웨이브 시작 상세 텍스트")]
+    [SerializeField]
+    private TextMeshProUGUI waveStartStateText;
+
+    [Tooltip("웨이브 클리어 텍스트")]
+    [SerializeField]
+    private GameObject waveEndText;
+
+    [Tooltip("웨이브 클리어 상세 텍스트")]
+    [SerializeField]
+    private TextMeshProUGUI waveEndStateText;
+    #endregion
+
+    #region 배속 상태일 때 UI에서 색상을 변경
+    [Header("현재 배속 상태에 따른 아이콘 색상 변경")]
+    [SerializeField]
+    private List<SpeedSetting> speedSettings = new List<SpeedSetting>();
+
+    [Tooltip("진행중o 배속 아이콘 색상")]
+    [SerializeField]
+    private Color activeColor = Color.green;
+
+    [Tooltip("진행중x 배속 아이콘 색상")]
+    [SerializeField]
+    private Color inactiveColor = Color.gray;
+    #endregion
+
+    #region 기타 설정
+    [Header("기타 설정")]
+    [Tooltip("웨이브 시작 전 대기 시간(쿨다운)")]
+    [SerializeField]
+    private float prepareCooldown = 10f;
+
+    [Tooltip("남은 몬스터 수")]
+    [SerializeField]
+    private int remainingMonsters = 0;
+    #endregion
+
+    #region 내부 변수
+    // 내부적으로 사용되는 변수들은 인스펙터에 노출하지 않기 위해 SerializeField를 제거
     private int totalMonstersToSpawn = 0; // 현재 웨이브에서 총 스폰할 몬스터 수
     private int spawnedMonsters = 0;      // 현재까지 스폰된 몬스터 수
 
     private const int WaveClearDrawCount = 3; // 매직 넘버 상수화
+
+    private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부, 웨이브 활성화 상태인지 알기 위한 개념
+    private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
+    private bool isGameOver = false;                  // 게임 오버 여부
+    private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
+    private Coroutine prepareCooldownCoroutine;        // 준비 시간 코루틴 참조
+    #endregion
+
+    #region 이벤트
+    public event System.Action OnAllWavesCleared;     // 모든 웨이브 클리어 시 발생하는 이벤트
+    #endregion
+
 
     private void Start()
     {
@@ -184,8 +262,6 @@ public class WaveManager : MonoBehaviour
         if (waveTextManager != null)
         {
             waveTextManager.Initialize(waves);
-            waveTextManager.ShowWaveInfo();
-            waveTextManager.ShowWaveInfo();
             waveTextManager.ShowWaveInfo();
         }
         else
@@ -292,6 +368,7 @@ public class WaveManager : MonoBehaviour
         if (isWaveActive || currentWaveIndex >= waves.Count) return;
 
         SoundManager.Instance.Play("BattleButton", SoundManager.Sound.Effect);
+        StartCoroutine(ShowWaveStateText(waveStartText));
 
         if (!isFirstBattleClicked)
         {
@@ -358,7 +435,6 @@ public class WaveManager : MonoBehaviour
         Debug.Log($"Monster Spawned: {spawnedMonsters}, Remaining: {remainingMonsters}");
     }
 
-
     private void OnMonsterDestroyed(GameObject monster)
     {
         remainingMonsters--;
@@ -370,7 +446,6 @@ public class WaveManager : MonoBehaviour
             EndCurrentWave();
         }
     }
-
 
     private void OnSpawnComplete()
     {
@@ -395,22 +470,25 @@ public class WaveManager : MonoBehaviour
         {
             for (int i = 0; i < WaveClearDrawCount; i++)
             {
-                UI_Draw.draw(); // 매직 넘버 3을 상수로 정의하는 것이 좋습니다.   
+                UI_Draw.draw(); // WaveClearDrawCount 만큼 효과 실행
                 if (GameManager.Instance.HandTetrisList.Count >= 10) break;
             }
         }
 
         GameManager.Instance.CurrentMoney += waveClearMoney;
+        waveEndStateText.text = $"Bonus Reward : {waveClearMoney}";
         waveClearMoney += 10;
 
         isWaveActive = false;
         currentWaveIndex++;
+        waveStartStateText.text = $"-WAVE {currentWaveIndex + 1}-";
 
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
 
         if (currentWaveIndex < waves.Count)
         {
             SoundManager.Instance.Play("WaveClearEffect", SoundManager.Sound.Effect);
+            StartCoroutine(ShowWaveStateText(waveEndText));
             isReadyForNextWave = true;
             UpdateWaveText();
             UpdateWavePrepareText();
@@ -436,10 +514,6 @@ public class WaveManager : MonoBehaviour
     {
         // 게임 클리어 처리 로직 추가 (예: UI 표시, 보상 지급 등)
         Debug.Log("All waves cleared! Game Cleared!");
-        if (gameClearUI != null)
-        {
-            gameClearUI.SetActive(true); // 게임 클리어 UI 활성화
-        }
         Time.timeScale = 0; // 게임 정지
     }
 
@@ -512,11 +586,6 @@ public class WaveManager : MonoBehaviour
         SetBattleButtonState(false);
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
         Time.timeScale = 0; // 게임 정지
-
-        if (gameOverUI != null)
-        {
-            gameOverUI.SetActive(true); // 게임 오버 UI 활성화
-        }
     }
 
     private void OnAllWavesClearedHandler()
@@ -533,5 +602,19 @@ public class WaveManager : MonoBehaviour
     private void OnDisable()
     {
         OnAllWavesCleared -= OnAllWavesClearedHandler;
+    }
+
+    private IEnumerator ShowWaveStateText(GameObject go)
+    {
+        // 게임 오버 상태라면 텍스트를 표시하지 않음
+        if (GameManager.Instance.CurrentHp <= 0)
+        {
+            yield break;
+        }
+
+        go.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        go.SetActive(false);
+        yield return null;
     }
 }
