@@ -195,7 +195,7 @@ public class StageManager : MonoBehaviour
         {
             SetUIElementsActive(uiElementsToDisable, false);
         }
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         Debug.Log("GameOverPanel 활성화 완료.");
     }
 
@@ -230,6 +230,7 @@ public class StageManager : MonoBehaviour
 
     public void OnGameOverButtonClicked()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         // 게임 오버 버튼 클릭 시 처리
         Debug.Log("게임 오버 버튼 클릭됨.");
         GameManager.Instance.Clear();

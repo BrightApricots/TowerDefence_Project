@@ -24,6 +24,7 @@ public class UI_BackToTitlePanel : MonoBehaviour
     }
     private void ClickYes()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         Time.timeScale = 1f;
         FadeManager.Instance.LoadScene("TitleScene");
         //SceneManager.LoadScene("TitleScene");
@@ -31,6 +32,7 @@ public class UI_BackToTitlePanel : MonoBehaviour
 
     private void ClickNo()
     {
+        SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         gameObject.SetActive(false);
     }
 }
