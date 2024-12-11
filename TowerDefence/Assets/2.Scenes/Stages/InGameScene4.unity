@@ -20545,18 +20545,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 2704021896978371004, guid: 041945405bbc89a4790427d1453048f7, type: 3}
-      spawnCount: 6
-    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
-      spawnCount: 3
+    - monsterPrefab: {fileID: 8858668344987094152, guid: 03cd11f880c255d4c99328d0d2b99a16, type: 3}
+      spawnCount: 30
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
     - {fileID: 1660414543}
     - {fileID: 1541005857}
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 2704021896978371004, guid: 041945405bbc89a4790427d1453048f7, type: 3}
-      spawnCount: 20
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 15
     - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
       spawnCount: 3
     spawnInterval: 1
@@ -20567,7 +20565,21 @@ MonoBehaviour:
   - monsterSpawnData:
     - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
       spawnCount: 40
-    - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+    - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
+      spawnCount: 1
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 9
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 8
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 15
+    - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
       spawnCount: 1
     spawnInterval: 1
     spawnPoints:
@@ -20577,11 +20589,13 @@ MonoBehaviour:
   - monsterSpawnData:
     - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
       spawnCount: 20
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 8
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 20
     - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
-      spawnCount: 4
-    - monsterPrefab: {fileID: 7441999123610416450, guid: 2850ca9d56c1cd84eb475b6ca247f570, type: 3}
-      spawnCount: 2
-    - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+      spawnCount: 5
+    - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
       spawnCount: 1
     spawnInterval: 1
     spawnPoints:
@@ -20590,10 +20604,54 @@ MonoBehaviour:
     - {fileID: 1541005857}
   - monsterSpawnData:
     - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
-      spawnCount: 60
+      spawnCount: 20
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 10
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 20
     - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
-      spawnCount: 24
+      spawnCount: 10
+    - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
+      spawnCount: 1
+    - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
+      spawnCount: 1
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 40
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 15
+    - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
+      spawnCount: 15
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 6
+    - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
+      spawnCount: 3
+    - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
+      spawnCount: 2
+    spawnInterval: 1
+    spawnPoints:
+    - {fileID: 362881107}
+    - {fileID: 1660414543}
+    - {fileID: 1541005857}
+  - monsterSpawnData:
+    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
+      spawnCount: 40
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 25
+    - monsterPrefab: {fileID: 3259748383907657246, guid: 10e4801936c85a44ea76b09d0c5dc2bd, type: 3}
+      spawnCount: 20
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 10
+    - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
+      spawnCount: 3
     - monsterPrefab: {fileID: 4603293611588590894, guid: 83f567247c869ce489af9d9b6a8349c4, type: 3}
+      spawnCount: 1
+    - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
       spawnCount: 2
     spawnInterval: 1
     spawnPoints:
