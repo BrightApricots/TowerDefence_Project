@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879743500050571213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1368347119209514309}
   - component: {fileID: 1469664355367384463}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 319745971239356319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: neck.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52750968289508942}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6590357728206464003}
   - component: {fileID: 1556418157815544971}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,9 +293,10 @@ GameObject:
   - component: {fileID: 4090370372463948750}
   - component: {fileID: 7526054076395088161}
   - component: {fileID: 8669718718538843961}
-  m_Layer: 0
+  - component: {fileID: -430819442421567111}
+  m_Layer: 8
   m_Name: Rattlesnake
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,6 +413,33 @@ MonoBehaviour:
   damage: 1
   gold: 1
   rotationSpeed: 5
+--- !u!54 &-430819442421567111
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299118305578061567}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4790479918520755598
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6691806860271218491}
   - component: {fileID: 6970692315984095286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7280191763775538306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: neck.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059066790613833086}
   - component: {fileID: 4582001559274810145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6813396143667402848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7643785323896726466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4648276280362543847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +764,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2875847284929811346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978159879459209787}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

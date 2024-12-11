@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3364337438250833552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 574936700422834239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2943304276629150448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4108767967844814044}
   - component: {fileID: 7189666652276159236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8676196950437087267}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: neck.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6714675862391596090}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7945346665548204156}
   - component: {fileID: 7748119145073477896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8932414191935236112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6834687922286950533}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6576737439843964171}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729049221396644005}
   - component: {fileID: 4974851912898418200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4467144508952269995}
   - component: {fileID: 3579236861907476526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5118584888723957060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: neck.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,9 +672,10 @@ GameObject:
   - component: {fileID: 5239998634044139900}
   - component: {fileID: 2434594558308371486}
   - component: {fileID: 4307429268705671267}
-  m_Layer: 0
+  - component: {fileID: 5365771786015822057}
+  m_Layer: 8
   m_Name: Cobra
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -791,3 +792,30 @@ MonoBehaviour:
   damage: 1
   gold: 1
   rotationSpeed: 5
+--- !u!54 &5365771786015822057
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7847107900140312233}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

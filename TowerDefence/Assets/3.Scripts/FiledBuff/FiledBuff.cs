@@ -25,7 +25,7 @@ public class BuffField : MonoBehaviour
     {
         originalHeight = transform.position.y;
         lastPosition = transform.position;
-        checkLayers = LayerMask.GetMask("Unwalkable", "Tower");
+        checkLayers = LayerMask.GetMask("Unwalkable");
         StartCoroutine(CheckForTowerAndBlock());
     }
 

@@ -34,7 +34,7 @@ public class UI_IngameScene : MonoBehaviour
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
         TowerCardSet();
     }
-
+     
     private void Update()
     {
         CurrentHp.text = $"{GameManager.Instance.CurrentHp}";

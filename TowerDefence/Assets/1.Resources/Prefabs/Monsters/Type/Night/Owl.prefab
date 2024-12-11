@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6818177511922148334}
   - component: {fileID: 7077756332371958472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2924373569237408724}
   - component: {fileID: 6959530599921919218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746096394537283571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feet.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2247719351329109917}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wing.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8383991919087494874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6041497299332759542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feet.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3760344161658697894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205017560389048899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wing.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,9 +386,10 @@ GameObject:
   - component: {fileID: 1081237146579524304}
   - component: {fileID: 2686561832634725833}
   - component: {fileID: 7952643415231294866}
-  m_Layer: 0
+  - component: {fileID: -8683581632644387755}
+  m_Layer: 8
   m_Name: Owl
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -505,6 +506,33 @@ MonoBehaviour:
   damage: 1
   gold: 1
   rotationSpeed: 5
+--- !u!54 &-8683581632644387755
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792139252172566729}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5383941431417970857
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1199551305783101300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 697496104419038606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4338395008135140626}
   - component: {fileID: 4639247502450233872}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6598330997470587110}
   - component: {fileID: 1468835800413493638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7085550753351774343}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
