@@ -53993,6 +53993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1104480016}
   - component: {fileID: 1104480017}
+  - component: {fileID: 1104480018}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -54009,7 +54010,7 @@ Transform:
   m_GameObject: {fileID: 1104480015}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5024793, y: -0.32116652, z: 0.20820509, w: 0.77525306}
-  m_LocalPosition: {x: 8.6, y: 27.05, z: -2}
+  m_LocalPosition: {x: 18.01, y: 27.05, z: 5.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54040,7 +54041,7 @@ MonoBehaviour:
     FieldOfView: 60
     OrthographicSize: 9
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 40
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -54055,6 +54056,23 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2787786}
+--- !u!114 &1104480018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104480015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ConfineMode: 1
+  m_BoundingVolume: {fileID: 1400637260}
+  m_BoundingShape2D: {fileID: 0}
+  m_ConfineScreenEdges: 1
+  m_Damping: 0
 --- !u!1 &1108459770
 GameObject:
   m_ObjectHideFlags: 0
@@ -60125,8 +60143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91538ef85652f41bb8eed367a584d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStageScene: {fileID: 102900000, guid: da929b343d938ff4a9880691b2254d79, type: 3}
-  gameOverScene: {fileID: 102900000, guid: 4f654ed664c00894d8accb37cd42dd1f, type: 3}
+  lobbySceneName: LobbyScene
+  titleSceneName: TitleScene
   EndPanel: {fileID: 681567162}
   GameOverPanel: {fileID: 1646685900}
   gameOverButton: {fileID: 1832563053}
@@ -63975,8 +63993,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 60, y: 70, z: 60}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 67.8, y: 70, z: 67.5}
+  m_Center: {x: 6.4, y: 0, z: 0}
 --- !u!4 &1400637261
 Transform:
   m_ObjectHideFlags: 0
@@ -65056,7 +65074,7 @@ Transform:
   m_GameObject: {fileID: 1488267144}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5024793, y: -0.32116652, z: 0.20820509, w: 0.77525306}
-  m_LocalPosition: {x: 8.6, y: 27.05, z: -2}
+  m_LocalPosition: {x: 18.01, y: 27.05, z: 5.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65136,7 +65154,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 40
   field of view: 60
   orthographic: 1
   orthographic size: 9
