@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2756288667395158484}
   - component: {fileID: 8011493787392439610}
   - component: {fileID: 129922415637547267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 29.Map_Floe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 935227891002630753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 29.Map_Floe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

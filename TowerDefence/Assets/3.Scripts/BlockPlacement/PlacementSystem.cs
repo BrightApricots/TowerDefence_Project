@@ -88,7 +88,19 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
-    public void StartPlacementForDrag(int ID)
+    public void StartPlacement2(int ID)
+    {
+        // 필수 컴포넌트 재확인
+        //if (!ValidateBeforePlacement()) return;
+
+        gridVisualization.SetActive(true);
+        buildingState = new PlacementState(ID, grid, preview, database, BlockData, TowerData, objectPlacer, inputManager, aGrid);
+        inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += StopPlacement;
+        inputManager.OnExit += StopPlacement;
+    }
+
+    public void StartPlacementForDrag(int ID) 
     {
         //StopPlacement();
         gridVisualization.SetActive(true);
@@ -102,16 +114,14 @@ public class PlacementSystem : MonoBehaviour
         inputManager.OnExit += StopPlacement;
     }
 
-    //public void StartRemoving()
-    //{
-    //    if (inputManager == null || grid == null || preview == null || 
-    //        database == null || objectPlacer == null || aGrid == null)
-    //    {
-    //        Debug.LogError("Cannot start placement: Some required components are missing!");
-    //        return false;
-    //    }
-    //    return true;
-    //}
+    public void StartRemoving()
+    {
+        if (inputManager == null || grid == null || preview == null ||
+            database == null || objectPlacer == null || aGrid == null)
+        {
+            Debug.LogError("Cannot start placement: Some required components are missing!");
+        }
+    }
 
     public void StartTowerPlacement(int ID)
     {

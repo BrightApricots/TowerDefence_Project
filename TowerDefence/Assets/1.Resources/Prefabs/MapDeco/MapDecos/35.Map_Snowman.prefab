@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4472390738466042942}
   - component: {fileID: 5684219649275488424}
   - component: {fileID: 3064410250220424072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 35.Map_Snowman
   m_TagString: Untagged
   m_Icon: {fileID: 0}

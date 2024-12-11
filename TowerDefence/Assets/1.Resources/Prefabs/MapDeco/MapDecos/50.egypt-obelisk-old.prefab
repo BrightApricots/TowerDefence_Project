@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4796312250590466836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 50.egypt-obelisk-old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2040809503530717717}
   - component: {fileID: 5101125980564104152}
   - component: {fileID: 7321778694638315634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 50.egypt-obelisk-old
   m_TagString: Untagged
   m_Icon: {fileID: 0}

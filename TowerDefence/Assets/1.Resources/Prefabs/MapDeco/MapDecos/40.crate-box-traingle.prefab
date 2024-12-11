@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2033989199023394909}
   - component: {fileID: 8343940429925299831}
   - component: {fileID: 2716792188493764426}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 40.crate-box-traingle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

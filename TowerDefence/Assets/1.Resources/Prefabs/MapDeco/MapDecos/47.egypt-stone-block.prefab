@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3333883948600285238}
   - component: {fileID: 1310804562490703898}
   - component: {fileID: 8169151945121021340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 47.egypt-stone-block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7127600328238043637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 47.egypt-stone-block
   m_TagString: Untagged
   m_Icon: {fileID: 0}

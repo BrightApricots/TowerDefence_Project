@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6771555780867136900}
   - component: {fileID: 6862776139326946528}
   - component: {fileID: 6000092125442802734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 34.Map_Sledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

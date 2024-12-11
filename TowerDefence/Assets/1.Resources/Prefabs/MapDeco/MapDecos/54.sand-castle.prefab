@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2733751165428148494}
   - component: {fileID: 3239524163083823716}
   - component: {fileID: 2437115143204597154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 54.sand-castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

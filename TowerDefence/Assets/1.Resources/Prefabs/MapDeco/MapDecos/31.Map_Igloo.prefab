@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 381484996487286790}
   - component: {fileID: 8195801305733834465}
   - component: {fileID: 1878695029660188744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 31.Map_Igloo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7599721279005709361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 31.Map_Igloo
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6115808625828402786}
   - component: {fileID: 7534987493524788115}
   - component: {fileID: 2541392138458772003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 52.egypt-stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

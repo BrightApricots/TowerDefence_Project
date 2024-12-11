@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4891728073329818434}
   - component: {fileID: 4638185164287370823}
   - component: {fileID: 8909729258708138131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 49.obelisk-old-broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8027234931757782788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 49.obelisk-old-broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

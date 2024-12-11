@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4431841589279201031}
   - component: {fileID: 8166834987082547017}
   - component: {fileID: 2125400682815143470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 55.sphinx
   m_TagString: Untagged
   m_Icon: {fileID: 0}

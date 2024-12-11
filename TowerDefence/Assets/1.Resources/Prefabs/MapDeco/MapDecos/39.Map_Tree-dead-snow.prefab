@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7414724713431791667}
   - component: {fileID: 354582844096497057}
   - component: {fileID: 5094503344916999291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 39.Map_Tree-dead-snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

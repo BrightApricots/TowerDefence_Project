@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4456783712414219118}
   - component: {fileID: 8183048289931929408}
   - component: {fileID: 1514007760622675596}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 36.Map_Stalags
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6926117526653677114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 36.Map_Stalags
   m_TagString: Untagged
   m_Icon: {fileID: 0}

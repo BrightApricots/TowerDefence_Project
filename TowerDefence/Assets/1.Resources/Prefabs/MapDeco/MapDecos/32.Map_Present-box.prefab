@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 291311633093908638}
   - component: {fileID: 6665131390302875736}
   - component: {fileID: 8612174795893335454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: present-box-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3750366859116726124}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 32.Map_Present-box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 6489074194784828371}
   - component: {fileID: 6736842237353117373}
   - component: {fileID: 7307740305395671883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: present-box-top
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8863898038019124789}
   - component: {fileID: 8001582374652449382}
   - component: {fileID: 7377793265833733597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 37.Map_Stone-snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1126491248401744253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 37.Map_Stone-snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

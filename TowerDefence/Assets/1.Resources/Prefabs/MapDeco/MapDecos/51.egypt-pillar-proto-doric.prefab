@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1839237813624780961}
   - component: {fileID: 6799785546861210393}
   - component: {fileID: 4475072438839199486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 51.egypt-pillar-proto-doric
   m_TagString: Untagged
   m_Icon: {fileID: 0}

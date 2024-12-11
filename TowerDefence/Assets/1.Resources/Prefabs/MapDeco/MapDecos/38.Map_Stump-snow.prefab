@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1580496746172924392}
   - component: {fileID: 138843687968903253}
   - component: {fileID: 5897691259531531814}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 38.Map_Stump-snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

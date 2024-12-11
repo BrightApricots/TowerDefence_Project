@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6772059848011573281}
   - component: {fileID: 6053244982489395446}
   - component: {fileID: 8307199394146897149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 53.pyramid-old
   m_TagString: Untagged
   m_Icon: {fileID: 0}

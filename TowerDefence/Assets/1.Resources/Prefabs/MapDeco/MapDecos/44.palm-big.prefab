@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 974881897092969694}
   - component: {fileID: 5299031779471144184}
   - component: {fileID: 3352417994943736038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 44.palm-big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
