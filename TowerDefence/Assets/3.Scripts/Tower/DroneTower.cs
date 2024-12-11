@@ -121,7 +121,7 @@ public class DroneTower : Tower
     {
         if (!drone.HasTarget())
         {
-            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range);
+            Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, Range + 3f);
             Transform nearestTarget = null;
             float minDistance = float.MaxValue;
 
@@ -148,6 +148,7 @@ public class DroneTower : Tower
             if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range)
             {
                 CurrentTarget = null;
+                drone.isReturning = true;
             }
         }
     }

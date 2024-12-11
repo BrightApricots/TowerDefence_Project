@@ -11,7 +11,6 @@ public class Tower : MonoBehaviour
     public string Name;
     public string Element;
     public int Damage;
-    //public float Range;
     public float FireRate;
     public int DamageDealt;
     public int TotalKilled;

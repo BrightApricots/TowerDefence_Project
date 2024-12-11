@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4548399479982253875}
   - component: {fileID: 2066439229231788694}
+  - component: {fileID: 6104806566159985736}
   m_Layer: 10
   m_Name: Tower_Sniper
   m_TagString: Untagged
@@ -162,6 +163,27 @@ MonoBehaviour:
   - {fileID: 1473300540488346420, guid: ecd10e4123d64c94083607f373f0b7ff, type: 3}
   IsTargeting: 1
   IsBomb: 0
+--- !u!65 &6104806566159985736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5076540907013298459}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1 &6467014787832968450
 GameObject:
   m_ObjectHideFlags: 0

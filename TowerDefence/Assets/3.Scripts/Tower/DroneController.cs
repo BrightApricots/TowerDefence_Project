@@ -7,7 +7,7 @@ public class DroneController : MonoBehaviour
     public float moveSpeed = 10f;
     public float rotationSpeed = 5f;
     public float heightOffset = 5f;
-    public float attackRange = 8f;
+    public float attackRange = 2f;
 
     public GameObject projectilePrefab;
     public GameObject projectileEffect;
@@ -21,7 +21,7 @@ public class DroneController : MonoBehaviour
     
     private Transform homePosition;
     [SerializeField]private Transform currentTarget;
-    private bool isReturning;
+    public bool isReturning;
     private float defaultHeight;
     private Transform towerPosition;
     private float towerRange;
