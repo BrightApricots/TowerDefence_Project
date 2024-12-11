@@ -37858,6 +37858,8 @@ MonoBehaviour:
   - {fileID: 1660414543}
   - {fileID: 1541005857}
   targetPoint: {fileID: 943508852}
+  gameClearUI: {fileID: 0}
+  gameOverUI: {fileID: 0}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -46736,7 +46738,7 @@ MonoBehaviour:
   - {fileID: 1124488417}
   - {fileID: 2115218082}
   - {fileID: 2033399253}
-  - {fileID: 770527175}
+  - {fileID: 802305573}
 --- !u!4 &1170214131
 Transform:
   m_ObjectHideFlags: 0
