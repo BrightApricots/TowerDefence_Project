@@ -83570,7 +83570,7 @@ MonoBehaviour:
   L: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
   DrawButton: {fileID: 1410705545}
   DrawPriceText: {fileID: 167317773}
-  HorizontalLayout: {fileID: 519119435}
+  HorizontalLayout: {fileID: 294630228}
   DialogBox: {fileID: 1350267054}
   DrawPriceInfo: {fileID: 1566809656}
   FullHandText: {fileID: 483634646}

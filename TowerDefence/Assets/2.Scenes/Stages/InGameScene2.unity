@@ -105277,7 +105277,7 @@ MonoBehaviour:
   L: {fileID: 3246596710672962738, guid: 7a36ae5c9a4787a49965c81b65df4b16, type: 3}
   DrawButton: {fileID: 1108174728}
   DrawPriceText: {fileID: 1285029814}
-  HorizontalLayout: {fileID: 830959052}
+  HorizontalLayout: {fileID: 271901941}
   DialogBox: {fileID: 0}
   DrawPriceInfo: {fileID: 0}
   FullHandText: {fileID: 0}
