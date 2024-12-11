@@ -40122,7 +40122,15 @@ MonoBehaviour:
     - {fileID: 362881107}
     - {fileID: 1660414543}
     - {fileID: 1541005857}
+  waveTextManager: {fileID: 902036303}
+  currentWaveIndex: 0
+  waveClearMoney: 30
   monsterSpawner: {fileID: 2142065682}
+  spawnPoints:
+  - {fileID: 362881107}
+  - {fileID: 1660414543}
+  - {fileID: 1541005857}
+  targetPoint: {fileID: 943508852}
   battleButton: {fileID: 399213837}
   waveStatusText: {fileID: 37371841}
   wavePrepareText: {fileID: 2073483914}
@@ -40153,15 +40161,7 @@ MonoBehaviour:
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
-  waveTextManager: {fileID: 902036303}
   remainingMonsters: 0
-  spawnPoints:
-  - {fileID: 362881107}
-  - {fileID: 1660414543}
-  - {fileID: 1541005857}
-  targetPoint: {fileID: 943508852}
-  gameClearUI: {fileID: 697883097}
-  gameOverUI: {fileID: 1646685900}
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -49468,7 +49468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbySceneName: LobbyScene
   titleSceneName: TitleScene
-  EndPanel: {fileID: 0}
+  EndPanel: {fileID: 697883097}
   GameOverPanel: {fileID: 1646685900}
   gameOverButton: {fileID: 1832563053}
   uiElementsToDisable:
