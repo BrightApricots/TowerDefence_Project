@@ -193,6 +193,14 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        // UI_PausePanel 활성화 여부 확인
+        GameObject pausePanel = GameObject.Find("UI_PausePanel");
+        if (pausePanel != null && pausePanel.activeSelf)
+        {
+            // UI_PausePanel이 활성화된 경우 입력 처리 중단
+            return;
+        }
+
         // 게임 오버 체크
         if (GameManager.Instance.CurrentHp <= 0 && !isGameOver)
         {

@@ -386,7 +386,6 @@ GameObject:
   - component: {fileID: 1081237146579524304}
   - component: {fileID: 2686561832634725833}
   - component: {fileID: 7952643415231294866}
-  - component: {fileID: -8683581632644387755}
   m_Layer: 8
   m_Name: Owl
   m_TagString: Monster
@@ -404,7 +403,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.13583, y: 9.138679, z: -14.449003}
-  m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3760344161658697894}
@@ -501,38 +500,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76367be63875e454cb64c082729c3574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 174
   speed: 2
-  damage: 1
-  gold: 1
+  damage: 5
+  gold: 5
   rotationSpeed: 5
---- !u!54 &-8683581632644387755
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3792139252172566729}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5383941431417970857
 GameObject:
   m_ObjectHideFlags: 0
