@@ -104,6 +104,12 @@ public class StageManager : MonoBehaviour
                     Debug.Log("'NextStageButton'을 찾았고, 리스너를 추가했습니다.");
                     break;
                 }
+                else if(btn.name == "BackToTitle")
+                {
+                    Button backToTitle = btn;
+                    GameManager.Instance.Clear();
+                    backToTitle.onClick.AddListener(() => SceneManager.LoadScene("TitleScene"));
+                }
             }
 
             if (nextStageButton == null)
