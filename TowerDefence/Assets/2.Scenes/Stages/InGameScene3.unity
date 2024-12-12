@@ -18268,6 +18268,8 @@ MonoBehaviour:
   Title: {fileID: 27454699}
   OptionsPanel: {fileID: 2006586832}
   BackTitlePopup: {fileID: 896651299}
+  EndPanel: {fileID: 697883097}
+  GameOverPanel: {fileID: 1646685900}
 --- !u!114 &262127880
 MonoBehaviour:
   m_ObjectHideFlags: 0

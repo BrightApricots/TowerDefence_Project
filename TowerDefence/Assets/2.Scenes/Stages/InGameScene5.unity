@@ -16140,6 +16140,8 @@ MonoBehaviour:
   Title: {fileID: 27454699}
   OptionsPanel: {fileID: 1814810689}
   BackTitlePopup: {fileID: 896651299}
+  EndPanel: {fileID: 1943224040}
+  GameOverPanel: {fileID: 1646685900}
 --- !u!114 &262127880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91198,7 +91200,7 @@ GameObject:
   - component: {fileID: 1943224044}
   - component: {fileID: 1943224043}
   m_Layer: 5
-  m_Name: UI_EndPanel
+  m_Name: EndPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

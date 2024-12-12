@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
         {
             OnClicked?.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(2))
         {
             OnExit?.Invoke();
         }
