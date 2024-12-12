@@ -167,14 +167,10 @@ public class UI_TowerTooltip : MonoBehaviour
                 if (data.PlacedObjectIndex >= 0)
                 {
                     Debug.Log($"Removing tower object at index: {data.PlacedObjectIndex}");
-                    ObjectPlacer.Instance?.RemoveObjectAt(data.PlacedObjectIndex);
+                    //ObjectPlacer.Instance?.RemoveObjectAt(ObjectPlacer.Instance.placedGameObjects.Count - data.PlacedObjectIndex);
                 }
                 
                 Debug.Log($"Successfully removed tower data from grid position {gridPosition}");
-            }
-            else
-            {
-                Debug.LogWarning($"No tower data found at grid position {gridPosition}");
             }
 
             // 타워 리스트에서 제거
@@ -187,20 +183,6 @@ public class UI_TowerTooltip : MonoBehaviour
             GameManager.Instance.tooltipCount = false;
             // 툴팁 제거
             Destroy(gameObject);
-            
-            // 제거 후 해당 위치가 비어있는지 확인
-            if (towerData.IsPositionOccupied(gridPosition))
-            {
-                Debug.LogError($"Position {gridPosition} is still occupied after tower removal!");
-                
-                // 강제로 한 번 더 제거 시도
-                Debug.Log($"Attempting to force remove tower data from position {gridPosition}");
-                towerData.RemoveObjectAt(gridPosition);
-            }
-            else
-            {
-                Debug.Log($"Position {gridPosition} is now free");
-            }
         }
         else
         {
