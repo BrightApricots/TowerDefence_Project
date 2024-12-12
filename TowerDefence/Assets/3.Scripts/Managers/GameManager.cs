@@ -108,9 +108,10 @@ public class GameManager : MonoBehaviour
         //EquipTowerList = new List<string>();
         //UnEquipTowerList = new List<string>();
         PlacedTowerList = new List<Tower>();
+        tooltipCount = false;
 
-        //각 매니저들 초기화
-        GridData.Instance.Clear();
+    //각 매니저들 초기화
+    GridData.Instance.Clear();
         PathManager.Instance.Clear();
         ObjectPlacer.Instance.Clear();
         PathManager.Instance.Clear();
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour
             PlacedTowerList.Clear();
         }
 
+        tooltipCount = false;
         HandTetrisList = new List<GameObject>();
         PlacedTowerList = new List<Tower>();
 
@@ -155,5 +157,6 @@ public class GameManager : MonoBehaviour
         PlacementSystem.Instance.Clear();
         PoolManager.Instance.Clear();
         ObjectManager.Instance.Clear();
+
     }
 }
