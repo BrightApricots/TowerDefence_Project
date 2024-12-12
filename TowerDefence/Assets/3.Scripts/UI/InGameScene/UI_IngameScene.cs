@@ -32,7 +32,7 @@ public class UI_IngameScene : MonoBehaviour
     {
         if(GameManager.Instance.clearStage==6)
         {
-            GameManager.Instance.bounusMoney += 150;
+            GameManager.Instance.bounusMoney += 550;
         }
         GameManager.Instance.CurrentMoney = 50 + GameManager.Instance.bounusMoney;
         SoundManager.Instance.Play("Battlefield", SoundManager.Sound.Bgm);
