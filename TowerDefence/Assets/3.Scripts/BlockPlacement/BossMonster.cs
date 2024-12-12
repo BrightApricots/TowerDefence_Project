@@ -52,6 +52,8 @@ public class BossMonster : Monster
     public override void TakeDamage(int damage)
     {
         if (IsDead) return;
+        if(isMoving == false)
+        { return; }
 
         GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
         GameObject damageCanvas = GameObject.Find("DamageCanvas");
