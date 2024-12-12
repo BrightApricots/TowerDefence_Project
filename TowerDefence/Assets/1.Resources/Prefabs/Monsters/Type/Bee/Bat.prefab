@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 2688800340552073838}
   - component: {fileID: 1135039995722378285}
   - component: {fileID: -6368717324885465222}
+  - component: {fileID: -1538902383919273736}
   m_Layer: 8
   m_Name: Bat
   m_TagString: Monster
@@ -728,6 +729,36 @@ MonoBehaviour:
   damage: 1
   gold: 1
   rotationSpeed: 5
+  maxHp: 100
+  spawnPos: {fileID: 0}
+  IsSpawnDirect: 0
+--- !u!54 &-1538902383919273736
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7348137727425373344}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7446816994076511022
 GameObject:
   m_ObjectHideFlags: 0
