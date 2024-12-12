@@ -159,6 +159,7 @@ public class WaveManager : MonoBehaviour
     #endregion
 
     #region 내부 변수
+    private StageManager stageManager; // StageManager를 참조하기 위한 변수
     // 내부적으로 사용되는 변수들은 인스펙터에 노출하지 않기 위해 SerializeField를 제거
     private int totalMonstersToSpawn = 0; // 현재 웨이브에서 총 스폰할 몬스터 수
     private int spawnedMonsters = 0;      // 현재까지 스폰된 몬스터 수
@@ -179,6 +180,13 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        // StageManager 인스턴스 찾기
+        stageManager = FindObjectOfType<StageManager>();
+        if (stageManager == null)
+        {
+            Debug.LogError("StageManager를 찾을 수 없습니다! 게임 오버 상태 확인 불가.");
+        }
+
         // PathManager 초기화
         if (PathManager.Instance != null)
         {
@@ -194,6 +202,7 @@ public class WaveManager : MonoBehaviour
         InitializeWaveTextManager();
         InitializeUIState();
         UpdateSpeedImageColors(1f); // 초기 배속 1배속 설정
+
     }
 
     private void Update()
@@ -451,10 +460,20 @@ public class WaveManager : MonoBehaviour
     private void OnMonsterDestroyed(GameObject monster)
     {
         remainingMonsters--;
+
+        // StageManager를 참조하고 있다고 가정 (stageManager 변수 필요)
+        // 게임 오버 상태인 경우에만 1 미만으로 내려가지 않도록 처리
+        if (stageManager != null && stageManager.IsGameOver)
+        {
+            if (remainingMonsters < 1)
+            {
+                remainingMonsters = 1;
+            }
+        }
+
         Debug.Log($"Monster Destroyed: Remaining: {remainingMonsters}");
 
-        // 모든 몬스터가 스폰되고 모두 파괴되었을 때 웨이브 종료
-        if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete() && 
+        if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete() &&
             GameManager.Instance.BossCount == 0)
         {
             EndCurrentWave();
@@ -599,7 +618,7 @@ public class WaveManager : MonoBehaviour
         isReadyForNextWave = false;
         SetBattleButtonState(false);
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
-        Time.timeScale = 0; // 게임 정지
+        Time.timeScale = 1; 
     }
 
     private void OnAllWavesClearedHandler()
