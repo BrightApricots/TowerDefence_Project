@@ -55620,23 +55620,23 @@ MonoBehaviour:
   waves:
   - monsterSpawnData:
     - monsterPrefab: {fileID: 7348137727425373344, guid: ec1894e179706d2429e761898047e560, type: 3}
-      spawnCount: 100
+      spawnCount: 50
     - monsterPrefab: {fileID: 4299118305578061567, guid: 6f7b441333b65d74c96855990a16903d, type: 3}
-      spawnCount: 50
+      spawnCount: 20
     - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
-      spawnCount: 30
+      spawnCount: 10
     - monsterPrefab: {fileID: 3792139252172566729, guid: 141230e150e29824cbde91d60b1bc9ae, type: 3}
-      spawnCount: 30
+      spawnCount: 10
     - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
-      spawnCount: 30
+      spawnCount: 10
     - monsterPrefab: {fileID: 8858668344987094152, guid: 03cd11f880c255d4c99328d0d2b99a16, type: 3}
-      spawnCount: 100
+      spawnCount: 50
     - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
-      spawnCount: 50
+      spawnCount: 20
     - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
-      spawnCount: 50
+      spawnCount: 20
     - monsterPrefab: {fileID: 1540698828338875796, guid: 206f43b16e31d91498de41e0de0066eb, type: 3}
-      spawnCount: 50
+      spawnCount: 20
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
@@ -55653,7 +55653,6 @@ MonoBehaviour:
   - {fileID: 1541005857}
   - {fileID: 1934502628}
   targetPoint: {fileID: 943508852}
-  spawnDelay: 0
   battleButton: {fileID: 399213837}
   waveStatusText: {fileID: 37371841}
   wavePrepareText: {fileID: 2073483914}
@@ -85494,7 +85493,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1661000325}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -91198,14 +91197,13 @@ GameObject:
   - component: {fileID: 1943224041}
   - component: {fileID: 1943224044}
   - component: {fileID: 1943224043}
-  - component: {fileID: 1943224042}
   m_Layer: 5
   m_Name: UI_EndPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1943224041
 RectTransform:
   m_ObjectHideFlags: 0
@@ -91230,22 +91228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1943224042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1943224040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd3ade54fc99464ca96cb385fedff36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RewardLocation: {fileID: 0}
-  ImageTetrisList: []
-  TetrisList: {fileID: 0}
-  TowerList: {fileID: 0}
 --- !u!114 &1943224043
 MonoBehaviour:
   m_ObjectHideFlags: 0

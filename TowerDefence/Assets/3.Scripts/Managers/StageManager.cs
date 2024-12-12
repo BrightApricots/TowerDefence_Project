@@ -107,8 +107,11 @@ public class StageManager : MonoBehaviour
                 else if(btn.name == "BackToTitle")
                 {
                     Button backToTitle = btn;
-                    GameManager.Instance.Clear();
-                    backToTitle.onClick.AddListener(() => SceneManager.LoadScene("TitleScene"));
+                    backToTitle.onClick.AddListener(() => 
+                    {
+                        SceneManager.LoadScene("TitleScene");
+                        GameManager.Instance.Clear(); 
+                    });
                 }
             }
 
