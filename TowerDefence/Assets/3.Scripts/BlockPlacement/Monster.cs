@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     private float rotationSpeed = 5f;
 
     [SerializeField]
-    public int maxHp = 100 * GameManager.Instance.Difficulty;
+    public int maxHp = 100;
     [SerializeField]
     public float maxSpeed = 2f;
     [SerializeField]
@@ -41,6 +41,7 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         //프리팹 스탯을 적용하기 위한 체력스탯
+        hp *= GameManager.Instance.Difficulty;
         maxHp = hp;
         maxSpeed = speed;
         maxDamage = damage;

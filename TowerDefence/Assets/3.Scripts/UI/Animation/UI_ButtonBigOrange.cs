@@ -51,7 +51,8 @@ public class UI_ButtonBigOrange : MonoBehaviour
         currentSequence
             .Append(transform.DOScale(new Vector3(originalScale.x * addScale, originalScale.y * addScale, originalScale.z * addScale), enterDuration)
             .SetEase(Ease.Linear))
-            .Join(text.DOColor(targetColor, 0.01f).SetEase(Ease.Linear)); 
+            .Join(text.DOColor(targetColor, 0.01f).SetEase(Ease.Linear))
+            .SetUpdate(true); 
     }
 
     protected virtual void OnExit()
@@ -60,6 +61,7 @@ public class UI_ButtonBigOrange : MonoBehaviour
         currentSequence = DOTween.Sequence();
         currentSequence.Append(transform.DOScale(originalScale, enterDuration)
             .SetEase(Ease.Linear, 0.5f, 0.3f))
-            .Join(text.DOColor(baseColor, 0.01f).SetEase(Ease.Linear)); 
+            .Join(text.DOColor(baseColor, 0.01f).SetEase(Ease.Linear))
+            .SetUpdate(true); 
     }
 }
