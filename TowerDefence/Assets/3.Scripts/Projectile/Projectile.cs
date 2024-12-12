@@ -25,6 +25,11 @@ public class Projectile : MonoBehaviour
     public Transform Target;
     public GameObject ExplosionParticle;
 
+    private void OnEnable()
+    {
+        StartCoroutine(SelfDestroy(Duration));
+    }
+
     public virtual void Initialize()
     {
         if(isSelfDestroy)
@@ -108,7 +113,6 @@ public class Projectile : MonoBehaviour
                     transform.position, 
                     Quaternion.identity
                 );
-                explosion.Initialize();
             }
 
             foreach (Collider h in hit)
@@ -135,7 +139,6 @@ public class Projectile : MonoBehaviour
                     transform.position,
                     Quaternion.identity
                 );
-                hitEffect.Initialize();
             }
 
             other.gameObject.GetComponent<Monster>().TakeDamage(Damage);

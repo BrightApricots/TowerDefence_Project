@@ -74,6 +74,6 @@ public class BossMonster : Monster
     IEnumerator removeBoss()
     {
         yield return new WaitForSeconds(5f);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
