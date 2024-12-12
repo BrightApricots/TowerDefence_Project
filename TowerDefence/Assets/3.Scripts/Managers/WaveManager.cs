@@ -82,6 +82,9 @@ public class WaveManager : MonoBehaviour
     [Tooltip("몬스터의 목표 지점")]
     [SerializeField]
     private Transform targetPoint;
+
+    [Tooltip("웨이브 시작 전 추가 딜레이(스폰 시작 전 대기 시간)")]
+    [SerializeField] private float spawnDelay = 0f; // 인스펙터에서 설정 가능
     #endregion
 
     #region UI 요소
@@ -432,11 +435,6 @@ public class WaveManager : MonoBehaviour
         var currentWave = waves[currentWaveIndex];
         monsterSpawner.SetMonsterData(currentWave.monsterSpawnData, currentWave.spawnInterval, currentWave.spawnPoints);
 
-        // 이벤트 등록
-        monsterSpawner.OnMonsterSpawned += OnMonsterSpawned;
-        monsterSpawner.OnMonsterDestroyed += OnMonsterDestroyed;
-        monsterSpawner.OnSpawnComplete += OnSpawnComplete; // 추가된 이벤트
-
         // 총 몬스터 수 계산
         totalMonstersToSpawn = 0;
         foreach (var spawnData in currentWave.monsterSpawnData)
@@ -444,11 +442,25 @@ public class WaveManager : MonoBehaviour
             totalMonstersToSpawn += spawnData.spawnCount;
         }
         spawnedMonsters = 0;
-        remainingMonsters = totalMonstersToSpawn; // 변경된 부분: 전체 몬스터 수로 초기화
+        remainingMonsters = totalMonstersToSpawn;
 
-        monsterSpawner.StartSpawning();
+        // 스폰 딜레이를 주기 위한 코루틴 실행
+        StartCoroutine(SpawnWithDelay());
         UpdateWaveText();
     }
+
+    private IEnumerator SpawnWithDelay()
+    {
+        // spawnDelay만큼 대기
+        if (spawnDelay > 0f)
+        {
+            yield return new WaitForSecondsRealtime(spawnDelay);
+        }
+
+        // 딜레이 후 실제 스폰 시작
+        monsterSpawner.StartSpawning();
+    }
+
 
     private void OnMonsterSpawned(GameObject monster)
     {
