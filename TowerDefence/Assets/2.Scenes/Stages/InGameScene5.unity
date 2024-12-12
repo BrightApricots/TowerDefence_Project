@@ -24407,7 +24407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 233.12451}
+  m_AnchoredPosition: {x: 0, y: 233.12451}
   m_SizeDelta: {x: -1377.2338, y: -914.34906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424457059
@@ -55469,21 +55469,10 @@ MonoBehaviour:
       spawnCount: 5
     spawnInterval: 1
     spawnPoints:
+    - {fileID: 362881107}
     - {fileID: 1660414543}
     - {fileID: 1541005857}
     - {fileID: 1934502628}
-  - monsterSpawnData: []
-    spawnInterval: 1
-    spawnPoints: []
-  - monsterSpawnData: []
-    spawnInterval: 1
-    spawnPoints: []
-  - monsterSpawnData: []
-    spawnInterval: 1
-    spawnPoints: []
-  - monsterSpawnData: []
-    spawnInterval: 1
-    spawnPoints: []
   waveTextManager: {fileID: 902036303}
   currentWaveIndex: 0
   waveClearMoney: 30
@@ -55525,6 +55514,7 @@ MonoBehaviour:
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   prepareCooldown: 120
   remainingMonsters: 0
+  isFirstBattleClicked: 0
 --- !u!4 &979587328
 Transform:
   m_ObjectHideFlags: 0
@@ -71807,6 +71797,7 @@ MonoBehaviour:
   PlacedTowerList: []
   bounusMoney: 0
   clearStage: 0
+  BossCount: 0
   tooltipCount: 0
 --- !u!224 &1498700928
 RectTransform:
@@ -95838,7 +95829,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 6.5, y: 0, z: 25.5}
-  m_LocalScale: {x: 4.93, y: 4.93, z: 4.93}
+  m_LocalScale: {x: 6.0000005, y: 6.0000005, z: 6.0000005}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4284089284031989822}
@@ -95866,8 +95857,12 @@ MonoBehaviour:
   gold: 1
   rotationSpeed: 5
   maxHp: 100
-  spawnPos: {fileID: 362881107}
+  maxSpeed: 2
+  maxDamage: 1
+  maxGold: 1
   IsSpawnDirect: 0
+  spawnPos: {fileID: 362881107}
+  waveInfo: {fileID: 979587327}
 --- !u!4 &7471510076861538264 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2903067104379635833, guid: 76f2a05c111738048b7e891faab1c4f9, type: 3}

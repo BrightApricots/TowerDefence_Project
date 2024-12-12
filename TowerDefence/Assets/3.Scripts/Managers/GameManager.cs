@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int bounusMoney = 0;
     public int clearStage = 0;
 
-
+    public int BossCount = 0;
 
     public bool tooltipCount = false;
 
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
             PlacedTowerList.Clear();
         }
 
+        Difficulty = 0;
         PlayerTetrisList = new List<GameObject>();
         HandTetrisList = new List<GameObject>();
         //EquipTowerList = new List<string>();

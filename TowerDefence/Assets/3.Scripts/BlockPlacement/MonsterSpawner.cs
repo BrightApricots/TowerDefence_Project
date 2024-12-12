@@ -88,6 +88,7 @@ public class MonsterSpawner : MonoBehaviour
             }
 
             Monster monster = ObjectManager.Instance.Spawn<Monster>(selectedMonsterPrefab, selectedSpawnPoint.position);
+            
 
             if (monster != null)
             {
