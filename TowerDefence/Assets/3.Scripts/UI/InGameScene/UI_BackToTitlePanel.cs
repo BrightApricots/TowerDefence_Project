@@ -18,7 +18,7 @@ public class UI_BackToTitlePanel : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            Time.timeScale = 1f;
+            Time.timeScale = GameManager.Instance.InGameSpeed;
             gameObject.SetActive(false);
         }
     }
@@ -28,7 +28,6 @@ public class UI_BackToTitlePanel : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.CurrentHp = GameManager.Instance.HpBeforeEnterStage;
         FadeManager.Instance.LoadScene("TitleScene");
-        //SceneManager.LoadScene("TitleScene");
     }
 
     private void ClickNo()
