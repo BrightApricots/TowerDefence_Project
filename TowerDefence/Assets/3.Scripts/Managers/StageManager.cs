@@ -196,7 +196,6 @@ public class StageManager : MonoBehaviour
 
     private void ShowGameOverPanel()
     {
-        // 이 시점에서 isGameOver는 이미 true
         SetPanelActive(GameOverPanel, true);
         if (gameOverButton != null)
         {
@@ -207,8 +206,7 @@ public class StageManager : MonoBehaviour
             SetUIElementsActive(uiElementsToDisable, false);
         }
 
-        // 필요하다면 여기서 Time.timeScale = 0f; 설정 가능
-        Debug.Log("GameOverPanel 활성화 완료. isGameOver = true 상태 유지.");
+
     }
 
     private void SetPanelActive(GameObject panel, bool isActive)

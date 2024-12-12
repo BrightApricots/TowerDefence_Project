@@ -618,7 +618,7 @@ public class WaveManager : MonoBehaviour
         isReadyForNextWave = false;
         SetBattleButtonState(false);
         if (speedButtonGroup != null) speedButtonGroup.SetActive(false);
-        Time.timeScale = 1; // 게임 정지
+        Time.timeScale = 1; 
     }
 
     private void OnAllWavesClearedHandler()
