@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     private float rotationSpeed = 5f;
 
     [SerializeField]
-    public int maxHp = 100 * GameManager.Instance.Difficulty;
+    public int maxHp = 100;
     [SerializeField]
     public float maxSpeed = 2f;
     [SerializeField]

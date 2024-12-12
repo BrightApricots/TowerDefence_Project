@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class Wave
@@ -21,10 +22,15 @@ public class Wave
 public class SpeedSetting
 {
     [Tooltip("배속 값 (예: 0.5x, 1x, 2x, 3x")]
-    public float speedMultiplier = GameManager.Instance.InGameSpeed;
+    public float speedMultiplier;
 
     [Tooltip("해당 배속 상태일 색상을 적용할 아이콘들")]
     public List<Image> speedImages;
+
+    private void Start()
+    {
+        speedMultiplier = GameManager.Instance.InGameSpeed;
+    }
 }
 
 namespace MyGame

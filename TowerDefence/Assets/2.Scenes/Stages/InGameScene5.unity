@@ -55539,8 +55539,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - monsterSpawnData:
-    - monsterPrefab: {fileID: 6215245390933727667, guid: b33bd40f090b6f84e8f449dfbca01225, type: 3}
-      spawnCount: 5
+    - monsterPrefab: {fileID: 7348137727425373344, guid: ec1894e179706d2429e761898047e560, type: 3}
+      spawnCount: 100
+    - monsterPrefab: {fileID: 4299118305578061567, guid: 6f7b441333b65d74c96855990a16903d, type: 3}
+      spawnCount: 50
+    - monsterPrefab: {fileID: 5331078080104531923, guid: 6a6c3fe131f4b844994634e69153eab9, type: 3}
+      spawnCount: 30
+    - monsterPrefab: {fileID: 3792139252172566729, guid: 141230e150e29824cbde91d60b1bc9ae, type: 3}
+      spawnCount: 30
+    - monsterPrefab: {fileID: 7565586854734543232, guid: de7cebedca8c19d4098c8860962efc7b, type: 3}
+      spawnCount: 30
+    - monsterPrefab: {fileID: 8858668344987094152, guid: 03cd11f880c255d4c99328d0d2b99a16, type: 3}
+      spawnCount: 100
+    - monsterPrefab: {fileID: 3100993288617365617, guid: 72ae23fe4675a37448827f70daa78438, type: 3}
+      spawnCount: 50
+    - monsterPrefab: {fileID: 2377433268561859353, guid: 9fe6551838807c849ae1c406c37153e1, type: 3}
+      spawnCount: 50
+    - monsterPrefab: {fileID: 1540698828338875796, guid: 206f43b16e31d91498de41e0de0066eb, type: 3}
+      spawnCount: 50
     spawnInterval: 1
     spawnPoints:
     - {fileID: 362881107}
@@ -71862,6 +71878,7 @@ MonoBehaviour:
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
+  InGameSpeed: 1
   TotalTetrisList: 
   TotalTowerList: []
   PlayerTetrisList: []
