@@ -92,7 +92,8 @@ public class MonsterSpawner : MonoBehaviour
 
             if (monster != null)
             {
-                monster.spawnPos = selectedSpawnPoint;
+                monster.Initialize(selectedSpawnPoint);
+                //monster.spawnPos = selectedSpawnPoint;
                 monster.IsSpawnDirect = true;
                 monster.OnDead -= HandleMonsterDestroyed;
                 monster.OnDead += HandleMonsterDestroyed;
