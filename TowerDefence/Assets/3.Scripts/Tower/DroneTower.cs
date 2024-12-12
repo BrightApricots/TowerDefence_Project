@@ -129,11 +129,15 @@ public class DroneTower : Tower
             {
                 if (target.CompareTag("Monster"))
                 {
-                    float distance = Vector3.Distance(drone.transform.position, target.transform.position);
-                    if (distance < minDistance)
+                    Monster monster = target.GetComponent<Monster>();
+                    if (monster != null && target.gameObject.activeSelf && !monster.IsDead)
                     {
-                        minDistance = distance;
-                        nearestTarget = target.transform;
+                        float distance = Vector3.Distance(drone.transform.position, target.transform.position);
+                        if (distance < minDistance)
+                        {
+                            minDistance = distance;
+                            nearestTarget = target.transform;
+                        }
                     }
                 }
             }
@@ -145,9 +149,21 @@ public class DroneTower : Tower
         }
         else
         {
-            if (Vector3.Distance(CurrentTarget.transform.position, transform.position) > Range)
+            if (drone.CurrentTarget != null)
             {
-                CurrentTarget = null;
+                Monster monster = drone.CurrentTarget.GetComponent<Monster>();
+                if (!drone.CurrentTarget.gameObject.activeSelf || 
+                    monster == null || 
+                    monster.IsDead || 
+                    Vector3.Distance(drone.CurrentTarget.position, transform.position) > Range)
+                {
+                    drone.ClearTarget();
+                    drone.isReturning = true;
+                }
+            }
+            else
+            {
+                drone.ClearTarget();
                 drone.isReturning = true;
             }
         }
