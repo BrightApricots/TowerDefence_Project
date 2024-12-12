@@ -38,15 +38,15 @@ public class Monster : MonoBehaviour
 
     public event Action OnDead;
 
-    private void Awake()
-    {
-        //프리팹 스탯을 적용하기 위한 체력스탯
-        hp *= GameManager.Instance.Difficulty;
-        maxHp = hp;
-        maxSpeed = speed;
-        maxDamage = damage;
-        maxGold = gold;
-    }
+    //private void Awake()
+    //{
+    //    //프리팹 스탯을 적용하기 위한 체력스탯
+    //    hp *= GameManager.Instance.Difficulty;
+    //    maxHp = hp;
+    //    maxSpeed = speed;
+    //    maxDamage = damage;
+    //    maxGold = gold;
+    //}
 
     public void Initialize(Transform spawn)
     {
@@ -214,6 +214,15 @@ public class Monster : MonoBehaviour
         {
             PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
+    }
+    private void OnEnable()
+    {
+        //프리팹 스탯을 적용하기 위한 체력스탯
+        hp *= GameManager.Instance.Difficulty;
+        maxHp = hp;
+        maxSpeed = speed;
+        maxDamage = damage;
+        maxGold = gold;
     }
 
     private void OnDisable()

@@ -55292,6 +55292,7 @@ MonoBehaviour:
   - {fileID: 1541005857}
   - {fileID: 1934502628}
   targetPoint: {fileID: 943508852}
+  spawnDelay: 0
   battleButton: {fileID: 399213837}
   waveStatusText: {fileID: 37371841}
   wavePrepareText: {fileID: 2073483914}
@@ -94520,9 +94521,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 157491839}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5850
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
