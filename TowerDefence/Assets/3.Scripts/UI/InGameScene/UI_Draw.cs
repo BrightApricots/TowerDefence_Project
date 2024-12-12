@@ -108,7 +108,7 @@ public class UI_Draw : MonoBehaviour
             int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
             DrawCard();
             if (GameManager.Instance.clearStage != 6)
-            {
+            { 
                 DrawPrice += 5;
             }
         }
