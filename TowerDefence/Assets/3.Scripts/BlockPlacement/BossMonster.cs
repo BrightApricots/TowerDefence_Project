@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -13,9 +14,14 @@ public class BossMonster : Monster
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        GameManager.Instance.BossCount = 1;
+        
     }
 
+
+    private void Start()
+    {
+        GameManager.Instance.BossCount = 1;
+    }
     protected override void Update()
     {
         if(waveInfo.isFirstBattleClicked == true && isStart == false)
@@ -28,12 +34,12 @@ public class BossMonster : Monster
 
     IEnumerator DoRoar()
     {
-        anim.SetBool("IsRoar", true);
+        anim.SetBool("IsScream", true);
         yield return new WaitForSeconds(3f);
-        anim.SetBool("IsMove", true);
+        anim.SetBool("IsWalk", true);
         Initialize(spawnPos);
         isMoving = true;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
     }
     //보스몬스터가 일반 몬스터랑 다른점?
     //웨이브 매니저와 상관 없이 나옴.
