@@ -175,10 +175,10 @@ public class GridData
         }
 
         // ObjectPlacer에서 오브젝트 제거
-        if (data.PlacedObjectIndex >= 0)
-        {
-            ObjectPlacer.Instance?.RemoveObjectAt(data.PlacedObjectIndex);
-        }
+        //if (data.PlacedObjectIndex >= 0)
+        //{
+        //    ObjectPlacer.Instance?.RemoveObjectAt(data.PlacedObjectIndex);
+        //}
 
         // 제거 후 Dictionary 상태 출력
         Debug.Log($"Remaining objects after removal: {placedObjects.Count}");
