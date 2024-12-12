@@ -545,8 +545,11 @@ MonoBehaviour:
   gold: 1
   rotationSpeed: 100
   maxHp: 100
-  spawnPos: {fileID: 0}
+  maxSpeed: 2
+  maxDamage: 1
+  maxGold: 1
   IsSpawnDirect: 0
+  spawnPos: {fileID: 0}
 --- !u!54 &-4317833142908104503
 Rigidbody:
   m_ObjectHideFlags: 0

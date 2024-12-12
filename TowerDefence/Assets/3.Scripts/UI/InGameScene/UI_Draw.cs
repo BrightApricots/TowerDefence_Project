@@ -107,7 +107,10 @@ public class UI_Draw : MonoBehaviour
             GameManager.Instance.CurrentMoney -= DrawPrice;
             int drawCard = Random.Range(0, GameManager.Instance.TotalTetrisList.Count);
             DrawCard();
-            DrawPrice += 5;
+            if (GameManager.Instance.clearStage != 6)
+            {
+                DrawPrice += 5;
+            }
         }
     }
 }
