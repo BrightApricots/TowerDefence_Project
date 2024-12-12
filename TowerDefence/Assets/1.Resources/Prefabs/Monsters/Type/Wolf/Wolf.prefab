@@ -697,10 +697,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 42
-  speed: 4
+  speed: 3
   damage: 1
   gold: 1
   rotationSpeed: 5
+  maxHp: 0
+  maxSpeed: 0
+  maxDamage: 0
+  maxGold: 0
+  IsSpawnDirect: 0
+  spawnPos: {fileID: 0}
 --- !u!1 &2377433268864834307
 GameObject:
   m_ObjectHideFlags: 0
