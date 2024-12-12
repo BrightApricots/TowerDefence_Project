@@ -106,7 +106,7 @@ public class FlameTower: Tower
             currentFlameProjectile.SetActive(false);
             currentFlameProjectile = flameProjeciles[Level - 1];
             StartCoroutine(Attack());
-            originalDamage += 3;  // 원본 데미지도 증가
+            originalDamage += 3;  
             Damage += 3;
         }
         else if (Level == 3)
@@ -115,9 +115,9 @@ public class FlameTower: Tower
             currentFlameProjectile.SetActive(false);
             currentFlameProjectile = flameProjeciles[Level - 1];
             StartCoroutine(Attack());
-            originalDamage += 1;  // 원본 데미지도 증가
+            originalDamage += 1; 
             Damage += 1;
-            originalRange += 2f;  // 원본 범위도 증가
+            originalRange += 2f; 
             Range += 2f;
         }
     }
