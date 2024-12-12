@@ -65,6 +65,7 @@ public class BossMonster : Monster
         if (hp <= 0)
         {
             hp = 0;
+            isMoving = false;
             GameManager.Instance.CurrentMoney += 1000;
             anim.SetBool("IsDead", true);
             StartCoroutine(removeBoss());
@@ -74,6 +75,7 @@ public class BossMonster : Monster
     IEnumerator removeBoss()
     {
         yield return new WaitForSeconds(5f);
+        Destroy(bossHpBar.gameObject);
         Destroy(this.gameObject);
     }
 }

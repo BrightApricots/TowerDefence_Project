@@ -14478,7 +14478,7 @@ MonoBehaviour:
   IsTargeting: 0
   IsBomb: 1
   BombRange: 3
-  isSelfDestroy: 0
+  isSelfDestroy: 1
   Target: {fileID: 0}
   ExplosionParticle: {fileID: 5711083335939177453, guid: 460f2665821f6c64dacbea9751566a5b, type: 3}
 --- !u!136 &9218619332921162443

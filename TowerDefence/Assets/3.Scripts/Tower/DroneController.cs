@@ -32,6 +32,8 @@ public class DroneController : MonoBehaviour
 
     public bool IsTargeting;
 
+    public Transform CurrentTarget => currentTarget;
+
     public void Initialize(Transform home, Transform tower, float range)
     {
         homePosition = home;
@@ -45,12 +47,20 @@ public class DroneController : MonoBehaviour
     {
         if (currentTarget != null && !isReturning)
         {
+            Monster monster = currentTarget.GetComponent<Monster>();
+            if (monster == null || !currentTarget.gameObject.activeSelf || monster.IsDead)
+            {
+                ClearTarget();
+                ReturnToHome();
+                return;
+            }
+
             float distanceToTarget = Vector3.Distance(currentTarget.position, transform.position);
             float distanceToTower = Vector3.Distance(currentTarget.position, towerPosition.position);
 
             if (distanceToTower > towerRange)
             {
-                currentTarget = null;
+                ClearTarget();
                 ReturnToHome();
             }
             else
@@ -133,14 +143,6 @@ public class DroneController : MonoBehaviour
             projectile.IsTargeting = this.IsTargeting;
             projectile.IsBomb = this.IsBomb;
             projectile.Target = currentTarget;
-
-            //GameObject projectile = Instantiate(projectilePrefab, muzzlePosition.position, Quaternion.identity);
-            //Projectile proj = projectile.GetComponent<Projectile>();
-            //proj.Damage = damage;
-            //proj.IsTargeting = true;
-            //proj.IsBomb = this.IsBomb;
-            //proj.Target = currentTarget;
-
             PooledParticle muzzleEffect = ObjectManager.Instance.Spawn<PooledParticle>(
                         projectileEffect, muzzlePosition.position, muzzlePosition.transform.rotation
                );
@@ -150,5 +152,10 @@ public class DroneController : MonoBehaviour
             //Destroy(_MuzzlEffect, _MuzzlEffect.GetComponent<ParticleSystem>().main.duration);
             lastShootTime = Time.time;
         }
+    }
+
+    public void ClearTarget()
+    {
+        currentTarget = null;
     }
 } 
