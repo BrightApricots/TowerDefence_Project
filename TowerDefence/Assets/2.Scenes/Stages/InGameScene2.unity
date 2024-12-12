@@ -58796,6 +58796,7 @@ MonoBehaviour:
   - {fileID: 1890111012}
   - {fileID: 1371365567}
   targetPoint: {fileID: 804980043}
+  spawnDelay: 0
   battleButton: {fileID: 399213837}
   waveStatusText: {fileID: 37371841}
   wavePrepareText: {fileID: 2073483914}
