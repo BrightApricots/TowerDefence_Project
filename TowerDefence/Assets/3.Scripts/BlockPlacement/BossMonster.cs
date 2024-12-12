@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.ComTypes;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMonster : Monster
 {
     private Animator anim;
     private bool isStart = false;
+    [SerializeField] Slider bossHpBar;
+    [SerializeField] TextMeshProUGUI HealthText;
     [SerializeField] WaveManager waveInfo;
 
     private void Awake()
@@ -27,8 +32,11 @@ public class BossMonster : Monster
         {
             StartCoroutine(DoRoar());
             isStart = true;
+            bossHpBar.gameObject.SetActive(true);
         }
         base.Update();
+        bossHpBar.value = (float)hp / maxHp;
+        HealthText.text = $"{hp}/{maxHp}";
     }
 
     IEnumerator DoRoar()
@@ -40,9 +48,32 @@ public class BossMonster : Monster
         isMoving = true;
         yield return new WaitForSeconds(1f);
     }
-    //보스몬스터가 일반 몬스터랑 다른점?
-    //웨이브 매니저와 상관 없이 나옴.
-    //보스가 죽기 전까진 웨이브가 끝나면 안됨. 겜메에 보스 카운트 넣어서 웨이브 매니저 클리어 조건에 추가
-    //예상 순서 : 배틀 버튼 -> 보스가 스폰1위치에 소환 -> 카메라 이동 -> 카메라 원점 -> 웨이브 시작
-    //
+
+    public override void TakeDamage(int damage)
+    {
+        if (IsDead) return;
+
+        GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
+        GameObject damageCanvas = GameObject.Find("DamageCanvas");
+        DamageFontEffect damageEffect = ObjectManager.Instance.Spawn<DamageFontEffect>(damageFontPrefab, Vector3.zero, Quaternion.identity);
+
+        damageEffect.transform.SetParent(damageCanvas.transform, false);
+        damageEffect.SetDamageText(damage.ToString(), transform.position);
+
+        hp -= damage;
+
+        if (hp <= 0)
+        {
+            hp = 0;
+            GameManager.Instance.CurrentMoney += 1000;
+            anim.SetBool("IsDead", true);
+            StartCoroutine(removeBoss());
+
+        }
+    }
+    IEnumerator removeBoss()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(this);
+    }
 }

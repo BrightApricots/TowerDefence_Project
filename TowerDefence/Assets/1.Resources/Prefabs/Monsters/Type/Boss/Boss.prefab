@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5850
-  speed: 0.8
+  speed: 0.4
   damage: 99
   gold: 1
   rotationSpeed: 5

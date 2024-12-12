@@ -5,7 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField]
-    private int hp = 100;
+    protected int hp = 100;
     [SerializeField]
     private float speed = 2f;
     [SerializeField]
@@ -177,7 +177,7 @@ public class Monster : MonoBehaviour
         Die();
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (IsDead) return;
 
