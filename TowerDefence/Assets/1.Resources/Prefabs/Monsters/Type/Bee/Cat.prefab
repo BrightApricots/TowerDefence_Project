@@ -397,8 +397,8 @@ GameObject:
   - component: {fileID: 7097469138640137198}
   - component: {fileID: 3406343002856678181}
   - component: {fileID: 4916644250998980759}
-  - component: {fileID: 1337862160876544560}
   - component: {fileID: 1598974403598814870}
+  - component: {fileID: -7169578941832206120}
   m_Layer: 8
   m_Name: Cat
   m_TagString: Monster
@@ -501,23 +501,6 @@ CapsuleCollider:
   m_Height: 0.920686
   m_Direction: 2
   m_Center: {x: 0, y: 0.48628485, z: -0.006075859}
---- !u!114 &1337862160876544560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6215245390933727667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76367be63875e454cb64c082729c3574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 8
-  speed: 2
-  damage: 1
-  gold: 1
-  rotationSpeed: 100
 --- !u!54 &1598974403598814870
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -545,6 +528,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7169578941832206120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215245390933727667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76367be63875e454cb64c082729c3574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 8
+  speed: 2
+  damage: 1
+  gold: 1
+  rotationSpeed: 5
+  maxHp: 100
+  maxSpeed: 0
+  maxDamage: 0
+  maxGold: 0
+  IsSpawnDirect: 0
+  spawnPos: {fileID: 0}
 --- !u!1 &6897385203080184258
 GameObject:
   m_ObjectHideFlags: 0
