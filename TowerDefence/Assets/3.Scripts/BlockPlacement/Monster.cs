@@ -187,6 +187,7 @@ public class Monster : MonoBehaviour
         hp -= damage;
         if (hp <= 0 && !IsDead)
         {
+            GameManager.Instance.CurrentMoney += gold;
             Die();
         }
     }
@@ -195,7 +196,6 @@ public class Monster : MonoBehaviour
     {
         if (IsDead) return;
         SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
-        GameManager.Instance.CurrentMoney += gold;
         
         IsDead = true;
         OnDead?.Invoke();
