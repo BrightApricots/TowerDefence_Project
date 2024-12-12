@@ -14498,7 +14498,7 @@ MonoBehaviour:
   MoveSpeed: 50
   Damage: 5
   Duration: 3
-  IsTargeting: 1
+  IsTargeting: 0
   IsBomb: 1
   BombRange: 3
   isSelfDestroy: 0

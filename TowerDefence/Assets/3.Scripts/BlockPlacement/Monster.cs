@@ -124,6 +124,8 @@ public class Monster : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (IsDead) return;
+        
         if(IsSpawnDirect == true)
         {
             Initialize(spawnPoint);
@@ -177,6 +179,8 @@ public class Monster : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (IsDead) return;
+
         GameObject damageFontPrefab = Resources.Load<GameObject>("Effects/DamageFont");
         GameObject damageCanvas = GameObject.Find("DamageCanvas");
         DamageFontEffect damageEffect = ObjectManager.Instance.Spawn<DamageFontEffect>(damageFontPrefab, Vector3.zero,Quaternion.identity);
@@ -185,8 +189,10 @@ public class Monster : MonoBehaviour
         damageEffect.SetDamageText(damage.ToString(), transform.position);
         
         hp -= damage;
-        if (hp <= 0 && !IsDead)
+        
+        if (hp <= 0)
         {
+            hp = 0;
             GameManager.Instance.CurrentMoney += gold;
             Die();
         }
@@ -195,9 +201,10 @@ public class Monster : MonoBehaviour
     private void Die()
     {
         if (IsDead) return;
-        SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
         
         IsDead = true;
+        isMoving = false;
+        SoundManager.Instance.Play("MonsterDeathSound", SoundManager.Sound.Effect);
         OnDead?.Invoke();
     }
 
@@ -221,7 +228,7 @@ public class Monster : MonoBehaviour
         hp = maxHp;  
         speed = maxSpeed;  
         gold = maxGold;  
-        damage = maxDamage;  
+        damage = maxDamage;
 
         //이벤트 해제 안하면 remaining 중첩해서 빠짐
         if (PathManager.Instance != null)

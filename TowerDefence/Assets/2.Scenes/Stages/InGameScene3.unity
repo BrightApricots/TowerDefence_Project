@@ -7277,7 +7277,7 @@ GameObject:
   - component: {fileID: 180138751}
   - component: {fileID: 180138750}
   - component: {fileID: 180138753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18097,7 +18097,7 @@ GameObject:
   - component: {fileID: 262023939}
   - component: {fileID: 262023938}
   - component: {fileID: 262023941}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18319,7 +18319,7 @@ GameObject:
   - component: {fileID: 264471256}
   - component: {fileID: 264471255}
   - component: {fileID: 264471258}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23487,7 +23487,7 @@ GameObject:
   - component: {fileID: 285673185}
   - component: {fileID: 285673184}
   - component: {fileID: 285673187}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23944,7 +23944,7 @@ GameObject:
   - component: {fileID: 318525622}
   - component: {fileID: 318525621}
   - component: {fileID: 318525624}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24105,7 +24105,7 @@ GameObject:
   - component: {fileID: 327091039}
   - component: {fileID: 327091038}
   - component: {fileID: 327091041}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24700,7 +24700,7 @@ GameObject:
   - component: {fileID: 355287370}
   - component: {fileID: 355287369}
   - component: {fileID: 355287372}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25625,7 +25625,7 @@ GameObject:
   - component: {fileID: 422415343}
   - component: {fileID: 422415342}
   - component: {fileID: 422415345}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26023,7 +26023,7 @@ GameObject:
   - component: {fileID: 456700334}
   - component: {fileID: 456700333}
   - component: {fileID: 456700336}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26148,7 +26148,7 @@ GameObject:
   - component: {fileID: 460953643}
   - component: {fileID: 460953642}
   - component: {fileID: 460953645}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27140,7 +27140,7 @@ GameObject:
   - component: {fileID: 559387015}
   - component: {fileID: 559387014}
   - component: {fileID: 559387017}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28057,7 +28057,7 @@ GameObject:
   - component: {fileID: 639875494}
   - component: {fileID: 639875493}
   - component: {fileID: 639875496}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28433,7 +28433,7 @@ GameObject:
   - component: {fileID: 687137154}
   - component: {fileID: 687137153}
   - component: {fileID: 687137156}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28879,7 +28879,7 @@ GameObject:
   - component: {fileID: 731547800}
   - component: {fileID: 731547799}
   - component: {fileID: 731547802}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42144,7 +42144,7 @@ GameObject:
   - component: {fileID: 917420533}
   - component: {fileID: 917420532}
   - component: {fileID: 917420535}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42304,7 +42304,7 @@ GameObject:
   - component: {fileID: 933258190}
   - component: {fileID: 933258189}
   - component: {fileID: 933258192}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42797,7 +42797,7 @@ GameObject:
   - component: {fileID: 951578213}
   - component: {fileID: 951578212}
   - component: {fileID: 951578215}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43428,7 +43428,7 @@ GameObject:
   - component: {fileID: 987001804}
   - component: {fileID: 987001803}
   - component: {fileID: 987001806}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44193,7 +44193,7 @@ GameObject:
   - component: {fileID: 1048642936}
   - component: {fileID: 1048642935}
   - component: {fileID: 1048642938}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49573,7 +49573,7 @@ GameObject:
   - component: {fileID: 1110665416}
   - component: {fileID: 1110665415}
   - component: {fileID: 1110665418}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53041,7 +53041,7 @@ GameObject:
   - component: {fileID: 1366431762}
   - component: {fileID: 1366431761}
   - component: {fileID: 1366431764}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58756,7 +58756,7 @@ GameObject:
   - component: {fileID: 1411202321}
   - component: {fileID: 1411202320}
   - component: {fileID: 1411202323}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58881,7 +58881,7 @@ GameObject:
   - component: {fileID: 1414952980}
   - component: {fileID: 1414952979}
   - component: {fileID: 1414952982}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59872,6 +59872,7 @@ MonoBehaviour:
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
+  InGameSpeed: 1
   TotalTetrisList: 
   TotalTowerList: []
   PlayerTetrisList: []
@@ -70246,7 +70247,7 @@ GameObject:
   - component: {fileID: 1536505666}
   - component: {fileID: 1536505665}
   - component: {fileID: 1536505668}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76782,7 +76783,7 @@ GameObject:
   - component: {fileID: 1637695174}
   - component: {fileID: 1637695173}
   - component: {fileID: 1637695176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77357,7 +77358,7 @@ GameObject:
   - component: {fileID: 1660703420}
   - component: {fileID: 1660703419}
   - component: {fileID: 1660703422}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80149,7 +80150,7 @@ GameObject:
   - component: {fileID: 1835197038}
   - component: {fileID: 1835197037}
   - component: {fileID: 1835197040}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87576,7 +87577,7 @@ GameObject:
   - component: {fileID: 2043079248}
   - component: {fileID: 2043079247}
   - component: {fileID: 2043079250}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88477,7 +88478,7 @@ GameObject:
   - component: {fileID: 2099915052}
   - component: {fileID: 2099915051}
   - component: {fileID: 2099915054}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94324,7 +94325,7 @@ GameObject:
   - component: {fileID: 2142270838}
   - component: {fileID: 2142270837}
   - component: {fileID: 2142270840}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Map_Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

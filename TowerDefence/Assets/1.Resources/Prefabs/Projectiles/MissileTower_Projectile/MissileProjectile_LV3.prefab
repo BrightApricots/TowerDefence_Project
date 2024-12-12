@@ -57,6 +57,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1503314963399906, guid: b179a4b6ccaf1ad459bbd10cfc2e1ca4, type: 3}
     - target: {fileID: 1295335802975358573, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+      propertyPath: IsBomb
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295335802975358573, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+      propertyPath: IsTargeting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295335802975358573, guid: 3720370842d0a124baa530637202c7ab, type: 3}
+      propertyPath: isSelfDestroy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295335802975358573, guid: 3720370842d0a124baa530637202c7ab, type: 3}
       propertyPath: ExplosionParticle
       value: 
       objectReference: {fileID: 7564372826126219967, guid: 873470cf1704c5e45bd860bbf5728091, type: 3}
