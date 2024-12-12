@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public int CurrentMoney = 50;
     public int MaxHp = 15;
     public int Difficulty;
+    public float InGameSpeed = 1f;
     public List<int> TotalTetrisList = new List<int> { 0,1,2,3,4,5}; //0~100
     public List<string> TotalTowerList;  //101~200
     public List<GameObject> PlayerTetrisList;

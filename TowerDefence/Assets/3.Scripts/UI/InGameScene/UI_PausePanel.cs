@@ -22,7 +22,7 @@ public class UI_PausePanel : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            Time.timeScale = 1f;
+            Time.timeScale = GameManager.Instance.InGameSpeed;
             gameObject.SetActive(false);
         }
     }
@@ -31,7 +31,7 @@ public class UI_PausePanel : MonoBehaviour
     {
         // 버튼 소리
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
-        Time.timeScale = 1f;
+        Time.timeScale = GameManager.Instance.InGameSpeed;
         gameObject.SetActive(false);
     }
 
