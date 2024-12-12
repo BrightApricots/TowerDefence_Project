@@ -63,17 +63,25 @@ public class Projectile : MonoBehaviour
 
     protected virtual void TargettingMove()
     {
-        if(Target == null)
+        if (Target == null || !Target.gameObject.activeSelf)
         {
+            if (ExplosionParticle != null)
+            {
+                PooledParticle explosion = ObjectManager.Instance.Spawn<PooledParticle>(
+                    ExplosionParticle, 
+                    transform.position, 
+                    Quaternion.identity
+                );
+            }
             ObjectManager.Instance.Despawn(this);
             return;
         }
+
         float time = Time.time + 1f;
 
-        // if 문으로 변경하여 조건을 확인합니다.
         if (time > Time.time)
         {
-            transform.Translate(Vector3.up* 30f * Time.deltaTime);
+            transform.Translate(Vector3.up * 30f * Time.deltaTime);
         }
 
         Vector3 dir = Target.position - transform.position;

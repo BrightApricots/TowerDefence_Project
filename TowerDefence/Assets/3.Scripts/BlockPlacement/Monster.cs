@@ -5,7 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField]
-    protected int hp = 100;
+    public int hp = 100;
     [SerializeField]
     private float speed = 2f;
     [SerializeField]
@@ -217,32 +217,40 @@ public class Monster : MonoBehaviour
     }
     private void OnEnable()
     {
-        //프리팹 스탯을 적용하기 위한 체력스탯
-        hp *= GameManager.Instance.Difficulty;
-        maxHp = hp;
-        maxSpeed = speed;
-        maxDamage = damage;
-        maxGold = gold;
-    }
-
-    private void OnDisable()
-    {
-        if (!IsDead) return;
-        //풀링시 초기화 해야할 값들
+        // 상태 초기화
         IsDead = false;
         isMoving = false;
         currentWaypointIndex = 0;
         spawnPoint = null;
         IsSpawnDirect = false;
-        hp = maxHp;  
-        speed = maxSpeed;  
-        gold = maxGold;  
-        damage = maxDamage;
 
-        //이벤트 해제 안하면 remaining 중첩해서 빠짐
+        // 프리팹에 설정된 초기값 복원
+        hp = maxHp;
+        speed = maxSpeed;
+        damage = maxDamage;
+        gold = maxGold;
+
+        // 난이도 적용 (체력만)
+        hp *= GameManager.Instance.Difficulty;
+        maxHp = hp;  // 난이도가 적용된 체력을 최대체력으로 설정
+    }
+
+    private void OnDisable()
+    {
+        // 이벤트 해제
         if (PathManager.Instance != null)
         {
             PathManager.Instance.OnActualPathUpdated -= OnActualPathUpdated;
         }
+    }
+
+    // Awake에서 최대값 초기화 추가
+    private void Awake()
+    {
+        // 프리팹의 초기값을 최대값으로 저장
+        maxHp = hp;
+        maxSpeed = speed;
+        maxDamage = damage;
+        maxGold = gold;
     }
 }
