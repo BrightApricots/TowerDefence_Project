@@ -37,6 +37,7 @@ public class UI_LobbyScene : MonoBehaviour
         SoundManager.Instance.Play("MBGM", SoundManager.Sound.Bgm);
         TowerCard();
         GameManager.Instance.IsSaved = true;
+        GameManager.Instance.HpBeforeEnterStage = GameManager.Instance.CurrentHp;
     }
 
     private void Update()

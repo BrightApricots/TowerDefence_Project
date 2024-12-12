@@ -187,7 +187,7 @@ public class Monster : MonoBehaviour
         hp -= damage;
         if (hp <= 0 && !IsDead)
         {
-            GameManager.Instance.CurrentMoney += gold;
+            GameManager.Instance.CurrentMoney += gold;     
             Die();
         }
     }
