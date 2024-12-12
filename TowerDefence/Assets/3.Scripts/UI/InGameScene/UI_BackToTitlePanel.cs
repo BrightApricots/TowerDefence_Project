@@ -26,6 +26,7 @@ public class UI_BackToTitlePanel : MonoBehaviour
     {
         SoundManager.Instance.Play("Click18", SoundManager.Sound.Effect);
         Time.timeScale = 1f;
+        GameManager.Instance.CurrentHp = GameManager.Instance.HpBeforeEnterStage;
         FadeManager.Instance.LoadScene("TitleScene");
         //SceneManager.LoadScene("TitleScene");
     }

@@ -69480,6 +69480,7 @@ MonoBehaviour:
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
+  HpBeforeEnterStage: 0
   InGameSpeed: 1
   TotalTetrisList: 
   TotalTowerList: []

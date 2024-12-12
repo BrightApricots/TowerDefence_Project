@@ -32265,6 +32265,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 932502956708926511, guid: a6d45d81765086f49b827b707155936a, type: 3}
+      propertyPath: speed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 932502956708926511, guid: a6d45d81765086f49b827b707155936a, type: 3}
       propertyPath: spawnPos
       value: 
       objectReference: {fileID: 362881107}
@@ -71588,10 +71592,11 @@ MonoBehaviour:
   IsSaved: 0
   CurrentExp: 10
   CurrentEmber: 10
-  CurrentHp: 10
+  CurrentHp: 15
   CurrentMoney: 50
   MaxHp: 15
   Difficulty: 0
+  HpBeforeEnterStage: 0
   InGameSpeed: 1
   TotalTetrisList: 
   TotalTowerList: []
@@ -84890,7 +84895,7 @@ Transform:
   m_GameObject: {fileID: 1660414538}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 0.12, z: 6.5}
+  m_LocalPosition: {x: -14.5, y: 0.12, z: 12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90354,7 +90359,7 @@ Transform:
   m_GameObject: {fileID: 1934502627}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.5, y: 0.12, z: -5.5}
+  m_LocalPosition: {x: -15.5, y: 0.12, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
