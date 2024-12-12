@@ -41,6 +41,7 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         //프리팹 스탯을 적용하기 위한 체력스탯
+        hp *= GameManager.Instance.Difficulty;
         maxHp = hp;
         maxSpeed = speed;
         maxDamage = damage;
