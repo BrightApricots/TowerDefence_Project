@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5615298810161423664}
   - component: {fileID: 5718853025075217930}
   - component: {fileID: 5703483938172672062}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4895,7 +4895,7 @@ GameObject:
   - component: {fileID: 474604135742478496}
   - component: {fileID: 1628692510959947222}
   - component: {fileID: 1595386696075708105}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FlamethrowerSharpBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9735,7 +9735,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.7, z: 3.5}
+  m_Size: {x: 1.3, y: 3.6, z: 3.6}
   m_Center: {x: 0, y: 0, z: 2}
 --- !u!54 &474604135742478496
 Rigidbody:
@@ -9892,7 +9892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5615202115123249522}
   - component: {fileID: 5503825593650633896}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9987,7 +9987,7 @@ GameObject:
   - component: {fileID: 5614880866296942596}
   - component: {fileID: 5702518189566539668}
   - component: {fileID: 5702014405614993778}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14749,7 +14749,7 @@ GameObject:
   - component: {fileID: 5616751851003621712}
   - component: {fileID: 5701790833521856108}
   - component: {fileID: 5703326853300393980}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19656,7 +19656,7 @@ GameObject:
   - component: {fileID: 6786966666688550510}
   - component: {fileID: 6700971679211820876}
   - component: {fileID: 6699125977973721876}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24475,7 +24475,7 @@ GameObject:
   - component: {fileID: 6787162682107954266}
   - component: {fileID: 6700405845288581766}
   - component: {fileID: 6700721584090027798}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29276,7 +29276,7 @@ GameObject:
   - component: {fileID: 2112647050609098639}
   - component: {fileID: 8665745509243422617}
   - component: {fileID: 1768351797300519436}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FlamethrowerSharpFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34116,7 +34116,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.7, z: 3.5}
+  m_Size: {x: 1.3, y: 3, z: 3.6}
   m_Center: {x: 0, y: 0, z: 2}
 --- !u!54 &2112647050609098639
 Rigidbody:
@@ -34273,7 +34273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6787065881247041990}
   - component: {fileID: 6899031917192102490}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34368,7 +34368,7 @@ GameObject:
   - component: {fileID: 6787434584726068004}
   - component: {fileID: 6665872745477223034}
   - component: {fileID: 6699772990443640792}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39202,7 +39202,7 @@ MonoBehaviour:
   TowerMuzzle: {fileID: 441837894699148981}
   TowerTooltip: {fileID: 3211512973347120550, guid: 2e1364c01f965e444b803fca1f2fcb3c, type: 3}
   isPreview: 0
-  isFollow: 0
+  isFollow: 1
   mainCanvas: {fileID: 0}
   _range: 3.5
   buffEffect: {fileID: 0}
@@ -39210,7 +39210,7 @@ MonoBehaviour:
   - {fileID: 6789872993577127074}
   - {fileID: 5612713678545289812}
   - {fileID: 8724742081443325109}
-  IsTargeting: 0
+  IsTargeting: 1
 --- !u!1 &8723502190727544635
 GameObject:
   m_ObjectHideFlags: 0
@@ -39222,7 +39222,7 @@ GameObject:
   - component: {fileID: 8727346894821566229}
   - component: {fileID: 8922433277688912149}
   - component: {fileID: 8923257952103271521}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44045,7 +44045,7 @@ GameObject:
   - component: {fileID: 3385551071933257700}
   - component: {fileID: 205377646915944978}
   - component: {fileID: 1814907543898414304}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: FlamethrowerSharpPink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48885,7 +48885,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.7, z: 5.5}
+  m_Size: {x: 1.3, y: 3.6, z: 5.6}
   m_Center: {x: 0, y: 0, z: 2.89}
 --- !u!54 &3385551071933257700
 Rigidbody:
@@ -49043,7 +49043,7 @@ GameObject:
   - component: {fileID: 8726962302066710719}
   - component: {fileID: 8922349559422265895}
   - component: {fileID: 8923503067738765705}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53839,7 +53839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8727078966555497461}
   - component: {fileID: 8687822841594636999}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53934,7 +53934,7 @@ GameObject:
   - component: {fileID: 8719552347466383215}
   - component: {fileID: 8911777381303855181}
   - component: {fileID: 8923782961874409345}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

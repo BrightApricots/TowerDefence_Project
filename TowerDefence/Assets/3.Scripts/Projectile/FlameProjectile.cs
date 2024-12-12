@@ -6,42 +6,55 @@ using UnityEngine;
 
 public class FlameProjectile : Projectile
 {
-    public float DamageInterval = 0.5f;
-    private Dictionary<Collider, Coroutine> _damageCoroutines = new Dictionary<Collider, Coroutine>();
-
+    public float DamageInterval = 1f;
+    private Dictionary<Collider, float> _lastDamageTime = new Dictionary<Collider, float>();
 
     protected override void Move()
     {
     }
 
-
     protected override void OnTriggerEnter(Collider other)
     {
-        if (_damageCoroutines.ContainsKey(other))
+        Monster monster = other.gameObject.GetComponent<Monster>();
+        if (monster == null || monster.IsDead) return;
+
+        // 첫 충돌시 즉시 데미지
+        monster.TakeDamage(this.Damage);
+        _lastDamageTime[other] = Time.time;
+    }
+
+    protected void OnTriggerStay(Collider other)
+    {
+        Monster monster = other.gameObject.GetComponent<Monster>();
+        if (monster == null || monster.IsDead)
         {
-            StopCoroutine(_damageCoroutines[other]);
+            if (_lastDamageTime.ContainsKey(other))
+                _lastDamageTime.Remove(other);
+            return;
         }
 
-        // 새로운 코루틴 시작 및 저장
-        var coroutine = StartCoroutine(CoStartDamage(other));
-        _damageCoroutines[other] = coroutine;
+        if (_lastDamageTime.ContainsKey(other))
+        {
+            float timeSinceLastDamage = Time.time - _lastDamageTime[other];
+            if (timeSinceLastDamage >= DamageInterval)
+            {
+                monster.TakeDamage(this.Damage);
+                _lastDamageTime[other] = Time.time;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (_damageCoroutines.ContainsKey(other))
+        if (_lastDamageTime.ContainsKey(other))
         {
-            StopCoroutine(_damageCoroutines[other]);
-            _damageCoroutines.Remove(other);
+            _lastDamageTime.Remove(other);
         }
     }
 
-    public IEnumerator CoStartDamage(Collider other)
+    protected override void OnDisable()
     {
-        while (true)
-        {
-            other.gameObject.GetComponent<Monster>().TakeDamage(this.Damage);
-            yield return new WaitForSeconds(DamageInterval);
-        }
+        base.OnDisable();
+        _lastDamageTime.Clear();
     }
 }
