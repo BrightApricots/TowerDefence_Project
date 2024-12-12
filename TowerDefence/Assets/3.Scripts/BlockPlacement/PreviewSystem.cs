@@ -216,6 +216,9 @@ public class PreviewSystem : MonoBehaviour
 
     public void UpdateRotation(int rotationIndex)
     {
+
+        // 타워 프리뷰 회전 소리
+        SoundManager.Instance.Play("TowerPreviewRotationSound", SoundManager.Sound.Effect);
         currentRotation = rotationIndex;
         if (previewObject != null)
         {

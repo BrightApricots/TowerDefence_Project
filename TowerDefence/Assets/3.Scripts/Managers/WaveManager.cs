@@ -520,9 +520,9 @@ public class WaveManager : MonoBehaviour
 
     private void HandleAllWavesCleared()
     {
-        // 게임 클리어 처리 로직 추가 (예: UI 표시, 보상 지급 등)
+        // 게임 클리어 처리 UI 표시
         Debug.Log("All waves cleared! Game Cleared!");
-        Time.timeScale = 0; // 게임 정지
+        Time.timeScale = 1;
     }
 
     private void ChangeGameSpeed(float speed)
