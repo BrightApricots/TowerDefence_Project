@@ -155,7 +155,7 @@ public class StageManager : MonoBehaviour
             // 딜레이 후 패널 표시하지만, 여기서 isGameOver를 true로 설정하면
             // 웨이브 매니저 등이 이를 감지하여 웨이브를 진행하지 않음
             isGameOver = true;
-            StartCoroutine(ShowGameOverPanelWithDelay(2f));
+            StartCoroutine(ShowGameOverPanelWithDelay(3f));
         }
     }
 
@@ -164,7 +164,7 @@ public class StageManager : MonoBehaviour
         if (isGameOver) return; // 게임 오버 상태면 엔드 패널 표시 안 함
 
         allWavesCleared = true;
-        StartCoroutine(ShowPreparationPanelWithDelay(2f));
+        StartCoroutine(ShowPreparationPanelWithDelay(3f));
     }
 
     private IEnumerator ShowPreparationPanelWithDelay(float delayTime)
