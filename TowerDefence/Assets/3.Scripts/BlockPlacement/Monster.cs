@@ -14,10 +14,17 @@ public class Monster : MonoBehaviour
     private int gold = 1;
     [SerializeField]
     private float rotationSpeed = 5f;
+
     [SerializeField]
-    private int maxHp = 100;  
+    public int maxHp = 100 * GameManager.Instance.Difficulty;
+    [SerializeField]
+    public float maxSpeed = 2f;
+    [SerializeField]
+    public int maxDamage = 1;
+    [SerializeField]
+    public int maxGold = 1;
+
     public bool IsDead { get; private set; }
-    public Transform spawnPos;
 
     private Vector3[] path;
     private int currentWaypointIndex;
@@ -26,13 +33,18 @@ public class Monster : MonoBehaviour
     private Vector3 moveDirection;
     private Transform spawnPoint;
     public bool IsSpawnDirect = false;
+    // 직접 소환할 경우 인스펙터에서 할당
+    public Transform spawnPos; 
 
     public event Action OnDead;
 
     private void Awake()
     {
         //프리팹 스탯을 적용하기 위한 체력스탯
-        maxHp = hp;  
+        maxHp = hp;
+        maxSpeed = speed;
+        maxDamage = damage;
+        maxGold = gold;
     }
 
     public void Initialize(Transform spawn)
@@ -109,7 +121,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if(IsSpawnDirect == true)
         {
@@ -206,6 +218,9 @@ public class Monster : MonoBehaviour
         spawnPoint = null;
         IsSpawnDirect = false;
         hp = maxHp;  
+        speed = maxSpeed;  
+        gold = maxGold;  
+        damage = maxDamage;  
 
         //이벤트 해제 안하면 remaining 중첩해서 빠짐
         if (PathManager.Instance != null)

@@ -56,8 +56,7 @@ public class WaveManager : MonoBehaviour
     private WaveTextManager waveTextManager;
 
     [Tooltip("현재 웨이브 인덱스 (0부터 시작)")]
-    [SerializeField]
-    private int currentWaveIndex = 0;
+    public int currentWaveIndex = 0;
 
     [Tooltip("웨이브 클리어 시 지급할 머니")]
     [SerializeField]
@@ -163,7 +162,7 @@ public class WaveManager : MonoBehaviour
     private bool isWaveActive = false;                // 현재 웨이브 진행 중 여부, 웨이브 활성화 상태인지 알기 위한 개념
     private bool isReadyForNextWave = false;          // 다음 웨이브 준비 상태 여부
     private bool isGameOver = false;                  // 게임 오버 여부
-    private bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
+    public bool isFirstBattleClicked = false;        // 처음 배틀 시작을 눌렀는지 여부
     private Coroutine prepareCooldownCoroutine;        // 준비 시간 코루틴 참조
     #endregion
 
@@ -449,7 +448,8 @@ public class WaveManager : MonoBehaviour
         Debug.Log($"Monster Destroyed: Remaining: {remainingMonsters}");
 
         // 모든 몬스터가 스폰되고 모두 파괴되었을 때 웨이브 종료
-        if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete())
+        if (remainingMonsters <= 0 && monsterSpawner.IsSpawningComplete() && 
+            GameManager.Instance.BossCount == 0)
         {
             EndCurrentWave();
         }
@@ -573,7 +573,7 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                waveStatusText.text = $"Wave {currentWaveIndex + 1}/{waves.Count}";
+                waveStatusText.text = $"Wave {currentWaveIndex + 1} / {waves.Count}";
             }
         }
     }
